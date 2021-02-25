@@ -30,6 +30,7 @@
 		D7147D6325E7686800AA0878 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6225E7686800AA0878 /* FacebookLogin */; };
 		D7147D6525E7686800AA0878 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6425E7686800AA0878 /* FacebookCore */; };
 		D7147D6925E768B800AA0878 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6825E768B800AA0878 /* Toast */; };
+		D7147D6C25E76A1900AA0878 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,8 @@
 		D70C37D425E103DE00898271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D70C37D625E103DE00898271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D70C37DD25E103F100898271 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobalMobalDebug.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,12 +108,14 @@
 		D70C37C725E103DD00898271 /* MobalMobal */ = {
 			isa = PBXGroup;
 			children = (
+				D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */,
 				D70C37C825E103DD00898271 /* AppDelegate.swift */,
 				D70C37CA25E103DD00898271 /* SceneDelegate.swift */,
 				D70C37CC25E103DD00898271 /* ViewController.swift */,
 				D70C37CE25E103DD00898271 /* Main.storyboard */,
-				D70C37D125E103DE00898271 /* Assets.xcassets */,
 				D70C37D325E103DE00898271 /* LaunchScreen.storyboard */,
+				D70C37D125E103DE00898271 /* Assets.xcassets */,
+				D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */,
 				D70C37D625E103DE00898271 /* Info.plist */,
 			);
 			path = MobalMobal;
@@ -211,6 +216,7 @@
 			files = (
 				D70C37DE25E103F100898271 /* .swiftlint.yml in Resources */,
 				D70C37D525E103DE00898271 /* LaunchScreen.storyboard in Resources */,
+				D7147D6C25E76A1900AA0878 /* GoogleService-Info.plist in Resources */,
 				D70C37D225E103DE00898271 /* Assets.xcassets in Resources */,
 				D70C37D025E103DD00898271 /* Main.storyboard in Resources */,
 			);
@@ -416,6 +422,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MobalMobal/MobalMobalDebug.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = TA757FA6NR;
