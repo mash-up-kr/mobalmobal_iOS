@@ -36,6 +36,7 @@
 		D7AC0C9925EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */; };
 		D7AC0C9D25EACF9A000A342A /* MainMyDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9C25EACF9A000A342A /* MainMyDonationCollectionViewCell.swift */; };
 		D7AC0CA025EAF35C000A342A /* MainOngoingDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9F25EAF35C000A342A /* MainOngoingDonationTableViewCell.swift */; };
+		D7AC0CA325EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0CA225EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift */; };
 		D7E44EF125EA5149007FDB4F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E44EF025EA5149007FDB4F /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAddMyDonationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D7AC0C9C25EACF9A000A342A /* MainMyDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMyDonationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D7AC0C9F25EAF35C000A342A /* MainOngoingDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOngoingDonationTableViewCell.swift; sourceTree = "<group>"; };
+		D7AC0CA225EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOngoingDonationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D7E44EF025EA5149007FDB4F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +152,7 @@
 				D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */,
 				D7AC0C9C25EACF9A000A342A /* MainMyDonationCollectionViewCell.swift */,
 				D7AC0C9F25EAF35C000A342A /* MainOngoingDonationTableViewCell.swift */,
+				D7AC0CA225EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */,
 				D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */,
 				D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */,
+				D7AC0CA325EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift in Sources */,
 				D7E44EF125EA5149007FDB4F /* MainViewController.swift in Sources */,
 				D7AC0C9D25EACF9A000A342A /* MainMyDonationCollectionViewCell.swift in Sources */,
 			);

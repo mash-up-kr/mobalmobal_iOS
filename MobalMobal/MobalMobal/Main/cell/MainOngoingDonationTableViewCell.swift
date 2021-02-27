@@ -19,7 +19,7 @@ class MainOngoingDonationTableViewCell: UITableViewCell {
     
     let headerLabel: UILabel = {
         let label: UILabel = UILabel(frame: .zero)
-        label.text = "나의 진행"
+        label.text = "진행중"
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.textColor = .veryLightPink
         return label
@@ -43,16 +43,16 @@ class MainOngoingDonationTableViewCell: UITableViewCell {
     }
     
     private func setLayout() {
-        [collectionView, headerLabel].forEach { contentView.addSubview($0) }
-        
-        collectionView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
+        [headerLabel, collectionView].forEach { contentView.addSubview($0) }
         
         headerLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(32)
+            make.top.equalToSuperview().inset(21)
             make.leading.trailing.equalToSuperview().inset(22)
+        }
+        
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(headerLabel.snp.bottom).offset(14)
+            make.top.leading.trailing.bottom.equalToSuperview()
         }
     }
 }

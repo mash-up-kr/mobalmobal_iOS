@@ -41,7 +41,7 @@ class MainViewController: UIViewController {
     let tableView: UITableView = {
         let tableView: UITableView = UITableView(frame: .zero, style: .plain)
         tableView.backgroundColor = .backgroundColor
-//        tableView.separatorStyle = .none
+        tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return tableView
@@ -130,7 +130,7 @@ extension MainViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
@@ -138,6 +138,8 @@ extension MainViewController: UITableViewDataSource {
             return 1
         case 1:
             return 1
+        case 2:
+            return 10
         default:
             return 0
         }
@@ -150,7 +152,34 @@ extension MainViewController: UITableViewDataSource {
             cell.selectionStyle = .none
             return cell
         case 1:
-            guard let cell: MainOngoingDonationTableViewCell = tableView.dequeueReusableCell(withIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationTableViewCell else { return .init() }
+            let cell: UITableViewCell = UITableViewCell(frame: .zero)
+            cell.backgroundColor = .clear
+            
+            let label: UILabel = UILabel(frame: .zero)
+            label.text = "진행중"
+            label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+            label.textColor = .veryLightPink
+            [label].forEach { cell.contentView.addSubview($0) }
+            
+            label.snp.makeConstraints { make in
+                make.top.equalToSuperview().inset(32)
+                make.leading.trailing.equalToSuperview().inset(22)
+            }
+            
+            cell.selectionStyle = .none
+            return cell
+        case 2:
+//            guard let cell: MainOngoingDonationTableViewCell = tableView.dequeueReusableCell(withIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationTableViewCell else { return .init() }
+            let cell: UITableViewCell = UITableViewCell(frame: .zero)
+            
+            let imageView: UIImageView = UIImageView(image: UIImage(named: "main"))
+            [imageView].forEach { cell.contentView.addSubview($0) }
+            
+            imageView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+                make.height.equalTo(imageView.snp.width).multipliedBy(842.0 / 742.0)
+            }
+            
             cell.selectionStyle = .none
             return cell
         default:
@@ -162,10 +191,8 @@ extension MainViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             return 184
-        case 1:
-            return UITableView.automaticDimension
         default:
-            return 0
+            return UITableView.automaticDimension
         }
     }
 }
