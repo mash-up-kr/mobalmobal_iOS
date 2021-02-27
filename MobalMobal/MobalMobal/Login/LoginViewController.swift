@@ -5,6 +5,7 @@
 //  Created by 임수현 on 2021/02/27.
 //
 import FBSDKLoginKit
+import Firebase
 import SnapKit
 import UIKit
 
@@ -78,18 +79,49 @@ class LoginViewController: UIViewController {
     // MARK: - Actions
     @IBAction private func clickFacebookLogin() {
         let manager: LoginManager = LoginManager()
-        manager.logIn(permissions: ["public_profile"], from: self) { result, error in
+        manager.logIn(permissions: ["public_profile"], from: self) { [weak self] result, error in
             if let error: Error = error {
-                print("🐻 FB Login :: Process error: \(error)🐻")
+                print("🐻 Facebook Login :: Process error: \(error)🐻")
                 return
             }
             guard let result = result else {
-                print("🐻 FB Login :: No Result 🐻")
+                print("🐻 FacebookLogin :: No Result 🐻")
                 return
             }
             if result.isCancelled {
-                print("🐻 FB Login :: Cancelled 🐻")
+                print("🐻 FacebookLogin :: Cancelled 🐻")
                 return
+            }
+            guard let token: AccessToken = result.token else {
+                print("🐻 FacebookLogin :: Token Error 🐻")
+                return
+            }
+            print("🐻 FacebookLogin :: Token: \(token) 🐻")
+            
+            // 토큰 받아오는 데 성공하면 파이어베이스로 인증
+            self?.loginWithFirebase(credential: FacebookAuthProvider.credential(withAccessToken: token.tokenString))
+        }
+    }
+    
+    private func loginWithFirebase(credential: AuthCredential) {
+        Auth.auth().signIn(with: credential) { authResult, error in
+            // guard let self = self else { return }
+            if let error: Error = error {
+                print("🐻 FirebaseAuth :: error: \(error) 🐻")
+                return
+            }
+            
+            let user: User? = authResult?.user
+            user?.getIDTokenForcingRefresh(true) { idToken, error in
+                if let error: Error = error {
+                    print("🐻 FirebaseAuth :: error: \(error) 🐻")
+                    return
+                }
+                guard let idToken = idToken else {
+                    print("🐻 FirebaseAuth :: idToken Error 🐻")
+                    return
+                }
+                print("🐻 FirebaseAuth :: idToken: \(idToken) 🐻")
             }
         }
     }
