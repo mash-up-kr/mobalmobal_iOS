@@ -24,7 +24,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func thirdButtonIsTapped(_ sender: UIButton) {
-        
+        let loginVC = LoginViewController()
+        loginVC.modalPresentationStyle = .fullScreen
+        self.present(loginVC, animated: true)
     }
     
     @IBAction func fourthButtonIsTapped(_ sender: UIButton) {
