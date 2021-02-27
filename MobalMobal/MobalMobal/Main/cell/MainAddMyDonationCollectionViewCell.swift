@@ -39,8 +39,9 @@ class MainAddMyDonationCollectionViewCell: UICollectionViewCell {
     private func setLayout() {
         [buttonView].forEach { contentView.addSubview($0) }
         buttonView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(68)
+            make.centerX.equalToSuperview()
             make.size.equalTo(65)
-            make.center.equalToSuperview()
         }
     }
 }

@@ -19,12 +19,22 @@ class MainMyDonationTableViewCell: UITableViewCell {
         return collectionView
     }()
     
+    let headerLabel: UILabel = {
+        let label: UILabel = UILabel(frame: .zero)
+        label.text = "나의 진행"
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.textColor = .veryLightPink
+        return label
+    }()
+    
     // MARK: - property
-    let cellIdentifier: String = "MainAddMyDonationCollectionViewCell"
+    let buttonCellIdentifier: String = "MainAddMyDonationCollectionViewCell"
+    let cardCellIdentifier: String = "MainMyDonationCollectionViewCell"
     
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = .backgroundColor
         setCollectionView()
         setLayout()
     }
@@ -41,13 +51,22 @@ class MainMyDonationTableViewCell: UITableViewCell {
     private func setCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(MainAddMyDonationCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.register(MainAddMyDonationCollectionViewCell.self, forCellWithReuseIdentifier: buttonCellIdentifier)
+        collectionView.register(MainMyDonationCollectionViewCell.self, forCellWithReuseIdentifier: cardCellIdentifier)
     }
     
     private func setLayout() {
-        [collectionView].forEach { contentView.addSubview($0) }
+        [collectionView, headerLabel].forEach { contentView.addSubview($0) }
+        
         collectionView.snp.makeConstraints { make in
+//            make.top.equalTo(headerLabel.snp.bottom).offset(10)
+//            make.leading.trailing.bottom.equalToSuperview()
             make.edges.equalToSuperview()
+        }
+        
+        headerLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(32)
+            make.leading.trailing.equalToSuperview().inset(22)
         }
 //        let view: UIView = UIView(frame: .zero)
 //        view.backgroundColor = .brown
@@ -81,25 +100,24 @@ extension MainMyDonationTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        switch indexPath.item {
-//        case 0:
-//            let cell: UICollectionViewCell = UICollectionViewCell()
-//            cell.backgroundColor = .green
-//            return cell
-//        case 1:
-//            let cell: UICollectionViewCell = UICollectionViewCell()
-//            cell.backgroundColor = .systemPink
-//            return cell
-//        default:
-//            return .init()
-//        }
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? MainAddMyDonationCollectionViewCell else { return .init() }
-        return cell
+        switch indexPath.item {
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: buttonCellIdentifier, for: indexPath) as? MainAddMyDonationCollectionViewCell else { return .init() }
+            return cell
+        default:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as? MainMyDonationCollectionViewCell else { return .init() }
+            return cell
+        }
     }
 }
 
 extension MainMyDonationTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 87, height: 87)
+        switch indexPath.item {
+        case 0:
+            return CGSize(width: 87, height: 142)
+        default:
+            return CGSize(width: 258, height: 142)
+        }
     }
 }
