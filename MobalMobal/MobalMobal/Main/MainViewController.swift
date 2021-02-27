@@ -27,13 +27,13 @@ class MainViewController: UIViewController {
     
     let notiListButton: UIButton = {
         let button: UIButton = UIButton(frame: .zero)
-        button.setTitle("알림", for: .normal)
+        button.setImage(UIImage(named: "icMyProfile"), for: .normal)
         return button
     }()
     
     let profileImageView: UIImageView = {
         let imageView: UIImageView = UIImageView(frame: .zero)
-//        imageView.image = UIImage
+        imageView.image = UIImage(named: "icAlarm")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -87,19 +87,21 @@ class MainViewController: UIViewController {
         [titleLabel, notiListButton, profileImageView].forEach { titleView.addSubview($0) }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.leading.bottom.equalToSuperview().inset(16)
+            make.top.equalToSuperview().inset(30)
+            make.leading.equalToSuperview().inset(22)
+            make.bottom.equalToSuperview().inset(10)
         }
         
         notiListButton.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
-            make.size.equalTo(60)
+            make.size.equalTo(44)
         }
         
         profileImageView.snp.makeConstraints { make in
-            make.leading.equalTo(notiListButton.snp.trailing).offset(8)
-            make.trailing.equalToSuperview().inset(16)
+            make.leading.equalTo(notiListButton.snp.trailing)
+            make.trailing.equalToSuperview().inset(10)
             make.centerY.equalTo(titleLabel)
-            make.size.equalTo(30)
+            make.size.equalTo(44)
         }
     }
 }
@@ -109,8 +111,14 @@ extension MainViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.lastContentOffset <= 0 {
             titleLabel.font = UIFont(name: "Futura-Bold", size: 25)
+            titleLabel.snp.updateConstraints { make in
+                make.top.equalToSuperview().inset(30)
+            }
         } else if self.lastContentOffset < scrollView.contentOffset.y {
             titleLabel.font = UIFont(name: "Futura-Bold", size: 16)
+            titleLabel.snp.updateConstraints { make in
+                make.top.equalToSuperview().inset(13)
+            }
         }
         self.lastContentOffset = scrollView.contentOffset.y
     }
@@ -140,7 +148,6 @@ extension MainViewController: UITableViewDataSource {
         case 1:
             let cell: UITableViewCell = UITableViewCell()
             cell.backgroundColor = .backgroundColor
-            cell.textLabel?.text = "ddd"
             cell.selectionStyle = .none
             return cell
         default:
@@ -151,7 +158,7 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 184
+            return 163
         case 1:
             return UITableView.automaticDimension
         default:
