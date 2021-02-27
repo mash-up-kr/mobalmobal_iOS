@@ -13,67 +13,68 @@ import UIKit
 class LoginViewController: UIViewController {
     // MARK: - UI Components
     let logoImageView: UIImageView = {
-        let imageName: String = ""
+        let imageName: String = "doneImage"
         let imageView: UIImageView = UIImageView()
         let image: UIImage? = UIImage(named: imageName)
-        imageView.backgroundColor = .gray
         imageView.image = image
         return imageView
     }()
-    let googleButton: UIButton = {
-        let button: UIButton = UIButton()
-        button.setTitle("Google Login", for: .normal)
-        button.backgroundColor = .red
+    let googleButton: UIView = {
+        let button: UIView = CustomLoginButton(title: "Google로 로그인하기", iconName: "googleLogo")
         return button
     }()
-    let facebookButton: UIButton = {
-        let button: UIButton = UIButton()
-        button.setTitle("Facebook Login", for: .normal)
-        button.backgroundColor = .blue
+    let facebookButton: UIView = {
+        let button: UIView = CustomLoginButton(title: "Facebook으로 로그인하기", iconName: "facebookLogo")
         return button
     }()
-    let appleButton: UIButton = {
-        let button: UIButton = UIButton()
-        button.setTitle("Apple Login", for: .normal)
-        button.backgroundColor = .gray
+    let appleButton: UIView = {
+        let button: UIView = CustomLoginButton(title: "Apple로 로그인하기", iconName: "appleLogo")
         return button
     }()
     
     // MARK: - Initializer
-    private func setSubviews() {
+    private func setSuperview() {
+        view.backgroundColor = .backgroundColor
         [logoImageView, facebookButton, googleButton, appleButton].forEach { view.addSubview($0) }
     }
     
     private func setConstraints() {
         logoImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(150)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(155)
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(200)
+            make.leading.trailing.equalToSuperview().inset(36)
         }
         googleButton.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(50)
-            make.leading.trailing.equalToSuperview().inset(50)
+            make.top.equalTo(logoImageView.snp.bottom).offset(58)
+            make.leading.trailing.equalToSuperview().inset(28)
+            make.height.equalTo(60)
         }
         facebookButton.snp.makeConstraints { make in
-            make.top.equalTo(googleButton.snp.bottom).offset(50)
-            make.leading.trailing.equalToSuperview().inset(50)
+            make.top.equalTo(googleButton.snp.bottom).offset(13)
+            make.leading.trailing.height.equalTo(googleButton)
         }
         appleButton.snp.makeConstraints { make in
-            make.top.equalTo(facebookButton.snp.bottom).offset(50)
-            make.leading.trailing.equalToSuperview().inset(50)
+            make.top.equalTo(facebookButton.snp.bottom).offset(13)
+            make.leading.trailing.height.equalTo(googleButton)
         }
     }
     
     private func setActions() {
-        facebookButton.addTarget(self, action: #selector(clickFacebookLoginButton), for: .touchUpInside)
-        googleButton.addTarget(self, action: #selector(clickGoogleLoginButton), for: .touchUpInside)
+        let googleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickGoogleLoginButton))
+        googleButton.addGestureRecognizer(googleLoginTap)
+        let facebookLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickFacebookLoginButton))
+        googleButton.addGestureRecognizer(facebookLoginTap)
+        
+        // TODO: Apple Login
+        // let appleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickAppleLoginButton))
+        // googleButton.addGestureRecognizer(appleLoginTap)
     }
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setSubviews()
+        setSuperview()
         setConstraints()
         setActions()
         
