@@ -6,6 +6,7 @@
 //
 
 import SnapKit
+import Then
 import UIKit
 
 class MainViewController: UIViewController {
@@ -19,7 +20,7 @@ class MainViewController: UIViewController {
     let titleLabel: UILabel = {
         let label: UILabel = UILabel(frame: .zero)
         label.text = "김재희님 어쩌고"
-        label.font = UIFont(name: "futura-Bold", size: 30)
+        label.font = UIFont(name: "futura", size: 30)
         return label
     }()
     
@@ -30,24 +31,28 @@ class MainViewController: UIViewController {
     }()
     
     let profileImageView: UIImageView = {
-        let imageView: UIImageView = UIImageView(image: UIImage(systemName: "return"))
+        let imageView: UIImageView = UIImageView(frame: .zero)
+//        imageView.image = UIImage
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
     let tableView: UITableView = {
         let tableView: UITableView = UITableView(frame: .zero, style: .plain)
-//        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView()
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return tableView
     }()
     
     // MARK: - property
+    var lastContentOffset: CGFloat = 0.0
     
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        tableView.delegate = self
+        tableView.dataSource = self
         setLayout()
     }
     
@@ -60,7 +65,6 @@ class MainViewController: UIViewController {
         titleView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(100)
         }
         
         tableView.snp.makeConstraints { make in
@@ -69,21 +73,47 @@ class MainViewController: UIViewController {
         }
         
         [titleLabel, notiListButton, profileImageView].forEach { titleView.addSubview($0) }
+        
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(16)
-            make.centerY.equalToSuperview()
+            make.top.leading.bottom.equalToSuperview().inset(16)
         }
         
         notiListButton.snp.makeConstraints { make in
+            make.centerY.equalTo(titleLabel)
             make.size.equalTo(60)
-            make.centerY.equalToSuperview()
         }
         
         profileImageView.snp.makeConstraints { make in
             make.leading.equalTo(notiListButton.snp.trailing).offset(8)
-            make.size.equalTo(60)
             make.trailing.equalToSuperview().inset(16)
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(titleLabel)
+            make.size.equalTo(30)
         }
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension MainViewController: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.lastContentOffset <= 0 {
+            titleLabel.font = UIFont(name: "futura", size: 30)
+        } else if self.lastContentOffset < scrollView.contentOffset.y {
+            titleLabel.font = UIFont(name: "futura", size: 15)
+        }
+        self.lastContentOffset = scrollView.contentOffset.y
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension MainViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        30
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = UITableViewCell()
+        cell.textLabel?.text = "ddd"
+        cell.selectionStyle = .none
+        return cell
     }
 }
