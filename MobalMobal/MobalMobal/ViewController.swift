@@ -8,7 +8,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -23,8 +22,8 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func thirdButtonIsTapped(_ sender: UIButton) {
-        let loginVC = LoginViewController()
+    @IBAction private func thirdButtonIsTapped(_ sender: UIButton) {
+        let loginVC: LoginViewController = LoginViewController()
         loginVC.modalPresentationStyle = .fullScreen
         self.present(loginVC, animated: true)
     }

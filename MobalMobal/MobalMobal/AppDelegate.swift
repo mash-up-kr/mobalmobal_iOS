@@ -4,7 +4,7 @@
 //
 //  Created by 김재희 on 2021/02/20.
 //
-
+import FBSDKCoreKit
 import Firebase
 import UIKit
 
@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Messaging.messaging().delegate = self
         setFCMToken()
+        
+        // setting Facebook Login
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         return true
     }
