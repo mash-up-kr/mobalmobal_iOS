@@ -128,7 +128,7 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView: UIView = UIView(frame: .zero)
-        headerView.backgroundColor = .backgroundColor
+        headerView.backgroundColor = .clear
         
         let headerLabel: UILabel = UILabel(frame: .zero)
         headerLabel.font = UIFont(name: "Spoqa Han Sans Neo", size: 14)
