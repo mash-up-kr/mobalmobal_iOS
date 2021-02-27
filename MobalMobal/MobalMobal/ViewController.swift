@@ -16,7 +16,9 @@ class ViewController: UIViewController {
     
     // - MARK : 각자 view로 넘어감
     @IBAction func firstButtonIsTapped(_ sender: UIButton) {
-       
+        let viewController = SettingViewController()
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func secondButtonIsTapped(_ sender: UIButton) {
