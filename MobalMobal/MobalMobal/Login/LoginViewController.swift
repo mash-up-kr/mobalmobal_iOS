@@ -63,7 +63,7 @@ class LoginViewController: UIViewController {
         let googleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickGoogleLoginButton))
         googleButton.addGestureRecognizer(googleLoginTap)
         let facebookLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickFacebookLoginButton))
-        googleButton.addGestureRecognizer(facebookLoginTap)
+        facebookButton.addGestureRecognizer(facebookLoginTap)
         
         // TODO: Apple Login
         // let appleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickAppleLoginButton))
@@ -143,6 +143,10 @@ extension LoginViewController: GIDSignInDelegate {
         guard let authentication = user.authentication else { return }
         let credential: AuthCredential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         loginWithFirebase(credential: credential)
+        
+        let mainVC: MainViewController = MainViewController()
+        mainVC.modalPresentationStyle = .fullScreen
+        self.present(mainVC, animated: true, completion: nil)
     }
 
     // 구글 로그인 연동 해제 시 호출
