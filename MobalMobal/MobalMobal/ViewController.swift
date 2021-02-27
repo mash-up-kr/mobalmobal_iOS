@@ -16,11 +16,12 @@ class ViewController: UIViewController {
     
     // - MARK : 각자 view로 넘어감
     @IBAction func firstButtonIsTapped(_ sender: UIButton) {
-       
     }
     
-    @IBAction func secondButtonIsTapped(_ sender: UIButton) {
-        
+    @IBAction private func secondButtonIsTapped(_ sender: UIButton) {
+        let mainVC: MainViewController = MainViewController()
+        mainVC.modalPresentationStyle = .fullScreen
+        self.present(mainVC, animated: true, completion: nil)
     }
     
     @IBAction func thirdButtonIsTapped(_ sender: UIButton) {
