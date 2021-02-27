@@ -50,6 +50,7 @@ class MainViewController: UIViewController {
     var lastContentOffset: CGFloat = 0.0
     
     let sectionTitle: [String] = ["나의 진행", "진행중"]
+    let cellIdentifier: String = "MainMyDonationTableViewCell"
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -57,6 +58,7 @@ class MainViewController: UIViewController {
         view.backgroundColor = .backgroundColor
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(MainMyDonationTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         setLayout()
     }
     
@@ -127,11 +129,14 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView: UIView = UIView(frame: .zero)
         headerView.backgroundColor = .backgroundColor
+        
         let headerLabel: UILabel = UILabel(frame: .zero)
         headerLabel.font = UIFont(name: "Spoqa Han Sans Neo", size: 14)
         headerLabel.textColor = .white
         headerLabel.text = sectionTitle[section]
+        
         [headerLabel].forEach { headerView.addSubview($0) }
+        
         headerLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(32)
             make.bottom.equalToSuperview().inset(10)
@@ -141,10 +146,30 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell()
-        cell.backgroundColor = .backgroundColor
-        cell.textLabel?.text = "ddd"
-        cell.selectionStyle = .none
-        return cell
+        switch indexPath.section {
+        case 0:
+            guard let cell: MainMyDonationTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MainMyDonationTableViewCell else { return .init() }
+//            let cell: UITableViewCell = UITableViewCell()
+            return cell
+        case 1:
+            let cell: UITableViewCell = UITableViewCell()
+            cell.backgroundColor = .backgroundColor
+            cell.textLabel?.text = "ddd"
+            cell.selectionStyle = .none
+            return cell
+        default:
+            return .init()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return 132
+        case 1:
+            return UITableView.automaticDimension
+        default:
+            return 0
+        }
     }
 }
