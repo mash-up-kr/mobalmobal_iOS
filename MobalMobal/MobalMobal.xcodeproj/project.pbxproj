@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6A7F9880C2DD6C6782A998EE /* Pods_MobalMobal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */; };
+		7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04536425EAAA3B00870761 /* UIColor+Additions.swift */; };
 		D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37C825E103DD00898271 /* AppDelegate.swift */; };
 		D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37CA25E103DD00898271 /* SceneDelegate.swift */; };
 		D70C37CD25E103DD00898271 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37CC25E103DD00898271 /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 		32D37E13F8458BE37D6BCAC0 /* Pods-MobalMobal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.release.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.release.xcconfig"; sourceTree = "<group>"; };
 		5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobalMobal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61483D18A64727D4EAFF1EDD /* Pods-MobalMobal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.debug.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.debug.xcconfig"; sourceTree = "<group>"; };
+		7C04536425EAAA3B00870761 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		D70C37C525E103DD00898271 /* MobalMobal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobalMobal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70C37C825E103DD00898271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D70C37CA25E103DD00898271 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C04536325EAAA2400870761 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7C04536425EAAA3B00870761 /* UIColor+Additions.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		C838D65354D003A3D43925F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				E3F1EA7625EA4AE800F34BDE /* Signup */,
+				7C04536325EAAA2400870761 /* Extension */,
 				D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */,
 				D70C37C825E103DD00898271 /* AppDelegate.swift */,
 				D70C37CA25E103DD00898271 /* SceneDelegate.swift */,
@@ -284,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D70C37CD25E103DD00898271 /* ViewController.swift in Sources */,
+				7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */,
 				D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */,
 				E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */,
 				D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */,
