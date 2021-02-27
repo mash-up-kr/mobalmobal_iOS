@@ -33,7 +33,7 @@
 		D7147D6925E768B800AA0878 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6825E768B800AA0878 /* Toast */; };
 		D7147D6C25E76A1900AA0878 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */; };
 		E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */; };
-		E3F1EAB225EACC9F00F34BDE /* SignUpCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EAB125EACC9F00F34BDE /* SignUpCustomView.swift */; };
+		E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EAB125EACC9F00F34BDE /* SignupCustomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +53,7 @@
 		D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobalMobalDebug.entitlements; sourceTree = "<group>"; };
 		E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
-		E3F1EAB125EACC9F00F34BDE /* SignUpCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCustomView.swift; sourceTree = "<group>"; };
+		E3F1EAB125EACC9F00F34BDE /* SignupCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCustomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */,
-				E3F1EAB125EACC9F00F34BDE /* SignUpCustomView.swift */,
+				E3F1EAB125EACC9F00F34BDE /* SignupCustomView.swift */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -298,7 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D70C37CD25E103DD00898271 /* ViewController.swift in Sources */,
-				E3F1EAB225EACC9F00F34BDE /* SignUpCustomView.swift in Sources */,
+				E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */,
 				7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */,
 				D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */,
 				E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */,
