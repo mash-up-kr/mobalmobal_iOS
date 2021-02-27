@@ -5,6 +5,7 @@
 //  Created by 김재희 on 2021/02/20.
 //
 import FBSDKCoreKit
+import GoogleSignIn
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -18,12 +19,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        guard let url = URLContexts.first?.url else {
-            return
-        }
-
+        guard let url = URLContexts.first?.url else { return }
+        guard let scheme = url.scheme else { return }
+        
         // setting facebook login URL open
-        ApplicationDelegate.shared.application(UIApplication.shared, open: url, sourceApplication: nil, annotation: [UIApplication.OpenURLOptionsKey.annotation])
+        if scheme.contains("fb770264156924576") {
+            ApplicationDelegate.shared.application(UIApplication.shared, open: url, sourceApplication: nil, annotation: [UIApplication.OpenURLOptionsKey.annotation])
+        }
+        
+        // setting google login url
+        if scheme.contains("com.googleusercontent.apps") {
+            GIDSignIn.sharedInstance().handle(url)
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

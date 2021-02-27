@@ -6,6 +6,7 @@
 //
 import FBSDKLoginKit
 import Firebase
+import GoogleSignIn
 import SnapKit
 import UIKit
 
@@ -64,7 +65,8 @@ class LoginViewController: UIViewController {
     }
     
     private func setActions() {
-        facebookButton.addTarget(self, action: #selector(clickFacebookLogin), for: .touchUpInside)
+        facebookButton.addTarget(self, action: #selector(clickFacebookLoginButton), for: .touchUpInside)
+        googleButton.addTarget(self, action: #selector(clickGoogleLoginButton), for: .touchUpInside)
     }
     
     // MARK: - Life Cycle
@@ -74,10 +76,80 @@ class LoginViewController: UIViewController {
         setSubviews()
         setConstraints()
         setActions()
+        
+        // Google Login 실행될 ViewController 설정
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance()?.presentingViewController = self
     }
     
     // MARK: - Actions
-    @IBAction private func clickFacebookLogin() {
+    @IBAction private func clickFacebookLoginButton() {
+        loginWithFacebook()
+    }
+    @IBAction private func clickGoogleLoginButton() {
+        loginWithGoogle()
+    }
+}
+
+// MARK: - Firebase
+extension LoginViewController {
+    private func loginWithFirebase(credential: AuthCredential) {
+        Auth.auth().signIn(with: credential) { authResult, error in
+            // guard let self = self else { return }
+            if let error: Error = error {
+                print("🐻 FirebaseAuth :: error: \(error) 🐻")
+                return
+            }
+            
+            let user: User? = authResult?.user
+            user?.getIDTokenForcingRefresh(true) { idToken, error in
+                if let error: Error = error {
+                    print("🐻 FirebaseAuth :: error: \(error) 🐻")
+                    return
+                }
+                guard let idToken = idToken else {
+                    print("🐻 FirebaseAuth :: idToken Error 🐻")
+                    return
+                }
+                print("🐻 FirebaseAuth :: idToken: \(idToken) 🐻")
+            }
+        }
+    }
+}
+
+// MARK: - Google
+extension LoginViewController: GIDSignInDelegate {
+    private func loginWithGoogle() {
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    // 구글 로그인 연동 시도 했을 시 호출
+    func sign(_ signIn: GIDSignIn?, didSignInFor user: GIDGoogleUser?, withError error: Error?) {
+        if let error: Error = error {
+            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+                print("🐻 GoogleLogin :: The user has not signed in before or they have since signed out. 🐻")
+            } else {
+                print("🐻 GoogleLogin :: error: \(error.localizedDescription) 🐻")
+            }
+            return
+        }
+        guard let user = user else {
+            print("🐻 GoogleLogin :: error: User Data Not Found 🐻")
+            return
+        }
+        print("🐻 GoogleLogin :: user: \(user)")
+    }
+
+    // 구글 로그인 연동 해제 시 호출
+    func sign(_ signIn: GIDSignIn?, didDisconnectWith user: GIDGoogleUser?, withError error: Error?) {
+        print("🐻 GoogleLogin :: disconnected 🐻")
+    }
+}
+
+// MARK: - Facebook
+extension LoginViewController {
+    private func loginWithFacebook() {
         let manager: LoginManager = LoginManager()
         manager.logIn(permissions: ["public_profile"], from: self) { [weak self] result, error in
             if let error: Error = error {
@@ -100,29 +172,6 @@ class LoginViewController: UIViewController {
             
             // 토큰 받아오는 데 성공하면 파이어베이스로 인증
             self?.loginWithFirebase(credential: FacebookAuthProvider.credential(withAccessToken: token.tokenString))
-        }
-    }
-    
-    private func loginWithFirebase(credential: AuthCredential) {
-        Auth.auth().signIn(with: credential) { authResult, error in
-            // guard let self = self else { return }
-            if let error: Error = error {
-                print("🐻 FirebaseAuth :: error: \(error) 🐻")
-                return
-            }
-            
-            let user: User? = authResult?.user
-            user?.getIDTokenForcingRefresh(true) { idToken, error in
-                if let error: Error = error {
-                    print("🐻 FirebaseAuth :: error: \(error) 🐻")
-                    return
-                }
-                guard let idToken = idToken else {
-                    print("🐻 FirebaseAuth :: idToken Error 🐻")
-                    return
-                }
-                print("🐻 FirebaseAuth :: idToken: \(idToken) 🐻")
-            }
         }
     }
 }

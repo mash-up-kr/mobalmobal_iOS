@@ -63,6 +63,19 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
     
+    <!--Google Login-->
+<!--    <key>CFBundleURLTypes</key>-->
+<!--    <array>-->
+<!--        <dict>-->
+<!--            <key>CFBundleTypeRole</key>-->
+<!--            <string>Editor</string>-->
+<!--            <key>CFBundleURLSchemes</key>-->
+<!--            <array>-->
+<!--                -->
+<!--            </array>-->
+<!--        </dict>-->
+<!--    </array>-->
+        
     <!-- Facebook Login -->
     <key>CFBundleURLTypes</key>
     <array>
@@ -70,6 +83,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
             <string>fb770264156924576</string>
+            <string>com.googleusercontent.apps.103202810083-nan5n1q6cmrtun6scg1uqt8g9n5ctng4</string>
         </array>
     </dict>
     </array>
