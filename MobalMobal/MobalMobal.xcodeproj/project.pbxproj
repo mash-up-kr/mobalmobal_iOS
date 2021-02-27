@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */; };
+		3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */; };
 		6A7F9880C2DD6C6782A998EE /* Pods_MobalMobal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */; };
 		7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04536425EAAA3B00870761 /* UIColor+Additions.swift */; };
 		D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37C825E103DD00898271 /* AppDelegate.swift */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		32D37E13F8458BE37D6BCAC0 /* Pods-MobalMobal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.release.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.release.xcconfig"; sourceTree = "<group>"; };
+		3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginButton.swift; sourceTree = "<group>"; };
 		5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobalMobal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61483D18A64727D4EAFF1EDD /* Pods-MobalMobal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.debug.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.debug.xcconfig"; sourceTree = "<group>"; };
 		7C04536425EAAA3B00870761 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
@@ -79,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A035F1625EA4D6000D3FB69 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */,
+				3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		7C04536325EAAA2400870761 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +131,7 @@
 		D70C37C725E103DD00898271 /* MobalMobal */ = {
 			isa = PBXGroup;
 			children = (
+				3A035F1625EA4D6000D3FB69 /* Login */,
 				7C04536325EAAA2400870761 /* Extension */,
 				D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */,
 				D70C37C825E103DD00898271 /* AppDelegate.swift */,
@@ -152,6 +166,8 @@
 				D70C37C225E103DD00898271 /* Frameworks */,
 				D70C37C325E103DD00898271 /* Resources */,
 				D70C37E025E1041D00898271 /* Run SwiftLint */,
+				4F43463B447430E17A7A7E30 /* [CP] Embed Pods Frameworks */,
+				9F68754E97333593B4BF85AE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -236,6 +252,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4F43463B447430E17A7A7E30 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		84F3F05E72455AC321E09A11 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -256,6 +289,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F68754E97333593B4BF85AE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D70C37E025E1041D00898271 /* Run SwiftLint */ = {
@@ -283,6 +333,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */,
+				3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */,
 				D70C37CD25E103DD00898271 /* ViewController.swift in Sources */,
 				7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */,
 				D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */,
