@@ -33,6 +33,7 @@
 		D7147D6925E768B800AA0878 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6825E768B800AA0878 /* Toast */; };
 		D7147D6C25E76A1900AA0878 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */; };
 		D7AC0C9525EAB9E2000A342A /* MainMyDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9425EAB9E2000A342A /* MainMyDonationTableViewCell.swift */; };
+		D7AC0C9925EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */; };
 		D7E44EF125EA5149007FDB4F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E44EF025EA5149007FDB4F /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobalMobalDebug.entitlements; sourceTree = "<group>"; };
 		D7AC0C9425EAB9E2000A342A /* MainMyDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMyDonationTableViewCell.swift; sourceTree = "<group>"; };
+		D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAddMyDonationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D7E44EF025EA5149007FDB4F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				D7AC0C9425EAB9E2000A342A /* MainMyDonationTableViewCell.swift */,
+				D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7AC0C9525EAB9E2000A342A /* MainMyDonationTableViewCell.swift in Sources */,
+				D7AC0C9925EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift in Sources */,
 				D70C37CD25E103DD00898271 /* ViewController.swift in Sources */,
 				7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */,
 				D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */,

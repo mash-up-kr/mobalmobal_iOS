@@ -10,11 +10,9 @@ import UIKit
 
 class MainMyDonationTableViewCell: UITableViewCell {
     // MARK: - UIComponent
-    lazy var collectionView: UICollectionView = {
+    let collectionView: UICollectionView = {
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        collectionView.delegate = self
-        collectionView.dataSource = self
         layout.scrollDirection = .horizontal
         collectionView.collectionViewLayout = layout
         collectionView.backgroundColor = .backgroundColor
@@ -22,11 +20,12 @@ class MainMyDonationTableViewCell: UITableViewCell {
     }()
     
     // MARK: - property
+    let cellIdentifier: String = "MainAddMyDonationCollectionViewCell"
     
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        print("🐰 \(reuseIdentifier)")
+        setCollectionView()
         setLayout()
     }
     
@@ -37,6 +36,12 @@ class MainMyDonationTableViewCell: UITableViewCell {
     // MARK: - Methods
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    private func setCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(MainAddMyDonationCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
     }
     
     private func setLayout() {
@@ -88,14 +93,13 @@ extension MainMyDonationTableViewCell: UICollectionViewDataSource {
 //        default:
 //            return .init()
 //        }
-        let cell: UICollectionViewCell = UICollectionViewCell()
-        cell.backgroundColor = .green
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? MainAddMyDonationCollectionViewCell else { return .init() }
         return cell
     }
 }
 
 extension MainMyDonationTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 50, height: 50)
+        return CGSize(width: 87, height: 87)
     }
 }
