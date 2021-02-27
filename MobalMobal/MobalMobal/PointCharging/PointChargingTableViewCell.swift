@@ -14,6 +14,12 @@ class PointChargingTableViewCell: UITableViewCell {
         let label: UILabel = UILabel()
         return label
     }()
+    let cellDetailButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.setImage(UIImage(named: "arrowChevronBigRight"), for: .normal)
+        return button
+    }()
+    
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,10 +31,16 @@ class PointChargingTableViewCell: UITableViewCell {
     }
     // MARK: - Methods
     private func setLayout() {
-        [pointPriceLabel].forEach { contentView.addSubview($0) }
+        [pointPriceLabel, cellDetailButton].forEach { contentView.addSubview($0) }
         pointPriceLabel.snp.makeConstraints { make in
-            make.top.bottom.trailing.equalToSuperview().inset(10)
-            make.leading.equalToSuperview().inset(20)
+            make.top.equalToSuperview().inset(11)
+            make.bottom.equalToSuperview().inset(20.1)
+            make.leading.equalToSuperview().inset(21)
+        }
+        cellDetailButton.snp.makeConstraints { make in
+            make.leading.equalTo(pointPriceLabel.snp.trailing).offset(225)
+            make.top.bottom.equalTo(pointPriceLabel)
+            make.trailing.equalToSuperview()
         }
     }
 }
