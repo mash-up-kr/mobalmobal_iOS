@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     // MARK: - UIComponent
     let titleView: UIView = {
         let view: UIView = UIView(frame: .zero)
-        view.backgroundColor = .darkGrey
+        view.backgroundColor = .backgroundColor
         return view
     }()
     
@@ -40,7 +40,7 @@ class MainViewController: UIViewController {
     
     let tableView: UITableView = {
         let tableView: UITableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = .darkGrey
+        tableView.backgroundColor = .backgroundColor
         tableView.tableFooterView = UIView()
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return tableView
@@ -49,10 +49,12 @@ class MainViewController: UIViewController {
     // MARK: - property
     var lastContentOffset: CGFloat = 0.0
     
+    let sectionTitle: [String] = ["나의 진행", "진행중"]
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .darkGrey
+        view.backgroundColor = .backgroundColor
         tableView.delegate = self
         tableView.dataSource = self
         setLayout()
@@ -108,13 +110,39 @@ extension MainViewController: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        30
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 30
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView: UIView = UIView(frame: .zero)
+        headerView.backgroundColor = .backgroundColor
+        let headerLabel: UILabel = UILabel(frame: .zero)
+        headerLabel.font = UIFont(name: "Spoqa Han Sans Neo", size: 14)
+        headerLabel.textColor = .white
+        headerLabel.text = sectionTitle[section]
+        [headerLabel].forEach { headerView.addSubview($0) }
+        headerLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(32)
+            make.bottom.equalToSuperview().inset(10)
+        }
+        
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell()
-        cell.backgroundColor = .darkGrey
+        cell.backgroundColor = .backgroundColor
         cell.textLabel?.text = "ddd"
         cell.selectionStyle = .none
         return cell
