@@ -61,7 +61,8 @@ class MainMyDonationTableViewCell: UITableViewCell {
         collectionView.snp.makeConstraints { make in
 //            make.top.equalTo(headerLabel.snp.bottom).offset(10)
 //            make.leading.trailing.bottom.equalToSuperview()
-            make.edges.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().inset(21)
         }
         
         headerLabel.snp.makeConstraints { make in

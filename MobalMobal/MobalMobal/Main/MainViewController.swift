@@ -41,6 +41,7 @@ class MainViewController: UIViewController {
     let tableView: UITableView = {
         let tableView: UITableView = UITableView(frame: .zero, style: .plain)
         tableView.backgroundColor = .backgroundColor
+//        tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return tableView
@@ -50,7 +51,8 @@ class MainViewController: UIViewController {
     var lastContentOffset: CGFloat = 0.0
     
     let sectionTitle: [String] = ["나의 진행", "진행중"]
-    let cellIdentifier: String = "MainMyDonationTableViewCell"
+    let myCellIdentifier: String = "MainMyDonationTableViewCell"
+    let ongoingCellIdentifier: String = "MainOngoingDonationTableViewCell"
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -66,7 +68,8 @@ class MainViewController: UIViewController {
     private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(MainMyDonationTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(MainMyDonationTableViewCell.self, forCellReuseIdentifier: myCellIdentifier)
+        tableView.register(MainOngoingDonationTableViewCell.self, forCellReuseIdentifier: ongoingCellIdentifier)
         tableView.layer.masksToBounds = true
         tableView.clipsToBounds = true
     }
@@ -134,7 +137,7 @@ extension MainViewController: UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return 30
+            return 1
         default:
             return 0
         }
@@ -143,11 +146,11 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            guard let cell: MainMyDonationTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MainMyDonationTableViewCell else { return .init() }
+            guard let cell: MainMyDonationTableViewCell = tableView.dequeueReusableCell(withIdentifier: myCellIdentifier, for: indexPath) as? MainMyDonationTableViewCell else { return .init() }
+            cell.selectionStyle = .none
             return cell
         case 1:
-            let cell: UITableViewCell = UITableViewCell()
-            cell.backgroundColor = .backgroundColor
+            guard let cell: MainOngoingDonationTableViewCell = tableView.dequeueReusableCell(withIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationTableViewCell else { return .init() }
             cell.selectionStyle = .none
             return cell
         default:
@@ -158,7 +161,7 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 163
+            return 184
         case 1:
             return UITableView.automaticDimension
         default:
