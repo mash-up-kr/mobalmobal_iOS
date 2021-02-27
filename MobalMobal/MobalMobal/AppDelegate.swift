@@ -5,12 +5,22 @@
 //  Created by 김재희 on 2021/02/20.
 //
 
+import Firebase
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
+        
+        // setting Firebase Cloud Messaging
+        setFCM()
+        application.registerForRemoteNotifications()
+        
+        Messaging.messaging().delegate = self
+        setFCMToken()
+        
         return true
     }
 
@@ -29,3 +39,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+// MARK: - UNUserNotificationCenterDelegate
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    private func setFCM() {
+        UNUserNotificationCenter.current().delegate = self
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in }
+    }
+}
+
+// MARK: - MessagingDelegate
+extension AppDelegate: MessagingDelegate {
+    private func setFCMToken() {
+        Messaging.messaging().token { token, error in
+            if let error: Error = error {
+                print("💥 Error fetching FCM registration token: \(error) 💥")
+            } else if let token: String = token {
+                print("🐰FCM registration token: \(token) 🐰")
+            }
+        }
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        // 토큰 갱신 모니터링
+        // print("🐰 Firebase registration token: \(fcmToken ?? "") 🐰")
+        // let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        // NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        // If necessary send token to application server.
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
+    }
+}
