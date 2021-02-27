@@ -16,21 +16,21 @@
 		D70C37D225E103DE00898271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D70C37D125E103DE00898271 /* Assets.xcassets */; };
 		D70C37D525E103DE00898271 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D70C37D325E103DE00898271 /* LaunchScreen.storyboard */; };
 		D70C37DE25E103F100898271 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = D70C37DD25E103F100898271 /* .swiftlint.yml */; };
-		D7147D4125E763DC00AA0878 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4025E763DC00AA0878 /* FirebaseDynamicLinks */; };
-		D7147D4325E763DC00AA0878 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4225E763DC00AA0878 /* FirebaseDatabase */; };
-		D7147D4525E763DC00AA0878 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4425E763DC00AA0878 /* FirebaseAnalytics */; };
-		D7147D4725E763DC00AA0878 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4625E763DC00AA0878 /* FirebaseCrashlytics */; };
-		D7147D4925E763DC00AA0878 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4825E763DC00AA0878 /* FirebaseMessaging */; };
-		D7147D4B25E763DC00AA0878 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4A25E763DC00AA0878 /* FirebaseAuth */; };
-		D7147D4D25E763DC00AA0878 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4C25E763DC00AA0878 /* FirebaseRemoteConfig */; };
-		D7147D4F25E763DC00AA0878 /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4E25E763DC00AA0878 /* FirebaseInAppMessaging-Beta */; };
-		D7147D5325E7646500AA0878 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D5225E7646500AA0878 /* Alamofire */; };
-		D7147D5725E7661100AA0878 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D5625E7661100AA0878 /* Kingfisher */; };
-		D7147D5B25E7667A00AA0878 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D5A25E7667A00AA0878 /* SnapKit */; };
-		D7147D5F25E766CC00AA0878 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D5E25E766CC00AA0878 /* Then */; };
-		D7147D6325E7686800AA0878 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6225E7686800AA0878 /* FacebookLogin */; };
-		D7147D6525E7686800AA0878 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6425E7686800AA0878 /* FacebookCore */; };
-		D7147D6925E768B800AA0878 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6825E768B800AA0878 /* Toast */; };
+		D7147D4125E763DC00AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4025E763DC00AA0878 /* SwiftPackageProductDependency */; };
+		D7147D4325E763DC00AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4225E763DC00AA0878 /* SwiftPackageProductDependency */; };
+		D7147D4525E763DC00AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4425E763DC00AA0878 /* SwiftPackageProductDependency */; };
+		D7147D4725E763DC00AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4625E763DC00AA0878 /* SwiftPackageProductDependency */; };
+		D7147D4925E763DC00AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4825E763DC00AA0878 /* SwiftPackageProductDependency */; };
+		D7147D4B25E763DC00AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4A25E763DC00AA0878 /* SwiftPackageProductDependency */; };
+		D7147D4D25E763DC00AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4C25E763DC00AA0878 /* SwiftPackageProductDependency */; };
+		D7147D4F25E763DC00AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D4E25E763DC00AA0878 /* SwiftPackageProductDependency */; };
+		D7147D5325E7646500AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D5225E7646500AA0878 /* SwiftPackageProductDependency */; };
+		D7147D5725E7661100AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D5625E7661100AA0878 /* SwiftPackageProductDependency */; };
+		D7147D5B25E7667A00AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D5A25E7667A00AA0878 /* SwiftPackageProductDependency */; };
+		D7147D5F25E766CC00AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D5E25E766CC00AA0878 /* SwiftPackageProductDependency */; };
+		D7147D6325E7686800AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6225E7686800AA0878 /* SwiftPackageProductDependency */; };
+		D7147D6525E7686800AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6425E7686800AA0878 /* SwiftPackageProductDependency */; };
+		D7147D6925E768B800AA0878 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6825E768B800AA0878 /* SwiftPackageProductDependency */; };
 		D7147D6C25E76A1900AA0878 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -57,22 +57,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7147D6925E768B800AA0878 /* Toast in Frameworks */,
-				D7147D4925E763DC00AA0878 /* FirebaseMessaging in Frameworks */,
-				D7147D6525E7686800AA0878 /* FacebookCore in Frameworks */,
-				D7147D4325E763DC00AA0878 /* FirebaseDatabase in Frameworks */,
-				D7147D4F25E763DC00AA0878 /* FirebaseInAppMessaging-Beta in Frameworks */,
+				D7147D6925E768B800AA0878 /* BuildFile in Frameworks */,
+				D7147D4925E763DC00AA0878 /* BuildFile in Frameworks */,
+				D7147D6525E7686800AA0878 /* BuildFile in Frameworks */,
+				D7147D4325E763DC00AA0878 /* BuildFile in Frameworks */,
+				D7147D4F25E763DC00AA0878 /* BuildFile in Frameworks */,
 				6A7F9880C2DD6C6782A998EE /* Pods_MobalMobal.framework in Frameworks */,
-				D7147D4725E763DC00AA0878 /* FirebaseCrashlytics in Frameworks */,
-				D7147D5F25E766CC00AA0878 /* Then in Frameworks */,
-				D7147D5325E7646500AA0878 /* Alamofire in Frameworks */,
-				D7147D4525E763DC00AA0878 /* FirebaseAnalytics in Frameworks */,
-				D7147D4B25E763DC00AA0878 /* FirebaseAuth in Frameworks */,
-				D7147D5725E7661100AA0878 /* Kingfisher in Frameworks */,
-				D7147D5B25E7667A00AA0878 /* SnapKit in Frameworks */,
-				D7147D4125E763DC00AA0878 /* FirebaseDynamicLinks in Frameworks */,
-				D7147D6325E7686800AA0878 /* FacebookLogin in Frameworks */,
-				D7147D4D25E763DC00AA0878 /* FirebaseRemoteConfig in Frameworks */,
+				D7147D4725E763DC00AA0878 /* BuildFile in Frameworks */,
+				D7147D5F25E766CC00AA0878 /* BuildFile in Frameworks */,
+				D7147D5325E7646500AA0878 /* BuildFile in Frameworks */,
+				D7147D4525E763DC00AA0878 /* BuildFile in Frameworks */,
+				D7147D4B25E763DC00AA0878 /* BuildFile in Frameworks */,
+				D7147D5725E7661100AA0878 /* BuildFile in Frameworks */,
+				D7147D5B25E7667A00AA0878 /* BuildFile in Frameworks */,
+				D7147D4125E763DC00AA0878 /* BuildFile in Frameworks */,
+				D7147D6325E7686800AA0878 /* BuildFile in Frameworks */,
+				D7147D4D25E763DC00AA0878 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +152,8 @@
 				D70C37C225E103DD00898271 /* Frameworks */,
 				D70C37C325E103DD00898271 /* Resources */,
 				D70C37E025E1041D00898271 /* Run SwiftLint */,
+				4F43463B447430E17A7A7E30 /* [CP] Embed Pods Frameworks */,
+				9F68754E97333593B4BF85AE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -159,21 +161,21 @@
 			);
 			name = MobalMobal;
 			packageProductDependencies = (
-				D7147D4025E763DC00AA0878 /* FirebaseDynamicLinks */,
-				D7147D4225E763DC00AA0878 /* FirebaseDatabase */,
-				D7147D4425E763DC00AA0878 /* FirebaseAnalytics */,
-				D7147D4625E763DC00AA0878 /* FirebaseCrashlytics */,
-				D7147D4825E763DC00AA0878 /* FirebaseMessaging */,
-				D7147D4A25E763DC00AA0878 /* FirebaseAuth */,
-				D7147D4C25E763DC00AA0878 /* FirebaseRemoteConfig */,
-				D7147D4E25E763DC00AA0878 /* FirebaseInAppMessaging-Beta */,
-				D7147D5225E7646500AA0878 /* Alamofire */,
-				D7147D5625E7661100AA0878 /* Kingfisher */,
-				D7147D5A25E7667A00AA0878 /* SnapKit */,
-				D7147D5E25E766CC00AA0878 /* Then */,
-				D7147D6225E7686800AA0878 /* FacebookLogin */,
-				D7147D6425E7686800AA0878 /* FacebookCore */,
-				D7147D6825E768B800AA0878 /* Toast */,
+				D7147D4025E763DC00AA0878 /* SwiftPackageProductDependency */,
+				D7147D4225E763DC00AA0878 /* SwiftPackageProductDependency */,
+				D7147D4425E763DC00AA0878 /* SwiftPackageProductDependency */,
+				D7147D4625E763DC00AA0878 /* SwiftPackageProductDependency */,
+				D7147D4825E763DC00AA0878 /* SwiftPackageProductDependency */,
+				D7147D4A25E763DC00AA0878 /* SwiftPackageProductDependency */,
+				D7147D4C25E763DC00AA0878 /* SwiftPackageProductDependency */,
+				D7147D4E25E763DC00AA0878 /* SwiftPackageProductDependency */,
+				D7147D5225E7646500AA0878 /* SwiftPackageProductDependency */,
+				D7147D5625E7661100AA0878 /* SwiftPackageProductDependency */,
+				D7147D5A25E7667A00AA0878 /* SwiftPackageProductDependency */,
+				D7147D5E25E766CC00AA0878 /* SwiftPackageProductDependency */,
+				D7147D6225E7686800AA0878 /* SwiftPackageProductDependency */,
+				D7147D6425E7686800AA0878 /* SwiftPackageProductDependency */,
+				D7147D6825E768B800AA0878 /* SwiftPackageProductDependency */,
 			);
 			productName = MobalMobal;
 			productReference = D70C37C525E103DD00898271 /* MobalMobal.app */;
@@ -203,13 +205,13 @@
 			);
 			mainGroup = D70C37BC25E103DD00898271;
 			packageReferences = (
-				D7147D3F25E763DC00AA0878 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				D7147D5125E7646500AA0878 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				D7147D5525E7661100AA0878 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				D7147D5925E7667900AA0878 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				D7147D5D25E766CC00AA0878 /* XCRemoteSwiftPackageReference "Then" */,
-				D7147D6125E7686800AA0878 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
-				D7147D6725E768B800AA0878 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				D7147D3F25E763DC00AA0878 /* RemoteSwiftPackageReference */,
+				D7147D5125E7646500AA0878 /* RemoteSwiftPackageReference */,
+				D7147D5525E7661100AA0878 /* RemoteSwiftPackageReference */,
+				D7147D5925E7667900AA0878 /* RemoteSwiftPackageReference */,
+				D7147D5D25E766CC00AA0878 /* RemoteSwiftPackageReference */,
+				D7147D6125E7686800AA0878 /* RemoteSwiftPackageReference */,
+				D7147D6725E768B800AA0878 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = D70C37C625E103DD00898271 /* Products */;
 			projectDirPath = "";
@@ -236,6 +238,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4F43463B447430E17A7A7E30 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		84F3F05E72455AC321E09A11 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -256,6 +275,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F68754E97333593B4BF85AE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D70C37E025E1041D00898271 /* Run SwiftLint */ = {
@@ -499,7 +535,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D7147D3F25E763DC00AA0878 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		D7147D3F25E763DC00AA0878 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -507,7 +543,7 @@
 				minimumVersion = 7.7.0;
 			};
 		};
-		D7147D5125E7646500AA0878 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		D7147D5125E7646500AA0878 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -515,7 +551,7 @@
 				minimumVersion = 5.4.1;
 			};
 		};
-		D7147D5525E7661100AA0878 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		D7147D5525E7661100AA0878 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -523,7 +559,7 @@
 				minimumVersion = 6.1.1;
 			};
 		};
-		D7147D5925E7667900AA0878 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		D7147D5925E7667900AA0878 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -531,7 +567,7 @@
 				minimumVersion = 5.0.1;
 			};
 		};
-		D7147D5D25E766CC00AA0878 /* XCRemoteSwiftPackageReference "Then" */ = {
+		D7147D5D25E766CC00AA0878 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then.git";
 			requirement = {
@@ -539,7 +575,7 @@
 				minimumVersion = 2.7.0;
 			};
 		};
-		D7147D6125E7686800AA0878 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+		D7147D6125E7686800AA0878 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk.git";
 			requirement = {
@@ -547,7 +583,7 @@
 				minimumVersion = 9.0.1;
 			};
 		};
-		D7147D6725E768B800AA0878 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+		D7147D6725E768B800AA0878 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
 			requirement = {
@@ -558,79 +594,79 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D7147D4025E763DC00AA0878 /* FirebaseDynamicLinks */ = {
+		D7147D4025E763DC00AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D3F25E763DC00AA0878 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = D7147D3F25E763DC00AA0878 /* RemoteSwiftPackageReference */;
 			productName = FirebaseDynamicLinks;
 		};
-		D7147D4225E763DC00AA0878 /* FirebaseDatabase */ = {
+		D7147D4225E763DC00AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D3F25E763DC00AA0878 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = D7147D3F25E763DC00AA0878 /* RemoteSwiftPackageReference */;
 			productName = FirebaseDatabase;
 		};
-		D7147D4425E763DC00AA0878 /* FirebaseAnalytics */ = {
+		D7147D4425E763DC00AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D3F25E763DC00AA0878 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = D7147D3F25E763DC00AA0878 /* RemoteSwiftPackageReference */;
 			productName = FirebaseAnalytics;
 		};
-		D7147D4625E763DC00AA0878 /* FirebaseCrashlytics */ = {
+		D7147D4625E763DC00AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D3F25E763DC00AA0878 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = D7147D3F25E763DC00AA0878 /* RemoteSwiftPackageReference */;
 			productName = FirebaseCrashlytics;
 		};
-		D7147D4825E763DC00AA0878 /* FirebaseMessaging */ = {
+		D7147D4825E763DC00AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D3F25E763DC00AA0878 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = D7147D3F25E763DC00AA0878 /* RemoteSwiftPackageReference */;
 			productName = FirebaseMessaging;
 		};
-		D7147D4A25E763DC00AA0878 /* FirebaseAuth */ = {
+		D7147D4A25E763DC00AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D3F25E763DC00AA0878 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = D7147D3F25E763DC00AA0878 /* RemoteSwiftPackageReference */;
 			productName = FirebaseAuth;
 		};
-		D7147D4C25E763DC00AA0878 /* FirebaseRemoteConfig */ = {
+		D7147D4C25E763DC00AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D3F25E763DC00AA0878 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = D7147D3F25E763DC00AA0878 /* RemoteSwiftPackageReference */;
 			productName = FirebaseRemoteConfig;
 		};
-		D7147D4E25E763DC00AA0878 /* FirebaseInAppMessaging-Beta */ = {
+		D7147D4E25E763DC00AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D3F25E763DC00AA0878 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = D7147D3F25E763DC00AA0878 /* RemoteSwiftPackageReference */;
 			productName = "FirebaseInAppMessaging-Beta";
 		};
-		D7147D5225E7646500AA0878 /* Alamofire */ = {
+		D7147D5225E7646500AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D5125E7646500AA0878 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = D7147D5125E7646500AA0878 /* RemoteSwiftPackageReference */;
 			productName = Alamofire;
 		};
-		D7147D5625E7661100AA0878 /* Kingfisher */ = {
+		D7147D5625E7661100AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D5525E7661100AA0878 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = D7147D5525E7661100AA0878 /* RemoteSwiftPackageReference */;
 			productName = Kingfisher;
 		};
-		D7147D5A25E7667A00AA0878 /* SnapKit */ = {
+		D7147D5A25E7667A00AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D5925E7667900AA0878 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = D7147D5925E7667900AA0878 /* RemoteSwiftPackageReference */;
 			productName = SnapKit;
 		};
-		D7147D5E25E766CC00AA0878 /* Then */ = {
+		D7147D5E25E766CC00AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D5D25E766CC00AA0878 /* XCRemoteSwiftPackageReference "Then" */;
+			package = D7147D5D25E766CC00AA0878 /* RemoteSwiftPackageReference */;
 			productName = Then;
 		};
-		D7147D6225E7686800AA0878 /* FacebookLogin */ = {
+		D7147D6225E7686800AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D6125E7686800AA0878 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = D7147D6125E7686800AA0878 /* RemoteSwiftPackageReference */;
 			productName = FacebookLogin;
 		};
-		D7147D6425E7686800AA0878 /* FacebookCore */ = {
+		D7147D6425E7686800AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D6125E7686800AA0878 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = D7147D6125E7686800AA0878 /* RemoteSwiftPackageReference */;
 			productName = FacebookCore;
 		};
-		D7147D6825E768B800AA0878 /* Toast */ = {
+		D7147D6825E768B800AA0878 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D7147D6725E768B800AA0878 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			package = D7147D6725E768B800AA0878 /* RemoteSwiftPackageReference */;
 			productName = Toast;
 		};
 /* End XCSwiftPackageProductDependency section */
