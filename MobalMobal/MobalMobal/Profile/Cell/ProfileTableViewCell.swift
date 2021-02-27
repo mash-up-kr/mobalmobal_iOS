@@ -12,65 +12,73 @@ class ProfileTableViewCell: UITableViewCell {
     let profileImage: UIImageView = {
         let image: UIImageView = UIImageView()
         image.image = UIImage(named: "Profile")
+        image.layer.cornerRadius = 24
         return image
-    }()
-    var nameLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.text = "서영서"
-        return label
     }()
     let nicknameLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "백호"
+        label.text = "Jercy"
+        label.textColor = .white
+        label.font = UIFont(name: "futura-Bold", size: 24)
+//        label.font = UIFont.systemFont(ofSize: 24)
         return label
     }()
-    let editButton: UIButton = {
+    let pointButton: UIButton = {
         let button: UIButton = UIButton()
-        button.setTitle("수정", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
-    let settingButton: UIButton = {
-        let button: UIButton = UIButton()
-        button.setTitle("설정", for: .normal)
-        button.setTitleColor(.white, for: .normal)
         return button
     }()
     let pointView: UIView = {
         let view: UIView = UIView()
-        view.layer.cornerRadius = 8.0
-        view.backgroundColor = .red
         return view
     }()
-    
+    let pointLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.text = "12,340원"
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .white
+        return label
+    }()
+    let pointDetailImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(systemName: "chevron.right")
+        image.tintColor = .white
+        return image
+    }()
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        print("init")
-        self.contentView.backgroundColor = .black
+        self.contentView.backgroundColor = .backgroundColor
         self.setLayout()
     }
     
     private func setLayout() {
-        print("setLayout ✨")
-        [profileImage, nameLabel, nicknameLabel, editButton, settingButton, pointView].forEach { contentView.addSubview( $0) }
+        pointView.addSubview(pointButton)
+        pointView.addSubview(pointDetailImage)
+        [profileImage, nicknameLabel, pointLabel, pointView].forEach { contentView.addSubview( $0 ) }
         profileImage.snp.makeConstraints {  make in
-            make.top.equalToSuperview().inset(20)
-            make.leading.equalToSuperview().offset(21)
+            make.top.equalTo(contentView.snp.top).inset(20)
+            make.leading.equalTo(contentView.snp.leading).offset(21)
             make.height.width.equalTo(80)
+            make.bottom.equalTo(contentView.snp.bottom).inset(60)
         }
-        profileImage.layer.cornerRadius = 10.0
         
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(34)
+            make.top.equalTo(profileImage.snp.top)
             make.leading.equalTo(profileImage.snp.trailing).offset(20)
             make.trailing.equalToSuperview().inset(20)
         }
+        pointLabel.snp.makeConstraints { make in
+            make.leading.equalTo(pointView)
+            make.centerY.equalTo(pointView)
+            
+        }
+        pointDetailImage.snp.makeConstraints { make in
+            make.leading.equalTo(pointLabel.snp.trailing)
+            make.top.bottom.equalTo(pointLabel)
+        }
         pointView.snp.makeConstraints { make in
-            make.top.equalTo(nicknameLabel.snp.bottom).offset(10)
-            make.leading.equalTo(profileImage.snp.leading)
-            make.trailing.equalTo(settingButton.snp.trailing)
-            make.height.equalTo(150)
+            make.top.equalTo(nicknameLabel.snp.bottom).offset(23)
+            make.leading.equalTo(nicknameLabel.snp.leading)
         }
     }
     
