@@ -13,14 +13,15 @@ class MainViewController: UIViewController {
     // MARK: - UIComponent
     let titleView: UIView = {
         let view: UIView = UIView(frame: .zero)
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = .darkGrey
         return view
     }()
     
     let titleLabel: UILabel = {
         let label: UILabel = UILabel(frame: .zero)
-        label.text = "김재희님 어쩌고"
-        label.font = UIFont(name: "futura", size: 30)
+        label.text = "Hi, jaehui"
+        label.font = UIFont(name: "Futura-Bold", size: 30)
+        label.textColor = .white
         return label
     }()
     
@@ -39,6 +40,7 @@ class MainViewController: UIViewController {
     
     let tableView: UITableView = {
         let tableView: UITableView = UITableView(frame: .zero, style: .plain)
+        tableView.backgroundColor = .darkGrey
         tableView.tableFooterView = UIView()
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return tableView
@@ -50,7 +52,7 @@ class MainViewController: UIViewController {
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .darkGrey
         tableView.delegate = self
         tableView.dataSource = self
         setLayout()
@@ -96,9 +98,9 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.lastContentOffset <= 0 {
-            titleLabel.font = UIFont(name: "futura", size: 30)
+            titleLabel.font = UIFont(name: "Futura-Bold", size: 25)
         } else if self.lastContentOffset < scrollView.contentOffset.y {
-            titleLabel.font = UIFont(name: "futura", size: 15)
+            titleLabel.font = UIFont(name: "Futura-Bold", size: 16)
         }
         self.lastContentOffset = scrollView.contentOffset.y
     }
@@ -112,6 +114,7 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell()
+        cell.backgroundColor = .darkGrey
         cell.textLabel?.text = "ddd"
         cell.selectionStyle = .none
         return cell
