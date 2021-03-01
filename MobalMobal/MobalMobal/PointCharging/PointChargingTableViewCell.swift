@@ -12,6 +12,8 @@ class PointChargingTableViewCell: UITableViewCell {
     // MARK: - UIComponents
     let pointPriceLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 15)
+        label.textColor = .white
         return label
     }()
     let cellDetailButton: UIButton = {
@@ -19,7 +21,6 @@ class PointChargingTableViewCell: UITableViewCell {
         button.setImage(UIImage(named: "arrowChevronBigRight"), for: .normal)
         return button
     }()
-    
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -38,8 +39,8 @@ class PointChargingTableViewCell: UITableViewCell {
             make.leading.equalToSuperview().inset(21)
         }
         cellDetailButton.snp.makeConstraints { make in
-            make.leading.equalTo(pointPriceLabel.snp.trailing).offset(225)
             make.top.bottom.equalTo(pointPriceLabel)
+            make.leading.lessThanOrEqualTo(pointPriceLabel.snp.trailing).offset(225)
             make.trailing.equalToSuperview()
         }
     }

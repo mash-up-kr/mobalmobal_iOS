@@ -12,6 +12,7 @@ class PointChargingViewController: UIViewController {
     // MARK: - UIComponents
     private let chargingTableView: UITableView = {
         let pointTableView: UITableView = UITableView(frame: .zero, style: .plain)
+        pointTableView.backgroundColor = .black
         return pointTableView
     }()
     private let pageTitle: UILabel = {
@@ -19,56 +20,75 @@ class PointChargingViewController: UIViewController {
         label.text = "충전"
         label.font = UIFont(name: "SpoqaHanSansNeo-Medium", size: 18)
         label.textColor = .white
+        label.backgroundColor = .black
         return label
     }()
-  
+    private let transparencyView: UIView = {
+        let view: UIView = UIView()
+        view.alpha = 0
+        return view
+    }()
+    private let contentView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = .black
+        view.layer.cornerRadius = 30.0
+        return view
+    }()
     // MARK: - Properties
     private let pointItems: [String] = ["1,000원", "2,000원", "5,000원", "10,000원", "50,000원", "100,000원", "직접입력"]
     private let cellIdentifier: String = "PointChargingTableViewCell"
-    
+    private var tableViewContentHiehgt: CGFloat = 0
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTableView()
+        setLayout()
+    }
+    // MARK: - Methods
+    private func setTableView() {
         self.chargingTableView.delegate = self
         self.chargingTableView.dataSource = self
         self.chargingTableView.register(PointChargingTableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
-        self.view.backgroundColor = .black
-        self.chargingTableView.backgroundColor = .black
         self.chargingTableView.separatorStyle = .none
-        setLayout()
+        self.chargingTableView.isScrollEnabled = false
     }
-    
-    // MARK: - Methods
     private func setLayout() {
-        [chargingTableView, pageTitle].forEach { self.view.addSubview($0) }
+        [ transparencyView, contentView].forEach { self.view.addSubview($0) }
+        [ chargingTableView, pageTitle].forEach { self.contentView.addSubview($0) }
+
+        chargingTableView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.bottom.equalTo(contentView.snp.bottom).inset(34)
+        }
         pageTitle.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(20)
+            make.top.equalTo(contentView.snp.top).offset(20)
+            make.bottom.equalTo(chargingTableView.snp.top).inset(-53.2)
             make.centerX.equalToSuperview()
         }
-        chargingTableView.snp.makeConstraints { make in
-            make.top.equalTo(pageTitle.snp.bottom).offset(53.2)
-            make.leading.trailing.bottom.equalToSuperview().inset(20)
+        contentView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(492.2 + 21)
+        }
+        transparencyView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(contentView.snp.top)
         }
     }
 }
-
  // MARK: - TableViewDataSource
 extension PointChargingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.pointItems.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell: PointChargingTableViewCell = self.chargingTableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath) as? PointChargingTableViewCell else { return UITableViewCell() }
         cell.pointPriceLabel.text = pointItems[indexPath.row]
-        cell.pointPriceLabel.textColor = .white
-        cell.pointPriceLabel.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 15)
         cell.selectionStyle = .none
         cell.backgroundColor = .black
         return cell
     }
 }
-
  // MARK: - TableViewDelegate
 extension PointChargingViewController: UITableViewDelegate {
 }
+
