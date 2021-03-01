@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */; };
+		3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */; };
+		3A1BD71625ED37BB0079D56D /* DonationDetailViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD71525ED37BB0079D56D /* DonationDetailViewController+Layout.swift */; };
 		3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */; };
 		6A7F9880C2DD6C6782A998EE /* Pods_MobalMobal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */; };
 		7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04536425EAAA3B00870761 /* UIColor+Additions.swift */; };
@@ -39,6 +41,8 @@
 /* Begin PBXFileReference section */
 		32D37E13F8458BE37D6BCAC0 /* Pods-MobalMobal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.release.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.release.xcconfig"; sourceTree = "<group>"; };
 		3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailViewController.swift; sourceTree = "<group>"; };
+		3A1BD71525ED37BB0079D56D /* DonationDetailViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DonationDetailViewController+Layout.swift"; path = "../../../../../../../../DonationDetailViewController+Layout.swift"; sourceTree = "<group>"; };
 		3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginButton.swift; sourceTree = "<group>"; };
 		5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobalMobal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61483D18A64727D4EAFF1EDD /* Pods-MobalMobal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.debug.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.debug.xcconfig"; sourceTree = "<group>"; };
@@ -92,6 +96,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		3A1BD70F25ED26970079D56D /* DonationDetail */ = {
+			isa = PBXGroup;
+			children = (
+				3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */,
+				3A1BD71525ED37BB0079D56D /* DonationDetailViewController+Layout.swift */,
+			);
+			path = DonationDetail;
+			sourceTree = "<group>";
+		};
 		7C04536325EAAA2400870761 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +144,7 @@
 		D70C37C725E103DD00898271 /* MobalMobal */ = {
 			isa = PBXGroup;
 			children = (
+				3A1BD70F25ED26970079D56D /* DonationDetail */,
 				3A035F1625EA4D6000D3FB69 /* Login */,
 				7C04536325EAAA2400870761 /* Extension */,
 				D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */,
@@ -334,7 +348,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */,
+				3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */,
 				3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */,
+				3A1BD71625ED37BB0079D56D /* DonationDetailViewController+Layout.swift in Sources */,
 				D70C37CD25E103DD00898271 /* ViewController.swift in Sources */,
 				7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */,
 				D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */,

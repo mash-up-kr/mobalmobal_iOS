@@ -63,11 +63,9 @@ class LoginViewController: UIViewController {
         let googleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickGoogleLoginButton))
         googleButton.addGestureRecognizer(googleLoginTap)
         let facebookLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickFacebookLoginButton))
-        googleButton.addGestureRecognizer(facebookLoginTap)
-        
-        // TODO: Apple Login
-        // let appleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickAppleLoginButton))
-        // googleButton.addGestureRecognizer(appleLoginTap)
+        facebookButton.addGestureRecognizer(facebookLoginTap)
+        let appleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickAppleLoginButton))
+        appleButton.addGestureRecognizer(appleLoginTap)
     }
     
     // MARK: - Life Cycle
@@ -89,6 +87,14 @@ class LoginViewController: UIViewController {
     }
     @IBAction private func clickGoogleLoginButton() {
         loginWithGoogle()
+    }
+    @IBAction private func clickAppleLoginButton() {
+        // TODO: loginWithApple()
+        
+        // TODO: 임시로 상세보기 화면으로 가는 코드
+        let detailVC: DonationDetailViewController = DonationDetailViewController()
+        detailVC.modalPresentationStyle = .fullScreen
+        self.present(detailVC, animated: true)
     }
 }
 
@@ -178,4 +184,9 @@ extension LoginViewController {
             self?.loginWithFirebase(credential: FacebookAuthProvider.credential(withAccessToken: token.tokenString))
         }
     }
+}
+
+// MARK: - Apple
+extension LoginViewController {
+    // TODO: private func loginWithApple() {}
 }
