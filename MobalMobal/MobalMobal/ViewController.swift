@@ -29,6 +29,8 @@ class ViewController: UIViewController {
     
     @IBAction func fourthButtonIsTapped(_ sender: UIButton) {
         let pointChargingViewController: PointChargingViewController = PointChargingViewController()
-        self.present(pointChargingViewController, animated: true, completion: nil)
+        let inputChargingViwecontroller: InputChargingViewController = InputChargingViewController()
+//        self.present(pointChargingViewController, animated: true, completion: nil)
+        self.present(inputChargingViwecontroller, animated: true, completion: nil)
     }
 }
