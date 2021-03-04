@@ -12,7 +12,7 @@ class DonationDetailViewController: UIViewController {
     // Top Image Area
     lazy var detailImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.image = UIImage(named: "doneImage") // TODO: backgroundColor 대신 로딩 이미지
+        imageView.image = UIImage(named: "doneImage") // TODO: 스켈레톤 데이터
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
