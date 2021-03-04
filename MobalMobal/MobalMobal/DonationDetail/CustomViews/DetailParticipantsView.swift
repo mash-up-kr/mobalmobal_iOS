@@ -8,7 +8,6 @@ import Kingfisher
 import SnapKit
 import UIKit
 
-
 /// [도네이션 상세 페이지] 여러 참여자 프로필 이미지를 묶어서 보여주는 뷰
 class DetailParticipantsView: UIView {
     // MARK: - UI Components

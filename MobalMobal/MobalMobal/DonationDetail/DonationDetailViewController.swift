@@ -156,8 +156,8 @@ class DonationDetailViewController: UIViewController {
         return label
     }()
     
-    let participantsProfilesView: UIView = {
-        let view: UIView = DetailParticipantsView()
+    let participantsProfilesView: DetailParticipantsView = {
+        let view: DetailParticipantsView = DetailParticipantsView()
         return view
     }()
     
@@ -192,9 +192,27 @@ class DonationDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraints()
+        setActions()
     }
     
     // MARK: - Actions
+    @IBAction private func clickParticipantsMoreButton() {
+        // 참여자 더보기 버튼 클릭 시
+        print("🐻 참여자 더보기 🐻")
+    }
+    
+    @IBAction private func clickDonationButton() {
+        // 후원하기 버튼 클릭 시
+        print("🐻 후원하기 🐻")
+    }
+    
     // MARK: - Methods
+    private func setActions() {
+        let moreButtonTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickParticipantsMoreButton))
+        participantsProfilesView.moreButtonView.addGestureRecognizer(moreButtonTap)
+        
+        let donationButtonTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickDonationButton))
+        donationButton.addGestureRecognizer(donationButtonTap)
+    }
     // MARK: - Protocols
 }
