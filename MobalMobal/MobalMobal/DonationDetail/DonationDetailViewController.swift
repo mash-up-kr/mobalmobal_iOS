@@ -34,10 +34,11 @@ class DonationDetailViewController: UIViewController {
         let view: UIView = UIView()
         view.backgroundColor = .wheat
         // shadow 적용
-        view.layer.masksToBounds = false
-        view.layer.shadowColor = UIColor.red.cgColor
-        view.layer.shadowOffset = CGSize(width: 0, height: 10)
+        view.layer.shadowColor = UIColor.yellowTan80.cgColor
         view.layer.shadowRadius = 10 / UIScreen.main.scale
+        view.layer.shadowOpacity = 1.0
+        view.layer.shadowOffset = .zero
+        view.layer.masksToBounds = false
         return view
     }()
     
@@ -80,10 +81,11 @@ class DonationDetailViewController: UIViewController {
         label.font = UIFont(name: "Futura-Medium", size: 16)
         label.textColor = .wheat
         // shadow 적용
-        label.layer.masksToBounds = false
-        label.layer.shadowColor = UIColor.red.cgColor
-        label.layer.shadowOffset = CGSize(width: 0, height: 10)
+        label.layer.shadowColor = UIColor.yellowTan80.cgColor
         label.layer.shadowRadius = 10 / UIScreen.main.scale
+        label.layer.shadowOpacity = 1.0
+        label.layer.shadowOffset = .zero
+        label.layer.masksToBounds = false
         return label
     }()
     
@@ -214,5 +216,6 @@ class DonationDetailViewController: UIViewController {
         let donationButtonTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickDonationButton))
         donationButton.addGestureRecognizer(donationButtonTap)
     }
+    
     // MARK: - Protocols
 }
