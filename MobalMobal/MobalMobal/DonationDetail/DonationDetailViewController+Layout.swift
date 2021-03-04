@@ -73,7 +73,6 @@ extension DonationDetailViewController {
         }
     }
     
-    
     private func setBottomDetailInfoAreaConstraints() {
         let detailGroupView: UIView = setDetailGroupView()
         
@@ -93,7 +92,7 @@ extension DonationDetailViewController {
     private func setNameGiftGroupView() -> UIView {
         let nameGiftGroupView: UIView = UIView()
         
-        [nameLabel, zosaLabel, giftLabel, wantLabel].forEach{ nameGiftGroupView.addSubview($0) }
+        [nameLabel, zosaLabel, giftLabel, wantLabel].forEach { nameGiftGroupView.addSubview($0) }
         
         nameLabel.snp.makeConstraints { make in
             make.top.leading.equalToSuperview()
