@@ -156,6 +156,11 @@ class DonationDetailViewController: UIViewController {
         return label
     }()
     
+    let participantsProfilesView: UIView = {
+        let view: UIView = DetailParticipantsView()
+        return view
+    }()
+    
     let endDateTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "종료날짜"

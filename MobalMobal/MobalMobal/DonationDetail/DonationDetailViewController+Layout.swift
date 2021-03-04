@@ -120,7 +120,7 @@ extension DonationDetailViewController {
         let detailGroupView: UIView = UIView()
         detailGroupView.backgroundColor = .blackTwo
         
-        [destinationTitleLabel, destinationNumberLabel, fundAmountTitleLabel, fundAmountNumberLabel, participantsTitleLabel, participantsCountLabel, endDateTitleLabel, endDateLabel].forEach { detailGroupView.addSubview($0) }
+        [destinationTitleLabel, destinationNumberLabel, fundAmountTitleLabel, fundAmountNumberLabel, participantsTitleLabel, participantsCountLabel, participantsProfilesView, endDateTitleLabel, endDateLabel].forEach { detailGroupView.addSubview($0) }
         
         destinationTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(35)
@@ -156,6 +156,11 @@ extension DonationDetailViewController {
         fundAmountNumberLabel.snp.makeConstraints { make in
             make.trailing.equalTo(destinationNumberLabel)
             make.centerY.equalTo(fundAmountTitleLabel)
+        }
+        
+        participantsProfilesView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(26)
+            make.centerY.equalTo(participantsTitleLabel)
         }
         
         endDateLabel.snp.makeConstraints { make in
