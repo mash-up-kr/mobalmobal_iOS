@@ -12,7 +12,8 @@ class DonationDetailViewController: UIViewController {
     // Top Image Area
     lazy var detailImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.backgroundColor = .purpleishBlue // TODO: backgroundColor 대신 로딩 이미지
+        imageView.image = UIImage(named: "doneImage") // TODO: backgroundColor 대신 로딩 이미지
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -53,7 +54,8 @@ class DonationDetailViewController: UIViewController {
     // Mid Description Area
     let profileImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.backgroundColor = .wheat // TODO: 스켈레톤 데이터
+        imageView.image = UIImage(named: "profile") // TODO: 스켈레톤 데이터
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 29
         imageView.layer.masksToBounds = true
         return imageView
