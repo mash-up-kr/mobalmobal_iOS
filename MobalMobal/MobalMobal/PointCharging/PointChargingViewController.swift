@@ -12,7 +12,7 @@ class PointChargingViewController: UIViewController {
     // MARK: - UIComponents
     private let chargingTableView: UITableView = {
         let pointTableView: UITableView = UITableView(frame: .zero, style: .plain)
-        pointTableView.backgroundColor = .black
+        pointTableView.backgroundColor = .backgroundColor
         return pointTableView
     }()
     private let pageTitle: UILabel = {
@@ -20,7 +20,7 @@ class PointChargingViewController: UIViewController {
         label.text = "충전"
         label.font = UIFont(name: "SpoqaHanSansNeo-Medium", size: 18)
         label.textColor = .white
-        label.backgroundColor = .black
+        label.backgroundColor = .backgroundColor
         return label
     }()
     private let transparencyView: UIView = {
@@ -30,14 +30,13 @@ class PointChargingViewController: UIViewController {
     }()
     private let contentView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .backgroundColor
         view.layer.cornerRadius = 30.0
         return view
     }()
     // MARK: - Properties
     private let pointItems: [String] = ["1,000원", "2,000원", "5,000원", "10,000원", "50,000원", "100,000원", "직접입력"]
     private let cellIdentifier: String = "PointChargingTableViewCell"
-    private var tableViewContentHiehgt: CGFloat = 0
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,8 +82,6 @@ extension PointChargingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell: PointChargingTableViewCell = self.chargingTableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath) as? PointChargingTableViewCell else { return UITableViewCell() }
         cell.pointPriceLabel.text = pointItems[indexPath.row]
-        cell.selectionStyle = .none
-        cell.backgroundColor = .black
         return cell
     }
 }

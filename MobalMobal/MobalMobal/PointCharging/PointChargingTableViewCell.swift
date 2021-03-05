@@ -25,6 +25,7 @@ class PointChargingTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setLayout()
+        self.setCellStyle()
     }
     
     required init?(coder: NSCoder) {
@@ -43,5 +44,9 @@ class PointChargingTableViewCell: UITableViewCell {
             make.leading.lessThanOrEqualTo(pointPriceLabel.snp.trailing).offset(225)
             make.trailing.equalToSuperview()
         }
+    }
+    private func setCellStyle() {
+        self.backgroundColor = .backgroundColor
+        self.selectionStyle = .none
     }
 }
