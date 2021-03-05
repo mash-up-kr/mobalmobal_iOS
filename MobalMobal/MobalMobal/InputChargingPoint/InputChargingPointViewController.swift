@@ -10,6 +10,12 @@ import UIKit
 
 class InputChargingPointViewController: UIViewController {
     // MARK: - UIComponents
+    private let chargingInputParentView: UIView = {
+        let view: UIView = UIView()
+        view.layer.cornerRadius = 30
+        view.backgroundColor = .backgroundColor
+        return view
+    }()
     private let chargingInputView: UIView = {
         let view: UIView = UIView()
         view.layer.cornerRadius = 30
@@ -40,36 +46,35 @@ class InputChargingPointViewController: UIViewController {
         button.setTitleColor(UIColor(cgColor: (CGColor(red: 121.0 / 255.0, green: 121.0 / 255.0, blue: 121.0 / 255.0, alpha: 1.0))), for: .normal)
         return button
     }()
-    private let navBar: UINavigationBar = {
-        let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 10, y: 10, width: UIScreen.main.bounds.width, height: 88))
-        navBar.barTintColor = .black94
-        navBar.isTranslucent = false
-        let navItem: UINavigationItem = UINavigationItem(title: "충전")
-        let beforeItem: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: nil, action: #selector(popVC))
-        navBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        beforeItem.tintColor = .white
-        navItem.leftBarButtonItem = beforeItem
-        navBar.setItems([navItem], animated: false)
-        return navBar
-    }()
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
-        self.navigationController?.title = "충전"
         setLayout()
+        setNavigation()
     }
-    override func viewDidLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        print("✨")
-        self.navBar.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 88)
+    // MARK: - Actions
+    @objc
+    private func popVC() {
+        print("✨ pop viewcontroller")
     }
-    
+    // MARK: - Methods
+    private func setNavigation() {
+        self.navigationController?.navigationBar.backgroundColor = .black94
+        self.navigationController?.navigationBar.barTintColor = .black94
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationItem.title = "충전"
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
+        self.navigationItem.leftBarButtonItem?.tintColor = .white
+    }
     private func setLayout() {
         print("✨ set layout")
-        [chargingInputView, chargingButton, navBar].forEach { view.addSubview($0) }
-        [chargingViewImage, chargingInputField].forEach { chargingInputView.addSubview($0) }
-        chargingInputView.snp.makeConstraints { make in
-            make.top.equalTo(navBar.snp.bottom).offset(52)
+        [chargingButton, chargingInputParentView].forEach { view.addSubview($0) }
+        [chargingInputView].forEach { chargingInputParentView.addSubview($0) }
+        [chargingViewImage, chargingInputField].forEach { chargingInputParentView.addSubview($0) }
+        chargingInputParentView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(52)
             make.centerX.equalToSuperview()
             make.height.equalTo(60)
             make.width.equalTo(345)
@@ -80,6 +85,9 @@ class InputChargingPointViewController: UIViewController {
             make.height.equalTo(60)
             make.width.equalTo(196)
         }
+        chargingInputView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         chargingViewImage.snp.makeConstraints { make in
             make.top.leading.bottom.equalToSuperview().inset(8)
             make.height.width.equalTo(44)
@@ -89,9 +97,5 @@ class InputChargingPointViewController: UIViewController {
             make.trailing.greaterThanOrEqualToSuperview().inset(113)
             make.top.bottom.equalToSuperview().inset(21)
         }
-    }
-    
-    @objc private func popVC() {
-        print("✨ pop viewcontroller")
     }
 }

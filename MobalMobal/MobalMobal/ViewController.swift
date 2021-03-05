@@ -31,6 +31,10 @@ class ViewController: UIViewController {
        let chargingInputVC: InputChargingPointViewController = InputChargingPointViewController()
         chargingInputVC.modalPresentationStyle = .fullScreen
         self.present(chargingInputVC, animated: true, completion: nil)
+//        let testVC = TestViewController()
+//        let navCon = UINavigationController(rootViewController: testVC)
+//        navCon.modalPresentationStyle = .fullScreen
+//        self.present(navCon, animated: true, completion: nil)
     }
 }
 
