@@ -10,12 +10,6 @@ import UIKit
 
 class InputChargingPointViewController: UIViewController {
     // MARK: - UIComponents
-    private let chargingInputParentView: UIView = {
-        let view: UIView = UIView()
-        view.layer.cornerRadius = 30
-        view.backgroundColor = .backgroundColor
-        return view
-    }()
     private let chargingInputView: UIView = {
         let view: UIView = UIView()
         view.layer.cornerRadius = 30
@@ -24,10 +18,11 @@ class InputChargingPointViewController: UIViewController {
     }()
     private let chargingInputField: UITextField = {
         let textField: UITextField = UITextField()
-        textField.placeholder = "충전할 금액을 입력하세요."
         textField.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 15)
-        textField.textColor = UIColor(cgColor: (CGColor(red: 121.0 / 255.0, green: 121.0 / 255.0, blue: 121.0 / 255.0, alpha: 1.0)))
         textField.keyboardType = .numberPad
+        textField.attributedPlaceholder = NSAttributedString(string: "충전할 금액을 입력하세요", attributes: [NSAttributedString.Key.foregroundColor: UIColor.brownGreyTwo])
+        textField.textColor = .white
+        textField.addTarget(self, action: #selector(textEdited), for: .editingChanged)
         return textField
     }()
     private let chargingViewImage: UIImageView = {
@@ -41,11 +36,22 @@ class InputChargingPointViewController: UIViewController {
         let button: UIButton = UIButton()
         button.layer.cornerRadius = 30
         button.backgroundColor = UIColor(cgColor: CGColor(red: 71.0 / 255.0, green: 71.0 / 255.0, blue: 71.0 / 255.0, alpha: 1))
-        
         button.setTitle("충전하기", for: .normal)
-        button.setTitleColor(UIColor(cgColor: (CGColor(red: 121.0 / 255.0, green: 121.0 / 255.0, blue: 121.0 / 255.0, alpha: 1.0))), for: .normal)
+        button.setTitleColor(.brownGreyTwo, for: .normal)
         return button
     }()
+    let numberFormat: (Int) -> String = { number in
+        let str: String = "\(number)"
+        let regex: NSRegularExpression?
+        do {
+            regex = try? NSRegularExpression(pattern: "(?<=\\d)(?=(?:\\d{3})+(?!\\d))", options: [])
+        }
+        guard let regexString = regex else { return "" }
+        return regexString.stringByReplacingMatches(in: str,
+                                                    options: [],
+                                                    range: NSMakeRange(0, str.count),
+                                                    withTemplate: ",")
+    }
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +63,16 @@ class InputChargingPointViewController: UIViewController {
     @objc
     private func popVC() {
         print("✨ pop viewcontroller")
+    }
+    @objc
+    private func textEdited(textField: UITextField) {
+        guard let textFieldText = textField.text else { return }
+        if !textFieldText.isEmpty {
+            var chargingPoint: String = textFieldText
+            chargingPoint = chargingPoint.replacingOccurrences(of: ",", with: "")
+            let chargingPointInt: Int = Int(String(chargingPoint))!
+            chargingInputField.text = numberFormat(chargingPointInt)
+        }
     }
     // MARK: - Methods
     private func setNavigation() {
@@ -70,10 +86,9 @@ class InputChargingPointViewController: UIViewController {
     }
     private func setLayout() {
         print("✨ set layout")
-        [chargingButton, chargingInputParentView].forEach { view.addSubview($0) }
-        [chargingInputView].forEach { chargingInputParentView.addSubview($0) }
-        [chargingViewImage, chargingInputField].forEach { chargingInputParentView.addSubview($0) }
-        chargingInputParentView.snp.makeConstraints { make in
+        [chargingButton, chargingInputView].forEach { view.addSubview($0) }
+        [chargingViewImage, chargingInputField].forEach { chargingInputView.addSubview($0) }
+        chargingInputView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(52)
             make.centerX.equalToSuperview()
             make.height.equalTo(60)
@@ -84,9 +99,6 @@ class InputChargingPointViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.height.equalTo(60)
             make.width.equalTo(196)
-        }
-        chargingInputView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
         }
         chargingViewImage.snp.makeConstraints { make in
             make.top.leading.bottom.equalToSuperview().inset(8)
