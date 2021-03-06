@@ -4,8 +4,9 @@
 //
 //  Created by 김재희 on 2021/02/20.
 //
-
+import FBSDKCoreKit
 import Firebase
+import GoogleSignIn
 import UIKit
 
 @main
@@ -21,6 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().delegate = self
         setFCMToken()
         
+        // setting Facebook Login
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        // setting Google Login
+        GIDSignIn.sharedInstance().clientID = "103202810083-nan5n1q6cmrtun6scg1uqt8g9n5ctng4.apps.googleusercontent.com"
+
         return true
     }
 
