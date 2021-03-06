@@ -4,6 +4,7 @@
 //
 //  Created by 임수현 on 2021/02/27.
 //
+import AuthenticationServices
 import FBSDKLoginKit
 import Firebase
 import GoogleSignIn
@@ -63,11 +64,10 @@ class LoginViewController: UIViewController {
         let googleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickGoogleLoginButton))
         googleButton.addGestureRecognizer(googleLoginTap)
         let facebookLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickFacebookLoginButton))
-        googleButton.addGestureRecognizer(facebookLoginTap)
+        facebookButton.addGestureRecognizer(facebookLoginTap)
         
-        // TODO: Apple Login
-        // let appleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickAppleLoginButton))
-        // googleButton.addGestureRecognizer(appleLoginTap)
+         let appleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickAppleLoginButton))
+         appleButton.addGestureRecognizer(appleLoginTap)
     }
     
     // MARK: - Life Cycle
@@ -89,6 +89,9 @@ class LoginViewController: UIViewController {
     }
     @IBAction private func clickGoogleLoginButton() {
         loginWithGoogle()
+    }
+    @IBAction private func clickAppleLoginButton() {
+        loginWithApple()
     }
 }
 
@@ -177,5 +180,43 @@ extension LoginViewController {
             // 토큰 받아오는 데 성공하면 파이어베이스로 인증
             self?.loginWithFirebase(credential: FacebookAuthProvider.credential(withAccessToken: token.tokenString))
         }
+    }
+}
+
+// MARK: - Apple
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate {
+    private func loginWithApple() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+            
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
+    // Apple login 모달 창 띄우기
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+    
+    // Apple ID 연동 성공 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        // Apple ID
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            print("🐻 AppleLogin :: ID: \(appleIDCredential.user)")
+            print("🐻 AppleLogin :: Name: \(appleIDCredential.fullName?.description ?? "정보 없음")")
+            print("🐻 AppleLogin :: Email: \(appleIDCredential.email ?? "정보 없음")")
+            
+        default:
+            break
+        }
+    }
+        
+    // Apple ID 연동 실패 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("🐻 AppleLogin :: 로그인 실패 \(error.localizedDescription)")
     }
 }
