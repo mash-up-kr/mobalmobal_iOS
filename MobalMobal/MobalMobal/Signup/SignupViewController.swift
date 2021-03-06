@@ -53,6 +53,21 @@ class SignupViewController: UIViewController {
         return label
     }()
     
+    private let completeButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.layer.cornerRadius = 30
+        button.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+        return button
+    }()
+    
+    private let completeButtonLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.text = "가입완료"
+        label.font = UIFont(name: "SpoqaHanSansNeo-Medium", size: 18)
+        label.textColor = UIColor(red: 121/255, green: 121/255, blue: 121/255, alpha: 1)
+        return label
+    }()
+    
     // MARK: - Property
     private var agreementButtonState: Bool = true
     
@@ -60,10 +75,7 @@ class SignupViewController: UIViewController {
     private func setup() {
         self.view.backgroundColor = .backgroundColor
         
-        setNicknameView()
-        setPhoneNumberView()
-        setEmailView()
-        setAgreementView()
+        setUIViewLayout()
     }
     
     @objc
@@ -115,6 +127,8 @@ class SignupViewController: UIViewController {
         self.agreementView.addSubview(agreementButton)
         self.agreementButton.snp.makeConstraints { make in
             make.centerY.equalTo(self.agreementView)
+            make.leading.equalToSuperview()
+            make.width.equalTo(43)
         }
         
         self.agreementView.addSubview(agreementLabel)
@@ -122,6 +136,20 @@ class SignupViewController: UIViewController {
             make.centerY.equalTo(self.agreementView)
             make.leading.equalTo(self.agreementButton.snp.trailing).offset(7)
             make.trailing.equalTo(self.agreementView.snp.trailing).offset(0)
+        }
+    }
+    
+    private func setCompleteButtonView() {
+        self.view.addSubview(completeButton)
+        self.completeButton.snp.makeConstraints { make in
+            make.top.equalTo(agreementView.snp.bottom).offset(50)
+            make.leading.trailing.equalToSuperview().inset(90)
+            make.height.equalTo(60)
+        }
+        
+        self.completeButton.addSubview(completeButtonLabel)
+        self.completeButtonLabel.snp.makeConstraints { make in
+            make.centerX.centerY.equalTo(completeButton)
         }
     }
     
@@ -135,6 +163,10 @@ class SignupViewController: UIViewController {
 
 extension SignupViewController {
     func setUIViewLayout() {
-        
+        setNicknameView()
+        setPhoneNumberView()
+        setEmailView()
+        setAgreementView()
+        setCompleteButtonView()
     }
 }
