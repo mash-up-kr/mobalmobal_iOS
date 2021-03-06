@@ -52,12 +52,15 @@ class InputChargingPointViewController: UIViewController {
                                                     range: NSMakeRange(0, str.count),
                                                     withTemplate: ",")
     }
+    private let maxChargingPoint: Int = 10_000_000
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
+        self.chargingInputField.becomeFirstResponder()
         setLayout()
         setNavigation()
+        tapGesture()
     }
     // MARK: - Actions
     @objc
@@ -71,10 +74,39 @@ class InputChargingPointViewController: UIViewController {
             var chargingPoint: String = textFieldText
             chargingPoint = chargingPoint.replacingOccurrences(of: ",", with: "")
             let chargingPointInt: Int = Int(String(chargingPoint))!
-            chargingInputField.text = numberFormat(chargingPointInt)
+            if chargingPointInt > maxChargingPoint {
+                alertController()
+                chargingInputField.text = ""
+            } else {
+                chargingInputField.text = numberFormat(chargingPointInt)
+                activateButtonUI()
+            }
+        } else {
+            initialButtonUI()
         }
     }
     // MARK: - Methods
+    private func tapGesture() {
+        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
+        tapGestureRecognizer.delegate = self
+        self.view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    private func activateButtonUI() {
+        chargingButton.setTitleColor(UIColor(cgColor: CGColor(red: 37.0 / 255.0, green: 37.0 / 255.0, blue: 37.0 / 255.0, alpha: 1)), for: .normal)
+        chargingButton.backgroundColor = .lightBluishGreen
+    }
+    private func initialButtonUI() {
+        chargingButton.backgroundColor = UIColor(cgColor: CGColor(red: 71.0 / 255.0, green: 71.0 / 255.0, blue: 71.0 / 255.0, alpha: 1))
+        chargingButton.setTitleColor(.brownGreyTwo, for: .normal)
+    }
+    private func alertController() {
+        print("✨ alertcontroller")
+        // 디자인 나오면 수정 필요
+        let alertController: UIAlertController = UIAlertController(title: "충전금액", message: "충전가능금액은 최대 10,000,000원 입니다.", preferredStyle: .alert)
+        let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
     private func setNavigation() {
         self.navigationController?.navigationBar.backgroundColor = .black94
         self.navigationController?.navigationBar.barTintColor = .black94
@@ -85,11 +117,11 @@ class InputChargingPointViewController: UIViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = .white
     }
     private func setLayout() {
-        print("✨ set layout")
         [chargingButton, chargingInputView].forEach { view.addSubview($0) }
         [chargingViewImage, chargingInputField].forEach { chargingInputView.addSubview($0) }
         chargingInputView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(52)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.centerX.equalToSuperview()
             make.height.equalTo(60)
             make.width.equalTo(345)
@@ -109,5 +141,12 @@ class InputChargingPointViewController: UIViewController {
             make.trailing.greaterThanOrEqualToSuperview().inset(113)
             make.top.bottom.equalToSuperview().inset(21)
         }
+    }
+}
+// MARK: - UIGestureRecognizerDelegate
+extension InputChargingPointViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        self.view.endEditing(true)
+        return true
     }
 }
