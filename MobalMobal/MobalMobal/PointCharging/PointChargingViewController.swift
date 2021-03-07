@@ -36,6 +36,7 @@ class PointChargingViewController: UIViewController {
         view.layer.shadowOffset = CGSize(width: 0, height: 4)
         view.layer.shadowRadius = 2
         view.layer.masksToBounds = false
+        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         return view
     }()
     // MARK: - Properties
