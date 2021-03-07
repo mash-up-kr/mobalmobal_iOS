@@ -5,5 +5,5 @@ target 'MobalMobal' do
   use_frameworks!
 
   pod 'SwiftLint'
-
+  pod 'GoogleSignIn', '< 5.1'
 end
