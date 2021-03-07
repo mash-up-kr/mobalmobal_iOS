@@ -569,3 +569,6 @@ function_body_length:
   
 reporter: "xcode"
 
+excluded:
+  - MobalMobal/Extension/UIColor+Additions.swift
+  - MobalMobal/ViewController.swift

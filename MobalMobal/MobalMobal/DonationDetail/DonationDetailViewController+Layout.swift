@@ -9,14 +9,14 @@ import UIKit
 
 extension DonationDetailViewController {
     // MARK: - Top Area
-    func setTopImageAreaConstraints() {       
-        [detailImageView].forEach { view.addSubview($0) }
+    func setTopImageAreaConstraints() {
+        view.addSubview(detailImageView)
         setDetailimageViewConstraints()
         
-        [translucentView].forEach { detailImageView.addSubview($0) }
+        detailImageView.addSubview(translucentView)
         setTranslucentViewConstraints()
         
-        [progressBarView, progressLabel, dDayLabel].forEach { translucentView.addSubview($0) }
+        translucentView.addSubviews([progressBarView, progressLabel, dDayLabel])
         setProgressBarViewConstraints()
         setProgressLabelConstraints()
         setDDayLabelConstraints()
@@ -54,13 +54,13 @@ extension DonationDetailViewController {
     
     // MARK: - Mid Area
     func setMidDescriptionAreaConstraints() {
-        [nameLabel, zosaLabel, giftLabel, wantLabel].forEach { nameGiftGroupView.addSubview($0) }
+        nameGiftGroupView.addSubviews([nameLabel, zosaLabel, giftLabel, wantLabel])
         setNameLabelConstraints()
         setZosaLabelConstraints()
         setGiftLabelConstraints()
         setWantLabelConstraints()
         
-        [profileImageView, nameGiftGroupView, descriptionLabel].forEach { view.addSubview($0) }
+        view.addSubviews([profileImageView, nameGiftGroupView, descriptionLabel])
         setProfileImageViewConstraints()
         setNameGiftGroupViewConstraints()
         setDescriptionLabelConstraints()
@@ -111,11 +111,11 @@ extension DonationDetailViewController {
     
     // MARK: - Bottom Area
     func setBottomDetailInfoAreaConstraints() {
-        [donationButton, detailGroupView].forEach { view.addSubview($0) }
+        view.addSubviews([donationButton, detailGroupView])
         setDonationButtonConstraints()
         setDetailGroupViewConstraints()
         
-        [destinationTitleLabel, destinationNumberLabel, fundAmountTitleLabel, fundAmountNumberLabel, participantsTitleLabel, participantsCountLabel, participantsProfilesView, endDateTitleLabel, endDateLabel].forEach { detailGroupView.addSubview($0) }
+        detailGroupView.addSubviews([destinationTitleLabel, destinationNumberLabel, fundAmountTitleLabel, fundAmountNumberLabel, participantsTitleLabel, participantsCountLabel, participantsProfilesView, endDateTitleLabel, endDateLabel])
         setDestinationConstraints()
         setFundAmountConstraints()
         setParticipantsConstraints()
