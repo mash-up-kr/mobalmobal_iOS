@@ -18,7 +18,6 @@ class DetailParticipantsView: UIView {
     // MARK: - Initializers
     init() {
         super.init(frame: CGRect())
-        setConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -26,7 +25,7 @@ class DetailParticipantsView: UIView {
     }
     
     // MARK: - Methods
-    private func setConstraints() {
+    override func updateConstraints() {
         [firstCircleView, secondCircleView, moreButtonView].forEach { self.addSubview($0) }
         
         firstCircleView.snp.makeConstraints { make in
@@ -44,5 +43,7 @@ class DetailParticipantsView: UIView {
             make.trailing.equalToSuperview()
             make.size.centerY.equalTo(secondCircleView)
         }
+        
+        super.updateConstraints()
     }
 }

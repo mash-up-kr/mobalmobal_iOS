@@ -35,7 +35,6 @@ class DetailParticipantsMoreButtonView: UIView {
         super.init(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         self.layer.cornerRadius = self.frame.height / 2
         self.backgroundColor = .white
-        setConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,7 +42,7 @@ class DetailParticipantsMoreButtonView: UIView {
     }
     
     // MARK: - Methods
-    private func setConstraints() {
+    override func updateConstraints() {
         [dot1, dot2, dot3].forEach { self.addSubview($0) }
         
         dot2.snp.makeConstraints { make in
@@ -58,5 +57,7 @@ class DetailParticipantsMoreButtonView: UIView {
             make.size.centerY.equalTo(dot2)
             make.leading.equalTo(dot2.snp.trailing).offset(4)
         }
+        
+        super.updateConstraints()
     }
 }
