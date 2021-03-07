@@ -36,14 +36,19 @@ class LoginViewController: UIViewController {
     
     // MARK: - Properties
     fileprivate var currentNonce: String?
-    
-    // MARK: - Initializer
-    private func setSuperview() {
+        
+    // MARK: - Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         view.backgroundColor = .backgroundColor
-        [logoImageView, facebookButton, googleButton, appleButton].forEach { view.addSubview($0) }
+
+        setActions()
     }
     
-    private func setConstraints() {
+    override func updateViewConstraints() {
+        [logoImageView, facebookButton, googleButton, appleButton].forEach { view.addSubview($0) }
+        
         logoImageView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).inset(155)
             make.centerX.equalToSuperview()
@@ -62,11 +67,15 @@ class LoginViewController: UIViewController {
             make.top.equalTo(facebookButton.snp.bottom).offset(13)
             make.leading.trailing.height.equalTo(googleButton)
         }
+        
+        super.updateViewConstraints()
     }
     
+    // MARK: - Actions
     private func setActions() {
         let googleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickGoogleLoginButton))
         googleButton.addGestureRecognizer(googleLoginTap)
+        
         let facebookLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickFacebookLoginButton))
         facebookButton.addGestureRecognizer(facebookLoginTap)
         
@@ -74,20 +83,6 @@ class LoginViewController: UIViewController {
         appleButton.addGestureRecognizer(appleLoginTap)
     }
     
-    // MARK: - Life Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setSuperview()
-        setConstraints()
-        setActions()
-        
-        // Google Login 실행될 ViewController 설정
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance()?.presentingViewController = self
-    }
-    
-    // MARK: - Actions
     @IBAction private func clickFacebookLoginButton() {
         loginWithFacebook()
     }
@@ -128,6 +123,8 @@ extension LoginViewController {
 // MARK: - Google
 extension LoginViewController: GIDSignInDelegate {
     private func loginWithGoogle() {
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().signIn()
     }
@@ -228,9 +225,7 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
             }
             
             randoms.forEach { random in
-                if remainingLength == 0 {
-                    return
-                }
+                if remainingLength == 0 { return }
                 
                 if random < charset.count {
                     result.append(charset[Int(random)])

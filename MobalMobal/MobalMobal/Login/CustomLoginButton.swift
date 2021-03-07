@@ -31,10 +31,9 @@ class CustomLoginButton: UIView {
         self.titleText = title
         self.iconName = iconName
         
-        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 60))
+        super.init(frame: .zero)
         
         setupView()
-        setConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -42,22 +41,26 @@ class CustomLoginButton: UIView {
     }
     
     // MARK: - Methods
-    private func setupView() {
-        self.layer.cornerRadius = self.frame.height / 2
-        self.backgroundColor = .white20
-    }
-    
-    private func setConstraints() {
+    override func updateConstraints() {
         [stackView].forEach { self.addSubview($0) }
-        
         stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(10)
         }
         
         [iconImageView, titleLabel].forEach { stackView.addArrangedSubview($0) }
-        
         iconImageView.snp.makeConstraints { make in
             make.size.equalTo(40)
         }
+        
+        super.updateConstraints()
+    }
+    
+    override func layoutSubviews() {
+        self.roundCorner()
+        super.layoutSubviews()
+    }
+    
+    private func setupView() {
+        self.backgroundColor = .white20
     }
 }

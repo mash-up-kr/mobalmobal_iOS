@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */; };
+		3A1BD78325F54BBC0079D56D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD78225F54BBC0079D56D /* UIView+Extension.swift */; };
 		3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */; };
 		6A7F9880C2DD6C6782A998EE /* Pods_MobalMobal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */; };
 		7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04536425EAAA3B00870761 /* UIColor+Additions.swift */; };
@@ -40,6 +41,7 @@
 		32D37E13F8458BE37D6BCAC0 /* Pods-MobalMobal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.release.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.release.xcconfig"; sourceTree = "<group>"; };
 		3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3A1BD74A25F373EA0079D56D /* MobalMobal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobalMobal.entitlements; sourceTree = "<group>"; };
+		3A1BD78225F54BBC0079D56D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginButton.swift; sourceTree = "<group>"; };
 		5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobalMobal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61483D18A64727D4EAFF1EDD /* Pods-MobalMobal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.debug.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.debug.xcconfig"; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				7C04536425EAAA3B00870761 /* UIColor+Additions.swift */,
+				3A1BD78225F54BBC0079D56D /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */,
+				3A1BD78325F54BBC0079D56D /* UIView+Extension.swift in Sources */,
 				3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */,
 				D70C37CD25E103DD00898271 /* ViewController.swift in Sources */,
 				7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */,
