@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6A7F9880C2DD6C6782A998EE /* Pods_MobalMobal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */; };
-		7C1505C125EE2A0D0044DEF5 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1505C025EE2A0D0044DEF5 /* UIColor+Additions.swift */; };
 		7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */; };
 		7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */; };
 		D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37C825E103DD00898271 /* AppDelegate.swift */; };
@@ -40,7 +39,6 @@
 		32D37E13F8458BE37D6BCAC0 /* Pods-MobalMobal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.release.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.release.xcconfig"; sourceTree = "<group>"; };
 		5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobalMobal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61483D18A64727D4EAFF1EDD /* Pods-MobalMobal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.debug.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.debug.xcconfig"; sourceTree = "<group>"; };
-		7C1505C025EE2A0D0044DEF5 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingViewController.swift; sourceTree = "<group>"; };
 		7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingTableViewCell.swift; sourceTree = "<group>"; };
 		D70C37C525E103DD00898271 /* MobalMobal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobalMobal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,14 +81,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7C1505BF25EE29C30044DEF5 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				7C1505C025EE2A0D0044DEF5 /* UIColor+Additions.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
 		7C61AECB25EA4CC900D9149F /* PointCharging */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,7 +121,6 @@
 		D70C37C725E103DD00898271 /* MobalMobal */ = {
 			isa = PBXGroup;
 			children = (
-				7C1505BF25EE29C30044DEF5 /* Extension */,
 				7C61AECB25EA4CC900D9149F /* PointCharging */,
 				D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */,
 				D70C37C825E103DD00898271 /* AppDelegate.swift */,
@@ -302,7 +291,6 @@
 				D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */,
 				D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */,
 				7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */,
-				7C1505C125EE2A0D0044DEF5 /* UIColor+Additions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
