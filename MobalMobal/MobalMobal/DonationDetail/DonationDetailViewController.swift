@@ -53,6 +53,8 @@ class DonationDetailViewController: UIViewController {
     }()
     
     // Mid Description Area
+    let nameGiftGroupView: UIView = UIView()
+    
     let profileImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.image = UIImage(named: "profile") // 스켈레톤 데이터
@@ -113,6 +115,12 @@ class DonationDetailViewController: UIViewController {
     }()
     
     // Bottom Detail Info Area
+    let detailGroupView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = .blackTwo
+        return view
+    }()
+    
     let destinationTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "목표 금액"
@@ -196,6 +204,8 @@ class DonationDetailViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .backgroundColor
+        
         setActions()
     }
     
