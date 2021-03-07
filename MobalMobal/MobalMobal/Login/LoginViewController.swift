@@ -89,9 +89,9 @@ class LoginViewController: UIViewController {
         loginWithGoogle()
     }
     @IBAction private func clickAppleLoginButton() {
-        // TODO: loginWithApple()
+        // loginWithApple()
         
-        // TODO: 임시로 상세보기 화면으로 가는 코드
+        // 임시로 상세보기 화면으로 가는 코드
         let detailVC: DonationDetailViewController = DonationDetailViewController()
         detailVC.modalPresentationStyle = .fullScreen
         self.present(detailVC, animated: true)
@@ -188,5 +188,5 @@ extension LoginViewController {
 
 // MARK: - Apple
 extension LoginViewController {
-    // TODO: private func loginWithApple() {}
+    // private func loginWithApple() {}
 }

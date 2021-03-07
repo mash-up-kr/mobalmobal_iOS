@@ -8,13 +8,7 @@
 import UIKit
 
 extension DonationDetailViewController {
-    func setConstraints() {
-        setTopImageAreaConstraints()
-        setMidDescriptionAreaConstraints()
-        setBottomDetailInfoAreaConstraints()
-    }
-    
-    private func setTopImageAreaConstraints() {
+    func setTopImageAreaConstraints() {
         view.backgroundColor = .backgroundColor
         
         [detailImageView].forEach { view.addSubview($0) }
@@ -22,7 +16,7 @@ extension DonationDetailViewController {
         
         detailImageView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(229)
+            make.height.equalTo(detailImageView.snp.width).multipliedBy(229.0 / 375.0)
         }
         
         [translucentView].forEach { detailImageView.addSubview($0) }
@@ -50,7 +44,7 @@ extension DonationDetailViewController {
         }
     }
     
-    private func setMidDescriptionAreaConstraints() {
+    func setMidDescriptionAreaConstraints() {
         let nameGiftGroupView: UIView = setNameGiftGroupView()
         
         [profileImageView, nameGiftGroupView, descriptionLabel].forEach { view.addSubview($0) }
@@ -73,7 +67,7 @@ extension DonationDetailViewController {
         }
     }
     
-    private func setBottomDetailInfoAreaConstraints() {
+    func setBottomDetailInfoAreaConstraints() {
         let detailGroupView: UIView = setDetailGroupView()
         
         [donationButton, detailGroupView].forEach { view.addSubview($0) }

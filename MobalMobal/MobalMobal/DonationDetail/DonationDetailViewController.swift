@@ -12,8 +12,9 @@ class DonationDetailViewController: UIViewController {
     // Top Image Area
     lazy var detailImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.image = UIImage(named: "doneImage") // TODO: 스켈레톤 데이터
+        imageView.image = UIImage(named: "doneImage") // 스켈레톤 데이터
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -25,7 +26,7 @@ class DonationDetailViewController: UIViewController {
     
     let progressLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "0%" // TODO: 스켈레톤 데이터
+        label.text = "0%" // 스켈레톤 데이터
         label.font = UIFont(name: "Futura-Bold", size: 18)
         label.textColor = .white
         return label
@@ -45,7 +46,7 @@ class DonationDetailViewController: UIViewController {
     
     let dDayLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "D-∞" // TODO: 스켈레톤 데이터
+        label.text = "D-∞" // 스켈레톤 데이터
         label.font = UIFont(name: "Futura-Regular", size: 13)
         label.textColor = .veryLightPink
         return label
@@ -54,7 +55,7 @@ class DonationDetailViewController: UIViewController {
     // Mid Description Area
     let profileImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.image = UIImage(named: "profile") // TODO: 스켈레톤 데이터
+        imageView.image = UIImage(named: "profile") // 스켈레톤 데이터
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 29
         imageView.layer.masksToBounds = true
@@ -63,7 +64,7 @@ class DonationDetailViewController: UIViewController {
     
     let nameLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "Someone" // TODO: 스켈레톤 데이터
+        label.text = "Someone" // 스켈레톤 데이터
         label.font = UIFont(name: "Futura-Medium", size: 16)
         label.textColor = .white
         return label
@@ -71,7 +72,7 @@ class DonationDetailViewController: UIViewController {
     
     let zosaLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "는" // TODO: 스켈레톤 데이터
+        label.text = "는" // 스켈레톤 데이터
         label.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 14)
         label.textColor = .white
         return label
@@ -79,7 +80,7 @@ class DonationDetailViewController: UIViewController {
     
     let giftLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "PS5" // TODO: 스켈레톤 데이터
+        label.text = "PS5" // 스켈레톤 데이터
         label.font = UIFont(name: "Futura-Medium", size: 16)
         label.textColor = .wheat
         // shadow 적용
@@ -93,7 +94,7 @@ class DonationDetailViewController: UIViewController {
     
     let wantLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "가지고 싶어요" // TODO: 스켈레톤 데이터
+        label.text = "가지고 싶어요" // 스켈레톤 데이터
         label.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 14)
         label.textColor = .white
         return label
@@ -104,7 +105,7 @@ class DonationDetailViewController: UIViewController {
         label.text = """
             Lorem Ipsum is simply dummy text of the printing and typesetting industry.
             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            """  // TODO: 스켈레톤 데이터
+            """  // 스켈레톤 데이터
         label.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 14)
         label.textColor = .white
         label.numberOfLines = 0
@@ -122,7 +123,7 @@ class DonationDetailViewController: UIViewController {
     
     let destinationNumberLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "2,000,000" // TODO: 스켈레톤 데이터
+        label.text = "2,000,000" // 스켈레톤 데이터
         label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)
         label.textColor = UIColor.white.withAlphaComponent(0.5)
         return label
@@ -138,7 +139,7 @@ class DonationDetailViewController: UIViewController {
     
     let fundAmountNumberLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "153,000" // TODO: 스켈레톤 데이터
+        label.text = "153,000" // 스켈레톤 데이터
         label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)
         label.textColor = .lightBluishGreen
         return label
@@ -154,7 +155,7 @@ class DonationDetailViewController: UIViewController {
     
     let participantsCountLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "(31)" // TODO: 스켈레톤 데이터
+        label.text = "(31)" // 스켈레톤 데이터
         label.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 15)
         label.textColor = .veryLightPink
         return label
@@ -175,7 +176,7 @@ class DonationDetailViewController: UIViewController {
     
     let endDateLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "2021.03.01" // TODO: 스켈레톤 데이터
+        label.text = "2021.03.01" // 스켈레톤 데이터
         label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)
         label.textColor = UIColor.white.withAlphaComponent(0.5)
         return label
@@ -195,8 +196,15 @@ class DonationDetailViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setConstraints()
         setActions()
+    }
+    
+    override func updateViewConstraints() {
+        setTopImageAreaConstraints()
+        setMidDescriptionAreaConstraints()
+        setBottomDetailInfoAreaConstraints()
+        
+        super.updateViewConstraints()
     }
     
     // MARK: - Actions
