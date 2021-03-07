@@ -40,7 +40,8 @@ class InputChargingPointViewController: UIViewController {
         button.setTitleColor(.brownGreyTwo, for: .normal)
         return button
     }()
-    let numberFormat: (Int) -> String = { number in
+    // MARK: - Properties
+    private let numberFormat: (Int) -> String = { number in
         let str: String = "\(number)"
         let regex: NSRegularExpression?
         do {
@@ -49,7 +50,7 @@ class InputChargingPointViewController: UIViewController {
         guard let regexString = regex else { return "" }
         return regexString.stringByReplacingMatches(in: str,
                                                     options: [],
-                                                    range: NSMakeRange(0, str.count),
+                                                    range: NSRange(location: 0, length: str.count),
                                                     withTemplate: ",")
     }
     private let maxChargingPoint: Int = 10_000_000
@@ -60,7 +61,7 @@ class InputChargingPointViewController: UIViewController {
         self.chargingInputField.becomeFirstResponder()
         setLayout()
         setNavigation()
-        tapGesture()
+        viewTapGesture()
     }
     // MARK: - Actions
     @objc
@@ -86,7 +87,7 @@ class InputChargingPointViewController: UIViewController {
         }
     }
     // MARK: - Methods
-    private func tapGesture() {
+    private func viewTapGesture() {
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
         tapGestureRecognizer.delegate = self
         self.view.addGestureRecognizer(tapGestureRecognizer)
@@ -96,8 +97,8 @@ class InputChargingPointViewController: UIViewController {
         chargingButton.backgroundColor = .lightBluishGreen
     }
     private func initialButtonUI() {
-        chargingButton.backgroundColor = UIColor(cgColor: CGColor(red: 71.0 / 255.0, green: 71.0 / 255.0, blue: 71.0 / 255.0, alpha: 1))
         chargingButton.setTitleColor(.brownGreyTwo, for: .normal)
+        chargingButton.backgroundColor = UIColor(cgColor: CGColor(red: 71.0 / 255.0, green: 71.0 / 255.0, blue: 71.0 / 255.0, alpha: 1))
     }
     private func alertController() {
         print("✨ alertcontroller")
@@ -134,7 +135,7 @@ class InputChargingPointViewController: UIViewController {
         }
         chargingViewImage.snp.makeConstraints { make in
             make.top.leading.bottom.equalToSuperview().inset(8)
-            make.height.width.equalTo(44)
+            make.size.equalTo(44)
         }
         chargingInputField.snp.makeConstraints { make in
             make.leading.equalTo(chargingViewImage.snp.trailing).offset(17)
