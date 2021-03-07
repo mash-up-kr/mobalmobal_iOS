@@ -35,13 +35,13 @@ class PointChargingTableViewCell: UITableViewCell {
     private func setLayout() {
         [pointPriceLabel, cellDetailButton].forEach { contentView.addSubview($0) }
         pointPriceLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(11)
-            make.bottom.equalToSuperview().inset(20.1)
-            make.leading.equalToSuperview().inset(21)
+            make.top.equalToSuperview().inset(3)
+            make.bottom.equalToSuperview().inset(28)
+            make.leading.equalToSuperview()
         }
         cellDetailButton.snp.makeConstraints { make in
             make.top.bottom.equalTo(pointPriceLabel)
-            make.leading.lessThanOrEqualTo(pointPriceLabel.snp.trailing).offset(225)
+//            make.leading.lessThanOrEqualTo(pointPriceLabel.snp.trailing).offset(225)
             make.trailing.equalToSuperview()
         }
     }

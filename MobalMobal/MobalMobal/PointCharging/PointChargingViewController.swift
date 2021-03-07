@@ -1,5 +1,5 @@
 //
-//  PoingChargingViewController.swift
+//  PointChargingViewController.swift
 //  MobalMobal
 //
 //  Created by 송서영 on 2021/02/27.
@@ -32,6 +32,7 @@ class PointChargingViewController: UIViewController {
         let view: UIView = UIView()
         view.backgroundColor = .backgroundColor
         view.layer.cornerRadius = 30.0
+        view.layer.shadowColor = UIColor.black25.cgColor
         return view
     }()
     // MARK: - Properties
@@ -52,21 +53,21 @@ class PointChargingViewController: UIViewController {
         self.chargingTableView.isScrollEnabled = false
     }
     private func setLayout() {
-        [ transparencyView, contentView].forEach { self.view.addSubview($0) }
-        [ chargingTableView, pageTitle].forEach { self.contentView.addSubview($0) }
+        [transparencyView, contentView].forEach { self.view.addSubview($0) }
+        [chargingTableView, pageTitle].forEach { self.contentView.addSubview($0) }
 
         chargingTableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-            make.bottom.equalTo(contentView.snp.bottom).inset(34)
+            make.bottom.equalTo(contentView.snp.bottom).inset(21)
         }
         pageTitle.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).offset(20)
-            make.bottom.equalTo(chargingTableView.snp.top).inset(-53.2)
+            make.bottom.equalTo(chargingTableView.snp.top).inset(-50)
             make.centerX.equalToSuperview()
         }
         contentView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(492.2 + 21)
+            make.height.equalTo(456)
         }
         transparencyView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
@@ -83,6 +84,9 @@ extension PointChargingViewController: UITableViewDataSource {
         guard let cell: PointChargingTableViewCell = self.chargingTableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath) as? PointChargingTableViewCell else { return UITableViewCell() }
         cell.pointPriceLabel.text = pointItems[indexPath.row]
         return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        49
     }
 }
  // MARK: - TableViewDelegate
