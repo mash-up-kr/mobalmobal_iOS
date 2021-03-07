@@ -13,21 +13,21 @@ class SignupViewController: UIViewController {
     // MARK: - UIView
     private let nickNameView: UIView = {
         let view: UIView = SignupCustomView(imageName: "iconlyLightProfile", inputText: "닉네임을 입력해주세요.")
-        view.backgroundColor = UIColor(red: 255.0 / 255, green: 255.0 / 255, blue: 255.0 / 255, alpha: 0.07)
+        view.backgroundColor = .signUpBackgroundColor
         view.layer.cornerRadius = 30
         return view
     }()
     
     private let phoneNumberView: UIView = {
         let view: UIView = SignupCustomView(imageName: "iconlyLightCall", inputText: "전화번호를 입력해주세요. (선택)")
-        view.backgroundColor = UIColor(red: 255.0 / 255, green: 255.0 / 255, blue: 255.0 / 255, alpha: 0.07)
+        view.backgroundColor = .signUpBackgroundColor
         view.layer.cornerRadius = 30
         return view
     }()
     
     private let emailView: UIView = {
         let view: UIView = SignupCustomView(imageName: "iconlyLightMessage", inputText: "이메일을 입력해주세요. (선택)")
-        view.backgroundColor = UIColor(red: 255.0 / 255, green: 255.0 / 255, blue: 255.0 / 255, alpha: 0.07)
+        view.backgroundColor = .signUpBackgroundColor
         view.layer.cornerRadius = 30
         return view
     }()
@@ -149,7 +149,7 @@ class SignupViewController: UIViewController {
         
         self.completeButton.addSubview(completeButtonLabel)
         self.completeButtonLabel.snp.makeConstraints { make in
-            make.centerX.centerY.equalTo(completeButton)
+            make.center.equalTo(completeButton)
         }
     }
     

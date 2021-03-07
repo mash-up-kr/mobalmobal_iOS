@@ -46,8 +46,8 @@ class SignupCustomView: UIView {
         self.radiusInputView.addSubview(textFieldView)
         
         self.imageView.snp.makeConstraints { make in
-            make.centerY.equalTo(self.radiusInputView)
-            make.leading.equalTo(self.radiusInputView).offset(8)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(8)
             make.size.equalTo(44)
         }
         
