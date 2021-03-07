@@ -14,7 +14,9 @@ class ViewController: UIViewController {
     }
     
     // - MARK : 각자 view로 넘어감
-    @IBAction func firstButtonIsTapped(_ sender: UIButton) {
+    @IBAction private func firstButtonIsTapped(_ sender: UIButton) {
+        let viewController = SignupViewController()
+        present(viewController, animated: true, completion: nil)
        
     }
     
@@ -29,7 +31,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func fourthButtonIsTapped(_ sender: UIButton) {
-        
+        let pointChargingViewController: PointChargingViewController
+            = PointChargingViewController()
+        self.present(pointChargingViewController, animated: true, completion: nil)
     }
 }
-
