@@ -12,7 +12,7 @@ class PointChargingViewController: UIViewController {
     // MARK: - UIComponents
     private let chargingTableView: UITableView = {
         let pointTableView: UITableView = UITableView(frame: .zero, style: .plain)
-        pointTableView.backgroundColor = .backgroundColor
+        pointTableView.backgroundColor = .darkGreyTwo
         return pointTableView
     }()
     private let pageTitle: UILabel = {
@@ -20,7 +20,7 @@ class PointChargingViewController: UIViewController {
         label.text = "충전"
         label.font = UIFont(name: "SpoqaHanSansNeo-Medium", size: 18)
         label.textColor = .white
-        label.backgroundColor = .backgroundColor
+        label.backgroundColor = .darkGreyTwo
         return label
     }()
     private let transparencyView: UIView = {
@@ -30,9 +30,12 @@ class PointChargingViewController: UIViewController {
     }()
     private let contentView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = .backgroundColor
+        view.backgroundColor = .darkGreyTwo
         view.layer.cornerRadius = 30.0
         view.layer.shadowColor = UIColor.black25.cgColor
+        view.layer.shadowOffset = CGSize(width: 0, height: 4)
+        view.layer.shadowRadius = 2
+        view.layer.masksToBounds = false
         return view
     }()
     // MARK: - Properties

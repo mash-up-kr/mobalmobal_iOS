@@ -46,7 +46,7 @@ class PointChargingTableViewCell: UITableViewCell {
         }
     }
     private func setCellStyle() {
-        self.backgroundColor = .backgroundColor
+        self.backgroundColor = .darkGreyTwo
         self.selectionStyle = .none
     }
 }
