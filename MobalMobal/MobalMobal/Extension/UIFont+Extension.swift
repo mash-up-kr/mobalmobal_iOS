@@ -9,16 +9,16 @@ import UIKit
 
 extension UIFont {
     enum SpoqaHanSansNeoWeight: String {
-        case Bold, Light, Medium, Regular, Thin
+        case bold = "Bold", light = "Light", medium = "Medium", regular = "Regular", thin = "Thin"
     }
-    class func spoqaHanSansNeo(ofSize fontSize: CGFloat = 15, weight: SpoqaHanSansNeoWeight) -> UIFont {
-        return UIFont(name: "SpoqaHanSansNeo-\(weight)", size: fontSize)!
+    static func spoqaHanSansNeo(ofSize fontSize: CGFloat = 15, weight: SpoqaHanSansNeoWeight = .regular) -> UIFont {
+        UIFont(name: "SpoqaHanSansNeo-\(weight)", size: fontSize)!
     }
     
-    enum FutraWeigh: String {
-        case Bold, Light, Medium, Regular, Thin
+    enum FutraWeight: String {
+        case bold = "Bold", medium = "Medium"
     }
-    class func futra(ofSize fontSize: CGFloat = 15, weight: FutraWeigh) -> UIFont {
-        return UIFont(name: "Futura-\(weight)", size: fontSize)!
+    static func futra(ofSize fontSize: CGFloat = 15, weight: FutraWeight = .medium) -> UIFont {
+        UIFont(name: "Futura-\(weight)", size: fontSize)!
     }
 }
