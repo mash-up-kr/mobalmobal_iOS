@@ -44,6 +44,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCV-o1-M48">
                                         <rect key="frame" x="0.0" y="459" width="30" height="30"/>
                                         <state key="normal" title="서영"/>
+                                        <connections>
+                                            <action selector="fourthButtonIsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RsT-fa-9iZ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
