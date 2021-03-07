@@ -57,8 +57,8 @@ class PointChargingViewController: UIViewController {
         self.chargingTableView.isScrollEnabled = false
     }
     private func setLayout() {
-        [transparencyView, contentView].forEach { self.view.addSubview($0) }
-        [chargingTableView, pageTitle].forEach { self.contentView.addSubview($0) }
+        self.view.addSubviews([transparencyView, contentView])
+        self.contentView.addSubviews([chargingTableView, pageTitle])
 
         chargingTableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)

@@ -33,7 +33,7 @@ class PointChargingTableViewCell: UITableViewCell {
     }
     // MARK: - Methods
     private func setLayout() {
-        [pointPriceLabel, cellDetailButton].forEach { contentView.addSubview($0) }
+        self.contentView.addSubviews([pointPriceLabel, cellDetailButton])
         pointPriceLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(3)
             make.bottom.equalToSuperview().inset(28)
