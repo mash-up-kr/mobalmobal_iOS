@@ -40,7 +40,7 @@ class DonationDetailViewController: UIViewController {
     let progressLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "0%" // 스켈레톤 데이터
-        label.font = UIFont(name: "Futura-Bold", size: 18)
+        label.font = UIFont(name: "Lato-Bold", size: 18)
         label.textColor = .white
         return label
     }()
@@ -59,8 +59,8 @@ class DonationDetailViewController: UIViewController {
     
     let dDayLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "D-∞" // 스켈레톤 데이터
-        label.font = UIFont(name: "Futura-Regular", size: 13)
+        label.text = "D-10" // 스켈레톤 데이터
+        label.font = UIFont(name: "Lato-Regular", size: 13)
         label.textColor = .veryLightPink
         return label
     }()
@@ -80,7 +80,7 @@ class DonationDetailViewController: UIViewController {
     let nameLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "Someone" // 스켈레톤 데이터
-        label.font = UIFont(name: "Futura-Medium", size: 16)
+        label.font = .futra(ofSize: 16, weight: .medium)
         label.textColor = .white
         return label
     }()
@@ -88,7 +88,7 @@ class DonationDetailViewController: UIViewController {
     let zosaLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "는" // 스켈레톤 데이터
-        label.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 14)
+        label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
         label.textColor = .white
         return label
     }()
@@ -96,7 +96,7 @@ class DonationDetailViewController: UIViewController {
     let giftLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "PS5" // 스켈레톤 데이터
-        label.font = UIFont(name: "Futura-Medium", size: 16)
+        label.font = .futra(ofSize: 16, weight: .medium)
         label.textColor = .wheat
         // shadow 적용
         label.layer.shadowColor = UIColor.yellowTan80.cgColor
@@ -110,7 +110,7 @@ class DonationDetailViewController: UIViewController {
     let wantLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "가지고 싶어요" // 스켈레톤 데이터
-        label.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 14)
+        label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
         label.textColor = .white
         return label
     }()
@@ -121,7 +121,7 @@ class DonationDetailViewController: UIViewController {
             Lorem Ipsum is simply dummy text of the printing and typesetting industry.
             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
             """  // 스켈레톤 데이터
-        label.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 14)
+        label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
         label.textColor = .white
         label.numberOfLines = 0
         return label
@@ -137,7 +137,7 @@ class DonationDetailViewController: UIViewController {
     let destinationTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "목표 금액"
-        label.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 15)
+        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
         label.textColor = .veryLightPink
         return label
     }()
@@ -145,7 +145,7 @@ class DonationDetailViewController: UIViewController {
     let destinationNumberLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "2,000,000" // 스켈레톤 데이터
-        label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)
+        label.font = UIFont(name: "Lato-Bold", size: 16)
         label.textColor = UIColor.white.withAlphaComponent(0.5)
         return label
     }()
@@ -153,7 +153,7 @@ class DonationDetailViewController: UIViewController {
     let fundAmountTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "모금 금액"
-        label.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 15)
+        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
         label.textColor = .veryLightPink
         return label
     }()
@@ -161,7 +161,7 @@ class DonationDetailViewController: UIViewController {
     let fundAmountNumberLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "153,000" // 스켈레톤 데이터
-        label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)
+        label.font = UIFont(name: "Lato-Bold", size: 16)
         label.textColor = .lightBluishGreen
         return label
     }()
@@ -169,7 +169,7 @@ class DonationDetailViewController: UIViewController {
     let participantsTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "참여자"
-        label.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 15)
+        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
         label.textColor = .veryLightPink
         return label
     }()
@@ -177,7 +177,7 @@ class DonationDetailViewController: UIViewController {
     let participantsCountLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "(31)" // 스켈레톤 데이터
-        label.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 15)
+        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
         label.textColor = .veryLightPink
         return label
     }()
@@ -190,7 +190,7 @@ class DonationDetailViewController: UIViewController {
     let endDateTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "종료날짜"
-        label.font = UIFont(name: "SpoqaHanSansNeo-Regular", size: 15)
+        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
         label.textColor = .veryLightPink
         return label
     }()
@@ -198,7 +198,7 @@ class DonationDetailViewController: UIViewController {
     let endDateLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "2021.03.01" // 스켈레톤 데이터
-        label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)
+        label.font = UIFont(name: "Lato-Bold", size: 16)
         label.textColor = UIColor.white.withAlphaComponent(0.5)
         return label
     }()
@@ -208,7 +208,7 @@ class DonationDetailViewController: UIViewController {
         button.backgroundColor = .purpleishBlue
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Someone 에게 후원하기", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)
+        button.titleLabel?.font = .spoqaHanSansNeo(ofSize: 16, weight: .medium)
         return button
     }()
     
