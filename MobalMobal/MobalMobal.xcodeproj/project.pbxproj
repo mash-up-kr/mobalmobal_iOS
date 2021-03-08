@@ -112,8 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				3A1BD72225F157FD0079D56D /* CustomViews */,
-				3A1BD71C25F12F0C0079D56D /* DonationDetailViewController+Layout.swift */,
 				3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */,
+				3A1BD71C25F12F0C0079D56D /* DonationDetailViewController+Layout.swift */,
 			);
 			path = DonationDetail;
 			sourceTree = "<group>";

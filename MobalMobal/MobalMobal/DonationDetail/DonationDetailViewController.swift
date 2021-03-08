@@ -9,6 +9,19 @@ import UIKit
 
 class DonationDetailViewController: UIViewController {
     // MARK: - UI Components
+    let scrollView: UIScrollView = {
+        let scrollView: UIScrollView = UIScrollView()
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.backgroundColor = .backgroundColor
+        return scrollView
+    }()
+    
+    let contentView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = .backgroundColor
+        return view
+    }()
+    
     // Top Image Area
     lazy var detailImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
@@ -210,6 +223,7 @@ class DonationDetailViewController: UIViewController {
     }
     
     override func updateViewConstraints() {
+        setScrollViewConstraints()
         setTopImageAreaConstraints()
         setMidDescriptionAreaConstraints()
         setBottomDetailInfoAreaConstraints()

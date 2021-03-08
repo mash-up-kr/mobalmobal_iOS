@@ -8,9 +8,22 @@ import SnapKit
 import UIKit
 
 extension DonationDetailViewController {
+    func setScrollViewConstraints() {
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        scrollView.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.width.centerX.equalToSuperview()
+        }
+    }
+    
     // MARK: - Top Area
     func setTopImageAreaConstraints() {
-        view.addSubview(detailImageView)
+        contentView.addSubview(detailImageView)
         setDetailimageViewConstraints()
         
         detailImageView.addSubview(translucentView)
@@ -60,7 +73,7 @@ extension DonationDetailViewController {
         setGiftLabelConstraints()
         setWantLabelConstraints()
         
-        view.addSubviews([profileImageView, nameGiftGroupView, descriptionLabel])
+        contentView.addSubviews([profileImageView, nameGiftGroupView, descriptionLabel])
         setProfileImageViewConstraints()
         setNameGiftGroupViewConstraints()
         setDescriptionLabelConstraints()
@@ -111,9 +124,9 @@ extension DonationDetailViewController {
     
     // MARK: - Bottom Area
     func setBottomDetailInfoAreaConstraints() {
-        view.addSubviews([donationButton, detailGroupView])
-        setDonationButtonConstraints()
+        contentView.addSubviews([detailGroupView, donationButton])
         setDetailGroupViewConstraints()
+        setDonationButtonConstraints()
         
         detailGroupView.addSubviews([destinationTitleLabel, destinationNumberLabel, fundAmountTitleLabel, fundAmountNumberLabel, participantsTitleLabel, participantsCountLabel, participantsProfilesView, endDateTitleLabel, endDateLabel])
         setDestinationConstraints()
@@ -121,16 +134,17 @@ extension DonationDetailViewController {
         setParticipantsConstraints()
         setEndDateConstraints()
     }
-    private func setDonationButtonConstraints() {
-        donationButton.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(85)
-        }
-    }
     private func setDetailGroupViewConstraints() {
         detailGroupView.snp.makeConstraints { make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(donationButton.snp.top)
+        }
+    }
+    private func setDonationButtonConstraints() {
+        donationButton.snp.makeConstraints { make in
+            make.top.equalTo(detailGroupView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(85)
         }
     }
     private func setDestinationConstraints() {
