@@ -23,16 +23,12 @@ extension DonationDetailViewController {
     
     // MARK: - Top Area
     func setTopImageAreaConstraints() {
-        contentView.addSubview(detailImageView)
+        contentView.addSubviews([detailImageView, translucentView, progressLabel, dDayLabel, progressBarView])
         setDetailimageViewConstraints()
-        
-        detailImageView.addSubview(translucentView)
         setTranslucentViewConstraints()
-        
-        translucentView.addSubviews([progressBarView, progressLabel, dDayLabel])
-        setProgressBarViewConstraints()
         setProgressLabelConstraints()
         setDDayLabelConstraints()
+        setProgressBarViewConstraints()
     }
     private func setDetailimageViewConstraints() {
         detailImageView.snp.makeConstraints { make in
@@ -42,26 +38,26 @@ extension DonationDetailViewController {
     }
     private func setTranslucentViewConstraints() {
         translucentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-    }
-    private func setProgressBarViewConstraints() {
-        progressBarView.snp.makeConstraints { make in
-            make.leading.bottom.equalToSuperview()
-            make.width.equalTo(200)
-            make.height.equalTo(2)
+            make.edges.equalTo(detailImageView)
         }
     }
     private func setProgressLabelConstraints() {
         progressLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(26)
-            make.bottom.equalToSuperview().inset(16)
+            make.leading.equalTo(translucentView).inset(26)
+            make.bottom.equalTo(translucentView).inset(16)
         }
     }
     private func setDDayLabelConstraints() {
         dDayLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(24)
+            make.trailing.equalTo(translucentView).inset(24)
             make.centerY.equalTo(progressLabel)
+        }
+    }
+    private func setProgressBarViewConstraints() {
+        progressBarView.snp.makeConstraints { make in
+            make.leading.bottom.equalTo(translucentView)
+            make.width.equalTo(200)
+            make.height.equalTo(2)
         }
     }
     
