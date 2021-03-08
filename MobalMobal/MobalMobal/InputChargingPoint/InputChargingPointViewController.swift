@@ -13,7 +13,7 @@ class InputChargingPointViewController: UIViewController {
     private let chargingInputView: UIView = {
         let view: UIView = UIView()
         view.layer.cornerRadius = 30
-        view.backgroundColor = UIColor(cgColor: CGColor(red: 255.0 / 255.0, green: 255.0 / 255.0, blue: 255.0 / 255.0, alpha: 0.07))
+        view.backgroundColor = .white7
         return view
     }()
     private let chargingInputField: UITextField = {
@@ -35,7 +35,7 @@ class InputChargingPointViewController: UIViewController {
     private let chargingButton: UIButton = {
         let button: UIButton = UIButton()
         button.layer.cornerRadius = 30
-        button.backgroundColor = UIColor(cgColor: CGColor(red: 71.0 / 255.0, green: 71.0 / 255.0, blue: 71.0 / 255.0, alpha: 1))
+        button.backgroundColor = .greyishBrown
         button.setTitle("충전하기", for: .normal)
         button.setTitleColor(.brownGreyTwo, for: .normal)
         return button
@@ -76,14 +76,15 @@ class InputChargingPointViewController: UIViewController {
             chargingPoint = chargingPoint.replacingOccurrences(of: ",", with: "")
             let chargingPointInt: Int = Int(String(chargingPoint))!
             if chargingPointInt > maxChargingPoint {
-                alertController()
+                showAlertController()
                 chargingInputField.text = ""
+                disactivateButtonUI()
             } else {
                 chargingInputField.text = numberFormat(chargingPointInt)
                 activateButtonUI()
             }
         } else {
-            initialButtonUI()
+            disactivateButtonUI()
         }
     }
     // MARK: - Methods
@@ -93,14 +94,14 @@ class InputChargingPointViewController: UIViewController {
         self.view.addGestureRecognizer(tapGestureRecognizer)
     }
     private func activateButtonUI() {
-        chargingButton.setTitleColor(UIColor(cgColor: CGColor(red: 37.0 / 255.0, green: 37.0 / 255.0, blue: 37.0 / 255.0, alpha: 1)), for: .normal)
+        chargingButton.setTitleColor(.blackThree, for: .normal)
         chargingButton.backgroundColor = .lightBluishGreen
     }
-    private func initialButtonUI() {
+    private func disactivateButtonUI() {
         chargingButton.setTitleColor(.brownGreyTwo, for: .normal)
-        chargingButton.backgroundColor = UIColor(cgColor: CGColor(red: 71.0 / 255.0, green: 71.0 / 255.0, blue: 71.0 / 255.0, alpha: 1))
+        chargingButton.backgroundColor = .greyishBrown
     }
-    private func alertController() {
+    private func showAlertController() {
         print("✨ alertcontroller")
         // 디자인 나오면 수정 필요
         let alertController: UIAlertController = UIAlertController(title: "충전금액", message: "충전가능금액은 최대 10,000,000원 입니다.", preferredStyle: .alert)
@@ -125,7 +126,6 @@ class InputChargingPointViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(15)
             make.centerX.equalToSuperview()
             make.height.equalTo(60)
-            make.width.equalTo(345)
         }
         chargingButton.snp.makeConstraints { make in
             make.top.equalTo(chargingInputView.snp.bottom).offset(43)
@@ -139,7 +139,7 @@ class InputChargingPointViewController: UIViewController {
         }
         chargingInputField.snp.makeConstraints { make in
             make.leading.equalTo(chargingViewImage.snp.trailing).offset(17)
-            make.trailing.greaterThanOrEqualToSuperview().inset(113)
+            make.trailing.equalToSuperview().inset(17)
             make.top.bottom.equalToSuperview().inset(21)
         }
     }
