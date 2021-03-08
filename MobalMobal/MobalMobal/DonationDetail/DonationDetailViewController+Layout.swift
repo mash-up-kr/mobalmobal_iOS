@@ -132,7 +132,7 @@ extension DonationDetailViewController {
     }
     private func setDetailGroupViewConstraints() {
         detailGroupView.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(30)
+            make.top.greaterThanOrEqualTo(descriptionLabel.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview()
         }
     }
@@ -140,6 +140,7 @@ extension DonationDetailViewController {
         donationButton.snp.makeConstraints { make in
             make.top.equalTo(detailGroupView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
+            make.bottom.greaterThanOrEqualTo(view)
             make.height.equalTo(85)
         }
     }
