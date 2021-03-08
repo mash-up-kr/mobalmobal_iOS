@@ -70,20 +70,20 @@ class InputChargingPointViewController: UIViewController {
     }
     @objc
     private func textEdited(textField: UITextField) {
-        guard let textFieldText = textField.text else { return }
+        guard var textFieldText = textField.text else { return }
         if !textFieldText.isEmpty {
-            var chargingPoint: String = textFieldText
-            chargingPoint = chargingPoint.replacingOccurrences(of: ",", with: "")
-            let chargingPointInt: Int = Int(String(chargingPoint))!
+            textFieldText = textFieldText.replacingOccurrences(of: ",", with: "")
+            let chargingPointInt: Int = Int(String(textFieldText))!
             if chargingPointInt > maxChargingPoint {
-                showAlertController()
                 chargingInputField.text = ""
+                showAlertController()
                 disactivateButtonUI()
             } else {
                 chargingInputField.text = numberFormat(chargingPointInt)
                 activateButtonUI()
             }
         } else {
+            // 텍스트가 backspace로 다 지워져서 isEmpty한 경우
             disactivateButtonUI()
         }
     }
