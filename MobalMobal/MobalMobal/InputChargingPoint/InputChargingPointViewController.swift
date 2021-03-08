@@ -28,7 +28,8 @@ class InputChargingPointViewController: UIViewController {
     private let chargingViewImage: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.image = UIImage(named: "iconlyBrokenBuy")
-        imageView.layer.shadowRadius = 1.7
+        imageView.layer.shadowRadius = 1.8
+        imageView.layer.shadowOffset = CGSize(width: 0, height: 3.6)
         imageView.layer.shadowColor = UIColor.lightBluishGreen.cgColor
         return imageView
     }()
