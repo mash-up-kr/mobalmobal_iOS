@@ -9,6 +9,7 @@ import SnapKit
 import UIKit
 
 class SuccessChargingViewController: UIViewController {
+    
     // MARK: - UIComponents
     private let scrollView: UIScrollView = {
         let scrollView: UIScrollView = UIScrollView()
@@ -24,6 +25,7 @@ class SuccessChargingViewController: UIViewController {
     private let closeBtn: UIButton = {
         let button: UIButton = UIButton()
         button.setImage(UIImage(named: "menuCloseBig"), for: .normal)
+        button.addTarget(self, action: #selector(closeBtnTapped), for: .touchUpInside)
         return button
     }()
     private let successImage: UIImageView = {
@@ -57,9 +59,13 @@ class SuccessChargingViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("✨ successcharging")
-//        self.view.backgroundColor = .backgroundColor
         setLayout()
+    }
+    
+    // MARK: - Actions
+    @objc
+    private func closeBtnTapped() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Methods
