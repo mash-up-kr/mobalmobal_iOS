@@ -10,6 +10,17 @@ import UIKit
 
 class SuccessChargingViewController: UIViewController {
     // MARK: - UIComponents
+    private let scrollView: UIScrollView = {
+        let scrollView: UIScrollView = UIScrollView()
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.backgroundColor = .backgroundColor
+        return scrollView
+    }()
+    private let contentView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = .backgroundColor
+        return view
+    }()
     private let closeBtn: UIButton = {
         let button: UIButton = UIButton()
         button.setImage(UIImage(named: "menuCloseBig"), for: .normal)
@@ -47,13 +58,23 @@ class SuccessChargingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("✨ successcharging")
-        self.view.backgroundColor = .backgroundColor
+//        self.view.backgroundColor = .backgroundColor
         setLayout()
     }
     
     // MARK: - Methods
     private func setLayout() {
-        self.view.addSubviews([closeBtn, successLabel, successImage])
+        self.view.addSubview(scrollView)
+        self.scrollView.addSubview(contentView)
+        self.contentView.addSubviews([closeBtn, successLabel, successImage])
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
         closeBtn.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(46)
             make.trailing.equalToSuperview().inset(10)
