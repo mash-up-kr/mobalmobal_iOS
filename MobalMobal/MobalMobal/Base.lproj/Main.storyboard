@@ -45,7 +45,7 @@
                                         <rect key="frame" x="0.0" y="459" width="30" height="30"/>
                                         <state key="normal" title="서영"/>
                                         <connections>
-                                            <action selector="fourthButtonIsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IgM-lO-F1F"/>
+                                            <action selector="fourthButtonIsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RsT-fa-9iZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
