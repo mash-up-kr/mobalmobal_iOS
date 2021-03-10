@@ -33,33 +33,33 @@ class SuccessChargingViewController: UIViewController {
         imageView.image = UIImage(named: "chargingComplete")
         return imageView
     }()
-    lazy var successLabel: UILabel = {
+    lazy var priceLabel: UILabel = {
         let label: UILabel = UILabel()
-        let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(self.point)원\n충전완료")
-        let emphasisAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.white,
-            .font: UIFont.spoqaHanSansNeo(ofSize: 36, weight: .medium)
-        ]
-        let defaultAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.veryLightPink,
-            .font: UIFont.spoqaHanSansNeo(ofSize: 36, weight: .regular)
-        ]
-        attributedString.addAttributes(defaultAttributes, range: _NSRange(location: 0, length: attributedString.length))
-        attributedString.addAttributes(emphasisAttributes, range: NSRange(location: 0, length: self.point.count + 1))
-        label.attributedText = attributedString
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.textAlignment = .center
+        label.font = .spoqaHanSansNeo(ofSize: 36, weight: .medium)
+        label.textColor = .white
+        label.text = "\(point)원"
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
-    
+    private let textLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.font = .spoqaHanSansNeo(ofSize: 36, weight: .regular)
+        label.textColor = .veryLightPink
+        label.text = "충전완료"
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
     // MARK: - Properties
     // dummy data
-    let point: String = "30,000"
+    private let point: String = "30,000"
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setLayout()
     }
     
     // MARK: - Actions
@@ -69,10 +69,12 @@ class SuccessChargingViewController: UIViewController {
     }
     
     // MARK: - Methods
-    private func setLayout() {
+    private func setViewHierarchy() {
         self.view.addSubview(scrollView)
         self.scrollView.addSubview(contentView)
-        self.contentView.addSubviews([closeBtn, successLabel, successImage])
+        self.contentView.addSubviews([closeBtn, priceLabel, textLabel, successImage])
+    }
+    private func setConstraints() {
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -86,14 +88,23 @@ class SuccessChargingViewController: UIViewController {
             make.trailing.equalToSuperview().inset(10)
             make.size.equalTo(44)
         }
-        successLabel.snp.makeConstraints { make in
+        priceLabel.snp.makeConstraints { make in
             make.top.equalTo(closeBtn.snp.bottom).offset(86)
             make.centerX.equalToSuperview()
         }
-        successImage.snp.makeConstraints { make in
-            make.top.equalTo(successLabel.snp.bottom).offset(40)
+        textLabel.snp.makeConstraints { make in
+            make.top.equalTo(priceLabel.snp.bottom)
             make.centerX.equalToSuperview()
+        }
+        successImage.snp.makeConstraints { make in
+            make.top.equalTo(textLabel.snp.bottom).offset(40)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(175)
         }
+    }
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        setViewHierarchy()
+        setConstraints()
     }
 }
