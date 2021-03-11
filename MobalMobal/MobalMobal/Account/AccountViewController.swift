@@ -115,7 +115,7 @@ class AccountViewController: UIViewController {
     }
     @objc
     private func copyAccount() {
-        UIPasteboard.general.string = self.account
+        UIPasteboard.general.string = self.account + self.bankName
         print("✨ copy 완료 \(self.account) \(self.bankName)")
     }
     
