@@ -10,17 +10,6 @@ import UIKit
 
 class SuccessChargingViewController: UIViewController {
     // MARK: - UIComponents
-    private let scrollView: UIScrollView = {
-        let scrollView: UIScrollView = UIScrollView()
-        scrollView.contentInsetAdjustmentBehavior = .never
-        scrollView.backgroundColor = .backgroundColor
-        return scrollView
-    }()
-    private let contentView: UIView = {
-        let view: UIView = UIView()
-        view.backgroundColor = .backgroundColor
-        return view
-    }()
     private let closeBtn: UIButton = {
         let button: UIButton = UIButton()
         button.setImage(UIImage(named: "menuCloseBig"), for: .normal)
@@ -32,7 +21,7 @@ class SuccessChargingViewController: UIViewController {
         imageView.image = UIImage(named: "chargingComplete")
         return imageView
     }()
-    lazy var priceLabel: UILabel = {
+    private lazy var priceLabel: UILabel = {
         let label: UILabel = UILabel()
         label.numberOfLines = 1
         label.textAlignment = .center
@@ -50,13 +39,33 @@ class SuccessChargingViewController: UIViewController {
         label.text = "충전완료"
         return label
     }()
+    private lazy var verticalStackView: UIStackView = {
+        let stackView: UIStackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        [priceLabel, textLabel, successImage].forEach { stackView.addArrangedSubview($0) }
+        stackView.setCustomSpacing(0, after: priceLabel)
+        stackView.setCustomSpacing(40, after: textLabel)
+        return stackView
+    }()
+    
     // MARK: - Properties
     // dummy data
     private let point: String = "30,000"
+    private var setLayoutFlag: Bool = false
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .backgroundColor
+    }
+    override func updateViewConstraints() {
+        if !setLayoutFlag {
+            setViewHierarchy()
+            setConstraints()
+            setLayoutFlag = true
+        }
+        super.updateViewConstraints()
     }
     
     // MARK: - Actions
@@ -67,45 +76,16 @@ class SuccessChargingViewController: UIViewController {
     
     // MARK: - Methods
     private func setViewHierarchy() {
-        self.view.addSubview(scrollView)
-        self.scrollView.addSubview(contentView)
-        self.contentView.addSubviews([closeBtn, priceLabel, textLabel, successImage])
+        self.view.addSubviews([closeBtn, verticalStackView])
     }
     private func setConstraints() {
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.width.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }
         closeBtn.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(Double(self.view.bounds.height * 46) / Double(812))
-            make.trailing.equalToSuperview().inset(Double(self.view.bounds.width * 10) / Double(375))
-            make.size.equalTo(Double(self.view.bounds.height * 44) / Double(812))
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.trailing.equalToSuperview().inset(10)
+            make.size.equalTo(44)
         }
-        priceLabel.snp.makeConstraints { make in
-            make.top.equalTo(closeBtn.snp.bottom).offset(Double(self.view.bounds.height * 85) / Double(812))
-            make.centerX.equalToSuperview()
-            make.height.equalTo(Double(self.view.bounds.height * 43) / Double(812))
+        verticalStackView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
-        textLabel.snp.makeConstraints { make in
-            make.top.equalTo(priceLabel.snp.bottom)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(Double(self.view.bounds.height * 43) / Double(812))
-        }
-        successImage.snp.makeConstraints { make in
-            make.top.equalTo(textLabel.snp.bottom).offset(Double(self.view.bounds.height * 40) / Double(812))
-            make.width.equalTo(successImage.snp.height).multipliedBy(Double(343) / Double(336))
-            make.trailing.equalToSuperview().inset(Double(self.view.bounds.width * 16) / Double(375))
-            make.leading.equalToSuperview().offset(Double(self.view.bounds.width * 16) / Double(375))
-            make.bottom.equalToSuperview().inset(Double(self.view.bounds.height * 175) / Double(812))
-        }
-    }
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-        setViewHierarchy()
-        setConstraints()
     }
 }
