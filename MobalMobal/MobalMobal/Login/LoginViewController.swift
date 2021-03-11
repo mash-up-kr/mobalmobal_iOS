@@ -59,7 +59,7 @@ class LoginViewController: UIViewController {
             make.width.equalToSuperview().multipliedBy(319.0 / 375.0)
         }
         
-        [logoImageView, facebookButton, googleButton, appleButton].forEach { stackView.addArrangedSubview($0) }
+        [logoImageView, googleButton, facebookButton, appleButton].forEach { stackView.addArrangedSubview($0) }
         logoImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(10)
@@ -95,8 +95,8 @@ class LoginViewController: UIViewController {
     
     private func setStackViewCustomSpacing() {
         stackView.setCustomSpacing(view.frame.height * 58 / 812, after: logoImageView)
-        stackView.setCustomSpacing(view.frame.height * 13 / 812, after: facebookButton)
         stackView.setCustomSpacing(view.frame.height * 13 / 812, after: googleButton)
+        stackView.setCustomSpacing(view.frame.height * 13 / 812, after: facebookButton)
     }
     
     @IBAction private func clickFacebookLoginButton() {
