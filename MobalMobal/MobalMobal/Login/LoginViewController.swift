@@ -14,6 +14,12 @@ import UIKit
 
 class LoginViewController: UIViewController {
     // MARK: - UI Components
+    let stackView: UIStackView = {
+        let stackView: UIStackView = UIStackView()
+        stackView.alignment = .center
+        stackView.axis = .vertical
+        return stackView
+    }()
     let logoImageView: UIImageView = {
         let imageName: String = "doneImage"
         let imageView: UIImageView = UIImageView()
@@ -47,30 +53,34 @@ class LoginViewController: UIViewController {
     }
     
     override func updateViewConstraints() {
-        [logoImageView, facebookButton, googleButton, appleButton].forEach { view.addSubview($0) }
+        view .addSubview(stackView)
+        stackView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(319.0 / 375.0)
+        }
         
+        [logoImageView, facebookButton, googleButton, appleButton].forEach { stackView.addArrangedSubview($0) }
         logoImageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).inset(155)
-            make.centerX.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(36)
+            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(10)
+            make.height.equalTo(logoImageView.snp.width).multipliedBy(202.0 / 302.0)
         }
         googleButton.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(58)
-            make.leading.trailing.equalToSuperview().inset(28)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(60)
         }
         facebookButton.snp.makeConstraints { make in
-            make.top.equalTo(googleButton.snp.bottom).offset(13)
             make.leading.trailing.height.equalTo(googleButton)
         }
         appleButton.snp.makeConstraints { make in
-            make.top.equalTo(facebookButton.snp.bottom).offset(13)
             make.leading.trailing.height.equalTo(googleButton)
+            make.bottom.equalToSuperview()
         }
         
+        setStackViewCustomSpacing()
         super.updateViewConstraints()
     }
-    
+        
     // MARK: - Actions
     private func setActions() {
         let googleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickGoogleLoginButton))
@@ -81,6 +91,12 @@ class LoginViewController: UIViewController {
         
         let appleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickAppleLoginButton))
         appleButton.addGestureRecognizer(appleLoginTap)
+    }
+    
+    private func setStackViewCustomSpacing() {
+        stackView.setCustomSpacing(view.frame.height * 58 / 812, after: logoImageView)
+        stackView.setCustomSpacing(view.frame.height * 13 / 812, after: facebookButton)
+        stackView.setCustomSpacing(view.frame.height * 13 / 812, after: googleButton)
     }
     
     @IBAction private func clickFacebookLoginButton() {

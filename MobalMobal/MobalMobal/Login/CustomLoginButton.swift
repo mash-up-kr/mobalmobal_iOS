@@ -13,7 +13,11 @@ class CustomLoginButton: UIView {
     let iconName: String
     
     // MARK: - UI Components
-    let stackView: UIStackView = UIStackView()
+    let stackView: UIStackView = {
+        let stackView: UIStackView = UIStackView()
+        stackView.alignment = .center
+        return stackView
+    }()
     
     lazy var iconImageView: UIImageView = UIImageView(image: UIImage(named: iconName))
     
@@ -44,12 +48,16 @@ class CustomLoginButton: UIView {
     override func updateConstraints() {
         [stackView].forEach { self.addSubview($0) }
         stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(10)
+            make.center.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(2.0 / 3.0)
+            make.width.equalToSuperview().multipliedBy(299.0 / 319.0)
+            make.height.greaterThanOrEqualTo(30)
+            make.height.lessThanOrEqualTo(60)
         }
         
         [iconImageView, titleLabel].forEach { stackView.addArrangedSubview($0) }
         iconImageView.snp.makeConstraints { make in
-            make.size.equalTo(40)
+            make.width.equalTo(iconImageView.snp.height)
         }
         
         super.updateConstraints()
