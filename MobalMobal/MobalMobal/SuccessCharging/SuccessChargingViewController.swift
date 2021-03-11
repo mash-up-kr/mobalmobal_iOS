@@ -9,7 +9,6 @@ import SnapKit
 import UIKit
 
 class SuccessChargingViewController: UIViewController {
-    
     // MARK: - UIComponents
     private let scrollView: UIScrollView = {
         let scrollView: UIScrollView = UIScrollView()
@@ -40,7 +39,6 @@ class SuccessChargingViewController: UIViewController {
         label.font = .spoqaHanSansNeo(ofSize: 36, weight: .medium)
         label.textColor = .white
         label.text = "\(point)원"
-        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     private let textLabel: UILabel = {
@@ -50,7 +48,6 @@ class SuccessChargingViewController: UIViewController {
         label.font = .spoqaHanSansNeo(ofSize: 36, weight: .regular)
         label.textColor = .veryLightPink
         label.text = "충전완료"
-        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     // MARK: - Properties
@@ -84,22 +81,26 @@ class SuccessChargingViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
         closeBtn.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(46)
-            make.trailing.equalToSuperview().inset(10)
-            make.size.equalTo(44)
+            make.top.equalToSuperview().inset(Double(self.view.bounds.height * 46) / Double(812))
+            make.trailing.equalToSuperview().inset(Double(self.view.bounds.width * 10) / Double(375))
+            make.size.equalTo(Double(self.view.bounds.height * 44) / Double(812))
         }
         priceLabel.snp.makeConstraints { make in
-            make.top.equalTo(closeBtn.snp.bottom).offset(86)
+            make.top.equalTo(closeBtn.snp.bottom).offset(Double(self.view.bounds.height * 85) / Double(812))
             make.centerX.equalToSuperview()
+            make.height.equalTo(Double(self.view.bounds.height * 43) / Double(812))
         }
         textLabel.snp.makeConstraints { make in
             make.top.equalTo(priceLabel.snp.bottom)
             make.centerX.equalToSuperview()
+            make.height.equalTo(Double(self.view.bounds.height * 43) / Double(812))
         }
         successImage.snp.makeConstraints { make in
-            make.top.equalTo(textLabel.snp.bottom).offset(40)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview().inset(175)
+            make.top.equalTo(textLabel.snp.bottom).offset(Double(self.view.bounds.height * 40) / Double(812))
+            make.width.equalTo(successImage.snp.height).multipliedBy(Double(343) / Double(336))
+            make.trailing.equalToSuperview().inset(Double(self.view.bounds.width * 16) / Double(375))
+            make.leading.equalToSuperview().offset(Double(self.view.bounds.width * 16) / Double(375))
+            make.bottom.equalToSuperview().inset(Double(self.view.bounds.height * 175) / Double(812))
         }
     }
     override func updateViewConstraints() {
