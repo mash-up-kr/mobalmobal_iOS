@@ -67,20 +67,37 @@ class AccountViewController: UIViewController {
         stackView.setCustomSpacing(24, after: accountImageView)
         return stackView
     }()
+    
     // MARK: - Properties
     // dummy data
     var account: String = "110-436-3412421"
     var bankName: String = "신한은행"
     var charge: String = "30,000"
     
+    var setLayoutFlag: Bool = false
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         accountLabelTapGesture()
-        setLayout()
         self.view.backgroundColor = .backgroundColor
     }
-
+    override func updateViewConstraints() {
+        if !setLayoutFlag {
+            self.view.addSubviews([verticalStackView, closeButton])
+            closeButton.snp.makeConstraints { make in
+                make.top.equalTo(self.view.safeAreaLayoutGuide)
+                make.trailing.equalToSuperview().inset(10)
+                make.size.equalTo(44)
+            }
+            verticalStackView.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+            }
+            setLayoutFlag = true
+        }
+        super.updateViewConstraints()
+    }
+    
     // MARK: - Actions
     @objc
     private func closeBtn() {
@@ -93,18 +110,6 @@ class AccountViewController: UIViewController {
     }
     
     // MARK: - Methods
-    private func setLayout() {
-        self.view.addSubviews([verticalStackView, closeButton])
-        closeButton.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.trailing.equalToSuperview().inset(10)
-            make.size.equalTo(44)
-        }
-
-        verticalStackView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-    }
     private func accountLabelTapGesture() {
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(copyAccount))
         accountLabel.isUserInteractionEnabled = true
