@@ -12,28 +12,32 @@ class AccountViewController: UIViewController {
     // MARK: - UIComponents
     private lazy var accountLabel: UILabel = {
         let label: UILabel = UILabel()
-        let accountLabelAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(self.account) \(self.bankName)으로 \n \(self.charge)원을 보내주세요")
-
-        let emphasisAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.white ,
-            .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .medium)
-        ]
+        let accountLabelAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(self.account) \(self.bankName)으로")
         let underLineAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white ,
             .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .medium),
             .underlineStyle: 1
         ]
-        let defaultAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.veryLightPink ,
-            .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .regular)
-        ]
-        
         accountLabelAttributedString.addAttributes(defaultAttributes, range: NSRange(location: 0, length: accountLabelAttributedString.length))
         accountLabelAttributedString.addAttributes(underLineAttributes, range: NSRange(location: 0, length: self.account.count))
         accountLabelAttributedString.addAttributes(underLineAttributes, range: NSRange(location: self.account.count + 1, length: self.bankName.count))
-        accountLabelAttributedString.addAttributes(emphasisAttributes, range: NSRange(location: self.account.count + 1 + self.bankName.count + 4 + 1, length: self.charge.count + 1))
-        
+       
         label.attributedText = accountLabelAttributedString
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        return label
+    }()
+    private lazy var priceLabel: UILabel = {
+        let label: UILabel = UILabel()
+        let priceLabelAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(self.charge)원을 보내주세요")
+        let emphasisAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white ,
+            .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .medium)
+        ]
+        priceLabelAttributedString.addAttributes(defaultAttributes, range: NSRange(location: 0, length: priceLabelAttributedString.length))
+        priceLabelAttributedString.addAttributes(emphasisAttributes, range: _NSRange(location: 0, length: self.charge.count + 1))
+        
+        label.attributedText = priceLabelAttributedString
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -61,9 +65,11 @@ class AccountViewController: UIViewController {
         stackView.alignment = .center
         stackView.axis = .vertical
         stackView.addArrangedSubview(accountLabel)
+        stackView.addArrangedSubview(priceLabel)
         stackView.addArrangedSubview(accountImageView)
         stackView.addArrangedSubview(accountDetailLabel)
-        stackView.setCustomSpacing(40, after: accountLabel)
+        stackView.setCustomSpacing(0, after: accountLabel)
+        stackView.setCustomSpacing(40, after: priceLabel)
         stackView.setCustomSpacing(24, after: accountImageView)
         return stackView
     }()
@@ -74,7 +80,11 @@ class AccountViewController: UIViewController {
     var bankName: String = "신한은행"
     var charge: String = "30,000"
     
-    var setLayoutFlag: Bool = false
+    private var setLayoutFlag: Bool = false
+    private let defaultAttributes: [NSAttributedString.Key: Any] = [
+        .foregroundColor: UIColor.veryLightPink ,
+        .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .regular)
+    ]
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
