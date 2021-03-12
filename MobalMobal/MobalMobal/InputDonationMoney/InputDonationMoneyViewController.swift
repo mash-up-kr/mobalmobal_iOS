@@ -32,6 +32,9 @@ class InputDonationMoneyViewController: UIViewController {
         textField.textColor = .white
         textField.placeholder = placeholderString
         textField.setPlaceholderColor(.brownGreyTwo)
+        
+        textField.keyboardType = .numberPad
+        textField.keyboardAppearance = .dark
         return textField
     }()
     
@@ -72,6 +75,10 @@ class InputDonationMoneyViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         roundView.roundCorner()
         donationButton.roundCorner()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+          dismissKeyboard()
     }
     
     // MARK: - Actions
@@ -116,5 +123,10 @@ class InputDonationMoneyViewController: UIViewController {
     private func setButtonDisable() {
         donationButton.isEnabled = false
         donationButton.backgroundColor = .greyishBrown
+    }
+    
+    @objc
+    private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
