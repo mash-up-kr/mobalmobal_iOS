@@ -91,10 +91,20 @@ class ProfileViewController: UIViewController {
         self.navigationItem.title = "Jercy"
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.whiteTwo]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
-        self.navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: UIImage(named: "iconlyLightEditSquare"), style: .plain, target: self, action: #selector(modifyInfo)),
-            UIBarButtonItem(image: UIImage(named: "iconlyLightSetting"), style: .plain, target: self, action: #selector(pushSettingVC))
-        ]
+        
+        let editBtn: UIButton = UIButton()
+        editBtn.setImage(UIImage(named: "iconlyLightSetting"), for: .normal)
+        editBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        editBtn.addTarget(self, action: #selector(pushSettingVC), for: .touchUpInside)
+        let editBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: editBtn)
+        
+        let settingBtn: UIButton = UIButton()
+        settingBtn.setImage(UIImage(named: "iconlyLightEditSquare"), for: .normal)
+        settingBtn.addTarget(self, action: #selector(modifyInfo), for: .touchUpInside)
+        settingBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        let settingBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: settingBtn)
+        
+        self.navigationItem.setRightBarButtonItems([editBtnBarItem, settingBtnBarItem], animated: true)
     }
     
     // 유동적으로 갯수가 변화하는 section인지 체크하는 메서드
@@ -135,18 +145,11 @@ extension ProfileViewController: UITableViewDataSource {
         else { return UITableViewCell() }
         
         [profileCell, myDonationCell, donatingCell].forEach { $0.selectionStyle = .none }
-        switch indexPath.section {
-        case 0:
+        if indexPath.section == 0 {
             return profileCell
-        case 1:
+        } else if indexPath.section == 1 {
             return myDonationCell
-        case 2:
-            return donatingCell
-        case 3:
-            return donatingCell
-        case 4:
-            return donatingCell
-        default:
+        } else {
             return donatingCell
         }
     }
