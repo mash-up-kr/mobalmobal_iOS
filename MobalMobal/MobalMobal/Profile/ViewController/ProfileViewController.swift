@@ -44,7 +44,6 @@ class ProfileViewController: UIViewController {
         self.mainTableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: self.profileCellIdentifier)
         self.mainTableView.register(ProfileMyDonationTableViewCell.self, forCellReuseIdentifier: self.myDonationCellIdentifier)
         self.mainTableView.register(ProfileDonatingTableViewCell.self, forCellReuseIdentifier: self.donatingCellIdentifier)
-        self.mainTableView.register(SectionHeaderCell.self, forHeaderFooterViewReuseIdentifier: self.sectionHeaderCellIdentifier)
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.backgroundColor = .backgroundColor
@@ -134,7 +133,13 @@ extension ProfileViewController: UITableViewDataSource {
             headerView.addSubview(headerLabel)
             return headerView
         }
-        return UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        return nil
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if !checkDynamicSection(section) {
+            return CGFloat.leastNormalMagnitude
+        }
+        return 35
     }
 }
 extension ProfileViewController: UITableViewDelegate {
