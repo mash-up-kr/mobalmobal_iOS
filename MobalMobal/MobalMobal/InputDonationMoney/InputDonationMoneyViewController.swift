@@ -35,6 +35,8 @@ class InputDonationMoneyViewController: UIViewController {
         
         textField.keyboardType = .numberPad
         textField.keyboardAppearance = .dark
+        
+        textField.delegate = self
         return textField
     }()
     
@@ -53,6 +55,8 @@ class InputDonationMoneyViewController: UIViewController {
     private let iconImageName: String = "iconlyBrokenBuy"
     private let placeholderString: String = "후원할 금액을 입력하세요."
     private let buttonString: String = "후원하기"
+    
+    private var inputString: String = ""
     
     // MARK: - Lifecycles
     override func viewDidLoad() {
@@ -125,8 +129,62 @@ class InputDonationMoneyViewController: UIViewController {
         donationButton.backgroundColor = .greyishBrown
     }
     
-    @objc
     private func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension InputDonationMoneyViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 기존 문자열 (콤마 없는)
+        let rawString: String = makeRawString(from: textField.text)
+        
+        // 새로 들어온게 숫자가 아니라면
+        if Int(string) == nil {
+            // 백스페이스
+            if string.isEmpty {
+                let newRawString: String = backspace(from: rawString)
+                if let formattedString: String = makeFormattedString(from: newRawString) {
+                    textField.text = formattedString
+                    return false
+                }
+                return true
+            }
+            // 문자는 입력할 수 없다
+            return false
+        }
+        
+        // 새로 만들어질 문자열 (콤마 없는)
+        let newRawString: String = rawString + string
+        if let formattedString: String = makeFormattedString(from: newRawString) {
+            textField.text = formattedString
+            return false
+        }
+        
+        return true
+    }
+    
+    private func backspace(from string: String) -> String {
+        if string.count < 2 { return "" }
+        
+        let firstIndex: String.Index = string.startIndex
+        let lastIndex: String.Index = string.index(before: string.endIndex)
+        return String(string[firstIndex..<lastIndex])
+    }
+    
+    private func makeRawString(from string: String?) -> String {
+        string?.replacingOccurrences(of: ",", with: "") ?? ""
+    }
+    
+    private func makeFormattedString(from rawString: String) -> String? {
+        let formatter: NumberFormatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 0
+        
+        guard let formattedNumber: NSNumber = formatter.number(from: rawString), let formattedString: String = formatter.string(from: formattedNumber) else {
+            return nil
+        }
+        return formattedString
     }
 }
