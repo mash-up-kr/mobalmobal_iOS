@@ -7,12 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */; };
+		3A1BD76D25F539D40079D56D /* Spoqa Han Sans Neo Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76825F539D20079D56D /* Spoqa Han Sans Neo Regular.otf */; };
+		3A1BD76E25F539D40079D56D /* Spoqa Han Sans Neo Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76925F539D30079D56D /* Spoqa Han Sans Neo Light.otf */; };
+		3A1BD76F25F539D40079D56D /* Spoqa Han Sans Neo Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76A25F539D30079D56D /* Spoqa Han Sans Neo Bold.otf */; };
+		3A1BD77025F539D40079D56D /* Spoqa Han Sans Neo Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76B25F539D30079D56D /* Spoqa Han Sans Neo Thin.otf */; };
+		3A1BD77125F539D40079D56D /* Spoqa Han Sans Neo Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76C25F539D40079D56D /* Spoqa Han Sans Neo Medium.otf */; };
+		3A1BD77C25F5443D0079D56D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */; };
+		3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */; };
 		6A7F9880C2DD6C6782A998EE /* Pods_MobalMobal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */; };
 		7C04535625EA949B00870761 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535525EA949B00870761 /* ProfileViewController.swift */; };
 		7C04535A25EA98B900870761 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535925EA98B900870761 /* ProfileTableViewCell.swift */; };
 		7C04535D25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535C25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift */; };
 		7C04536025EAA2DC00870761 /* ProfileDonatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535F25EAA2DC00870761 /* ProfileDonatingTableViewCell.swift */; };
+		7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */; };
+		7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */; };
 		7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04536425EAAA3B00870761 /* UIColor+Additions.swift */; };
+		7C36DF4625F2014E001C2DBB /* InputChargingPointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */; };
 		D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37C825E103DD00898271 /* AppDelegate.swift */; };
 		D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37CA25E103DD00898271 /* SceneDelegate.swift */; };
 		D70C37CD25E103DD00898271 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37CC25E103DD00898271 /* ViewController.swift */; };
@@ -36,17 +47,31 @@
 		D7147D6525E7686800AA0878 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6425E7686800AA0878 /* FacebookCore */; };
 		D7147D6925E768B800AA0878 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6825E768B800AA0878 /* Toast */; };
 		D7147D6C25E76A1900AA0878 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */; };
+		E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */; };
+		E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */; };
+		E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EAB125EACC9F00F34BDE /* SignupCustomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		32D37E13F8458BE37D6BCAC0 /* Pods-MobalMobal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.release.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.release.xcconfig"; sourceTree = "<group>"; };
+		3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3A1BD76825F539D20079D56D /* Spoqa Han Sans Neo Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Regular.otf"; sourceTree = "<group>"; };
+		3A1BD76925F539D30079D56D /* Spoqa Han Sans Neo Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Light.otf"; sourceTree = "<group>"; };
+		3A1BD76A25F539D30079D56D /* Spoqa Han Sans Neo Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Bold.otf"; sourceTree = "<group>"; };
+		3A1BD76B25F539D30079D56D /* Spoqa Han Sans Neo Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Thin.otf"; sourceTree = "<group>"; };
+		3A1BD76C25F539D40079D56D /* Spoqa Han Sans Neo Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Medium.otf"; sourceTree = "<group>"; };
+		3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginButton.swift; sourceTree = "<group>"; };
 		5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobalMobal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61483D18A64727D4EAFF1EDD /* Pods-MobalMobal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.debug.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.debug.xcconfig"; sourceTree = "<group>"; };
+		7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingViewController.swift; sourceTree = "<group>"; };
+		7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingTableViewCell.swift; sourceTree = "<group>"; };
 		7C04535525EA949B00870761 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7C04535925EA98B900870761 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		7C04535C25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMyDonationTableViewCell.swift; sourceTree = "<group>"; };
 		7C04535F25EAA2DC00870761 /* ProfileDonatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDonatingTableViewCell.swift; sourceTree = "<group>"; };
 		7C04536425EAAA3B00870761 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
+		7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputChargingPointViewController.swift; sourceTree = "<group>"; };
 		D70C37C525E103DD00898271 /* MobalMobal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobalMobal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70C37C825E103DD00898271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D70C37CA25E103DD00898271 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +83,9 @@
 		D70C37DD25E103F100898271 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobalMobalDebug.entitlements; sourceTree = "<group>"; };
+		E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		E3F1EAB125EACC9F00F34BDE /* SignupCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCustomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +115,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C61AECB25EA4CC900D9149F /* PointCharging */ = {
+			isa = PBXGroup;
+			children = (
+				7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */,
+				7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */,
+			);
+			path = PointCharging;
+            sourceTree = "<group>";
+        };
+		3A035F1625EA4D6000D3FB69 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */,
+				3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		3A1BD76625F5397F0079D56D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3A1BD76A25F539D30079D56D /* Spoqa Han Sans Neo Bold.otf */,
+				3A1BD76925F539D30079D56D /* Spoqa Han Sans Neo Light.otf */,
+				3A1BD76C25F539D40079D56D /* Spoqa Han Sans Neo Medium.otf */,
+				3A1BD76825F539D20079D56D /* Spoqa Han Sans Neo Regular.otf */,
+				3A1BD76B25F539D30079D56D /* Spoqa Han Sans Neo Thin.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		7C04535225EA942F00870761 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,8 +176,18 @@
 			isa = PBXGroup;
 			children = (
 				7C04536425EAAA3B00870761 /* UIColor+Additions.swift */,
+				E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */,
+				3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		7C36DF4325F20129001C2DBB /* InputChargingPoint */ = {
+			isa = PBXGroup;
+			children = (
+				7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */,
+			);
+			path = InputChargingPoint;
 			sourceTree = "<group>";
 		};
 		C838D65354D003A3D43925F2 /* Pods */ = {
@@ -153,6 +221,11 @@
 		D70C37C725E103DD00898271 /* MobalMobal */ = {
 			isa = PBXGroup;
 			children = (
+				3A1BD76625F5397F0079D56D /* Fonts */,
+				7C61AECB25EA4CC900D9149F /* PointCharging */,
+				E3F1EA7625EA4AE800F34BDE /* Signup */,
+				3A035F1625EA4D6000D3FB69 /* Login */,
+				7C36DF4325F20129001C2DBB /* InputChargingPoint */,
 				7C04535225EA942F00870761 /* Profile */,
 				7C04536325EAAA2400870761 /* Extension */,
 				D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */,
@@ -166,6 +239,15 @@
 				D70C37D625E103DE00898271 /* Info.plist */,
 			);
 			path = MobalMobal;
+			sourceTree = "<group>";
+		};
+		E3F1EA7625EA4AE800F34BDE /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */,
+				E3F1EAB125EACC9F00F34BDE /* SignupCustomView.swift */,
+			);
+			path = Signup;
 			sourceTree = "<group>";
 		};
 		EA3589F72EB11296D9C5D06E /* Frameworks */ = {
@@ -188,6 +270,8 @@
 				D70C37C225E103DD00898271 /* Frameworks */,
 				D70C37C325E103DD00898271 /* Resources */,
 				D70C37E025E1041D00898271 /* Run SwiftLint */,
+				4F43463B447430E17A7A7E30 /* [CP] Embed Pods Frameworks */,
+				9F68754E97333593B4BF85AE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -262,16 +346,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				D70C37DE25E103F100898271 /* .swiftlint.yml in Resources */,
+				3A1BD76E25F539D40079D56D /* Spoqa Han Sans Neo Light.otf in Resources */,
+				3A1BD77025F539D40079D56D /* Spoqa Han Sans Neo Thin.otf in Resources */,
+				3A1BD77125F539D40079D56D /* Spoqa Han Sans Neo Medium.otf in Resources */,
 				D70C37D525E103DE00898271 /* LaunchScreen.storyboard in Resources */,
 				D7147D6C25E76A1900AA0878 /* GoogleService-Info.plist in Resources */,
 				D70C37D225E103DE00898271 /* Assets.xcassets in Resources */,
+				3A1BD76F25F539D40079D56D /* Spoqa Han Sans Neo Bold.otf in Resources */,
 				D70C37D025E103DD00898271 /* Main.storyboard in Resources */,
+				3A1BD76D25F539D40079D56D /* Spoqa Han Sans Neo Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4F43463B447430E17A7A7E30 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		84F3F05E72455AC321E09A11 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -292,6 +398,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F68754E97333593B4BF85AE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MobalMobal/Pods-MobalMobal-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D70C37E025E1041D00898271 /* Run SwiftLint */ = {
@@ -319,14 +442,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */,
+				3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */,
 				D70C37CD25E103DD00898271 /* ViewController.swift in Sources */,
+				7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */,
+				E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */,
+				E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */,
 				7C04536025EAA2DC00870761 /* ProfileDonatingTableViewCell.swift in Sources */,
 				7C04535D25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift in Sources */,
 				7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */,
 				D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */,
+				E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */,
+				3A1BD77C25F5443D0079D56D /* UIFont+Extension.swift in Sources */,
+				7C36DF4625F2014E001C2DBB /* InputChargingPointViewController.swift in Sources */,
 				7C04535625EA949B00870761 /* ProfileViewController.swift in Sources */,
 				7C04535A25EA98B900870761 /* ProfileTableViewCell.swift in Sources */,
 				D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */,
+				7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
