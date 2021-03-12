@@ -54,6 +54,7 @@ class InputDonationMoneyViewController: UIViewController {
     
     // MARK: - Properties
     private let navigationTitle: String = "후원"
+    private let backButtonImageName: String = "arrowChevronBigLeft"
     private let iconImageName: String = "iconlyBrokenBuy"
     private let placeholderString: String = "후원할 금액을 입력하세요."
     private let buttonString: String = "후원하기"
@@ -65,6 +66,7 @@ class InputDonationMoneyViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
         setButtonDisable()
+        setNavigation()
     }
     
     override func updateViewConstraints() {
@@ -94,10 +96,25 @@ class InputDonationMoneyViewController: UIViewController {
     }
     
     // MARK: - Methods
+    private func setNavigation() {
+        let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .black94
+        navigationController?.navigationBar.standardAppearance = appearance
+        
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationItem.title = navigationTitle
+        navigationItem.standardAppearance = appearance
+        
+        guard let backButtonImage: UIImage = UIImage(named: backButtonImageName) else { return }
+        let backButton: UIBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(dismissVC))
+        backButton.tintColor = .white
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
     private func setRoundViewConstraints() {
         roundView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(view.frame.height * 52 / 812)
-            make.leading.equalToSuperview().inset(view.frame.width * 15 / 375 )
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(view.frame.height * 52 / 812)
+            make.leading.equalTo(view.safeAreaLayoutGuide).inset(view.frame.width * 15 / 375 )
             make.centerX.equalToSuperview()
             make.height.equalTo(60)
         }
@@ -162,6 +179,10 @@ class InputDonationMoneyViewController: UIViewController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
+    @objc
+    private func dismissVC() {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITextFieldDelegate
@@ -191,8 +212,9 @@ extension InputDonationMoneyViewController: UITextFieldDelegate {
         checkEmptyOrZero(newRawString)
         
         if isOverMaxRange(newRawString) {
-            showAlert()
+            dismissKeyboard()
             textField.text = "10,000,000"
+            showAlert()
             return false
         }
         
