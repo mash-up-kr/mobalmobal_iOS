@@ -42,6 +42,10 @@ class DonateMoneyViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
+    override func viewDidLayoutSubviews() {
+        tableView.roundCorners(corners: [.topLeft, .topRight], radius: 30)
+    }
+    
     // MARK: - Actions
     @objc
     private func dismissViewController() {
