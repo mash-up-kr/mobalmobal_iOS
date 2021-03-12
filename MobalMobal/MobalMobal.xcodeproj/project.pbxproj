@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */; };
+		3A179F4725FB4C9D00901436 /* SuccessDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A179F4625FB4C9D00901436 /* SuccessDonationViewController.swift */; };
 		3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */; };
 		3A1BD71D25F12F0C0079D56D /* DonationDetailViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD71C25F12F0C0079D56D /* DonationDetailViewController+Layout.swift */; };
 		3A1BD72425F1583D0079D56D /* DetailParticipantsMoreButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD72325F1583D0079D56D /* DetailParticipantsMoreButtonView.swift */; };
@@ -21,10 +22,10 @@
 		3A1BD77C25F5443D0079D56D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */; };
 		3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */; };
 		6A7F9880C2DD6C6782A998EE /* Pods_MobalMobal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */; };
-		7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */; };
-		7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */; };
 		7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04536425EAAA3B00870761 /* UIColor+Additions.swift */; };
 		7C36DF4625F2014E001C2DBB /* InputChargingPointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */; };
+		7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */; };
+		7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */; };
 		D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37C825E103DD00898271 /* AppDelegate.swift */; };
 		D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37CA25E103DD00898271 /* SceneDelegate.swift */; };
 		D70C37CD25E103DD00898271 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37CC25E103DD00898271 /* ViewController.swift */; };
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		32D37E13F8458BE37D6BCAC0 /* Pods-MobalMobal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.release.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.release.xcconfig"; sourceTree = "<group>"; };
 		3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3A179F4625FB4C9D00901436 /* SuccessDonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessDonationViewController.swift; sourceTree = "<group>"; };
 		3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailViewController.swift; sourceTree = "<group>"; };
 		3A1BD71C25F12F0C0079D56D /* DonationDetailViewController+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DonationDetailViewController+Layout.swift"; sourceTree = "<group>"; };
 		3A1BD72325F1583D0079D56D /* DetailParticipantsMoreButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailParticipantsMoreButtonView.swift; sourceTree = "<group>"; };
@@ -71,10 +73,10 @@
 		3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginButton.swift; sourceTree = "<group>"; };
 		5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobalMobal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61483D18A64727D4EAFF1EDD /* Pods-MobalMobal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.debug.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.debug.xcconfig"; sourceTree = "<group>"; };
-		7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingViewController.swift; sourceTree = "<group>"; };
-		7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingTableViewCell.swift; sourceTree = "<group>"; };
 		7C04536425EAAA3B00870761 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputChargingPointViewController.swift; sourceTree = "<group>"; };
+		7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingViewController.swift; sourceTree = "<group>"; };
+		7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingTableViewCell.swift; sourceTree = "<group>"; };
 		D70C37C525E103DD00898271 /* MobalMobal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobalMobal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70C37C825E103DD00898271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D70C37CA25E103DD00898271 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,15 +120,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7C61AECB25EA4CC900D9149F /* PointCharging */ = {
-			isa = PBXGroup;
-			children = (
-				7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */,
-				7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */,
-			);
-			path = PointCharging;
-            sourceTree = "<group>";
-        };
 		3A035F1625EA4D6000D3FB69 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +127,14 @@
 				3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		3A179F4525FB4C7A00901436 /* SuccessDonation */ = {
+			isa = PBXGroup;
+			children = (
+				3A179F4625FB4C9D00901436 /* SuccessDonationViewController.swift */,
+			);
+			path = SuccessDonation;
 			sourceTree = "<group>";
 		};
 		3A1BD70F25ED26970079D56D /* DonationDetail */ = {
@@ -186,6 +187,15 @@
 			path = InputChargingPoint;
 			sourceTree = "<group>";
 		};
+		7C61AECB25EA4CC900D9149F /* PointCharging */ = {
+			isa = PBXGroup;
+			children = (
+				7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */,
+				7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */,
+			);
+			path = PointCharging;
+			sourceTree = "<group>";
+		};
 		C838D65354D003A3D43925F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +227,7 @@
 		D70C37C725E103DD00898271 /* MobalMobal */ = {
 			isa = PBXGroup;
 			children = (
+				3A179F4525FB4C7A00901436 /* SuccessDonation */,
 				3A1BD70F25ED26970079D56D /* DonationDetail */,
 				3A1BD76625F5397F0079D56D /* Fonts */,
 				7C61AECB25EA4CC900D9149F /* PointCharging */,
@@ -442,11 +453,11 @@
 				3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */,
 				3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */,
 				3A1BD72425F1583D0079D56D /* DetailParticipantsMoreButtonView.swift in Sources */,
-				3A1BD78325F54BBC0079D56D /* UIView+Extension.swift in Sources */,
 				3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */,
 				3A1BD71D25F12F0C0079D56D /* DonationDetailViewController+Layout.swift in Sources */,
 				3A1BD73125F15EF20079D56D /* DetailParticipantsView.swift in Sources */,
 				D70C37CD25E103DD00898271 /* ViewController.swift in Sources */,
+				3A179F4725FB4C9D00901436 /* SuccessDonationViewController.swift in Sources */,
 				7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */,
 				E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */,
 				E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */,

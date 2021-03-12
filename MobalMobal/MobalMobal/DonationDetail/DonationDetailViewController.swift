@@ -240,6 +240,11 @@ class DonationDetailViewController: UIViewController {
     @IBAction private func clickDonationButton() {
         // 후원하기 버튼 클릭 시
         print("🐻 후원하기 🐻")
+        
+        // 임시로 후원 완료 페이지로 이동하는 코드
+        let successDonationVC: SuccessDonationViewController = SuccessDonationViewController()
+        successDonationVC.modalPresentationStyle = .fullScreen
+        self.present(successDonationVC, animated: true)
     }
     
     // MARK: - Methods
