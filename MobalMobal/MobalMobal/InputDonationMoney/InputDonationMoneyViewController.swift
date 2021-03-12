@@ -47,6 +47,8 @@ class InputDonationMoneyViewController: UIViewController {
                 
         button.setTitleColor(.blackThree, for: .normal)
         button.setTitleColor(.brownGreyTwo, for: .disabled)
+        
+        button.addTarget(self, action: #selector(clickDonationButton), for: .touchUpInside)
         return button
     }()
     
@@ -86,6 +88,10 @@ class InputDonationMoneyViewController: UIViewController {
     }
     
     // MARK: - Actions
+    @objc
+    private func clickDonationButton() {
+        print("🐻 \(textField.text!)원 후원하기 🐻")
+    }
     
     // MARK: - Methods
     private func setRoundViewConstraints() {
@@ -140,6 +146,16 @@ class InputDonationMoneyViewController: UIViewController {
         return false
     }
     
+    private func checkEmptyOrZero(_ string: String) {
+        if string.isEmpty {
+            setButtonDisable()
+        } else if Int(string) == 0 {
+            setButtonDisable()
+        } else {
+            setButtonEnable()
+        }
+    }
+    
     private func showAlert() {
         let alert: UIAlertController = UIAlertController(title: "후원 금액", message: "최대 후원 금액은 10,000,000원 입니다.", preferredStyle: .alert)
         let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default)
@@ -158,6 +174,8 @@ extension InputDonationMoneyViewController: UITextFieldDelegate {
             // 새로운 입력값 == 백스페이스
             if string.isEmpty {
                 let newRawString: String = backspace(from: rawString)
+                checkEmptyOrZero(newRawString)
+                
                 if let formattedString: String = makeFormattedString(from: newRawString) {
                     textField.text = formattedString
                     return false
@@ -170,6 +188,7 @@ extension InputDonationMoneyViewController: UITextFieldDelegate {
         
         // 새로 만들어질 문자열 (콤마 없는)
         let newRawString: String = rawString + string
+        checkEmptyOrZero(newRawString)
         
         if isOverMaxRange(newRawString) {
             showAlert()
