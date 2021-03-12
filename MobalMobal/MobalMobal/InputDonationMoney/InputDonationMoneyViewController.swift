@@ -31,6 +31,7 @@ class InputDonationMoneyViewController: UIViewController {
         textField.font = .spoqaHanSansNeo(ofSize: 15, weight: .bold)
         textField.textColor = .white
         textField.placeholder = placeholderString
+        textField.setPlaceholderColor(.brownGreyTwo)
         return textField
     }()
     

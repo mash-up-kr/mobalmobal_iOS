@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */; };
 		3A179F6025FB87AF00901436 /* InputDonationMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A179F5F25FB87AF00901436 /* InputDonationMoneyViewController.swift */; };
+		3A179F7725FBC84F00901436 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A179F7625FBC84F00901436 /* UITextField+Extension.swift */; };
 		3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */; };
 		3A1BD71D25F12F0C0079D56D /* DonationDetailViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD71C25F12F0C0079D56D /* DonationDetailViewController+Layout.swift */; };
 		3A1BD72425F1583D0079D56D /* DetailParticipantsMoreButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD72325F1583D0079D56D /* DetailParticipantsMoreButtonView.swift */; };
@@ -58,6 +59,7 @@
 		32D37E13F8458BE37D6BCAC0 /* Pods-MobalMobal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.release.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.release.xcconfig"; sourceTree = "<group>"; };
 		3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3A179F5F25FB87AF00901436 /* InputDonationMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDonationMoneyViewController.swift; sourceTree = "<group>"; };
+		3A179F7625FBC84F00901436 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailViewController.swift; sourceTree = "<group>"; };
 		3A1BD71C25F12F0C0079D56D /* DonationDetailViewController+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DonationDetailViewController+Layout.swift"; sourceTree = "<group>"; };
 		3A1BD72325F1583D0079D56D /* DetailParticipantsMoreButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailParticipantsMoreButtonView.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				7C04536425EAAA3B00870761 /* UIColor+Additions.swift */,
 				E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */,
 				3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */,
+				3A179F7625FBC84F00901436 /* UITextField+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */,
 				E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */,
 				7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */,
+				3A179F7725FBC84F00901436 /* UITextField+Extension.swift in Sources */,
 				D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */,
 				E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */,
 				3A1BD77C25F5443D0079D56D /* UIFont+Extension.swift in Sources */,
