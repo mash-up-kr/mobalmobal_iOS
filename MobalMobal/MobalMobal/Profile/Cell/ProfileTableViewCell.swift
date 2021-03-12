@@ -19,13 +19,13 @@ class ProfileTableViewCell: UITableViewCell {
         let label: UILabel = UILabel()
         label.text = self.nickname
         label.textColor = .white
-        label.font = UIFont(name: "futura-Bold", size: 24)
+        label.font = .futra(ofSize: 24, weight: .medium)
         return label
     }()
     private lazy var pointLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = self.point
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = .spoqaHanSansNeo(ofSize: 16, weight: .bold)
         label.textColor = .white
         return label
     }()
@@ -68,7 +68,7 @@ class ProfileTableViewCell: UITableViewCell {
     
     // MARK: - Methods
     private func setLayout() {
-        [profileImage, userInfoVerticalStackView].forEach { self.contentView.addSubview($0) }
+        self.contentView.addSubviews([profileImage, userInfoVerticalStackView])
         profileImage.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().inset(20)
             make.size.equalTo(80)
