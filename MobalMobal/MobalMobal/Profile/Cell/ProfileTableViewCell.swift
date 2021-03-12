@@ -9,83 +9,76 @@ import SnapKit
 import UIKit
 
 class ProfileTableViewCell: UITableViewCell {
-    let profileImage: UIImageView = {
+    // MARK: - UIComponents
+    private lazy var profileImage: UIImageView = {
         let image: UIImageView = UIImageView()
-        image.image = UIImage(named: "Profile")
-        image.layer.cornerRadius = 24
+        image.image = UIImage(named: self.userImg)
         return image
     }()
-    let nicknameLabel: UILabel = {
+    private lazy var nicknameLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "Jercy"
+        label.text = self.nickname
         label.textColor = .white
         label.font = UIFont(name: "futura-Bold", size: 24)
-//        label.font = UIFont.systemFont(ofSize: 24)
         return label
     }()
-    let pointButton: UIButton = {
-        let button: UIButton = UIButton()
-        return button
-    }()
-    let pointView: UIView = {
-        let view: UIView = UIView()
-        return view
-    }()
-    let pointLabel: UILabel = {
+    private lazy var pointLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "12,340원"
+        label.text = self.point
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .white
         return label
     }()
-    let pointDetailImage: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(systemName: "chevron.right")
-        image.tintColor = .white
-        return image
+    private let pointButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.setImage(UIImage(named: "arrowChevronBigRight"), for: .normal)
+        return button
     }()
+    private lazy var pointStackView: UIStackView = {
+        let stackView: UIStackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 0
+        [pointLabel, pointButton].forEach { stackView.addArrangedSubview($0) }
+        return stackView
+    }()
+    private lazy var userInfoVerticalStackView: UIStackView = {
+        let stackView: UIStackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 0
+        stackView.alignment = .leading
+        [nicknameLabel, pointStackView].forEach { stackView.addArrangedSubview($0) }
+        return stackView
+    }()
+    
+    // MARK: - Properties
+    // dummy data
+    let nickname: String = "Jercy"
+    let point: String = "12,340원"
+    let userImg: String = "Profile"
+    
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.backgroundColor = .backgroundColor
         self.setLayout()
     }
-    
-    private func setLayout() {
-        pointView.addSubview(pointButton)
-        pointView.addSubview(pointDetailImage)
-        [profileImage, nicknameLabel, pointLabel, pointView].forEach { contentView.addSubview( $0 ) }
-        profileImage.snp.makeConstraints {  make in
-            make.top.equalTo(contentView.snp.top).inset(20)
-            make.leading.equalTo(contentView.snp.leading).offset(21)
-            make.height.width.equalTo(80)
-            make.bottom.equalTo(contentView.snp.bottom).inset(60)
-        }
-        
-        nicknameLabel.snp.makeConstraints { make in
-            make.top.equalTo(profileImage.snp.top)
-            make.leading.equalTo(profileImage.snp.trailing).offset(20)
-            make.trailing.equalToSuperview().inset(20)
-        }
-        pointLabel.snp.makeConstraints { make in
-            make.leading.equalTo(pointView)
-            make.centerY.equalTo(pointView)
-            
-        }
-        pointDetailImage.snp.makeConstraints { make in
-            make.leading.equalTo(pointLabel.snp.trailing)
-            make.top.bottom.equalTo(pointLabel)
-        }
-        pointView.snp.makeConstraints { make in
-            make.top.equalTo(nicknameLabel.snp.bottom).offset(23)
-            make.leading.equalTo(nicknameLabel.snp.leading)
-        }
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Methods
+    private func setLayout() {
+        [profileImage, userInfoVerticalStackView].forEach { self.contentView.addSubview($0) }
+        profileImage.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().inset(20)
+            make.size.equalTo(80)
+            make.bottom.equalToSuperview().inset(60)
+        }
+        userInfoVerticalStackView.snp.makeConstraints { make in
+            make.leading.equalTo(profileImage.snp.trailing).offset(12)
+            make.centerY.equalTo(profileImage)
+        }
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
