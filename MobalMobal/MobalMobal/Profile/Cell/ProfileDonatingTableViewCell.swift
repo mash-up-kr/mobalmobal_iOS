@@ -10,12 +10,6 @@ import UIKit
 
 class ProfileDonatingTableViewCell: UITableViewCell {
     // MARK: - UIComponents
-//    var cellTitleLabel: UILabel = {
-//        let label: UILabel = UILabel()
-//        label.textColor = .white
-//        label.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
-//        return label
-//    }()
     private let donateContentView: UIView = {
         let view: UIView = UIView()
         view.layer.cornerRadius = 12
@@ -99,7 +93,7 @@ class ProfileDonatingTableViewCell: UITableViewCell {
         self.donateContentView.addSubviews([donateImg, ratingBackgroundBar, donateTitle])
         self.ratingBackgroundBar.addSubview(ratingBar)
         donateContentView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
+            make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
         }

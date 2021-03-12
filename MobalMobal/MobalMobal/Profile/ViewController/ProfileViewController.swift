@@ -31,7 +31,7 @@ class ProfileViewController: UIViewController {
     private let myDonationCellIdentifier: String = "MyDonationTableViewCell"
     private let donatingCellIdentifier: String = "DonatingTableViewCell"
     private let sectionHeaderCellIdentifier: String = "SectionHeaderCell"
-
+    private let numberOfDonations: [Int] = [1,1,1]
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +76,14 @@ class ProfileViewController: UIViewController {
         }
         return true
     }
+    
+    // 서버로부터 받아온 도네이션 갯수가 0개인지 체크하는 메서드
+    func checkNumberOfDonationIsZero(_ section: Int) -> Bool {
+        if numberOfDonations[section - 2] == 0 {
+            return true
+        }
+        return false
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -89,17 +97,9 @@ extension ProfileViewController: UITableViewDataSource {
             return 1
         } else {
             // 서버에서 받아온 값 만큼
-            return 2
+            return numberOfDonations[section - 2]
         }
     }
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        let sectionTitle: [String] = ["내 연 도네", "후원 중인 도네", "종료된 도네"]
-//        if !checkDynamicSection(section) {
-//            return ""
-//        } else {
-//            return sectionTitle[section - 2]
-//        }
-//    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell,
               let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell,
@@ -123,8 +123,8 @@ extension ProfileViewController: UITableViewDataSource {
         }
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if checkDynamicSection(section) {
-            let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 35))
+        if checkDynamicSection(section) && !checkNumberOfDonationIsZero(section) {
+            let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 22))
             let headerLabel: UILabel = UILabel(frame: CGRect(x: 20, y: 0, width: tableView.frame.width - 40, height: 22))
             headerLabel.text = sectionHeader[section - 2]
             headerLabel.textColor = .white
