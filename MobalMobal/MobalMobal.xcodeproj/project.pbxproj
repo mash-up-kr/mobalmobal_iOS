@@ -61,6 +61,7 @@
 		3A1BD72325F1583D0079D56D /* DetailParticipantsMoreButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailParticipantsMoreButtonView.swift; sourceTree = "<group>"; };
 		3A1BD72F25F15EF20079D56D /* DetailParticipantsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailParticipantsView.swift; sourceTree = "<group>"; };
 		3A1BD73025F15EF20079D56D /* DetailParticipantsProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailParticipantsProfileImageView.swift; sourceTree = "<group>"; };
+		3A1BD74A25F373EA0079D56D /* MobalMobal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobalMobal.entitlements; sourceTree = "<group>"; };
 		3A1BD76825F539D20079D56D /* Spoqa Han Sans Neo Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Regular.otf"; sourceTree = "<group>"; };
 		3A1BD76925F539D30079D56D /* Spoqa Han Sans Neo Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Light.otf"; sourceTree = "<group>"; };
 		3A1BD76A25F539D30079D56D /* Spoqa Han Sans Neo Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Bold.otf"; sourceTree = "<group>"; };
@@ -223,6 +224,7 @@
 				3A035F1625EA4D6000D3FB69 /* Login */,
 				7C36DF4325F20129001C2DBB /* InputChargingPoint */,
 				7C04536325EAAA2400870761 /* Extension */,
+				3A1BD74A25F373EA0079D56D /* MobalMobal.entitlements */,
 				D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */,
 				D70C37C825E103DD00898271 /* AppDelegate.swift */,
 				D70C37CA25E103DD00898271 /* SceneDelegate.swift */,
@@ -440,6 +442,7 @@
 				3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */,
 				3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */,
 				3A1BD72425F1583D0079D56D /* DetailParticipantsMoreButtonView.swift in Sources */,
+				3A1BD78325F54BBC0079D56D /* UIView+Extension.swift in Sources */,
 				3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */,
 				3A1BD71D25F12F0C0079D56D /* DonationDetailViewController+Layout.swift in Sources */,
 				3A1BD73125F15EF20079D56D /* DetailParticipantsView.swift in Sources */,
@@ -626,6 +629,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MobalMobal/MobalMobal.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = TA757FA6NR;
