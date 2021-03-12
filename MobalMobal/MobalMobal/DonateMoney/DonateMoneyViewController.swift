@@ -13,14 +13,19 @@ class DonateMoneyViewController: UIViewController {
         let tableView: UITableView = UITableView()
         tableView.backgroundColor = .darkGreyTwo
         tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
+        
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.register(DonateMoneyTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         return tableView
     }()
     
     // MARK: - Properties
     private let headerString: String = "후원"
     private let moneyStrings: [String] = ["1,000원", "2,000원", "5,000원", "10,000원", "50,000원", "100,000원", "직접입력"]
+    private let cellIdentifier: String = "DonateMoneyTableViewCell"
     
     // MARK: - Lifecycles
     override func viewDidLoad() {
@@ -32,7 +37,7 @@ class DonateMoneyViewController: UIViewController {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(458)
+            make.height.equalTo(51 * moneyStrings.count + 77)
         }
         super.updateViewConstraints()
     }
@@ -57,13 +62,16 @@ extension DonateMoneyViewController: UITableViewDataSource {
         }()
         
         headerView.addSubview(headerLabel)
-        headerLabel.snp.makeConstraints { make in make.center.equalToSuperview() }
+        headerLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(20)
+            make.centerX.equalToSuperview()
+        }
         
         return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        62
+        77
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,9 +79,10 @@ extension DonateMoneyViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell()
-        cell.backgroundColor = .darkGreyTwo
-        cell.largeContentTitle = moneyStrings[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? DonateMoneyTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.setTitle(moneyStrings[indexPath.row])
         return cell
     }
 }
