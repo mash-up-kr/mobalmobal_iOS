@@ -9,7 +9,8 @@ import UIKit
 
 class DonateMoneyViewController: UIViewController {
     // MARK: - UIComponents
-    private lazy var tableView: UITableView = {
+    private let clearView: UIView = UIView()
+        private lazy var tableView: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.backgroundColor = .darkGreyTwo
         tableView.separatorStyle = .none
@@ -31,24 +32,41 @@ class DonateMoneyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
-        navigationController?.isNavigationBarHidden = true
         
         setConstraints()
+        setViewTapGesture()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
     }
     
     // MARK: - Actions
+    @objc
+    private func dismissViewController() {
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
     
     // MARK: - Methods
     private func setConstraints() {
-        view.addSubview(tableView)
+        view.addSubviews([tableView, clearView])
         tableView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(51 * moneyStrings.count + 77)
         }
+        clearView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(tableView.snp.top)
+        }
+    }
+    private func setViewTapGesture() {
+        let clearViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
+        clearView.addGestureRecognizer(clearViewTap)
     }
 }
 
-// MARK: - Protocols
+// MARK: - UITableViewDelegate
 extension DonateMoneyViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == moneyStrings.count - 1 {
@@ -60,6 +78,7 @@ extension DonateMoneyViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension DonateMoneyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView: UIView = UIView()
