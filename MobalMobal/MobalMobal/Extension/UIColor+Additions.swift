@@ -2,7 +2,7 @@
 //  UIColor+Additions.swift
 //  Mobal iOS
 //
-//  Generated on Zeplin. (2021. 3. 8.).
+//  Generated on Zeplin. (2021. 3. 12.).
 //  Copyright (c) 2021 __MyCompanyName__. All rights reserved.
 //
 
@@ -64,7 +64,7 @@ extension UIColor {
     @nonobjc class var black25: UIColor {
         return UIColor(white: 0.0, alpha: 0.25)
     }
-    
+  
     @nonobjc class var black70: UIColor {
         return UIColor(white: 16.0 / 255.0, alpha: 0.7)
     }
@@ -99,5 +99,8 @@ extension UIColor {
     
     @nonobjc class var blackThree: UIColor {
         return UIColor(white: 37.0 / 255.0, alpha: 1.0)
+    }
+    @nonobjc class var lemonLime80: UIColor {
+      return UIColor(red: 187.0 / 255.0, green: 1.0, blue: 41.0 / 255.0, alpha: 0.8)
     }
 }
