@@ -11,6 +11,7 @@ class SuccessDonationViewController: UIViewController {
     // MARK: - UIComponents
     private lazy var closeButton: UIButton = {
         let button: UIButton = UIButton()
+        button.addTarget(self, action: #selector(clickCloseButton), for: .touchUpInside)
         guard let image: UIImage = UIImage(named: closeButtonImageName) else {
             button.setTitle("X", for: .normal)
             button.setTitleColor(.white, for: .normal)
@@ -93,7 +94,13 @@ class SuccessDonationViewController: UIViewController {
     }
     
     // MARK: - Actions
+    @objc
+    private func clickCloseButton() {
+        dismissViewController()
+    }
     
     // MARK: - Methods
-    
+    private func dismissViewController() {
+        dismiss(animated: true, completion: nil)
+    }
 }
