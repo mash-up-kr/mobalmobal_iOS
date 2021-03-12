@@ -10,12 +10,12 @@ import UIKit
 
 class ProfileDonatingTableViewCell: UITableViewCell {
     // MARK: - UIComponents
-    var cellTitleLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.textColor = .white
-        label.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
-        return label
-    }()
+//    var cellTitleLabel: UILabel = {
+//        let label: UILabel = UILabel()
+//        label.textColor = .white
+//        label.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
+//        return label
+//    }()
     private let donateContentView: UIView = {
         let view: UIView = UIView()
         view.layer.cornerRadius = 12
