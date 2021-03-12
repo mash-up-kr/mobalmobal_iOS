@@ -240,7 +240,9 @@ class DonationDetailViewController: UIViewController {
     @IBAction private func clickDonationButton() {
         // 후원하기 버튼 클릭 시
         let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController()
-        self.present(donateMoneyVC, animated: true)
+        let navigationController: UINavigationController = UINavigationController(rootViewController: donateMoneyVC)
+        navigationController.modalPresentationStyle = .overFullScreen
+        present(navigationController, animated: true, completion: nil)
     }
     
     // MARK: - Methods

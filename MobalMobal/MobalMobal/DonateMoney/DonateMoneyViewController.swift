@@ -31,24 +31,34 @@ class DonateMoneyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
-    }
-    
-    override func updateViewConstraints() {
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(51 * moneyStrings.count + 77)
-        }
-        super.updateViewConstraints()
+        navigationController?.isNavigationBarHidden = true
+        
+        setConstraints()
     }
     
     // MARK: - Actions
     
     // MARK: - Methods
+    private func setConstraints() {
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(51 * moneyStrings.count + 77)
+        }
+    }
 }
 
 // MARK: - Protocols
-extension DonateMoneyViewController: UITableViewDelegate { }
+extension DonateMoneyViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == moneyStrings.count - 1 {
+            print("🐻 직접 입력 🐻")
+            let inputDonateMoneyVC: InputChargingPointViewController = InputChargingPointViewController()
+            inputDonateMoneyVC.modalPresentationStyle = .fullScreen
+            self.navigationController?.show(inputDonateMoneyVC, sender: self)
+        }
+    }
+}
 
 extension DonateMoneyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

@@ -68,6 +68,7 @@ class InputChargingPointViewController: UIViewController {
     @objc
     private func popVC() {
         print("✨ pop viewcontroller")
+        self.navigationController?.popViewController(animated: true)
     }
     @objc
     private func textEdited(textField: UITextField) {
@@ -111,6 +112,7 @@ class InputChargingPointViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     private func setNavigation() {
+        self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.backgroundColor = .black94
         self.navigationController?.navigationBar.barTintColor = .black94
         self.navigationController?.navigationBar.isTranslucent = false
