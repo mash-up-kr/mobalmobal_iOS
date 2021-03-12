@@ -20,8 +20,14 @@ class ProfileDonatingTableViewCell: UITableViewCell {
         let image: UIImageView = UIImageView()
         image.image = UIImage(named: "\(self.imageName)")
         image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 24
         image.layer.masksToBounds = true
         return image
+    }()
+    private let translucentView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = .black70
+        return view
     }()
     private lazy var donateDday: UILabel = {
         let label: UILabel = UILabel()
@@ -79,6 +85,7 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.backgroundColor = .backgroundColor
+        setViewHierarchy()
         setLayout()
     }
     
@@ -87,25 +94,28 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     }
     
     // MARK: - Methods
-    func setLayout() {
+    func setViewHierarchy() {
         self.contentView.addSubviews([donateContentView])
-        self.donateImg.addSubview(donateInfoStackView)
+        self.donateImg.addSubview(translucentView)
+        translucentView.addSubview(donateInfoStackView)
         self.donateContentView.addSubviews([donateImg, ratingBackgroundBar, donateTitle])
         self.ratingBackgroundBar.addSubview(ratingBar)
-        donateContentView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview()
-        }
+    }
+    func setDonationImageLayout() {
         donateImg.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(124.5)
+        }
+        translucentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         donateInfoStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(22)
             make.leading.trailing.equalToSuperview().inset(23)
             make.bottom.equalToSuperview().inset(63.5)
         }
+    }
+    func setRatingBarLayout() {
         ratingBackgroundBar.snp.makeConstraints { make in
             make.top.equalTo(donateImg.snp.bottom)
             make.leading.trailing.equalToSuperview()
@@ -115,6 +125,15 @@ class ProfileDonatingTableViewCell: UITableViewCell {
             make.top.leading.bottom.equalToSuperview()
             make.width.equalTo(182)
         }
+    }
+    func setLayout() {
+        donateContentView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview()
+        }
+        setDonationImageLayout()
+        setRatingBarLayout()
         donateTitle.snp.makeConstraints { make in
             make.top.equalTo(ratingBackgroundBar.snp.bottom).offset(20)
             make.bottom.equalToSuperview().inset(20)

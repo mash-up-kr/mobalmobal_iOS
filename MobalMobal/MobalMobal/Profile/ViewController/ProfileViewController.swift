@@ -10,16 +10,6 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     // MARK: - UIComponents
-    private let scrollView: UIScrollView = {
-        let scrollView: UIScrollView = UIScrollView()
-        scrollView.backgroundColor = .backgroundColor
-        return scrollView
-    }()
-    private let contentView: UIView = {
-        let contentView: UIView = UIView()
-        contentView.backgroundColor = .backgroundColor
-        return contentView
-    }()
     private let mainTableView: UITableView = {
         let tableview: UITableView = UITableView(frame: .zero, style: .grouped)
         return tableview
@@ -67,17 +57,7 @@ class ProfileViewController: UIViewController {
         mainTableView.rowHeight = UITableView.automaticDimension
     }
     func setLayout() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        [mainTableView].forEach { contentView.addSubview($0) }
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        contentView.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.edges.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }
+        [mainTableView].forEach { self.view.addSubview($0) }
         mainTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.height.equalTo(UIScreen.main.bounds.height)        
@@ -87,6 +67,7 @@ class ProfileViewController: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = .blackFour
         self.navigationController?.navigationBar.barTintColor = .blackFour
         self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.isNavigationBarHidden = false
         // dummy data
         self.navigationItem.title = "Jercy"
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.whiteTwo]
@@ -109,9 +90,7 @@ class ProfileViewController: UIViewController {
     
     // 유동적으로 갯수가 변화하는 section인지 체크하는 메서드
     func checkDynamicSection(_ section: Int) -> Bool {
-        if section == 0 || section == 1 {
-            return false
-        }
+        if section < 2 { return false }
         return true
     }
     
@@ -139,32 +118,33 @@ extension ProfileViewController: UITableViewDataSource {
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell,
-              let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell,
-              let donatingCell: ProfileDonatingTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: donatingCellIdentifier, for: indexPath) as? ProfileDonatingTableViewCell
-        else { return UITableViewCell() }
-        
-        [profileCell, myDonationCell, donatingCell].forEach { $0.selectionStyle = .none }
         if indexPath.section == 0 {
+            guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return UITableViewCell() }
+            profileCell.selectionStyle = .none
             return profileCell
         } else if indexPath.section == 1 {
+            guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
+            myDonationCell.selectionStyle = .none
             return myDonationCell
         } else {
+            guard let donatingCell: ProfileDonatingTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: donatingCellIdentifier, for: indexPath) as? ProfileDonatingTableViewCell
+            else { return UITableViewCell() }
+            donatingCell.selectionStyle = .none
             return donatingCell
         }
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if checkDynamicSection(section) && !checkNumberOfDonationIsZero(section) {
-            let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 22))
-            let headerLabel: UILabel = UILabel(frame: CGRect(x: 20, y: 0, width: tableView.frame.width - 40, height: 22))
-            headerLabel.text = sectionHeader[section - 2]
-            headerLabel.textColor = .white
-            headerLabel.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
-            
-            headerView.addSubview(headerLabel)
-            return headerView
+        if !checkDynamicSection(section) && checkNumberOfDonationIsZero(section) {
+            return nil
         }
-        return nil
+        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 22))
+        let headerLabel: UILabel = UILabel(frame: CGRect(x: 20, y: 0, width: tableView.frame.width - 40, height: 22))
+        headerLabel.text = sectionHeader[section - 2]
+        headerLabel.textColor = .white
+        headerLabel.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
+        
+        headerView.addSubview(headerLabel)
+        return headerView
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if !checkDynamicSection(section) {
@@ -173,5 +153,7 @@ extension ProfileViewController: UITableViewDataSource {
         return 35
     }
 }
+
+ // MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
 }

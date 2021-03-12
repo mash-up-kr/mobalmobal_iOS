@@ -44,7 +44,7 @@ class ProfileTableViewCell: UITableViewCell {
     private lazy var userInfoVerticalStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 0
+        stackView.spacing = 6
         stackView.alignment = .leading
         [nicknameLabel, pointStackView].forEach { stackView.addArrangedSubview($0) }
         return stackView
@@ -54,7 +54,7 @@ class ProfileTableViewCell: UITableViewCell {
     // dummy data
     let nickname: String = "Jercy"
     let point: String = "12,340원"
-    let userImg: String = "Profile"
+    let userImg: String = "profile"
     
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -78,10 +78,5 @@ class ProfileTableViewCell: UITableViewCell {
             make.leading.equalTo(profileImage.snp.trailing).offset(12)
             make.centerY.equalTo(profileImage)
         }
-    }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileMyDonationTableViewCell: UITableViewCell {
     // MARK: - UIComponents
-    private lazy var giveDonationTitle: UILabel = {
+    private lazy var giveDonationTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = myDonationText[0]
         label.font = .spoqaHanSansNeo(ofSize: 18, weight: .regular)
@@ -24,7 +24,7 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
         label.textColor = .white
         return label
     }()
-    private lazy var takeDonationTitle: UILabel = {
+    private lazy var takeDonationTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = myDonationText[1]
         label.font = .spoqaHanSansNeo(ofSize: 18, weight: .regular)
@@ -38,7 +38,7 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
         label.textColor = .white
         return label
     }()
-    private lazy var endDonationTitle: UILabel = {
+    private lazy var endDonationTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = myDonationText[2]
         label.font = .spoqaHanSansNeo(ofSize: 18, weight: .regular)
@@ -56,19 +56,19 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
     private lazy var giveStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         setVerticalStackView(stackView)
-        [giveNumberOfDonation, giveDonationTitle].forEach { stackView.addArrangedSubview($0) }
+        [giveNumberOfDonation, giveDonationTitleLabel].forEach { stackView.addArrangedSubview($0) }
         return stackView
     }()
     private lazy var takeStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         setVerticalStackView(stackView)
-        [takeNumberOfDonation, takeDonationTitle].forEach { stackView.addArrangedSubview($0) }
+        [takeNumberOfDonation, takeDonationTitleLabel].forEach { stackView.addArrangedSubview($0) }
         return stackView
     }()
     private lazy var endStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         setVerticalStackView(stackView)
-        [endNumberOfDonation, endDonationTitle].forEach { stackView.addArrangedSubview($0) }
+        [endNumberOfDonation, endDonationTitleLabel].forEach { stackView.addArrangedSubview($0) }
         return stackView
     }()
     
