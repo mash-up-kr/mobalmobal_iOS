@@ -239,7 +239,8 @@ class DonationDetailViewController: UIViewController {
     
     @IBAction private func clickDonationButton() {
         // 후원하기 버튼 클릭 시
-        print("🐻 후원하기 🐻")
+        let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController()
+        self.present(donateMoneyVC, animated: true)
     }
     
     // MARK: - Methods
