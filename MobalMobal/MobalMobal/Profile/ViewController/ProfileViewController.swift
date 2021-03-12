@@ -62,7 +62,6 @@ class ProfileViewController: UIViewController {
             make.edges.equalToSuperview()
             make.centerX.equalToSuperview()
         }
-
         mainTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.height.equalTo(UIScreen.main.bounds.height)        // 수정필요
@@ -77,9 +76,9 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return UITableViewCell() }
-        
-        return profileCell
+//        guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return UITableViewCell() }
+        guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
+        return myDonationCell
     }
 }
 extension ProfileViewController: UITableViewDelegate {
