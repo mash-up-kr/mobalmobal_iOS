@@ -56,7 +56,7 @@ class InputDonationMoneyViewController: UIViewController {
     private let placeholderString: String = "후원할 금액을 입력하세요."
     private let buttonString: String = "후원하기"
     
-    private var inputString: String = ""
+    private let maxMoneyRange: Int = 10_000_000
     
     // MARK: - Lifecycles
     override func viewDidLoad() {
@@ -132,6 +132,20 @@ class InputDonationMoneyViewController: UIViewController {
     private func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    private func isOverMaxRange(_ string: String) -> Bool {
+        if let number: Int = Int(string), number > maxMoneyRange {
+            return true
+        }
+        return false
+    }
+    
+    private func showAlert() {
+        let alert: UIAlertController = UIAlertController(title: "후원 금액", message: "최대 후원 금액은 10,000,000원 입니다.", preferredStyle: .alert)
+        let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
 }
 
 // MARK: - UITextFieldDelegate
@@ -140,9 +154,8 @@ extension InputDonationMoneyViewController: UITextFieldDelegate {
         // 기존 문자열 (콤마 없는)
         let rawString: String = makeRawString(from: textField.text)
         
-        // 새로 들어온게 숫자가 아니라면
         if Int(string) == nil {
-            // 백스페이스
+            // 새로운 입력값 == 백스페이스
             if string.isEmpty {
                 let newRawString: String = backspace(from: rawString)
                 if let formattedString: String = makeFormattedString(from: newRawString) {
@@ -151,12 +164,19 @@ extension InputDonationMoneyViewController: UITextFieldDelegate {
                 }
                 return true
             }
-            // 문자는 입력할 수 없다
+            // 새로운 입력값 == 문자
             return false
         }
         
         // 새로 만들어질 문자열 (콤마 없는)
         let newRawString: String = rawString + string
+        
+        if isOverMaxRange(newRawString) {
+            showAlert()
+            textField.text = "10,000,000"
+            return false
+        }
+        
         if let formattedString: String = makeFormattedString(from: newRawString) {
             textField.text = formattedString
             return false
