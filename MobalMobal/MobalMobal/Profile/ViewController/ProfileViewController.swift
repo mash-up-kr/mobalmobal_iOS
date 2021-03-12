@@ -31,12 +31,27 @@ class ProfileViewController: UIViewController {
     private let myDonationCellIdentifier: String = "MyDonationTableViewCell"
     private let donatingCellIdentifier: String = "DonatingTableViewCell"
     private let sectionHeaderCellIdentifier: String = "SectionHeaderCell"
-    private let numberOfDonations: [Int] = [1,1,1]
+    private let numberOfDonations: [Int] = [1, 1, 1]
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
         setLayout()
+        setNavigation()
+    }
+    
+    // MARK: - Actions
+    @objc
+    private func popVC() {
+        print("✨ pop viewcontroller")
+    }
+    @objc
+    private func modifyInfo() {
+        print("✨ modify user info")
+    }
+    @objc
+    private func pushSettingVC() {
+        print("✨ push setting vc")
     }
     
     // MARK: - Methods
@@ -67,6 +82,19 @@ class ProfileViewController: UIViewController {
             make.edges.equalToSuperview()
             make.height.equalTo(UIScreen.main.bounds.height)        
         }
+    }
+    private func setNavigation() {
+        self.navigationController?.navigationBar.backgroundColor = .blackFour
+        self.navigationController?.navigationBar.barTintColor = .blackFour
+        self.navigationController?.navigationBar.isTranslucent = false
+        // dummy data
+        self.navigationItem.title = "Jercy"
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.whiteTwo]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
+        self.navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: UIImage(named: "iconlyLightEditSquare"), style: .plain, target: self, action: #selector(modifyInfo)),
+            UIBarButtonItem(image: UIImage(named: "iconlyLightSetting"), style: .plain, target: self, action: #selector(pushSettingVC))
+        ]
     }
     
     // 유동적으로 갯수가 변화하는 section인지 체크하는 메서드

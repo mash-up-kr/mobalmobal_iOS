@@ -103,4 +103,10 @@ extension UIColor {
     @nonobjc class var lemonLime80: UIColor {
       return UIColor(red: 187.0 / 255.0, green: 1.0, blue: 41.0 / 255.0, alpha: 0.8)
     }
+    @nonobjc class var blackFour: UIColor {
+        return UIColor(white: 0.0, alpha: 1.0)
+    }
+    @nonobjc class var whiteTwo: UIColor {
+        return UIColor(white: 1.0, alpha: 1.0)
+    }
 }
