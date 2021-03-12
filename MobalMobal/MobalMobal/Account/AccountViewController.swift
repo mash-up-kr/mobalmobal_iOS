@@ -13,11 +13,7 @@ class AccountViewController: UIViewController {
     private lazy var accountLabel: UILabel = {
         let label: UILabel = UILabel()
         let accountLabelAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(self.account) \(self.bankName)으로")
-        let underLineAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.white ,
-            .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .medium),
-            .underlineStyle: 1
-        ]
+        
         accountLabelAttributedString.addAttributes(defaultAttributes, range: NSRange(location: 0, length: accountLabelAttributedString.length))
         accountLabelAttributedString.addAttributes(underLineAttributes, range: NSRange(location: 0, length: self.account.count))
         accountLabelAttributedString.addAttributes(underLineAttributes, range: NSRange(location: self.account.count + 1, length: self.bankName.count))
@@ -30,10 +26,7 @@ class AccountViewController: UIViewController {
     private lazy var priceLabel: UILabel = {
         let label: UILabel = UILabel()
         let priceLabelAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(self.charge)원을 보내주세요")
-        let emphasisAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.white ,
-            .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .medium)
-        ]
+        
         priceLabelAttributedString.addAttributes(defaultAttributes, range: NSRange(location: 0, length: priceLabelAttributedString.length))
         priceLabelAttributedString.addAttributes(emphasisAttributes, range: _NSRange(location: 0, length: self.charge.count + 1))
         
@@ -76,16 +69,24 @@ class AccountViewController: UIViewController {
     
     // MARK: - Properties
     // dummy data
-    var account: String = "110-436-3412421"
-    var bankName: String = "신한은행"
-    var charge: String = "30,000"
+    private var account: String = "110-436-3412421"
+    private var bankName: String = "신한은행"
+    private var charge: String = "30,000"
     
     private var setLayoutFlag: Bool = false
     private let defaultAttributes: [NSAttributedString.Key: Any] = [
         .foregroundColor: UIColor.veryLightPink ,
         .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .regular)
     ]
-    
+    private let emphasisAttributes: [NSAttributedString.Key: Any] = [
+        .foregroundColor: UIColor.white ,
+        .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .medium)
+    ]
+    private let underLineAttributes: [NSAttributedString.Key: Any] = [
+        .foregroundColor: UIColor.white ,
+        .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .medium),
+        .underlineStyle: 1
+    ]
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,18 +94,16 @@ class AccountViewController: UIViewController {
         self.view.backgroundColor = .backgroundColor
     }
     override func updateViewConstraints() {
-        if !setLayoutFlag {
-            self.view.addSubviews([verticalStackView, closeButton])
-            closeButton.snp.makeConstraints { make in
-                make.top.equalTo(self.view.safeAreaLayoutGuide)
-                make.trailing.equalToSuperview().inset(10)
-                make.size.equalTo(44)
-            }
-            verticalStackView.snp.makeConstraints { make in
-                make.center.equalToSuperview()
-            }
-            setLayoutFlag = true
+        self.view.addSubviews([verticalStackView, closeButton])
+        closeButton.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.trailing.equalToSuperview().inset(10)
+            make.size.equalTo(44)
         }
+        verticalStackView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        setLayoutFlag = true
         super.updateViewConstraints()
     }
     
