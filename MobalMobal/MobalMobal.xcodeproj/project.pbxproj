@@ -24,6 +24,7 @@
 		7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04536425EAAA3B00870761 /* UIColor+Additions.swift */; };
 		7C36DF4625F2014E001C2DBB /* InputChargingPointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */; };
 		7C39979125F75B5900EA82C2 /* SuccessChargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C39979025F75B5900EA82C2 /* SuccessChargingViewController.swift */; };
+		7C39985D25FA51AA00EA82C2 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C39985C25FA51AA00EA82C2 /* AccountViewController.swift */; };
 		7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */; };
 		7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */; };
 		D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37C825E103DD00898271 /* AppDelegate.swift */; };
@@ -75,6 +76,7 @@
 		7C04536425EAAA3B00870761 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputChargingPointViewController.swift; sourceTree = "<group>"; };
 		7C39979025F75B5900EA82C2 /* SuccessChargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessChargingViewController.swift; sourceTree = "<group>"; };
+		7C39985C25FA51AA00EA82C2 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingViewController.swift; sourceTree = "<group>"; };
 		7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingTableViewCell.swift; sourceTree = "<group>"; };
 		D70C37C525E103DD00898271 /* MobalMobal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobalMobal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,6 +198,14 @@
 			path = PointCharging;
 			sourceTree = "<group>";
 		};
+		7C39985B25FA517900EA82C2 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				7C39985C25FA51AA00EA82C2 /* AccountViewController.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
 		C838D65354D003A3D43925F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +239,7 @@
 			children = (
 				3A1BD70F25ED26970079D56D /* DonationDetail */,
 				7C39978F25F75B3700EA82C2 /* SuccessCharging */,
+				7C39985B25FA517900EA82C2 /* Account */,
 				3A1BD76625F5397F0079D56D /* Fonts */,
 				7C61AECB25EA4CC900D9149F /* PointCharging */,
 				E3F1EA7625EA4AE800F34BDE /* Signup */,
@@ -457,6 +468,7 @@
 				3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */,
 				3A1BD71D25F12F0C0079D56D /* DonationDetailViewController+Layout.swift in Sources */,
 				3A1BD73125F15EF20079D56D /* DetailParticipantsView.swift in Sources */,
+				7C39985D25FA51AA00EA82C2 /* AccountViewController.swift in Sources */,
 				D70C37CD25E103DD00898271 /* ViewController.swift in Sources */,
 				7C39979125F75B5900EA82C2 /* SuccessChargingViewController.swift in Sources */,
 				7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */,
