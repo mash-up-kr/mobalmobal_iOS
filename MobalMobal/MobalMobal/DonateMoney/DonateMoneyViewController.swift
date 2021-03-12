@@ -10,15 +10,20 @@ import UIKit
 class DonateMoneyViewController: UIViewController {
     // MARK: - UIComponents
     private let clearView: UIView = UIView()
-        private lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.backgroundColor = .darkGreyTwo
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
         
+        // shadow 적용
+        tableView.drawShadow(color: .black, alpha: 1.0, shadowX: 0, shadowY: 20, blur: 20, spread: 0)
+        
+        // delegate, datasource 적용
         tableView.delegate = self
         tableView.dataSource = self
         
+        // cell 적용
         tableView.register(DonateMoneyTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         return tableView
     }()
@@ -44,6 +49,7 @@ class DonateMoneyViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         tableView.roundCorners(corners: [.topLeft, .topRight], radius: 30)
+        tableView.drawShadow(color: .black, alpha: 1.0, shadowX: 0, shadowY: 20, blur: 20, spread: 0)
     }
     
     // MARK: - Actions
