@@ -131,6 +131,11 @@ extension LoginViewController {
                     return
                 }
                 print("🐻 FirebaseAuth :: idToken: \(idToken) 🐻")
+                
+                // 임시로 상세보기 화면으로 가는 코드
+                let detailVC: DonationDetailViewController = DonationDetailViewController()
+                detailVC.modalPresentationStyle = .fullScreen
+                self.present(detailVC, animated: true)
             }
         }
     }
