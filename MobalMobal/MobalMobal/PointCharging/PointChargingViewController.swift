@@ -18,7 +18,7 @@ class PointChargingViewController: UIViewController {
     private let pageTitle: UILabel = {
         let label: UILabel = UILabel()
         label.text = "충전"
-        label.font = UIFont(name: "SpoqaHanSansNeo-Medium", size: 18)
+        label.font = .spoqaHanSansNeo(ofSize: 18, weight: .medium)
         label.textColor = .white
         label.backgroundColor = .darkGreyTwo
         return label
@@ -39,6 +39,7 @@ class PointChargingViewController: UIViewController {
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         return view
     }()
+    
     // MARK: - Properties
     private let pointItemList: [String] = ["1,000원", "2,000원", "5,000원", "10,000원", "50,000원", "100,000원", "직접입력"]
     private let cellIdentifier: String = "PointChargingTableViewCell"
@@ -47,17 +48,8 @@ class PointChargingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
-        setLayout()
     }
-    // MARK: - Methods
-    private func setTableView() {
-        self.chargingTableView.delegate = self
-        self.chargingTableView.dataSource = self
-        self.chargingTableView.register(PointChargingTableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
-        self.chargingTableView.separatorStyle = .none
-        self.chargingTableView.isScrollEnabled = false
-    }
-    private func setLayout() {
+    override func updateViewConstraints() {
         self.view.addSubviews([transparencyView, contentView])
         self.contentView.addSubviews([chargingTableView, pageTitle])
 
@@ -78,8 +70,19 @@ class PointChargingViewController: UIViewController {
             make.top.leading.trailing.equalToSuperview()
             make.bottom.equalTo(contentView.snp.top)
         }
+        super.updateViewConstraints()
+    }
+    
+    // MARK: - Methods
+    private func setTableView() {
+        self.chargingTableView.delegate = self
+        self.chargingTableView.dataSource = self
+        self.chargingTableView.register(PointChargingTableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
+        self.chargingTableView.separatorStyle = .none
+        self.chargingTableView.isScrollEnabled = false
     }
 }
+
  // MARK: - TableViewDataSource
 extension PointChargingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

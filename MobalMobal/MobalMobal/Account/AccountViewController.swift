@@ -72,8 +72,8 @@ class AccountViewController: UIViewController {
     // dummy data
     private var account: String = "110-436-3412421"
     private var bankName: String = "신한은행"
-    var charge: String?
     
+    var charge: String?
     private var setLayoutFlag: Bool = false
     private let defaultAttributes: [NSAttributedString.Key: Any] = [
         .foregroundColor: UIColor.veryLightPink ,
@@ -93,7 +93,6 @@ class AccountViewController: UIViewController {
         super.viewDidLoad()
         accountLabelTapGesture()
         self.view.backgroundColor = .backgroundColor
-        self.navigationController?.navigationBar.isHidden = true
     }
     override func updateViewConstraints() {
         self.view.addSubviews([verticalStackView, closeButton])
@@ -105,7 +104,6 @@ class AccountViewController: UIViewController {
         verticalStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        setLayoutFlag = true
         super.updateViewConstraints()
     }
     
