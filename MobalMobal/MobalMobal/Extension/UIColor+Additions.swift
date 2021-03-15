@@ -2,7 +2,7 @@
 //  UIColor+Additions.swift
 //  Mobal iOS
 //
-//  Generated on Zeplin. (2021. 2. 28.).
+//  Generated on Zeplin. (2021. 3. 12.).
 //  Copyright (c) 2021 __MyCompanyName__. All rights reserved.
 //
 
@@ -58,10 +58,55 @@ extension UIColor {
     }
     
     @nonobjc class var darkGreyTwo: UIColor {
-      return UIColor(red: 41.0 / 255.0, green: 41.0 / 255.0, blue: 44.0 / 255.0, alpha: 1.0)
+        return UIColor(red: 41.0 / 255.0, green: 41.0 / 255.0, blue: 44.0 / 255.0, alpha: 1.0)
     }
     
     @nonobjc class var black25: UIColor {
-      return UIColor(white: 0.0, alpha: 0.25)
+        return UIColor(white: 0.0, alpha: 0.25)
+    }
+  
+    @nonobjc class var black70: UIColor {
+        return UIColor(white: 16.0 / 255.0, alpha: 0.7)
+    }
+    
+    @nonobjc class var blackTwo: UIColor {
+        return UIColor(white: 34.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var lightBluishGreen: UIColor {
+        return UIColor(red: 122.0 / 255.0, green: 1.0, blue: 151.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var black94: UIColor {
+        return UIColor(white: 29.0 / 255.0, alpha: 0.94)
+    }
+    
+    @nonobjc class var brownGreyTwo: UIColor {
+        return UIColor(white: 121.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var white7: UIColor {
+        return UIColor(white: 1.0, alpha: 0.07)
+    }
+    
+    @nonobjc class var white20: UIColor {
+        return UIColor(white: 1.0, alpha: 0.2)
+    }
+    
+    @nonobjc class var greyishBrown: UIColor {
+        return UIColor(white: 71.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var blackThree: UIColor {
+        return UIColor(white: 37.0 / 255.0, alpha: 1.0)
+    }
+    @nonobjc class var lemonLime80: UIColor {
+      return UIColor(red: 187.0 / 255.0, green: 1.0, blue: 41.0 / 255.0, alpha: 0.8)
+    }
+    @nonobjc class var blackFour: UIColor {
+        return UIColor(white: 0.0, alpha: 1.0)
+    }
+    @nonobjc class var whiteTwo: UIColor {
+        return UIColor(white: 1.0, alpha: 1.0)
     }
 }
