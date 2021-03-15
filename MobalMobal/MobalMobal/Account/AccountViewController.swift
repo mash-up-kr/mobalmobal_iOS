@@ -25,10 +25,11 @@ class AccountViewController: UIViewController {
     }()
     private lazy var priceLabel: UILabel = {
         let label: UILabel = UILabel()
-        let priceLabelAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(self.charge)원을 보내주세요")
+        guard let charge = self.charge else { return label }
+        let priceLabelAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(charge)을 보내주세요")
         
         priceLabelAttributedString.addAttributes(defaultAttributes, range: NSRange(location: 0, length: priceLabelAttributedString.length))
-        priceLabelAttributedString.addAttributes(emphasisAttributes, range: _NSRange(location: 0, length: self.charge.count + 1))
+        priceLabelAttributedString.addAttributes(emphasisAttributes, range: _NSRange(location: 0, length: charge.count))
         
         label.attributedText = priceLabelAttributedString
         label.numberOfLines = 0
@@ -71,7 +72,7 @@ class AccountViewController: UIViewController {
     // dummy data
     private var account: String = "110-436-3412421"
     private var bankName: String = "신한은행"
-    private var charge: String = "30,000"
+    var charge: String?
     
     private var setLayoutFlag: Bool = false
     private let defaultAttributes: [NSAttributedString.Key: Any] = [
@@ -92,6 +93,7 @@ class AccountViewController: UIViewController {
         super.viewDidLoad()
         accountLabelTapGesture()
         self.view.backgroundColor = .backgroundColor
+        self.navigationController?.navigationBar.isHidden = true
     }
     override func updateViewConstraints() {
         self.view.addSubviews([verticalStackView, closeButton])
@@ -110,7 +112,7 @@ class AccountViewController: UIViewController {
     // MARK: - Actions
     @objc
     private func closeBtn() {
-        self.dismiss(animated: true, completion: nil)
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     @objc
     private func copyAccount() {

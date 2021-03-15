@@ -40,8 +40,9 @@ class PointChargingViewController: UIViewController {
         return view
     }()
     // MARK: - Properties
-    private let pointItems: [String] = ["1,000원", "2,000원", "5,000원", "10,000원", "50,000원", "100,000원", "직접입력"]
+    private let pointItemList: [String] = ["1,000원", "2,000원", "5,000원", "10,000원", "50,000원", "100,000원", "직접입력"]
     private let cellIdentifier: String = "PointChargingTableViewCell"
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,18 +83,33 @@ class PointChargingViewController: UIViewController {
  // MARK: - TableViewDataSource
 extension PointChargingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.pointItems.count
+        self.pointItemList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell: PointChargingTableViewCell = self.chargingTableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath) as? PointChargingTableViewCell else { return UITableViewCell() }
-        cell.pointPriceLabel.text = pointItems[indexPath.row]
+        cell.pointPriceLabel.text = pointItemList[indexPath.row]
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         49
     }
 }
+
  // MARK: - TableViewDelegate
 extension PointChargingViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        indexPath.row <= 5 ? presentAccountVC(indexPath.row) : presentInputVC()
+    }
+    func presentAccountVC(_ indexNumber: Int) {
+        let accountVC: AccountViewController = AccountViewController()
+        accountVC.charge = pointItemList[indexNumber]
+        accountVC.modalPresentationStyle = .fullScreen
+        self.present(accountVC, animated: true, completion: nil)
+    }
+    func presentInputVC() {
+        let inputVC: InputChargingPointViewController = InputChargingPointViewController()
+        inputVC.modalPresentationStyle = .fullScreen
+        self.present(inputVC, animated: true, completion: nil)
+    }
 }
 
