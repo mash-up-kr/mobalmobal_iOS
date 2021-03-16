@@ -55,21 +55,19 @@ class InputChargingPointViewController: UIViewController {
                                                     withTemplate: ",")
     }
     private let maxChargingPoint: Int = 10_000_000
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
         self.chargingInputField.becomeFirstResponder()
         viewTapGesture()
-        view.setNeedsUpdateConstraints()
+        setNavigation()
+        setLayout()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigation()
-    }
-    override func updateViewConstraints() {
-        setLayout()
-        super.updateViewConstraints()
+        self.navigationController?.navigationBar.isHidden = false
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -124,8 +122,6 @@ class InputChargingPointViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     private func setNavigation() {
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.backgroundColor = .black94
         self.navigationController?.navigationBar.barTintColor = .black94
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = "충전"

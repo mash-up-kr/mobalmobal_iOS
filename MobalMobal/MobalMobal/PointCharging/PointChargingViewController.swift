@@ -50,14 +50,8 @@ class PointChargingViewController: UIViewController {
         setTableView()
     }
     override func viewWillAppear(_ animated: Bool) {
-        print("🤨table will appear")
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        print("🤨table will disappear")
-        super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.isHidden = false
     }
     override func updateViewConstraints() {
         self.view.addSubviews([transparencyView, contentView])
@@ -111,17 +105,16 @@ extension PointChargingViewController: UITableViewDataSource {
  // MARK: - TableViewDelegate
 extension PointChargingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        indexPath.row <= 5 ? presentAccountVC(indexPath.row) : presentInputVC()
+        indexPath.row <= 5 ? pushAccountVC(indexPath.row) : pushInputVC()
     }
-    func presentAccountVC(_ indexNumber: Int) {
+    func pushAccountVC(_ indexNumber: Int) {
         let accountVC: AccountViewController = AccountViewController()
         accountVC.charge = pointItemList[indexNumber]
         self.navigationController?.pushViewController(accountVC, animated: true)
     }
-    func presentInputVC() {
+    func pushInputVC() {
         let inputVC: InputChargingPointViewController = InputChargingPointViewController()
-        inputVC.modalPresentationStyle = .overFullScreen
-        self.navigationController?.show(inputVC, sender: self)
+        self.navigationController?.pushViewController(inputVC, animated: true)
     }
 }
 
