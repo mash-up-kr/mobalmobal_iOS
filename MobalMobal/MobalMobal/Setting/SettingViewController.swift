@@ -72,6 +72,14 @@ class SettingViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = .black94
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        let leftBarButton: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .done, target: self, action: #selector(barButtonTapped))
+        self.navigationItem.leftBarButtonItem = leftBarButton
+    }
+    
+    @objc
+    func barButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func setConstraint() {
