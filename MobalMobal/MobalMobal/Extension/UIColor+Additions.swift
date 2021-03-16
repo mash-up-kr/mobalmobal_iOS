@@ -109,4 +109,8 @@ extension UIColor {
     @nonobjc class var whiteTwo: UIColor {
         return UIColor(white: 1.0, alpha: 1.0)
     }
+    
+    @nonobjc class var barbiePink: UIColor {
+        return UIColor(red: 255/255, green: 56/255, blue: 176/255, alpha: 1.0)
+    }
 }
