@@ -111,9 +111,9 @@ class AccountViewController: UIViewController {
     // MARK: - Actions
     @objc
     private func closeBtn() {
-        guard let navigationController = self.navigationController else { return }
-        let viewControllers: [UIViewController] = navigationController.viewControllers
-        self.navigationController?.popToViewController(viewControllers[viewControllers.count - 2], animated: true)
+        if let presentingViewController: UIViewController = navigationController?.presentingViewController {
+            presentingViewController.dismiss(animated: true, completion: nil)
+        }
     }
     @objc
     private func copyAccount() {

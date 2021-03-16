@@ -18,7 +18,7 @@ class InputChargingPointViewController: UIViewController {
     }()
     private let chargingInputField: UITextField = {
         let textField: UITextField = UITextField()
-        textField.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 15)
+        textField.font = .spoqaHanSansNeo(ofSize: 15, weight: .bold)
         textField.keyboardType = .numberPad
         textField.attributedPlaceholder = NSAttributedString(string: "충전할 금액을 입력하세요", attributes: [NSAttributedString.Key.foregroundColor: UIColor.brownGreyTwo])
         textField.textColor = .white
@@ -38,7 +38,9 @@ class InputChargingPointViewController: UIViewController {
         button.layer.cornerRadius = 30
         button.backgroundColor = .greyishBrown
         button.setTitle("충전하기", for: .normal)
+        button.titleLabel?.font = .spoqaHanSansNeo(ofSize: 18, weight: .medium)
         button.setTitleColor(.brownGreyTwo, for: .normal)
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()
     // MARK: - Properties
@@ -76,6 +78,15 @@ class InputChargingPointViewController: UIViewController {
     
     // MARK: - Actions
     @objc
+    private func buttonTapped() {
+        let accountVC: AccountViewController = AccountViewController()
+        guard let inputText = chargingInputField.text else {
+            return
+        }
+        accountVC.charge = "\(inputText)원"
+        self.navigationController?.pushViewController(accountVC, animated: true)
+    }
+    @objc
     private func popVC() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -108,10 +119,12 @@ class InputChargingPointViewController: UIViewController {
     private func activateButtonUI() {
         chargingButton.setTitleColor(.blackThree, for: .normal)
         chargingButton.backgroundColor = .lightBluishGreen
+        chargingButton.isEnabled = true
     }
     private func disactivateButtonUI() {
         chargingButton.setTitleColor(.brownGreyTwo, for: .normal)
         chargingButton.backgroundColor = .greyishBrown
+        chargingButton.isEnabled = false
     }
     private func showAlertController() {
         // TODO
