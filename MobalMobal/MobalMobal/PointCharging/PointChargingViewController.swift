@@ -23,11 +23,7 @@ class PointChargingViewController: UIViewController {
         label.backgroundColor = .darkGreyTwo
         return label
     }()
-    private let transparencyView: UIView = {
-        let view: UIView = UIView()
-        view.alpha = 0
-        return view
-    }()
+    private let transparencyView: UIView = UIView()
     private let contentView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .darkGreyTwo
@@ -48,6 +44,7 @@ class PointChargingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
+        setViewDismissGesture()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -77,6 +74,12 @@ class PointChargingViewController: UIViewController {
         super.updateViewConstraints()
     }
     
+    // MARK: - Actions
+    @objc
+    func dismissVC() {
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Methods
     private func setTableView() {
         self.chargingTableView.delegate = self
@@ -84,6 +87,10 @@ class PointChargingViewController: UIViewController {
         self.chargingTableView.register(PointChargingTableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
         self.chargingTableView.separatorStyle = .none
         self.chargingTableView.isScrollEnabled = false
+    }
+    private func setViewDismissGesture() {
+        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissVC))
+        self.transparencyView.addGestureRecognizer(tapGestureRecognizer)
     }
 }
 
@@ -117,4 +124,3 @@ extension PointChargingViewController: UITableViewDelegate {
         self.navigationController?.pushViewController(inputVC, animated: true)
     }
 }
-
