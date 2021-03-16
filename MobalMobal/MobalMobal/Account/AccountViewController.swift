@@ -74,7 +74,6 @@ class AccountViewController: UIViewController {
     private var bankName: String = "신한은행"
     
     var charge: String?
-    private var setLayoutFlag: Bool = false
     private let defaultAttributes: [NSAttributedString.Key: Any] = [
         .foregroundColor: UIColor.veryLightPink ,
         .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .regular)
@@ -93,6 +92,8 @@ class AccountViewController: UIViewController {
         super.viewDidLoad()
         accountLabelTapGesture()
         self.view.backgroundColor = .backgroundColor
+        self.navigationController?.navigationBar.isHidden = true
+        view.setNeedsUpdateConstraints()
     }
     override func updateViewConstraints() {
         self.view.addSubviews([verticalStackView, closeButton])
@@ -110,7 +111,9 @@ class AccountViewController: UIViewController {
     // MARK: - Actions
     @objc
     private func closeBtn() {
-        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+        guard let navigationController = self.navigationController else { return }
+        let viewControllers: [UIViewController] = navigationController.viewControllers
+        self.navigationController?.popToViewController(viewControllers[viewControllers.count - 2], animated: true)
     }
     @objc
     private func copyAccount() {

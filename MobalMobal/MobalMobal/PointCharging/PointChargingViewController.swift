@@ -49,6 +49,16 @@ class PointChargingViewController: UIViewController {
         super.viewDidLoad()
         setTableView()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        print("🤨table will appear")
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        print("🤨table will disappear")
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+    }
     override func updateViewConstraints() {
         self.view.addSubviews([transparencyView, contentView])
         self.contentView.addSubviews([chargingTableView, pageTitle])
@@ -106,13 +116,12 @@ extension PointChargingViewController: UITableViewDelegate {
     func presentAccountVC(_ indexNumber: Int) {
         let accountVC: AccountViewController = AccountViewController()
         accountVC.charge = pointItemList[indexNumber]
-        accountVC.modalPresentationStyle = .fullScreen
-        self.present(accountVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(accountVC, animated: true)
     }
     func presentInputVC() {
         let inputVC: InputChargingPointViewController = InputChargingPointViewController()
-        inputVC.modalPresentationStyle = .fullScreen
-        self.present(inputVC, animated: true, completion: nil)
+        inputVC.modalPresentationStyle = .overFullScreen
+        self.navigationController?.show(inputVC, sender: self)
     }
 }
 

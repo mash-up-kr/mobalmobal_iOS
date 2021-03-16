@@ -60,14 +60,26 @@ class InputChargingPointViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
         self.chargingInputField.becomeFirstResponder()
-        setLayout()
-        setNavigation()
         viewTapGesture()
+        view.setNeedsUpdateConstraints()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigation()
+    }
+    override func updateViewConstraints() {
+        setLayout()
+        super.updateViewConstraints()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     // MARK: - Actions
     @objc
     private func popVC() {
-        print("✨ pop viewcontroller")
+        self.navigationController?.popViewController(animated: true)
     }
     @objc
     private func textEdited(textField: UITextField) {
@@ -88,6 +100,7 @@ class InputChargingPointViewController: UIViewController {
             disactivateButtonUI()
         }
     }
+    
     // MARK: - Methods
     private func viewTapGesture() {
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
@@ -103,7 +116,7 @@ class InputChargingPointViewController: UIViewController {
         chargingButton.backgroundColor = .greyishBrown
     }
     private func showAlertController() {
-        print("✨ alertcontroller")
+        // TODO
         // 디자인 나오면 수정 필요
         let alertController: UIAlertController = UIAlertController(title: "충전금액", message: "충전가능금액은 최대 10,000,000원 입니다.", preferredStyle: .alert)
         let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: nil)
@@ -111,6 +124,7 @@ class InputChargingPointViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     private func setNavigation() {
+        self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.backgroundColor = .black94
         self.navigationController?.navigationBar.barTintColor = .black94
         self.navigationController?.navigationBar.isTranslucent = false
