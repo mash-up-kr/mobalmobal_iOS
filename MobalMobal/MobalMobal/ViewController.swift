@@ -31,8 +31,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func fourthButtonIsTapped(_ sender: UIButton) {
-       let chargingInputVC: InputChargingPointViewController = InputChargingPointViewController()
-        chargingInputVC.modalPresentationStyle = .fullScreen
-        self.present(chargingInputVC, animated: true, completion: nil)
+        let vc: ProfileViewController = ProfileViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
 }
