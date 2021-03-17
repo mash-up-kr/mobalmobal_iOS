@@ -111,9 +111,7 @@ class AccountViewController: UIViewController {
     // MARK: - Actions
     @objc
     private func closeBtn() {
-        if let presentingViewController: UIViewController = navigationController?.presentingViewController {
-            presentingViewController.dismiss(animated: true, completion: nil)
-        }
+        navigationController?.dismiss(animated: true, completion: nil)
     }
     @objc
     private func copyAccount() {
