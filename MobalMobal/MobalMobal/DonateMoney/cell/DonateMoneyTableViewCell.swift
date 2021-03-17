@@ -63,6 +63,7 @@ class DonateMoneyTableViewCell: UITableViewCell {
     // MARK: - Methods
     private func setCellStyle() {
         backgroundColor = .darkGreyTwo
+        selectionStyle = .none
     }
     
     func setTitle(_ title: String) {
