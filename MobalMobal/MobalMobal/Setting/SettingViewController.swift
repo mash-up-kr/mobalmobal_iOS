@@ -78,7 +78,7 @@ class SettingViewController: UIViewController {
     }
     
     @objc
-    func barButtonTapped() {
+    private func barButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
     
