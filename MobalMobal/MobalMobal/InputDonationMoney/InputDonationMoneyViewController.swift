@@ -106,7 +106,7 @@ class InputDonationMoneyViewController: UIViewController {
         navigationItem.standardAppearance = appearance
         
         guard let backButtonImage: UIImage = UIImage(named: backButtonImageName) else { return }
-        let backButton: UIBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(dismissVC))
+        let backButton: UIBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(dismissNavigationController))
         backButton.tintColor = .white
         navigationItem.leftBarButtonItem = backButton
     }
@@ -180,8 +180,8 @@ class InputDonationMoneyViewController: UIViewController {
         present(alert, animated: true)
     }
     @objc
-    private func dismissVC() {
-        dismiss(animated: true, completion: nil)
+    private func dismissNavigationController() {
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 }
 
