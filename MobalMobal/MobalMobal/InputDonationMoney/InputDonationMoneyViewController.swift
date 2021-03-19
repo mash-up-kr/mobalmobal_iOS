@@ -94,6 +94,10 @@ class InputDonationMoneyViewController: UIViewController {
     private func clickDonationButton() {
         print("🐻 \(textField.text!)원 후원하기 🐻")
     }
+    @objc
+    private func clickNavigationBackButton() {
+        dismissNavigationController()
+    }
     
     // MARK: - Methods
     private func setNavigation() {
@@ -106,7 +110,7 @@ class InputDonationMoneyViewController: UIViewController {
         navigationItem.standardAppearance = appearance
         
         guard let backButtonImage: UIImage = UIImage(named: backButtonImageName) else { return }
-        let backButton: UIBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(dismissNavigationController))
+        let backButton: UIBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(clickNavigationBackButton))
         backButton.tintColor = .white
         navigationItem.leftBarButtonItem = backButton
     }
