@@ -44,13 +44,14 @@ class ModifyProfileViewController: UIViewController {
         button.setTitleColor(.brownGreyTwo, for: .normal)
         button.backgroundColor = .greyishBrown
         button.layer.cornerRadius = 30
+        button.isEnabled = false
         return button
     }()
     // MARK: - Properties
     // dummy data
-    var dummyUserName = "Jercy"
-    let dummyUserPhoneNumber = "01012345678"
-    let dummyUserEmail = "mobalmobal@naver.com"
+    var dummyUserName = "모발~모발~"
+    var dummyUserPhoneNumber = "01012345678"
+    var dummyUserEmail = "mobalmobal@naver.com"
     
     private let imagePicker: UIImagePickerController = UIImagePickerController()
     // MARK: - life cycle
@@ -85,9 +86,14 @@ class ModifyProfileViewController: UIViewController {
         super.updateViewConstraints()
     }
     // MARK: - Actions
-    @objc
-    func getProfileImgByLibrary() {
+    func getImgFromLibrary() {
         self.imagePicker.sourceType = .photoLibrary
+        self.imagePicker.allowsEditing = true
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    func getImgFromCamera() {
+        self.imagePicker.sourceType = .camera
+        self.imagePicker.cameraCaptureMode = .photo
         self.imagePicker.allowsEditing = true
         self.present(imagePicker, animated: true, completion: nil)
     }
@@ -100,9 +106,32 @@ class ModifyProfileViewController: UIViewController {
         }
     }
     func setProfileImgGestureRecognizer() {
-        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(getProfileImgByLibrary))
+        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showActionSheet))
         profileImageView.isUserInteractionEnabled = true
         self.profileImageView.addGestureRecognizer(gestureRecognizer)
+    }
+    // 아직 dummy 데이터여서 실행시키지는 않았습니다.
+    func modifyCompletedBtnEnable() {
+        modifyCompleteBtn.backgroundColor = .lightBluishGreen
+        modifyCompleteBtn.titleLabel?.textColor = .blackThree
+    }
+    @objc
+    func showActionSheet() {
+        let alertController: UIAlertController = UIAlertController(title: "프로필 사진 수정", message: nil, preferredStyle: .actionSheet)
+        let selectLibrary: UIAlertAction = UIAlertAction(title: "앨범에서 선택", style: .default) { [weak self]_ in
+            self?.getImgFromLibrary()
+        }
+        let selectCamera: UIAlertAction = UIAlertAction(title: "직접 찍기", style: .default) { [weak self]_ in
+            self?.getImgFromCamera()
+        }
+        let deleteImg: UIAlertAction = UIAlertAction(title: "삭제하기", style: .default) { _ in
+            self.profileImageView.image = nil
+            self.cameraImage.isHidden = false
+        }
+        let cancel: UIAlertAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        [selectLibrary, selectCamera, deleteImg, cancel].forEach { alertController.addAction($0) }
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 
