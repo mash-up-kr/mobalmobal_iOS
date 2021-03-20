@@ -10,7 +10,7 @@ import UIKit
 
 class ModifyProfileViewController: UIViewController {
     // MARK: - UIComponents
-    private lazy var profileImageView: UIImageView = {
+    private var profileImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.layer.cornerRadius = 50
         imageView.backgroundColor = .darkGreyThree
@@ -49,9 +49,9 @@ class ModifyProfileViewController: UIViewController {
     }()
     // MARK: - Properties
     // dummy data
-    var dummyUserName = "모발~모발~"
-    var dummyUserPhoneNumber = "01012345678"
-    var dummyUserEmail = "mobalmobal@naver.com"
+    private var dummyUserName: String = "모발~모발~"
+    private var dummyUserPhoneNumber: String = "01012345678"
+    private var dummyUserEmail: String = "mobalmobal@naver.com"
     
     private let imagePicker: UIImagePickerController = UIImagePickerController()
     // MARK: - life cycle
@@ -88,13 +88,13 @@ class ModifyProfileViewController: UIViewController {
     }
     // MARK: - Actions
     @objc
-    func popVC() {
+    private func popVC() {
         self.navigationController?.popViewController(animated: true)
     }
     // TODO
     // 디자인 및 기획 수정되면 바꿔야합니다!!! 임의로 작업했스밍
     @objc
-    func showActionSheet() {
+    private func showActionSheet() {
         let alertController: UIAlertController = UIAlertController(title: "프로필 사진 수정", message: nil, preferredStyle: .actionSheet)
         let selectLibrary: UIAlertAction = UIAlertAction(title: "앨범에서 선택", style: .default) { [weak self]_ in
             self?.getImgFromLibrary()
@@ -112,19 +112,19 @@ class ModifyProfileViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     // MARK: - Methods
-    func setStackViewHeight(of view: UIView) {
+    private func setStackViewHeight(of view: UIView) {
         view.snp.makeConstraints { make in
             make.height.equalTo(60)
             make.width.equalTo(345)
         }
     }
-    func setProfileImgGestureRecognizer() {
+    private func setProfileImgGestureRecognizer() {
         let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showActionSheet))
         profileImageView.isUserInteractionEnabled = true
         self.profileImageView.addGestureRecognizer(gestureRecognizer)
     }
     // 아직 dummy 데이터여서 실행시키지는 않았습니다.
-    func modifyCompletedBtnEnable() {
+    private func modifyCompletedBtnEnable() {
         modifyCompleteBtn.backgroundColor = .lightBluishGreen
         modifyCompleteBtn.titleLabel?.textColor = .blackThree
     }
@@ -138,12 +138,12 @@ class ModifyProfileViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
         self.navigationItem.leftBarButtonItem?.tintColor = .white
     }
-    func getImgFromLibrary() {
+    private func getImgFromLibrary() {
         self.imagePicker.sourceType = .photoLibrary
         self.imagePicker.allowsEditing = true
         self.present(imagePicker, animated: true, completion: nil)
     }
-    func getImgFromCamera() {
+    private func getImgFromCamera() {
         self.imagePicker.sourceType = .camera
         self.imagePicker.cameraCaptureMode = .photo
         self.imagePicker.allowsEditing = true
