@@ -57,9 +57,10 @@ class ModifyProfileViewController: UIViewController {
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.imagePicker.delegate = self
         self.view.backgroundColor = .backgroundColor
         setProfileImgGestureRecognizer()
-        self.imagePicker.delegate = self
+        setNavigation()
     }
     override func updateViewConstraints() {
         self.view.addSubviews([profileImageView, profileTextFieldStackView, modifyCompleteBtn])
@@ -86,35 +87,12 @@ class ModifyProfileViewController: UIViewController {
         super.updateViewConstraints()
     }
     // MARK: - Actions
-    func getImgFromLibrary() {
-        self.imagePicker.sourceType = .photoLibrary
-        self.imagePicker.allowsEditing = true
-        self.present(imagePicker, animated: true, completion: nil)
+    @objc
+    func popVC() {
+        self.navigationController?.popViewController(animated: true)
     }
-    func getImgFromCamera() {
-        self.imagePicker.sourceType = .camera
-        self.imagePicker.cameraCaptureMode = .photo
-        self.imagePicker.allowsEditing = true
-        self.present(imagePicker, animated: true, completion: nil)
-    }
-    
-    // MARK: - Methods
-    func setStackViewHeight(of view: UIView) {
-        view.snp.makeConstraints { make in
-            make.height.equalTo(60)
-            make.width.equalTo(345)
-        }
-    }
-    func setProfileImgGestureRecognizer() {
-        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showActionSheet))
-        profileImageView.isUserInteractionEnabled = true
-        self.profileImageView.addGestureRecognizer(gestureRecognizer)
-    }
-    // 아직 dummy 데이터여서 실행시키지는 않았습니다.
-    func modifyCompletedBtnEnable() {
-        modifyCompleteBtn.backgroundColor = .lightBluishGreen
-        modifyCompleteBtn.titleLabel?.textColor = .blackThree
-    }
+    // TODO
+    // 디자인 및 기획 수정되면 바꿔야합니다!!! 임의로 작업했스밍
     @objc
     func showActionSheet() {
         let alertController: UIAlertController = UIAlertController(title: "프로필 사진 수정", message: nil, preferredStyle: .actionSheet)
@@ -133,6 +111,45 @@ class ModifyProfileViewController: UIViewController {
         [selectLibrary, selectCamera, deleteImg, cancel].forEach { alertController.addAction($0) }
         self.present(alertController, animated: true, completion: nil)
     }
+    // MARK: - Methods
+    func setStackViewHeight(of view: UIView) {
+        view.snp.makeConstraints { make in
+            make.height.equalTo(60)
+            make.width.equalTo(345)
+        }
+    }
+    func setProfileImgGestureRecognizer() {
+        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showActionSheet))
+        profileImageView.isUserInteractionEnabled = true
+        self.profileImageView.addGestureRecognizer(gestureRecognizer)
+    }
+    // 아직 dummy 데이터여서 실행시키지는 않았습니다.
+    func modifyCompletedBtnEnable() {
+        modifyCompleteBtn.backgroundColor = .lightBluishGreen
+        modifyCompleteBtn.titleLabel?.textColor = .blackThree
+    }
+    private func setNavigation() {
+        self.navigationController?.navigationBar.backgroundColor = .black94
+        self.navigationController?.navigationBar.barTintColor = .black94
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = "프로필 수정"
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.whiteTwo]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
+        self.navigationItem.leftBarButtonItem?.tintColor = .white
+    }
+    func getImgFromLibrary() {
+        self.imagePicker.sourceType = .photoLibrary
+        self.imagePicker.allowsEditing = true
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    func getImgFromCamera() {
+        self.imagePicker.sourceType = .camera
+        self.imagePicker.cameraCaptureMode = .photo
+        self.imagePicker.allowsEditing = true
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+
 }
 
 // MARK: - UIImagePickerControllerDelegate
