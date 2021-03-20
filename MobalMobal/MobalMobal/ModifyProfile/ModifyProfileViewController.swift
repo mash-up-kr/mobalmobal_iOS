@@ -10,11 +10,12 @@ import UIKit
 
 class ModifyProfileViewController: UIViewController {
     // MARK: - UIComponents
-    private let profileImageView: UIView = {
-        let view: UIView = UIView()
-        view.layer.cornerRadius = 50
-        view.backgroundColor = .darkGreyThree
-        return view
+    private lazy var profileImageView: UIImageView = {
+        let imageView: UIImageView = UIImageView()
+        imageView.layer.cornerRadius = 50
+        imageView.backgroundColor = .darkGreyThree
+        imageView.clipsToBounds = true
+        return imageView
     }()
     private let cameraImage: UIImageView = {
         let image: UIImageView = UIImageView()
@@ -47,14 +48,17 @@ class ModifyProfileViewController: UIViewController {
     }()
     // MARK: - Properties
     // dummy data
-    let dummyUserName = "Jercy"
+    var dummyUserName = "Jercy"
     let dummyUserPhoneNumber = "01012345678"
     let dummyUserEmail = "mobalmobal@naver.com"
     
+    private let imagePicker: UIImagePickerController = UIImagePickerController()
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
+        setProfileImgGestureRecognizer()
+        self.imagePicker.delegate = self
     }
     override func updateViewConstraints() {
         self.view.addSubviews([profileImageView, profileTextFieldStackView, modifyCompleteBtn])
@@ -80,6 +84,13 @@ class ModifyProfileViewController: UIViewController {
         }
         super.updateViewConstraints()
     }
+    // MARK: - Actions
+    @objc
+    func getProfileImgByLibrary() {
+        self.imagePicker.sourceType = .photoLibrary
+        self.imagePicker.allowsEditing = true
+        self.present(imagePicker, animated: true, completion: nil)
+    }
     
     // MARK: - Methods
     func setStackViewHeight(of view: UIView) {
@@ -88,4 +99,32 @@ class ModifyProfileViewController: UIViewController {
             make.width.equalTo(345)
         }
     }
+    func setProfileImgGestureRecognizer() {
+        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(getProfileImgByLibrary))
+        profileImageView.isUserInteractionEnabled = true
+        self.profileImageView.addGestureRecognizer(gestureRecognizer)
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+extension ModifyProfileViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        var newProfileImg: UIImage?
+        if let editImage: UIImage = info[.editedImage] as? UIImage {
+            newProfileImg = editImage
+            cameraImage.isHidden = true
+        } else if let originalImage: UIImage = info[.originalImage] as? UIImage {
+            newProfileImg = originalImage
+            cameraImage.isHidden = true
+        }
+        self.profileImageView.image = newProfileImg
+        picker.dismiss(animated: true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - UINavigationControllerDelegate
+extension ModifyProfileViewController: UINavigationControllerDelegate {
 }

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app uses users photo to using UserImage</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Spoqa Han Sans Neo Bold.otf</string>
