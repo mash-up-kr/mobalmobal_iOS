@@ -23,9 +23,9 @@ class ModifyProfileViewController: UIViewController {
         return image
     }()
     
-    private lazy var nickNameView: UIView = ModifyProfileCustomView(imageName: "iconlyLightProfile", inputText: dummyUserName)
-    private lazy var phoneNumberView: UIView = ModifyProfileCustomView(imageName: "iconlyLightCall", inputText: dummyUserPhoneNumber)
-    private lazy var emailView: UIView = ModifyProfileCustomView(imageName: "iconlyLightMessage", inputText: dummyUserEmail)
+    private lazy var nickNameView: UIView = ModifyProfileCustomView(imageName: "iconlyLightProfile", inputText: dummyUserName, keyboardType: .default)
+    private lazy var phoneNumberView: UIView = ModifyProfileCustomView(imageName: "iconlyLightCall", inputText: dummyUserPhoneNumber, keyboardType: .numberPad)
+    private lazy var emailView: UIView = ModifyProfileCustomView(imageName: "iconlyLightMessage", inputText: dummyUserEmail, keyboardType: .emailAddress)
     private lazy var profileTextFieldStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         stackView.axis = .vertical
@@ -54,12 +54,14 @@ class ModifyProfileViewController: UIViewController {
     private var dummyUserEmail: String = "mobalmobal@naver.com"
     
     private let imagePicker: UIImagePickerController = UIImagePickerController()
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imagePicker.delegate = self
         self.view.backgroundColor = .backgroundColor
         setProfileImgGestureRecognizer()
+        setDismissKeyboard()
         setNavigation()
     }
     override func updateViewConstraints() {
@@ -102,14 +104,18 @@ class ModifyProfileViewController: UIViewController {
         let selectCamera: UIAlertAction = UIAlertAction(title: "직접 찍기", style: .default) { [weak self]_ in
             self?.getImgFromCamera()
         }
-        let deleteImg: UIAlertAction = UIAlertAction(title: "삭제하기", style: .default) { _ in
-            self.profileImageView.image = nil
-            self.cameraImage.isHidden = false
+        let deleteImg: UIAlertAction = UIAlertAction(title: "삭제하기", style: .default) { [weak self]_ in
+            self?.profileImageView.image = nil
+            self?.cameraImage.isHidden = false
         }
         let cancel: UIAlertAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         [selectLibrary, selectCamera, deleteImg, cancel].forEach { alertController.addAction($0) }
         self.present(alertController, animated: true, completion: nil)
+    }
+    @objc
+    func dismissKeyboard() {
+        self.view.endEditing(true)
     }
     // MARK: - Methods
     private func setStackViewHeight(of view: UIView) {
@@ -122,6 +128,10 @@ class ModifyProfileViewController: UIViewController {
         let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showActionSheet))
         profileImageView.isUserInteractionEnabled = true
         self.profileImageView.addGestureRecognizer(gestureRecognizer)
+    }
+    private func setDismissKeyboard() {
+        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(gestureRecognizer)
     }
     // 아직 dummy 데이터여서 실행시키지는 않았습니다.
     private func modifyCompletedBtnEnable() {
@@ -149,7 +159,6 @@ class ModifyProfileViewController: UIViewController {
         self.imagePicker.allowsEditing = true
         self.present(imagePicker, animated: true, completion: nil)
     }
-
 }
 
 // MARK: - UIImagePickerControllerDelegate

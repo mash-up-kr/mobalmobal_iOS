@@ -10,39 +10,41 @@ import SnapKit
 import UIKit
 
 class ModifyProfileCustomView: UIView {
-    let imageName: String
-    let inputText: String
+    private let imageName: String
+    private let inputText: String
+    private let keyboardType: UIKeyboardType
     
-    let radiusInputView: UIView = {
+    private let radiusInputView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .white7
         view.layer.cornerRadius = 30
         return view
     }()
     
-    lazy var imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let imageView: UIImageView = UIImageView(image: UIImage(named: imageName))
         return imageView
     }()
     
-    lazy var textFieldView: UITextField = {
+    private lazy var textFieldView: UITextField = {
         let textField: UITextField = UITextField()
         textField.font = .spoqaHanSansNeo(ofSize: 15, weight: .bold)
         textField.textColor = .white
         textField.text = inputText
+        textField.keyboardType = keyboardType
         return textField
     }()
     
-    init(imageName: String, inputText: String) {
+    init(imageName: String, inputText: String, keyboardType: UIKeyboardType) {
         self.imageName = imageName
         self.inputText = inputText
+        self.keyboardType = keyboardType
         super.init(frame: .zero)
         
         self.addSubview(radiusInputView)
         radiusInputView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
         
         self.radiusInputView.addSubviews([imageView, textFieldView])
         self.imageView.snp.makeConstraints { make in
