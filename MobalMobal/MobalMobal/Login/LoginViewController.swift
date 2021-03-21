@@ -100,13 +100,23 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction private func clickFacebookLoginButton() {
-        loginWithFacebook()
+//        loginWithFacebook()
+        goToDetailVC()
     }
     @IBAction private func clickGoogleLoginButton() {
-        loginWithGoogle()
+//        loginWithGoogle()
+        goToDetailVC()
     }
     @IBAction private func clickAppleLoginButton() {
-        loginWithApple()
+//        loginWithApple()
+        goToDetailVC()
+    }
+    
+    private func goToDetailVC() {
+        // 임시로 상세보기 화면으로 가는 코드
+        let detailVC: DonationDetailViewController = DonationDetailViewController()
+        detailVC.modalPresentationStyle = .fullScreen
+        self.present(detailVC, animated: true)
     }
 }
 
@@ -131,11 +141,6 @@ extension LoginViewController {
                     return
                 }
                 print("🐻 FirebaseAuth :: idToken: \(idToken) 🐻")
-                
-                // 임시로 상세보기 화면으로 가는 코드
-                let detailVC: DonationDetailViewController = DonationDetailViewController()
-                detailVC.modalPresentationStyle = .fullScreen
-                self.present(detailVC, animated: true)
             }
         }
     }
