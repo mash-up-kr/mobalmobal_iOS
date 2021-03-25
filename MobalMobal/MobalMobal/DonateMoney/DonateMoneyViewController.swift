@@ -16,9 +16,6 @@ class DonateMoneyViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
         
-        // shadow 적용
-        tableView.drawShadow(color: .black, alpha: 1.0, shadowX: 0, shadowY: 20, blur: 20, spread: 0)
-        
         // delegate, datasource 적용
         tableView.delegate = self
         tableView.dataSource = self
@@ -81,9 +78,10 @@ extension DonateMoneyViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == moneyStrings.count - 1 {
             print("🐻 직접 입력 🐻")
-            let inputDonateMoneyVC: InputChargingPointViewController = InputChargingPointViewController()
+            let inputDonateMoneyVC: InputDonationMoneyViewController = InputDonationMoneyViewController()
             inputDonateMoneyVC.modalPresentationStyle = .fullScreen
-            self.navigationController?.show(inputDonateMoneyVC, sender: self)
+            navigationController?.pushViewController(inputDonateMoneyVC, animated: true)
+            navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
 }
