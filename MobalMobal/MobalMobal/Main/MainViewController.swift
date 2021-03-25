@@ -25,17 +25,17 @@ class MainViewController: UIViewController {
         return label
     }()
     
-    let notiListButton: UIButton = {
-        let button: UIButton = UIButton(frame: .zero)
-        button.setImage(UIImage(named: "icMyProfile"), for: .normal)
-        return button
-    }()
-    
     let profileImageView: UIImageView = {
         let imageView: UIImageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(named: "icAlarm")
+        imageView.image = UIImage(named: "icMyProfile")
         imageView.contentMode = .scaleAspectFill
         return imageView
+    }()
+    
+    let notiListButton: UIButton = {
+        let button: UIButton = UIButton(frame: .zero)
+        button.setImage(UIImage(named: "icAlarm"), for: .normal)
+        return button
     }()
     
     let tableView: UITableView = {
@@ -43,7 +43,7 @@ class MainViewController: UIViewController {
         tableView.backgroundColor = .backgroundColor
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        tableView.separatorInset = .zero
         return tableView
     }()
     
@@ -87,7 +87,7 @@ class MainViewController: UIViewController {
             make.leading.trailing.bottom.equalToSuperview()
         }
         
-        [titleLabel, notiListButton, profileImageView].forEach { titleView.addSubview($0) }
+        [titleLabel, profileImageView, notiListButton].forEach { titleView.addSubview($0) }
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(30)
@@ -95,13 +95,13 @@ class MainViewController: UIViewController {
             make.bottom.equalToSuperview().inset(10)
         }
         
-        notiListButton.snp.makeConstraints { make in
+        profileImageView.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
             make.size.equalTo(44)
         }
         
-        profileImageView.snp.makeConstraints { make in
-            make.leading.equalTo(notiListButton.snp.trailing)
+        notiListButton.snp.makeConstraints { make in
+            make.leading.equalTo(profileImageView.snp.trailing)
             make.trailing.equalToSuperview().inset(10)
             make.centerY.equalTo(titleLabel)
             make.size.equalTo(44)
@@ -168,8 +168,8 @@ extension MainViewController: UITableViewDataSource {
             
             cell.selectionStyle = .none
             return cell
-        case 2:
-//            guard let cell: MainOngoingDonationTableViewCell = tableView.dequeueReusableCell(withIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationTableViewCell else { return .init() }
+        case 2: // dummy data
+            // guard let cell: MainOngoingDonationTableViewCell = tableView.dequeueReusableCell(withIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationTableViewCell else { return .init() }
             let cell: UITableViewCell = UITableViewCell(frame: .zero)
             
             let imageView: UIImageView = UIImageView(image: UIImage(named: "main"))
