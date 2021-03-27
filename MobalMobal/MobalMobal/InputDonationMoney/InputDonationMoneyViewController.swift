@@ -101,18 +101,8 @@ class InputDonationMoneyViewController: UIViewController {
     
     // MARK: - Methods
     private func setNavigation() {
-        let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .black94
-        navigationController?.navigationBar.standardAppearance = appearance
-        
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.title = navigationTitle
-        navigationItem.standardAppearance = appearance
-        
-        guard let backButtonImage: UIImage = UIImage(named: backButtonImageName) else { return }
-        let backButton: UIBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(clickNavigationBackButton))
-        backButton.tintColor = .white
-        navigationItem.leftBarButtonItem = backButton
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        setNavigationItems(title: navigationTitle, backButtonImageName: backButtonImageName, action: #selector(clickNavigationBackButton))
     }
     
     private func setRoundViewConstraints() {

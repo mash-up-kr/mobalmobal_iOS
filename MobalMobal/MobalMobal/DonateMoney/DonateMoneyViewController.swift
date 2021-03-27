@@ -39,11 +39,6 @@ class DonateMoneyViewController: UIViewController {
         setViewTapGesture()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
-    }
-    
     override func viewDidLayoutSubviews() {
         tableView.roundCorners(corners: [.topLeft, .topRight], radius: 30)
         tableView.drawShadow(color: .black, alpha: 1.0, shadowX: 0, shadowY: 20, blur: 20, spread: 0)

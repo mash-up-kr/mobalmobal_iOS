@@ -75,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         btnAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
         standard.buttonAppearance = btnAppearance
         
+        UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().standardAppearance = standard
     }
 }
