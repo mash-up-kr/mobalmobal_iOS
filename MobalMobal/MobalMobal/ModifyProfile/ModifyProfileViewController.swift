@@ -66,7 +66,7 @@ class ModifyProfileViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     override func updateViewConstraints() {
         self.view.addSubviews([profileImageView, profileTextFieldStackView, modifyCompleteBtn])

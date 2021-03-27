@@ -242,7 +242,6 @@ class DonationDetailViewController: UIViewController {
         let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController()
         let navigationController: UINavigationController = UINavigationController(rootViewController: donateMoneyVC)
         navigationController.modalPresentationStyle = .overFullScreen
-//        navigationController.setNavigationBarHidden(true, animated: true)
         present(navigationController, animated: true)
     }
     

@@ -35,9 +35,13 @@ class DonateMoneyViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .clear
         
-        setNavigation()
         setConstraints()
         setViewTapGesture()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewDidLayoutSubviews() {
@@ -52,9 +56,6 @@ class DonateMoneyViewController: UIViewController {
     }
     
     // MARK: - Methods
-    private func setNavigation() {
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
     private func setConstraints() {
         view.addSubviews([tableView, clearView])
         tableView.snp.makeConstraints { make in

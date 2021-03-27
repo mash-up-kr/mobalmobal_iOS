@@ -65,8 +65,13 @@ class InputDonationMoneyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
+        setNavigationItems()
         setButtonDisable()
-        setNavigation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func updateViewConstraints() {
@@ -100,8 +105,7 @@ class InputDonationMoneyViewController: UIViewController {
     }
     
     // MARK: - Methods
-    private func setNavigation() {
-        navigationController?.setNavigationBarHidden(false, animated: true)
+    private func setNavigationItems() {
         setNavigationItems(title: navigationTitle, backButtonImageName: backButtonImageName, action: #selector(clickNavigationBackButton))
     }
     
