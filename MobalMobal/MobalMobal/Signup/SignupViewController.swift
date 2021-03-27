@@ -47,7 +47,7 @@ class SignupViewController: UIViewController {
     private let agreementLabel: UILabel = {
         let label: UILabel = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 45)
+        label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 15)
         label.text = "이용약관, 개인정보 수집 및 이용에 모두 동의 합니다."
         label.textColor = .white
         return label
@@ -56,7 +56,7 @@ class SignupViewController: UIViewController {
     private let completeButton: UIButton = {
         let button: UIButton = UIButton()
         button.layer.cornerRadius = 30
-        button.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+        button.backgroundColor = UIColor(red: 71.0 / 255, green: 71.0 / 255, blue: 71.0 / 255, alpha: 1)
         return button
     }()
     
@@ -64,7 +64,7 @@ class SignupViewController: UIViewController {
         let label: UILabel = UILabel()
         label.text = "가입완료"
         label.font = UIFont(name: "SpoqaHanSansNeo-Medium", size: 18)
-        label.textColor = UIColor(red: 121/255, green: 121/255, blue: 121/255, alpha: 1)
+        label.textColor = UIColor(red: 121.0 / 255, green: 121.0 / 255, blue: 121.0 / 255, alpha: 1)
         return label
     }()
     
@@ -93,7 +93,7 @@ class SignupViewController: UIViewController {
         self.view.addSubview(nickNameView)
         self.nickNameView.snp.makeConstraints { make in
             make.height.equalTo(60)
-            make.top.equalToSuperview().inset(59)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(59)
             make.leading.trailing.equalToSuperview().inset(15)
         }
     }
