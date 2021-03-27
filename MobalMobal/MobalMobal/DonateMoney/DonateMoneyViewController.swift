@@ -35,6 +35,7 @@ class DonateMoneyViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .clear
         
+        setNavigation()
         setConstraints()
         setViewTapGesture()
     }
@@ -51,6 +52,9 @@ class DonateMoneyViewController: UIViewController {
     }
     
     // MARK: - Methods
+    private func setNavigation() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
     private func setConstraints() {
         view.addSubviews([tableView, clearView])
         tableView.snp.makeConstraints { make in
@@ -76,7 +80,6 @@ extension DonateMoneyViewController: UITableViewDelegate {
             let inputDonateMoneyVC: InputDonationMoneyViewController = InputDonationMoneyViewController()
             inputDonateMoneyVC.modalPresentationStyle = .fullScreen
             navigationController?.pushViewController(inputDonateMoneyVC, animated: true)
-            navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
 }
