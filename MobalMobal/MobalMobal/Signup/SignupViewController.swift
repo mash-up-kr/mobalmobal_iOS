@@ -76,6 +76,7 @@ class SignupViewController: UIViewController {
         self.view.backgroundColor = .backgroundColor
         
         setUIViewLayout()
+        setNavigationItems(title: "회원 가입", backButtonImageName: "arrowChevronBigLeft", action: #selector(backButtonTapped))
     }
     
     @objc
@@ -87,6 +88,13 @@ class SignupViewController: UIViewController {
         } else {
             button.setImage(UIImage(named: "iconlyLightCheckOn"), for: .normal)
         }
+    }
+    
+    @objc
+    func backButtonTapped() {
+        // 실제로는 pop이 되어야 함. dismiss는 임시코드
+        // navigationController?.popViewController(animated: true)
+        navigationController?.dismiss(animated: true)
     }
     
     private func setNicknameView() {
