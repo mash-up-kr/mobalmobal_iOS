@@ -22,18 +22,24 @@ class ProfileViewController: UIViewController {
     private let donatingCellIdentifier: String = "DonatingTableViewCell"
     private let sectionHeaderCellIdentifier: String = "SectionHeaderCell"
     private let numberOfDonations: [Int] = [1, 1, 1]
+    private let modifyVC: UIViewController = ModifyProfileViewController()
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
         setLayout()
-        setNavigation()
+        setNavigationItems()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     // MARK: - Actions
     @objc
     private func popVC() {
         print("✨ pop viewcontroller")
+        navigationController?.dismiss(animated: true)
     }
     @objc
     private func modifyInfo() {
@@ -63,16 +69,10 @@ class ProfileViewController: UIViewController {
             make.height.equalTo(UIScreen.main.bounds.height)        
         }
     }
-    private func setNavigation() {
-        self.navigationController?.navigationBar.backgroundColor = .blackFour
-        self.navigationController?.navigationBar.barTintColor = .blackFour
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.isNavigationBarHidden = false
-        // dummy data
-        self.navigationItem.title = "Jercy"
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.whiteTwo]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
+    private func setNavigationItems() {
+        setNavigationItems(title: "Jercy", backButtonImageName: "arrowChevronBigLeft", action: #selector(popVC))
         
+        // 추가 네비게이션 아이템
         let editBtn: UIButton = UIButton()
         editBtn.setImage(UIImage(named: "iconlyLightSetting"), for: .normal)
         editBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
