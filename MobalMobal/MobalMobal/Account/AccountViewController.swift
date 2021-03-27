@@ -92,8 +92,11 @@ class AccountViewController: UIViewController {
         super.viewDidLoad()
         accountLabelTapGesture()
         self.view.backgroundColor = .backgroundColor
-        self.navigationController?.navigationBar.isHidden = true
         view.setNeedsUpdateConstraints()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     override func updateViewConstraints() {
         self.view.addSubviews([verticalStackView, closeButton])
