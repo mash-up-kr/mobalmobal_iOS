@@ -22,7 +22,10 @@ class ProfileViewController: UIViewController {
     private let donatingCellIdentifier: String = "DonatingTableViewCell"
     private let sectionHeaderCellIdentifier: String = "SectionHeaderCell"
     private let numberOfDonations: [Int] = [1, 1, 1]
+    
     private let modifyVC: UIViewController = ModifyProfileViewController()
+    private let chargingVC: UIViewController = PointChargingViewController()
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +52,11 @@ class ProfileViewController: UIViewController {
     @objc
     private func pushSettingVC() {
         print("✨ push setting vc")
+        
+        // 임시로 PointCharging으로 이동하는 코드
+        let navVC: UINavigationController = UINavigationController(rootViewController: chargingVC)
+        navVC.modalPresentationStyle = .overFullScreen
+        self.present(navVC, animated: true)
     }
     
     // MARK: - Methods
