@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */; };
+		3A179F4D25FB5A3900901436 /* DonateMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A179F4C25FB5A3900901436 /* DonateMoneyViewController.swift */; };
+		3A179F5225FB62B700901436 /* DonateMoneyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A179F5125FB62B700901436 /* DonateMoneyTableViewCell.swift */; };
 		3A179F6025FB87AF00901436 /* InputDonationMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A179F5F25FB87AF00901436 /* InputDonationMoneyViewController.swift */; };
 		3A179F7725FBC84F00901436 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A179F7625FBC84F00901436 /* UITextField+Extension.swift */; };
 		3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */; };
@@ -66,6 +68,8 @@
 /* Begin PBXFileReference section */
 		32D37E13F8458BE37D6BCAC0 /* Pods-MobalMobal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.release.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.release.xcconfig"; sourceTree = "<group>"; };
 		3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3A179F4C25FB5A3900901436 /* DonateMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateMoneyViewController.swift; sourceTree = "<group>"; };
+		3A179F5125FB62B700901436 /* DonateMoneyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateMoneyTableViewCell.swift; sourceTree = "<group>"; };
 		3A179F5F25FB87AF00901436 /* InputDonationMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDonationMoneyViewController.swift; sourceTree = "<group>"; };
 		3A179F7625FBC84F00901436 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +149,23 @@
 				3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		3A179F4B25FB5A2100901436 /* DonateMoney */ = {
+			isa = PBXGroup;
+			children = (
+				3A179F5025FB629F00901436 /* cell */,
+				3A179F4C25FB5A3900901436 /* DonateMoneyViewController.swift */,
+			);
+			path = DonateMoney;
+			sourceTree = "<group>";
+		};
+		3A179F5025FB629F00901436 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				3A179F5125FB62B700901436 /* DonateMoneyTableViewCell.swift */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		3A179F5E25FB878F00901436 /* InputDonationMoney */ = {
@@ -298,6 +319,7 @@
 		D70C37C725E103DD00898271 /* MobalMobal */ = {
 			isa = PBXGroup;
 			children = (
+				3A179F4B25FB5A2100901436 /* DonateMoney */,
 				3A179F5E25FB878F00901436 /* InputDonationMoney */,
 				7C842F9C2606265900A66756 /* ModifyProfile */,
 				3A1BD70F25ED26970079D56D /* DonationDetail */,
@@ -551,6 +573,8 @@
 				D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */,
 				3A1BD73225F15EF20079D56D /* DetailParticipantsProfileImageView.swift in Sources */,
 				7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */,
+				3A179F4D25FB5A3900901436 /* DonateMoneyViewController.swift in Sources */,
+				3A179F5225FB62B700901436 /* DonateMoneyTableViewCell.swift in Sources */,
 				3A179F6025FB87AF00901436 /* InputDonationMoneyViewController.swift in Sources */,
 				7C842FA326063FB100A66756 /* ModifyProfileCustomView.swift in Sources */,
 			);

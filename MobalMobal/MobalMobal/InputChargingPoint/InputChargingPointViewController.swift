@@ -131,8 +131,10 @@ class InputChargingPointViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     private func setNavigation() {
-        self.navigationController?.navigationBar.barTintColor = .black94
+        self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.backgroundColor = .black94
+        self.navigationController?.navigationBar.barTintColor = .black94
         self.navigationItem.title = "충전"
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
