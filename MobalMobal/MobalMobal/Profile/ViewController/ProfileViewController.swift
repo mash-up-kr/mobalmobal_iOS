@@ -44,6 +44,7 @@ class ProfileViewController: UIViewController {
     @objc
     private func modifyInfo() {
         print("✨ modify user info")
+        navigationController?.pushViewController(modifyVC, animated: true)
     }
     @objc
     private func pushSettingVC() {
