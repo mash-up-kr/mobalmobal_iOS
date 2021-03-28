@@ -55,11 +55,12 @@ class MainViewController: UIViewController {
     
     private let itemsPerRow: CGFloat = 2
     private let firstSectionInsets: UIEdgeInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0)
-    private let secondSectionInsets: UIEdgeInsets = UIEdgeInsets(top: 14.0, left: 22.0, bottom: 0.0, right: 22.0)
+    private let secondSectionInsets: UIEdgeInsets = UIEdgeInsets(top: 15.0, left: 22.0, bottom: 0.0, right: 22.0)
     
     let sectionTitle: [String] = ["나의 진행", "진행중"]
     let myCellIdentifier: String = "MainMyDonationCollectionViewCell"
     let ongoingCellIdentifier: String = "MainOngoingDonationCollectionViewCell"
+    let ongoingHeaderIdentifier: String = "MainOngoingDonationHeaderView"
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -78,6 +79,7 @@ class MainViewController: UIViewController {
         
         collectionView.register(MainMyDonationCollectionViewCell.self, forCellWithReuseIdentifier: myCellIdentifier)
         collectionView.register(MainOngoingDonationCollectionViewCell.self, forCellWithReuseIdentifier: ongoingCellIdentifier)
+        collectionView.register(MainOngoingDonationHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ongoingHeaderIdentifier)
     }
     
     private func setLayout() {
@@ -158,6 +160,16 @@ extension MainViewController: UICollectionViewDataSource {
             return cell
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            guard let headerView: MainOngoingDonationHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ongoingHeaderIdentifier, for: indexPath as IndexPath) as? MainOngoingDonationHeaderView else { return .init() }
+            return headerView
+        default:
+            return .init()
+        }
+    }
 }
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
@@ -165,7 +177,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         switch indexPath.section {
         case 0:
             let availableWidth: CGFloat = view.frame.width - (firstSectionInsets.left * 2)
-            return CGSize(width: availableWidth, height: 200)
+            return CGSize(width: availableWidth, height: 142)
             
         case 1:
             let insetSpace: CGFloat = secondSectionInsets.left * 2
@@ -199,6 +211,16 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
             return 12
         default:
             return 0
+        }
+    }
+    
+    // header size
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        switch section {
+        case 1:
+            return CGSize(width: view.frame.width, height: 59)
+        default:
+            return .zero
         }
     }
 }

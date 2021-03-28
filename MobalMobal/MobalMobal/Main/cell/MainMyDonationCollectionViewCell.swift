@@ -23,8 +23,8 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
     let headerLabel: UILabel = {
         let label: UILabel = UILabel(frame: .zero)
         label.text = "나의 진행"
-        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.textColor = .veryLightPink
+        label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
         return label
     }()
     
@@ -35,7 +35,7 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
     // MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .backgroundColor
+        backgroundColor = .green
         setCollectionView()
         setLayout()
     }
@@ -57,12 +57,11 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
         [collectionView, headerLabel].forEach { contentView.addSubview($0) }
         
         collectionView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().inset(21)
+            make.edges.equalToSuperview()
         }
         
         headerLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(32)
+            make.top.equalToSuperview().inset(21)
             make.leading.trailing.equalToSuperview().inset(22)
         }
     }
@@ -115,7 +114,7 @@ extension MainMyDonationCollectionViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         switch section {
         case 0:
-            return UIEdgeInsets(top: 11.0, left: 22.0, bottom: 11.0, right: 0.0)
+            return UIEdgeInsets(top: 0.0, left: 22.0, bottom: 0.0, right: 0.0)
         case 1:
             return UIEdgeInsets(top: 0.0, left: 12.0, bottom: 0.0, right: 22.0)
         default:
