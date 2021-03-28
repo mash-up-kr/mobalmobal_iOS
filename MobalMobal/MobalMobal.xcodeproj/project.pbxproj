@@ -58,10 +58,9 @@
 		D7147D6525E7686800AA0878 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6425E7686800AA0878 /* FacebookCore */; };
 		D7147D6925E768B800AA0878 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6825E768B800AA0878 /* Toast */; };
 		D7147D6C25E76A1900AA0878 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */; };
-		D7AC0C9525EAB9E2000A342A /* MainMyDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9425EAB9E2000A342A /* MainMyDonationTableViewCell.swift */; };
+		D7AC0C9525EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9425EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift */; };
 		D7AC0C9925EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */; };
-		D7AC0C9D25EACF9A000A342A /* MainMyDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9C25EACF9A000A342A /* MainMyDonationCollectionViewCell.swift */; };
-		D7AC0CA025EAF35C000A342A /* MainOngoingDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9F25EAF35C000A342A /* MainOngoingDonationTableViewCell.swift */; };
+		D7AC0C9D25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9C25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift */; };
 		D7AC0CA325EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0CA225EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift */; };
 		D7E44EF125EA5149007FDB4F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E44EF025EA5149007FDB4F /* MainViewController.swift */; };
 		E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */; };
@@ -112,10 +111,9 @@
 		D70C37DD25E103F100898271 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobalMobalDebug.entitlements; sourceTree = "<group>"; };
-		D7AC0C9425EAB9E2000A342A /* MainMyDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMyDonationTableViewCell.swift; sourceTree = "<group>"; };
+		D7AC0C9425EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMyDonationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAddMyDonationCollectionViewCell.swift; sourceTree = "<group>"; };
-		D7AC0C9C25EACF9A000A342A /* MainMyDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMyDonationCollectionViewCell.swift; sourceTree = "<group>"; };
-		D7AC0C9F25EAF35C000A342A /* MainOngoingDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOngoingDonationTableViewCell.swift; sourceTree = "<group>"; };
+		D7AC0C9C25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMyOngoingDonationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D7AC0CA225EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOngoingDonationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D7E44EF025EA5149007FDB4F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -340,10 +338,9 @@
 		D7AC0C9325EAB610000A342A /* cell */ = {
 			isa = PBXGroup;
 			children = (
-				D7AC0C9425EAB9E2000A342A /* MainMyDonationTableViewCell.swift */,
+				D7AC0C9425EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift */,
 				D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */,
-				D7AC0C9C25EACF9A000A342A /* MainMyDonationCollectionViewCell.swift */,
-				D7AC0C9F25EAF35C000A342A /* MainOngoingDonationTableViewCell.swift */,
+				D7AC0C9C25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift */,
 				D7AC0CA225EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift */,
 			);
 			path = cell;
@@ -559,8 +556,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7AC0CA025EAF35C000A342A /* MainOngoingDonationTableViewCell.swift in Sources */,
-				D7AC0C9525EAB9E2000A342A /* MainMyDonationTableViewCell.swift in Sources */,
+				D7AC0C9525EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift in Sources */,
 				D7AC0C9925EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift in Sources */,
 				3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */,
 				3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */,
@@ -588,7 +584,7 @@
 				D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */,
 				D7AC0CA325EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift in Sources */,
 				D7E44EF125EA5149007FDB4F /* MainViewController.swift in Sources */,
-				D7AC0C9D25EACF9A000A342A /* MainMyDonationCollectionViewCell.swift in Sources */,
+				D7AC0C9D25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift in Sources */,
 				3A1BD73225F15EF20079D56D /* DetailParticipantsProfileImageView.swift in Sources */,
 				7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */,
 				3A179F6025FB87AF00901436 /* InputDonationMoneyViewController.swift in Sources */,

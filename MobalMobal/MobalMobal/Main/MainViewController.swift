@@ -38,56 +38,62 @@ class MainViewController: UIViewController {
         return button
     }()
     
-    let tableView: UITableView = {
-        let tableView: UITableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = .backgroundColor
-        tableView.separatorStyle = .none
-        tableView.tableFooterView = UIView()
-        tableView.separatorInset = .zero
-        return tableView
+    lazy var collectionView: UICollectionView = {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .backgroundColor
+        collectionView.layer.masksToBounds = true
+        collectionView.clipsToBounds = true
+        
+        return collectionView
     }()
     
     // MARK: - property
     var lastContentOffset: CGFloat = 0.0
     
+    private let itemsPerRow: CGFloat = 2
+    private let firstSectionInsets: UIEdgeInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0)
+    private let secondSectionInsets: UIEdgeInsets = UIEdgeInsets(top: 14.0, left: 22.0, bottom: 0.0, right: 22.0)
+    
     let sectionTitle: [String] = ["나의 진행", "진행중"]
-    let myCellIdentifier: String = "MainMyDonationTableViewCell"
-    let ongoingCellIdentifier: String = "MainOngoingDonationTableViewCell"
+    let myCellIdentifier: String = "MainMyDonationCollectionViewCell"
+    let ongoingCellIdentifier: String = "MainOngoingDonationCollectionViewCell"
     
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
-        setTableView()
+        setCollectionView()
         setLayout()
     }
     
     // MARK: - Action
     
     // MARK: - Method
-    private func setTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(MainMyDonationTableViewCell.self, forCellReuseIdentifier: myCellIdentifier)
-        tableView.register(MainOngoingDonationTableViewCell.self, forCellReuseIdentifier: ongoingCellIdentifier)
-        tableView.layer.masksToBounds = true
-        tableView.clipsToBounds = true
+    private func setCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        collectionView.register(MainMyDonationCollectionViewCell.self, forCellWithReuseIdentifier: myCellIdentifier)
+        collectionView.register(MainOngoingDonationCollectionViewCell.self, forCellWithReuseIdentifier: ongoingCellIdentifier)
     }
     
     private func setLayout() {
-        [titleView, tableView].forEach { view.addSubview($0) }
+        view.addSubviews([titleView, collectionView])
         
         titleView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
         }
         
-        tableView.snp.makeConstraints { make in
+        collectionView.snp.makeConstraints { make in
             make.top.equalTo(titleView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
         
-        [titleLabel, profileImageView, notiListButton].forEach { titleView.addSubview($0) }
+        titleView.addSubviews([titleLabel, profileImageView, notiListButton])
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(30)
@@ -108,9 +114,7 @@ class MainViewController: UIViewController {
         }
     }
 }
-
-// MARK: - UITableViewDelegate
-extension MainViewController: UITableViewDelegate {
+extension MainViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.lastContentOffset <= 0 {
             titleLabel.font = UIFont(name: "Futura-Bold", size: 25)
@@ -127,72 +131,74 @@ extension MainViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - UITableViewDataSource
-extension MainViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        3
+extension MainViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        2
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 1
         case 1:
-            return 1
-        case 2:
-            return 10
+            return 13
         default:
             return 0
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            guard let cell: MainMyDonationTableViewCell = tableView.dequeueReusableCell(withIdentifier: myCellIdentifier, for: indexPath) as? MainMyDonationTableViewCell else { return .init() }
-            cell.selectionStyle = .none
+            guard let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: myCellIdentifier, for: indexPath) as? MainMyDonationCollectionViewCell else { return .init() }
             return cell
-        case 1:
-            let cell: UITableViewCell = UITableViewCell(frame: .zero)
-            cell.backgroundColor = .clear
             
-            let label: UILabel = UILabel(frame: .zero)
-            label.text = "진행중"
-            label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-            label.textColor = .veryLightPink
-            [label].forEach { cell.contentView.addSubview($0) }
-            
-            label.snp.makeConstraints { make in
-                make.top.equalToSuperview().inset(32)
-                make.leading.trailing.equalToSuperview().inset(22)
-            }
-            
-            cell.selectionStyle = .none
-            return cell
-        case 2: // dummy data
-            // guard let cell: MainOngoingDonationTableViewCell = tableView.dequeueReusableCell(withIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationTableViewCell else { return .init() }
-            let cell: UITableViewCell = UITableViewCell(frame: .zero)
-            
-            let imageView: UIImageView = UIImageView(image: UIImage(named: "main"))
-            [imageView].forEach { cell.contentView.addSubview($0) }
-            
-            imageView.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
-                make.height.equalTo(imageView.snp.width).multipliedBy(842.0 / 742.0)
-            }
-            
-            cell.selectionStyle = .none
-            return cell
         default:
-            return .init()
+            guard let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationCollectionViewCell else { return .init() }
+            return cell
+        }
+    }
+}
+
+extension MainViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch indexPath.section {
+        case 0:
+            let availableWidth: CGFloat = view.frame.width - (firstSectionInsets.left * 2)
+            return CGSize(width: availableWidth, height: 200)
+            
+        case 1:
+            let insetSpace: CGFloat = secondSectionInsets.left * 2
+            let paddingSpace: CGFloat = 12 * (itemsPerRow - 1)
+            let availableWidth: CGFloat = view.frame.width - insetSpace - paddingSpace
+            let widthPerItem: CGFloat = availableWidth / itemsPerRow
+            let heightPerItem: CGFloat = widthPerItem / 159 * 198
+            return CGSize(width: widthPerItem, height: heightPerItem)
+            
+        default:
+            return .zero
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
+    // cell이 들어갈 inset
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        switch section {
         case 0:
-            return 184
+            return firstSectionInsets
+        case 1:
+            return secondSectionInsets
         default:
-            return UITableView.automaticDimension
+            return .zero
+        }
+    }
+    
+    // cell 사이의 간격
+    func collectionView( _ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        switch section {
+        case 1:
+            return 12
+        default:
+            return 0
         }
     }
 }

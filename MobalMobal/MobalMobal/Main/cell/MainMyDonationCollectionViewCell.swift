@@ -10,38 +10,33 @@ import UIKit
 
 class MainMyDonationCollectionViewCell: UICollectionViewCell {
     // MARK: - UIComponent
-    let cardView: UIView = {
-        let view: UIView = UIView(frame: .zero)
-        view.backgroundColor = .purpleishBlue
-        view.layer.cornerRadius = 12
-        return view
+    let collectionView: UICollectionView = {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .backgroundColor
+        
+        return collectionView
     }()
     
-    let donationTitleLabel: UILabel = {
+    let headerLabel: UILabel = {
         let label: UILabel = UILabel(frame: .zero)
+        label.text = "나의 진행"
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        label.text = "야 너두 할 수 있어"
-        label.textColor = .white
+        label.textColor = .veryLightPink
         return label
     }()
     
-    let donationPointLabel: UILabel = {
-        let label: UILabel = UILabel(frame: .zero)
-        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        label.text = "0"
-        label.textColor = .white
-        return label
-    }()
-    
-    let donationImageView: UIImageView = {
-        let imageView: UIImageView = UIImageView(image: UIImage(named: "imgGuzi"))
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
+    // MARK: - property
+    let buttonCellIdentifier: String = "MainAddMyDonationCollectionViewCell"
+    let cardCellIdentifier: String = "MainMyOngoingDonationCollectionViewCell"
     
     // MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .backgroundColor
+        setCollectionView()
         setLayout()
     }
     
@@ -49,31 +44,92 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Method
+    // MARK: - Methods
+    private func setCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        collectionView.register(MainAddMyDonationCollectionViewCell.self, forCellWithReuseIdentifier: buttonCellIdentifier)
+        collectionView.register(MainMyOngoingDonationCollectionViewCell.self, forCellWithReuseIdentifier: cardCellIdentifier)
+    }
+    
     private func setLayout() {
-        [cardView].forEach { contentView.addSubview($0) }
+        [collectionView, headerLabel].forEach { contentView.addSubview($0) }
         
-        cardView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(55)
-            make.leading.trailing.bottom.equalToSuperview()
+        collectionView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().inset(21)
         }
         
-        [donationImageView, donationTitleLabel, donationPointLabel].forEach { cardView.addSubview($0) }
-        
-        donationImageView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(-10)
-            make.bottom.equalToSuperview()
-            make.width.equalTo(172)
-            make.height.equalTo(135)
+        headerLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(32)
+            make.leading.trailing.equalToSuperview().inset(22)
         }
-        
-        donationTitleLabel.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(18)
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+extension MainMyDonationCollectionViewCell: UICollectionViewDelegate {
+}
+
+// MARK: - UICollectionViewDataSource
+extension MainMyDonationCollectionViewCell: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 10
+        default:
+            return 0
         }
-        
-        donationPointLabel.snp.makeConstraints { make in
-            make.top.equalTo(donationTitleLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalTo(donationTitleLabel)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch indexPath.section {
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: buttonCellIdentifier, for: indexPath) as? MainAddMyDonationCollectionViewCell else { return .init() }
+            return cell
+        default:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as? MainMyOngoingDonationCollectionViewCell else { return .init() }
+            return cell
+        }
+    }
+}
+
+extension MainMyDonationCollectionViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch indexPath.section {
+        case 0:
+            return CGSize(width: 65, height: 142)
+        default:
+            return CGSize(width: 258, height: 142)
+        }
+    }
+    
+    // 각 section의 inset
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        switch section {
+        case 0:
+            return UIEdgeInsets(top: 11.0, left: 22.0, bottom: 11.0, right: 0.0)
+        case 1:
+            return UIEdgeInsets(top: 0.0, left: 12.0, bottom: 0.0, right: 22.0)
+        default:
+            return .zero
+        }
+    }
+    
+    // cell 사이의 간격
+    func collectionView( _ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        switch section {
+        case 1:
+            return 10
+        default:
+            return 0
         }
     }
 }

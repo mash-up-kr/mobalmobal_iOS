@@ -13,6 +13,7 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     // MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .systemGray
     }
     
     required init?(coder: NSCoder) {
