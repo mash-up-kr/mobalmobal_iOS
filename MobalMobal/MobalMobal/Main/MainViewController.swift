@@ -44,9 +44,9 @@ class MainViewController: UIViewController {
         
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .backgroundColor
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.layer.masksToBounds = true
         collectionView.clipsToBounds = true
-        
         return collectionView
     }()
     
@@ -143,7 +143,7 @@ extension MainViewController: UICollectionViewDataSource {
         case 0:
             return 1
         case 1:
-            return 13
+            return 1
         default:
             return 0
         }

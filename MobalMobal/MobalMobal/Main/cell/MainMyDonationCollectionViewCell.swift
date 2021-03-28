@@ -16,6 +16,7 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
         
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .backgroundColor
+        collectionView.showsHorizontalScrollIndicator = false
         
         return collectionView
     }()
