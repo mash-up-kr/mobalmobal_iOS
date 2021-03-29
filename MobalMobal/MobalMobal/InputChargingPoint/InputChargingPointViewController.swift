@@ -64,12 +64,12 @@ class InputChargingPointViewController: UIViewController {
         self.view.backgroundColor = .backgroundColor
         self.chargingInputField.becomeFirstResponder()
         viewTapGesture()
-        setNavigation()
+        setNavigationItems()
         setLayout()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     // MARK: - Actions
@@ -130,21 +130,14 @@ class InputChargingPointViewController: UIViewController {
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
-    private func setNavigation() {
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.backgroundColor = .black94
-        self.navigationController?.navigationBar.barTintColor = .black94
-        self.navigationItem.title = "충전"
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
-        self.navigationItem.leftBarButtonItem?.tintColor = .white
+    private func setNavigationItems() {
+        self.setNavigationItems(title: "충전", backButtonImageName: "arrowChevronBigLeft", action: #selector(popVC))
     }
     private func setLayout() {
         [chargingButton, chargingInputView].forEach { view.addSubview($0) }
         [chargingViewImage, chargingInputField].forEach { chargingInputView.addSubview($0) }
         chargingInputView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(52)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(52)
             make.leading.trailing.equalToSuperview().inset(15)
             make.centerX.equalToSuperview()
             make.height.equalTo(60)

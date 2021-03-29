@@ -62,7 +62,11 @@ class ModifyProfileViewController: UIViewController {
         self.view.backgroundColor = .backgroundColor
         setProfileImgGestureRecognizer()
         setDismissKeyboard()
-        setNavigation()
+        setNavigationItems()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     override func updateViewConstraints() {
         self.view.addSubviews([profileImageView, profileTextFieldStackView, modifyCompleteBtn])
@@ -138,15 +142,8 @@ class ModifyProfileViewController: UIViewController {
         modifyCompleteBtn.backgroundColor = .lightBluishGreen
         modifyCompleteBtn.titleLabel?.textColor = .blackThree
     }
-    private func setNavigation() {
-        self.navigationController?.navigationBar.backgroundColor = .black94
-        self.navigationController?.navigationBar.barTintColor = .black94
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.title = "프로필 수정"
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.whiteTwo]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
-        self.navigationItem.leftBarButtonItem?.tintColor = .white
+    private func setNavigationItems() {
+        setNavigationItems(title: "프로필 수정", backButtonImageName: "arrowChevronBigLeft", action:  #selector(popVC))
     }
     private func getImgFromLibrary() {
         self.imagePicker.sourceType = .photoLibrary

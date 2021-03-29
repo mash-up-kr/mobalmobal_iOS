@@ -41,7 +41,7 @@ class DonateMoneyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewDidLayoutSubviews() {
@@ -81,7 +81,6 @@ extension DonateMoneyViewController: UITableViewDelegate {
             let inputDonateMoneyVC: InputDonationMoneyViewController = InputDonationMoneyViewController()
             inputDonateMoneyVC.modalPresentationStyle = .fullScreen
             navigationController?.pushViewController(inputDonateMoneyVC, animated: true)
-            navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
 }

@@ -242,7 +242,7 @@ class DonationDetailViewController: UIViewController {
         let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController()
         let navigationController: UINavigationController = UINavigationController(rootViewController: donateMoneyVC)
         navigationController.modalPresentationStyle = .overFullScreen
-        present(navigationController, animated: true, completion: nil)
+        present(navigationController, animated: true)
     }
     
     // MARK: - Methods
