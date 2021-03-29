@@ -58,6 +58,7 @@
 		D7147D6525E7686800AA0878 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6425E7686800AA0878 /* FacebookCore */; };
 		D7147D6925E768B800AA0878 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6825E768B800AA0878 /* Toast */; };
 		D7147D6C25E76A1900AA0878 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */; };
+		E359440E260F125D0078903E /* CreateDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E359440D260F125D0078903E /* CreateDonationViewController.swift */; };
 		E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */; };
 		E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */; };
 		E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EAB125EACC9F00F34BDE /* SignupCustomView.swift */; };
@@ -106,6 +107,7 @@
 		D70C37DD25E103F100898271 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobalMobalDebug.entitlements; sourceTree = "<group>"; };
+		E359440D260F125D0078903E /* CreateDonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDonationViewController.swift; sourceTree = "<group>"; };
 		E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		E3F1EAB125EACC9F00F34BDE /* SignupCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCustomView.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 		D70C37C725E103DD00898271 /* MobalMobal */ = {
 			isa = PBXGroup;
 			children = (
+				E359440C260F124F0078903E /* CreateDonation */,
 				3A179F5E25FB878F00901436 /* InputDonationMoney */,
 				7C842F9C2606265900A66756 /* ModifyProfile */,
 				3A1BD70F25ED26970079D56D /* DonationDetail */,
@@ -322,6 +325,14 @@
 				D70C37D625E103DE00898271 /* Info.plist */,
 			);
 			path = MobalMobal;
+			sourceTree = "<group>";
+		};
+		E359440C260F124F0078903E /* CreateDonation */ = {
+			isa = PBXGroup;
+			children = (
+				E359440D260F125D0078903E /* CreateDonationViewController.swift */,
+			);
+			path = CreateDonation;
 			sourceTree = "<group>";
 		};
 		E3F1EA7625EA4AE800F34BDE /* Signup */ = {
@@ -536,6 +547,7 @@
 				7C39979125F75B5900EA82C2 /* SuccessChargingViewController.swift in Sources */,
 				7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */,
 				E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */,
+				E359440E260F125D0078903E /* CreateDonationViewController.swift in Sources */,
 				E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */,
 				7C842FA02606267400A66756 /* ModifyProfileViewController.swift in Sources */,
 				7C04536025EAA2DC00870761 /* ProfileDonatingTableViewCell.swift in Sources */,
