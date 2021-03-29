@@ -65,8 +65,13 @@ class InputDonationMoneyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
+        setNavigationItems()
         setButtonDisable()
-        setNavigation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func updateViewConstraints() {
@@ -100,19 +105,8 @@ class InputDonationMoneyViewController: UIViewController {
     }
     
     // MARK: - Methods
-    private func setNavigation() {
-        let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .black94
-        navigationController?.navigationBar.standardAppearance = appearance
-        
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.title = navigationTitle
-        navigationItem.standardAppearance = appearance
-        
-        guard let backButtonImage: UIImage = UIImage(named: backButtonImageName) else { return }
-        let backButton: UIBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(clickNavigationBackButton))
-        backButton.tintColor = .white
-        navigationItem.leftBarButtonItem = backButton
+    private func setNavigationItems() {
+        setNavigationItems(title: navigationTitle, backButtonImageName: backButtonImageName, action: #selector(clickNavigationBackButton))
     }
     
     private func setRoundViewConstraints() {
