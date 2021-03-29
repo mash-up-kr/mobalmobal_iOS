@@ -8,7 +8,7 @@
 import UIKit
 
 class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
-    // MARK: - UIComponent
+    // MARK: - UIComponents
     private let thumbnailImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.image = UIImage(named: "doneImage")
@@ -67,6 +67,7 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     }()
     
     // MARK: - Properties
+    // dummy data
     var dday: String = "D-12"
     var money: String = "123,456"
     var title: String = "티끌모아 닌텐도 스위치 사주세요 제발요 부탁드립니다!!!!!!"
@@ -78,7 +79,6 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .darkGrey
         contentView.layer.cornerRadius = 12
         contentView.clipsToBounds = true
-//        setLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -87,7 +87,6 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         contentView.addSubviews([thumbnailImageView, translucentView, progressBackgroundView, dDayLabel, moneyLabel, titleLabel])
-        
         thumbnailImageView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(124)
@@ -114,7 +113,6 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
         }
         
         progressBackgroundView.addSubview(progressBarView)
-        
         progressBarView.snp.makeConstraints { make in
             make.top.leading.bottom.equalToSuperview()
             make.width.lessThanOrEqualToSuperview().multipliedBy(progress)
@@ -123,5 +121,5 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
     }
     
-    // MARK: - Method
+    // MARK: - Methods
 }

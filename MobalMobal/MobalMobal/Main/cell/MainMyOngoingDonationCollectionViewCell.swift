@@ -9,7 +9,7 @@ import SnapKit
 import UIKit
 
 class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
-    // MARK: - UIComponent
+    // MARK: - UIComponents
     let cardView: UIView = {
         let view: UIView = UIView(frame: .zero)
         view.backgroundColor = .purpleishBlue
@@ -49,7 +49,7 @@ class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Method
+    // MARK: - Methods
     private func setLayout() {
         [cardView].forEach { contentView.addSubview($0) }
         

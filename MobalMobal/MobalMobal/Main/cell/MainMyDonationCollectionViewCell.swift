@@ -8,8 +8,13 @@
 import SnapKit
 import UIKit
 
+protocol MainMyDonationCollectionViewCellDelegate: AnyObject {
+    func didSelectAddMyDonationButton()
+    func didSelectMyOngoingDonationItem(at indexPath: IndexPath)
+}
+
 class MainMyDonationCollectionViewCell: UICollectionViewCell {
-    // MARK: - UIComponent
+    // MARK: - UIComponents
     let collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -29,7 +34,8 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    // MARK: - property
+    // MARK: - Properties
+    weak var delegate: MainMyDonationCollectionViewCellDelegate?
     let buttonCellIdentifier: String = "MainAddMyDonationCollectionViewCell"
     let cardCellIdentifier: String = "MainMyOngoingDonationCollectionViewCell"
     
@@ -70,6 +76,16 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
 
 // MARK: - UICollectionViewDelegate
 extension MainMyDonationCollectionViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            delegate?.didSelectAddMyDonationButton()
+        case 1:
+            delegate?.didSelectMyOngoingDonationItem(at: indexPath)
+        default:
+            break
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -101,7 +117,9 @@ extension MainMyDonationCollectionViewCell: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension MainMyDonationCollectionViewCell: UICollectionViewDelegateFlowLayout {
+    // cell size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case 0:
@@ -111,7 +129,7 @@ extension MainMyDonationCollectionViewCell: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    // 각 section의 inset
+    // section inset
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         switch section {
         case 0:

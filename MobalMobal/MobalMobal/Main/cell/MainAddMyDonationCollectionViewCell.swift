@@ -9,7 +9,7 @@ import SnapKit
 import UIKit
 
 class MainAddMyDonationCollectionViewCell: UICollectionViewCell {
-    // MARK: - UIComponent
+    // MARK: - UIComponents
     let buttonView: UIView = {
         let view: UIView = UIView(frame: .zero)
         view.backgroundColor = .black
