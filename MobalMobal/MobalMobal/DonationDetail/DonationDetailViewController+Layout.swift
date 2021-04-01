@@ -18,6 +18,7 @@ extension DonationDetailViewController {
         contentView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.width.centerX.equalToSuperview()
+            make.height.greaterThanOrEqualToSuperview()
         }
     }
     
@@ -73,6 +74,8 @@ extension DonationDetailViewController {
         setProfileImageViewConstraints()
         setNameGiftGroupViewConstraints()
         setDescriptionLabelConstraints()
+        
+        
     }
     private func setNameLabelConstraints() {
         nameLabel.snp.makeConstraints { make in
@@ -129,6 +132,8 @@ extension DonationDetailViewController {
         setFundAmountConstraints()
         setParticipantsConstraints()
         setEndDateConstraints()
+        detailGroupView.snp.updateConstraints { make in
+        }
     }
     private func setDetailGroupViewConstraints() {
         detailGroupView.snp.makeConstraints { make in
@@ -140,7 +145,7 @@ extension DonationDetailViewController {
         donationButton.snp.makeConstraints { make in
             make.top.equalTo(detailGroupView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
-            make.bottom.greaterThanOrEqualTo(view)
+            make.bottom.equalToSuperview()
             make.height.equalTo(85)
         }
     }

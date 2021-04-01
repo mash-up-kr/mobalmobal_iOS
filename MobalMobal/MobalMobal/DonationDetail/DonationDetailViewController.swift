@@ -12,6 +12,7 @@ class DonationDetailViewController: UIViewController {
     let scrollView: UIScrollView = {
         let scrollView: UIScrollView = UIScrollView()
         scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.alwaysBounceVertical = true
         scrollView.backgroundColor = .backgroundColor
         return scrollView
     }()
@@ -118,6 +119,10 @@ class DonationDetailViewController: UIViewController {
     let descriptionLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = """
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
             Lorem Ipsum is simply dummy text of the printing and typesetting industry.
             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
             """  // 스켈레톤 데이터
@@ -245,6 +250,10 @@ class DonationDetailViewController: UIViewController {
         present(navigationController, animated: true)
     }
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        scrollView.bounces = scrollView.contentOffset.y > 0
+    }
+    
     // MARK: - Methods
     private func setActions() {
         let moreButtonTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickParticipantsMoreButton))
@@ -252,7 +261,8 @@ class DonationDetailViewController: UIViewController {
         
         let donationButtonTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickDonationButton))
         donationButton.addGestureRecognizer(donationButtonTap)
+        
+//        let scroll: UIgesture
+//        scrollView.addGestureRecognizer(<#T##gestureRecognizer: UIGestureRecognizer##UIGestureRecognizer#>)
     }
-    
-    // MARK: - Protocols
 }
