@@ -18,6 +18,7 @@ extension DonationDetailViewController {
         contentView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.width.centerX.equalToSuperview()
+            make.height.greaterThanOrEqualToSuperview()
         }
     }
     
@@ -140,7 +141,7 @@ extension DonationDetailViewController {
         donationButton.snp.makeConstraints { make in
             make.top.equalTo(detailGroupView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
-            make.bottom.greaterThanOrEqualTo(view)
+            make.bottom.equalToSuperview()
             make.height.equalTo(85)
         }
     }
