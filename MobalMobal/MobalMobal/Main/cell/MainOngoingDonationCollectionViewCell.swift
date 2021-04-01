@@ -5,6 +5,7 @@
 //  Created by 김재희 on 2021/02/28.
 //
 
+import SnapKit
 import UIKit
 
 class MainOngoingDonationCollectionViewCell: UICollectionViewCell {

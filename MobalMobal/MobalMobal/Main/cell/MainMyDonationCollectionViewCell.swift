@@ -42,7 +42,6 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
     // MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .green
         setCollectionView()
         setLayout()
     }

@@ -5,6 +5,7 @@
 //  Created by 임수현 on 2021/03/29.
 //
 
+import SnapKit
 import UIKit
 
 class MainOngoingDonationHeaderView: UICollectionReusableView {
