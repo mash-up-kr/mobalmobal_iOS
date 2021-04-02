@@ -45,12 +45,21 @@ class PointChargingViewController: UIViewController {
         super.viewDidLoad()
         setTableView()
         setViewDismissGesture()
+        setLayout()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-    override func updateViewConstraints() {
+    
+    // MARK: - Actions
+    @objc
+    func dismissVC() {
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Methods
+    private func setLayout() {
         self.view.addSubviews([transparencyView, contentView])
         self.contentView.addSubviews([chargingTableView, pageTitle])
 
@@ -71,16 +80,7 @@ class PointChargingViewController: UIViewController {
             make.top.leading.trailing.equalToSuperview()
             make.bottom.equalTo(contentView.snp.top)
         }
-        super.updateViewConstraints()
     }
-    
-    // MARK: - Actions
-    @objc
-    func dismissVC() {
-        self.navigationController?.dismiss(animated: true, completion: nil)
-    }
-    
-    // MARK: - Methods
     private func setTableView() {
         self.chargingTableView.delegate = self
         self.chargingTableView.dataSource = self

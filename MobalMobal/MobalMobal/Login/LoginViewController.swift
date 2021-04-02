@@ -101,19 +101,19 @@ class LoginViewController: UIViewController {
     
     @IBAction private func clickFacebookLoginButton() {
 //        loginWithFacebook()
-        goToDetailVC()
+        goToDonationDetail()
     }
     @IBAction private func clickGoogleLoginButton() {
 //        loginWithGoogle()
-        goToDetailVC()
+        goToDonationDetail()
     }
     @IBAction private func clickAppleLoginButton() {
 //        loginWithApple()
-        goToDetailVC()
+        goToDonationDetail()
     }
     
-    private func goToDetailVC() {
-        // 임시로 상세보기 화면으로 가는 코드
+    // 임시로 상세보기 화면으로 가는 코드
+    private func goToDonationDetail() {
         let detailVC: DonationDetailViewController = DonationDetailViewController()
         detailVC.modalPresentationStyle = .fullScreen
         self.present(detailVC, animated: true)
