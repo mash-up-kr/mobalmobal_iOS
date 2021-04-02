@@ -108,6 +108,10 @@ class CreateDonationViewController: UIViewController {
     private func setup() {
         self.view.backgroundColor = .backgroundColor
         setScrollView()
+        donationTextField.delegate = self
+        donationPriceTextField.delegate = self
+        donataionProductTextField.delegate = self
+        
         addTapGesture(to: view)
     }
     
@@ -240,3 +244,24 @@ class CreateDonationViewController: UIViewController {
         setDonationProductView()
     }
 }
+
+// MARK: - UITextFieldDelegate
+extension CreateDonationViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == donataionProductTextField {
+            guard !(donataionProductTextField.text?.isEmpty ?? false) else {
+                return false
+            }
+            dontationTextFieldIsFilled()
+        } else if textField == donationTextField {
+            guard !(donationTextField.text?.isEmpty ?? false) else {
+                return false
+            }
+            donationInputViewIsFilled()
+        }
+        self.view.endEditing(true)
+        
+        return true
+    }
+}
+
