@@ -36,7 +36,12 @@ class CreateDonationViewController: UIViewController {
         return view
     }()
     
-    private var donationInputView: UIView = {
+    private let donationInputView: UIView = {
+        let view: UIView = UIView()
+        return view
+    }()
+    
+    private let donationPriceView: UIView = {
         let view: UIView = UIView()
         return view
     }()
@@ -68,6 +73,14 @@ class CreateDonationViewController: UIViewController {
         return view
     }()
     
+    private let dividerView3: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = .wheat
+        view.layer.shadowColor = UIColor.lemonLime80.cgColor
+        view.layer.shadowRadius = 10
+        return view
+    }()
+    
     private var donationTextField: UITextField = {
         let textField: UITextField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "하고싶은 말", attributes: [
@@ -76,6 +89,18 @@ class CreateDonationViewController: UIViewController {
         ])
         textField.font = UIFont(name: "Roboto-Regular", size: 24)
         textField.textColor = .veryLightPink
+        return textField
+    }()
+    
+    private var donationPriceTextField: UITextField = {
+        let textField: UITextField = UITextField()
+        textField.attributedPlaceholder = NSAttributedString(string: "얼마를 모아볼까요?", attributes: [
+            NSAttributedString.Key.foregroundColor : UIColor.veryLightPink,
+//            NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 24)
+        ])
+        textField.font = UIFont(name: "Roboto-Regular", size: 24)
+        textField.textColor = .veryLightPink
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -93,7 +118,7 @@ class CreateDonationViewController: UIViewController {
         }
     }
     
-    private func setViewLayout() {
+    private func setBasicViewLayout() {
         self.view.addSubview(createDonationLabel)
         createDonationLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).inset(18)
@@ -106,7 +131,9 @@ class CreateDonationViewController: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).inset(0)
             make.trailing.equalToSuperview().inset(8)
         }
-        
+    }
+    
+    private func setDonationProductView() {
         self.view.addSubview(donationProductView)
         donationProductView.snp.makeConstraints { make in
             make.top.equalTo(createDonationLabel.snp.bottom).offset(177)
@@ -145,10 +172,37 @@ class CreateDonationViewController: UIViewController {
             make.height.equalTo(1)
         }
 
-        self.donationProductView.snp.removeConstraints()
+        resetConstraint(baseView: self.donationProductView, offset: 263)
+    }
+    
+    private func donationInputViewIsFilled() {
+        self.view.addSubview(donationPriceView)
+        donationPriceView.snp.makeConstraints { make in
+            make.top.equalTo(createDonationLabel.snp.bottom).offset(177)
+            make.leading.trailing.equalToSuperview().inset(28)
+            make.height.equalTo(49)
+        }
+        
+        self.donationPriceView.addSubview(donationPriceTextField)
+        donationPriceTextField.snp.makeConstraints { make in
+            make.top.leading.equalTo(donationPriceView)
+        }
+        
+        self.donationPriceView.addSubview(dividerView3)
+        dividerView3.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalTo(donationPriceView)
+            make.height.equalTo(1)
+        }
+    
+        resetConstraint(baseView: self.donationProductView, offset: 349)
+        resetConstraint(baseView: self.donationInputView, offset: 263)
+    }
+    
+    private func resetConstraint(baseView: UIView, offset: Int) {
+        baseView.snp.removeConstraints()
         UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseIn) {
-            self.donationProductView.snp.makeConstraints { make in
-                make.top.equalTo(self.createDonationLabel.snp.bottom).offset(263)
+            baseView.snp.makeConstraints { make in
+                make.top.equalTo(self.createDonationLabel.snp.bottom).offset(offset)
                 make.leading.trailing.equalToSuperview().inset(28)
                 make.height.equalTo(49)
             }
@@ -168,8 +222,11 @@ class CreateDonationViewController: UIViewController {
     @objc
     private func dismissKeyboard() {
         if donataionProductTextField.isEditing && !(donataionProductTextField.text?.isEmpty ?? false) {
-            print("minho")
+            print("1")
             dontationTextFieldIsFilled()
+        } else if donationTextField.isEditing && !(donationTextField.text?.isEmpty ?? false) {
+            print("2")
+            donationInputViewIsFilled()
         }
         view.endEditing(true)
     }
@@ -179,6 +236,7 @@ class CreateDonationViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        setViewLayout()
+        setBasicViewLayout()
+        setDonationProductView()
     }
 }
