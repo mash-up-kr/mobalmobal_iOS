@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        setNavigationAppearance()
+        
         FirebaseApp.configure()
         
         // setting Firebase Cloud Messaging
@@ -55,6 +57,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
+    private func setNavigationAppearance() {
+        let standard: UINavigationBarAppearance = UINavigationBarAppearance()
+        
+        // background
+        standard.configureWithOpaqueBackground()
+        standard.backgroundColor = .black94
+        
+        // title
+        standard.titleTextAttributes = [
+            .foregroundColor: UIColor.whiteTwo,
+            .font: UIFont.spoqaHanSansNeo(ofSize: 17, weight: .medium)
+        ]
+        
+        // button
+        let btnAppearance: UIBarButtonItemAppearance = UIBarButtonItemAppearance(style: .plain)
+        btnAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
+        standard.buttonAppearance = btnAppearance
+        
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().standardAppearance = standard
+    }
 }
 
 // MARK: - UNUserNotificationCenterDelegate

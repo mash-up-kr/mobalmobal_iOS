@@ -18,7 +18,7 @@ class InputChargingPointViewController: UIViewController {
     }()
     private let chargingInputField: UITextField = {
         let textField: UITextField = UITextField()
-        textField.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 15)
+        textField.font = .spoqaHanSansNeo(ofSize: 15, weight: .bold)
         textField.keyboardType = .numberPad
         textField.attributedPlaceholder = NSAttributedString(string: "충전할 금액을 입력하세요", attributes: [NSAttributedString.Key.foregroundColor: UIColor.brownGreyTwo])
         textField.textColor = .white
@@ -38,7 +38,9 @@ class InputChargingPointViewController: UIViewController {
         button.layer.cornerRadius = 30
         button.backgroundColor = .greyishBrown
         button.setTitle("충전하기", for: .normal)
+        button.titleLabel?.font = .spoqaHanSansNeo(ofSize: 18, weight: .medium)
         button.setTitleColor(.brownGreyTwo, for: .normal)
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()
     // MARK: - Properties
@@ -55,19 +57,34 @@ class InputChargingPointViewController: UIViewController {
                                                     withTemplate: ",")
     }
     private let maxChargingPoint: Int = 10_000_000
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
         self.chargingInputField.becomeFirstResponder()
-        setLayout()
-        setNavigation()
         viewTapGesture()
+        setNavigationItems()
+        setLayout()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     // MARK: - Actions
     @objc
+    private func buttonTapped() {
+        let accountVC: AccountViewController = AccountViewController()
+        guard let inputText = chargingInputField.text else {
+            return
+        }
+        accountVC.charge = "\(inputText)원"
+        self.navigationController?.pushViewController(accountVC, animated: true)
+    }
+    @objc
     private func popVC() {
-        print("✨ pop viewcontroller")
+        self.navigationController?.popViewController(animated: true)
     }
     @objc
     private func textEdited(textField: UITextField) {
@@ -88,6 +105,7 @@ class InputChargingPointViewController: UIViewController {
             disactivateButtonUI()
         }
     }
+    
     // MARK: - Methods
     private func viewTapGesture() {
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
@@ -97,33 +115,29 @@ class InputChargingPointViewController: UIViewController {
     private func activateButtonUI() {
         chargingButton.setTitleColor(.blackThree, for: .normal)
         chargingButton.backgroundColor = .lightBluishGreen
+        chargingButton.isEnabled = true
     }
     private func disactivateButtonUI() {
         chargingButton.setTitleColor(.brownGreyTwo, for: .normal)
         chargingButton.backgroundColor = .greyishBrown
+        chargingButton.isEnabled = false
     }
     private func showAlertController() {
-        print("✨ alertcontroller")
+        // TODO
         // 디자인 나오면 수정 필요
         let alertController: UIAlertController = UIAlertController(title: "충전금액", message: "충전가능금액은 최대 10,000,000원 입니다.", preferredStyle: .alert)
         let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
-    private func setNavigation() {
-        self.navigationController?.navigationBar.backgroundColor = .black94
-        self.navigationController?.navigationBar.barTintColor = .black94
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationItem.title = "충전"
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
-        self.navigationItem.leftBarButtonItem?.tintColor = .white
+    private func setNavigationItems() {
+        self.setNavigationItems(title: "충전", backButtonImageName: "arrowChevronBigLeft", action: #selector(popVC))
     }
     private func setLayout() {
         [chargingButton, chargingInputView].forEach { view.addSubview($0) }
         [chargingViewImage, chargingInputField].forEach { chargingInputView.addSubview($0) }
         chargingInputView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(52)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(52)
             make.leading.trailing.equalToSuperview().inset(15)
             make.centerX.equalToSuperview()
             make.height.equalTo(60)

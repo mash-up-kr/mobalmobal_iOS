@@ -30,8 +30,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func fourthButtonIsTapped(_ sender: UIButton) {
-        let vc: ProfileViewController = ProfileViewController()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        let vc = ProfileViewController()
+        let navVc: UINavigationController = UINavigationController(rootViewController: vc)
+        navVc.modalPresentationStyle = .overFullScreen
+//        vc.modalPresentationStyle = .fullScreen
+        self.present(navVc, animated: true, completion: nil)
     }
 }
