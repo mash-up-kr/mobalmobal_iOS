@@ -62,6 +62,8 @@
 		D7147D6525E7686800AA0878 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6425E7686800AA0878 /* FacebookCore */; };
 		D7147D6925E768B800AA0878 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6825E768B800AA0878 /* Toast */; };
 		D7147D6C25E76A1900AA0878 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */; };
+		E3F1EA8425EA552800F34BDE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EA8325EA552800F34BDE /* SettingViewController.swift */; };
+		E3F1EA8A25EA5AE300F34BDE /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EA8925EA5AE300F34BDE /* SettingTableViewCell.swift */; };
 		D7AC0C9525EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9425EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift */; };
 		D7AC0C9925EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */; };
 		D7AC0C9D25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9C25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift */; };
@@ -119,6 +121,8 @@
 		D70C37DD25E103F100898271 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobalMobalDebug.entitlements; sourceTree = "<group>"; };
+		E3F1EA8325EA552800F34BDE /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		E3F1EA8925EA5AE300F34BDE /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		D7AC0C9425EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMyDonationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAddMyDonationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D7AC0C9C25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMyOngoingDonationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -334,6 +338,7 @@
 		D70C37C725E103DD00898271 /* MobalMobal */ = {
 			isa = PBXGroup;
 			children = (
+				E3F1EA8025EA551F00F34BDE /* Setting */,
 				D7E44EEF25EA5133007FDB4F /* Main */,
 				3A179F4B25FB5A2100901436 /* DonateMoney */,
 				3A179F5E25FB878F00901436 /* InputDonationMoney */,
@@ -362,6 +367,15 @@
 			path = MobalMobal;
 			sourceTree = "<group>";
 		};
+		E3F1EA8025EA551F00F34BDE /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				E3F1EA8325EA552800F34BDE /* SettingViewController.swift */,
+				E3F1EA8925EA5AE300F34BDE /* SettingTableViewCell.swift */,
+			);
+			path = Setting;
+            sourceTree = "<group>";
+        };
 		D7AC0C9325EAB610000A342A /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -594,6 +608,7 @@
 				3A1BD73125F15EF20079D56D /* DetailParticipantsView.swift in Sources */,
 				7C39985D25FA51AA00EA82C2 /* AccountViewController.swift in Sources */,
 				D70C37CD25E103DD00898271 /* ViewController.swift in Sources */,
+				E3F1EA8A25EA5AE300F34BDE /* SettingTableViewCell.swift in Sources */,
 				3AB1D0252610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift in Sources */,
 				7C39979125F75B5900EA82C2 /* SuccessChargingViewController.swift in Sources */,
 				7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */,
@@ -612,6 +627,7 @@
 				7C04535625EA949B00870761 /* ProfileViewController.swift in Sources */,
 				7C04535A25EA98B900870761 /* ProfileTableViewCell.swift in Sources */,
 				D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */,
+				E3F1EA8425EA552800F34BDE /* SettingViewController.swift in Sources */,
 				D7AC0CA325EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift in Sources */,
 				D7E44EF125EA5149007FDB4F /* MainViewController.swift in Sources */,
 				D7AC0C9D25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift in Sources */,
