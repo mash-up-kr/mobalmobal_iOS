@@ -12,6 +12,7 @@ class DonationDetailViewController: UIViewController {
     let scrollView: UIScrollView = {
         let scrollView: UIScrollView = UIScrollView()
         scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.alwaysBounceVertical = true
         scrollView.backgroundColor = .backgroundColor
         return scrollView
     }()
@@ -253,6 +254,4 @@ class DonationDetailViewController: UIViewController {
         let donationButtonTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickDonationButton))
         donationButton.addGestureRecognizer(donationButtonTap)
     }
-    
-    // MARK: - Protocols
 }
