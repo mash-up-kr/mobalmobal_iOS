@@ -24,7 +24,7 @@ class ProfileTableViewCell: UITableViewCell {
     }()
     private lazy var pointLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = self.point
+        label.text = "\(self.point ?? 0)원"
         label.font = .spoqaHanSansNeo(ofSize: 16, weight: .bold)
         label.textColor = .white
         return label
@@ -52,15 +52,16 @@ class ProfileTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     // dummy data
-    let nickname: String = "Jercy"
-    let point: String = "12,340원"
-    let userImg: String = "profile"
-    
+    private var nickname: String?
+    private var point: Int?
+    private let userImg: String = "profile"
+    private let profileViewModel: ProfileViewModel = ProfileViewModel()
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.backgroundColor = .backgroundColor
         self.setLayout()
+        self.binding()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -78,5 +79,11 @@ class ProfileTableViewCell: UITableViewCell {
             make.leading.equalTo(profileImage.snp.trailing).offset(12)
             make.centerY.equalTo(profileImage)
         }
+    }
+    
+    private func binding() {
+        self.nickname = profileViewModel.getUserNickname()
+        self.point = profileViewModel.getUserCash()
+        // 이미지처리는 s3이후에 진행하겟습니다
     }
 }
