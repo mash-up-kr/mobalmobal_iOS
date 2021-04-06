@@ -105,39 +105,37 @@ class LoginViewController: UIViewController {
         stackView.setCustomSpacing(view.frame.height * 13 / 812, after: facebookButton)
     }
     
+    @IBAction private func clickGoogleLoginButton() {
+        loginWithGoogle()
+    }
     @IBAction private func clickFacebookLoginButton() {
         loginWithFacebook()
-//        goToDonationDetail()
-    }
-    @IBAction private func clickGoogleLoginButton() {
-//        loginWithGoogle()
-        goToMainViewController()
     }
     @IBAction private func clickAppleLoginButton() {
-//        loginWithApple()
-        goToMainViewController()
+        loginWithApple()
     }
     
-    private func goToMainViewController() {
+    private func presentMainViewController() {
         let mainVC: MainViewController = MainViewController()
         let navigation: UINavigationController = UINavigationController(rootViewController: mainVC)
         navigation.modalPresentationStyle = .fullScreen
         self.present(navigation, animated: true)
     }
     
-    private func goToSignUpViewController() {
+    private func pushSignUpViewController() {
         let signUpVC: SignupViewController = SignupViewController()
         navigationController?.pushViewController(signUpVC, animated: true)
     }
 }
 
+// MARK: - LoginViewModelDelegate
 extension LoginViewController: LoginViewModelDelegate {
     func successLogin() {
-        goToMainViewController()
+        presentMainViewController()
     }
     
     func needToSignUp(with firestoreId: String) {
-        goToSignUpViewController()
+        pushSignUpViewController()
     }
 }
 
