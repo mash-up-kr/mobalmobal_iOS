@@ -9,15 +9,16 @@ import Alamofire
 import Foundation
 
 protocol LoginViewModelDelegate: AnyObject {
-    func needToSignUp(with firestoreId: String)
+    func needToSignUp()
     func successLogin()
 }
 
 class LoginViewModel {
-    private let userTokenKey: String = "userToken"
     weak var delegate: LoginViewModelDelegate?
     
-    private var fireStoreId: String?
+    private var fireStoreId: String? {
+        didSet { setFireStoreId() }
+    }
     private var loginResponse: LoginResponse? {
         didSet { loginResponseChanged() }
     }
@@ -64,7 +65,7 @@ class LoginViewModel {
             delegate?.successLogin()
         case .unknownAccount:
             guard let fireStoreId = fireStoreId else { break }
-            delegate?.needToSignUp(with: fireStoreId)
+            delegate?.needToSignUp()
             fallthrough
         default:
             self.resetUserToken()
@@ -72,11 +73,19 @@ class LoginViewModel {
         }
     }
     
+    private func setFireStoreId() {
+        guard let id = fireStoreId else {
+            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.fireStoreId)
+            return
+        }
+        UserDefaults.standard.setValue(id, forKey: UserDefaultsKeys.fireStoreId)
+    }
+    
     private func setUserToken(_ token: String) {
-        UserDefaults.standard.setValue(token, forKey: userTokenKey)
+        UserDefaults.standard.setValue(token, forKey: UserDefaultsKeys.userToken)
     }
     
     private func resetUserToken() {
-        UserDefaults.standard.removeObject(forKey: userTokenKey)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userToken)
     }
 }
