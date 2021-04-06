@@ -10,14 +10,16 @@ import Foundation
 
 protocol LoginViewModelDelegate: AnyObject {
     func needToSignUp(with firestoreId: String)
+    func successLogin()
 }
 
 class LoginViewModel {
+    private let userTokenKey: String = "userToken"
     weak var delegate: LoginViewModelDelegate?
     
     private var fireStoreId: String?
     private var loginResponse: LoginResponse? {
-        didSet { loginResponseParsed() }
+        didSet { loginResponseChanged() }
     }
     
     func login(with fireStoreId: String) {
@@ -49,18 +51,32 @@ class LoginViewModel {
         }
     }
     
-    private func loginResponseParsed() {
-        guard let parsedResponse = loginResponse else { return }
+    private func loginResponseChanged() {
+        guard let loginResponse = loginResponse else {
+            self.resetUserToken()
+            return
+        }
         
-        switch parsedResponse.code {
+        switch loginResponse.code {
         case .success:
-            // 토큰 저장 & 메인으로 이동
-            break
+            guard let token = loginResponse.data?.token.token else { break }
+            self.setUserToken(token)
+            delegate?.successLogin()
         case .unknownAccount:
             guard let fireStoreId = fireStoreId else { break }
             delegate?.needToSignUp(with: fireStoreId)
+            fallthrough
         default:
-            print(parsedResponse.message)
+            self.resetUserToken()
+            print("🐻 \(loginResponse.message)")
         }
+    }
+    
+    private func setUserToken(_ token: String) {
+        UserDefaults.standard.setValue(token, forKey: userTokenKey)
+    }
+    
+    private func resetUserToken() {
+        UserDefaults.standard.removeObject(forKey: userTokenKey)
     }
 }

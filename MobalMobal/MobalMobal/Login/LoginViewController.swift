@@ -111,26 +111,31 @@ class LoginViewController: UIViewController {
     }
     @IBAction private func clickGoogleLoginButton() {
 //        loginWithGoogle()
-        goToDonationDetail()
+        goToMainViewController()
     }
     @IBAction private func clickAppleLoginButton() {
 //        loginWithApple()
-        goToDonationDetail()
+        goToMainViewController()
+    }
+    
+    private func goToMainViewController() {
+        let mainVC: MainViewController = MainViewController()
+        let navigation: UINavigationController = UINavigationController(rootViewController: mainVC)
+        navigation.modalPresentationStyle = .fullScreen
+        self.present(navigation, animated: true)
     }
     
     private func goToSignUpViewController() {
         let signUpVC: SignupViewController = SignupViewController()
         navigationController?.pushViewController(signUpVC, animated: true)
     }
-    
-    // 임시로 상세보기 화면으로 가는 코드
-    private func goToDonationDetail() {
-        let detailVC: DonationDetailViewController = DonationDetailViewController()
-        navigationController?.pushViewController(detailVC, animated: true)
-    }
 }
 
 extension LoginViewController: LoginViewModelDelegate {
+    func successLogin() {
+        goToMainViewController()
+    }
+    
     func needToSignUp(with firestoreId: String) {
         goToSignUpViewController()
     }
@@ -144,25 +149,12 @@ extension LoginViewController {
                 print("🐻 FirebaseAuth :: error: \(error) 🐻")
                 return
             }
-            guard let authResult = authResult else {
-                // print("🐻 FirebaseAuth :: No Auth Result 🐻")
-                return
-            }
+            guard let authResult = authResult else { return }
             let fireStoreId: String = authResult.user.uid
             print("🐻 fireStoreId: \(fireStoreId)")
             self?.viewModel.login(with: fireStoreId)
             
-//            user?.getIDTokenForcingRefresh(true) {idToken, error in
-//                if let error: Error = error {
-//                    print("🐻 FirebaseAuth :: error: \(error) 🐻")
-//                    return
-//                }
-//                guard let idToken = idToken else {
-//                    print("🐻 FirebaseAuth :: idToken Error 🐻")
-//                    return
-//                }
-//                print("🐻 FirebaseAuth :: idToken: \(idToken) 🐻")
-//            }
+//            user?.getIDTokenForcingRefresh(true) {idToken, error in ... }
         }
     }
 }
