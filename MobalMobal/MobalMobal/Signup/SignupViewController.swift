@@ -92,9 +92,7 @@ class SignupViewController: UIViewController {
     
     @objc
     func backButtonTapped() {
-        // 실제로는 pop이 되어야 함. dismiss는 임시코드
-        // navigationController?.popViewController(animated: true)
-        navigationController?.dismiss(animated: true)
+         navigationController?.popViewController(animated: true)
     }
     
     private func setNicknameView() {

@@ -50,6 +50,12 @@ class LoginViewController: UIViewController {
         viewModel.delegate = self
         view.backgroundColor = .backgroundColor
         setActions()
+        updateViewConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func updateViewConstraints() {
@@ -114,16 +120,13 @@ class LoginViewController: UIViewController {
     
     private func goToSignUpViewController() {
         let signUpVC: SignupViewController = SignupViewController()
-        let navigation: UINavigationController = UINavigationController(rootViewController: signUpVC)
-        navigation.modalPresentationStyle = .fullScreen
-        self.present(navigation, animated: true)
+        navigationController?.pushViewController(signUpVC, animated: true)
     }
     
     // 임시로 상세보기 화면으로 가는 코드
     private func goToDonationDetail() {
         let detailVC: DonationDetailViewController = DonationDetailViewController()
-        detailVC.modalPresentationStyle = .fullScreen
-        self.present(detailVC, animated: true)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
