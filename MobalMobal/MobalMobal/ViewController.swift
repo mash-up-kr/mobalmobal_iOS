@@ -14,16 +14,15 @@ class ViewController: UIViewController {
     }
     
     // - MARK : 각자 view로 넘어감
-    @IBAction private func firstButtonIsTapped(_ sender: UIButton) {
-        let viewController = SignupViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true)
-       
+    @IBAction func firstButtonIsTapped(_ sender: UIButton) {
+        let viewController = SettingViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
-    @IBAction func secondButtonIsTapped(_ sender: UIButton) {
-        
+    @IBAction private func secondButtonIsTapped(_ sender: UIButton) {
+        let mainVC: MainViewController = MainViewController()
+        mainVC.modalPresentationStyle = .fullScreen
+        self.present(mainVC, animated: true, completion: nil)
     }
     
     @IBAction private func thirdButtonIsTapped(_ sender: UIButton) {
