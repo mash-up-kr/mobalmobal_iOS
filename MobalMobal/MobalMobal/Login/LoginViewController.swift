@@ -41,6 +41,7 @@ class LoginViewController: UIViewController {
     }()
     
     // MARK: - Properties
+    let viewModel: LoginViewModel = LoginViewModel()
     fileprivate var currentNonce: String?
         
     // MARK: - Life Cycle
@@ -100,8 +101,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction private func clickFacebookLoginButton() {
-//        loginWithFacebook()
-        goToDonationDetail()
+        loginWithFacebook()
+//        goToDonationDetail()
     }
     @IBAction private func clickGoogleLoginButton() {
 //        loginWithGoogle()
@@ -123,25 +124,30 @@ class LoginViewController: UIViewController {
 // MARK: - Firebase
 extension LoginViewController {
     private func loginWithFirebase(credential: AuthCredential) {
-        Auth.auth().signIn(with: credential) { authResult, error in
-            // guard let self = self else { return }
+        Auth.auth().signIn(with: credential) { [weak self] authResult, error in
             if let error: Error = error {
                 print("🐻 FirebaseAuth :: error: \(error) 🐻")
                 return
             }
-            
-            let user: User? = authResult?.user
-            user?.getIDTokenForcingRefresh(true) { idToken, error in
-                if let error: Error = error {
-                    print("🐻 FirebaseAuth :: error: \(error) 🐻")
-                    return
-                }
-                guard let idToken = idToken else {
-                    print("🐻 FirebaseAuth :: idToken Error 🐻")
-                    return
-                }
-                print("🐻 FirebaseAuth :: idToken: \(idToken) 🐻")
+            guard let authResult = authResult else {
+                // print("🐻 FirebaseAuth :: No Auth Result 🐻")
+                return
             }
+            let fireStoreId: String = authResult.user.uid
+            print("🐻 fireStoreId: \(fireStoreId)")
+            self?.viewModel.login(with: fireStoreId)
+            
+//            user?.getIDTokenForcingRefresh(true) {idToken, error in
+//                if let error: Error = error {
+//                    print("🐻 FirebaseAuth :: error: \(error) 🐻")
+//                    return
+//                }
+//                guard let idToken = idToken else {
+//                    print("🐻 FirebaseAuth :: idToken Error 🐻")
+//                    return
+//                }
+//                print("🐻 FirebaseAuth :: idToken: \(idToken) 🐻")
+//            }
         }
     }
 }
