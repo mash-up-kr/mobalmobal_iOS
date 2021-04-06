@@ -47,9 +47,8 @@ class LoginViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        viewModel.delegate = self
         view.backgroundColor = .backgroundColor
-
         setActions()
     }
     
@@ -113,11 +112,24 @@ class LoginViewController: UIViewController {
         goToDonationDetail()
     }
     
+    private func goToSignUpViewController() {
+        let signUpVC: SignupViewController = SignupViewController()
+        let navigation: UINavigationController = UINavigationController(rootViewController: signUpVC)
+        navigation.modalPresentationStyle = .fullScreen
+        self.present(navigation, animated: true)
+    }
+    
     // 임시로 상세보기 화면으로 가는 코드
     private func goToDonationDetail() {
         let detailVC: DonationDetailViewController = DonationDetailViewController()
         detailVC.modalPresentationStyle = .fullScreen
         self.present(detailVC, animated: true)
+    }
+}
+
+extension LoginViewController: LoginViewModelDelegate {
+    func needToSignUp(with firestoreId: String) {
+        goToSignUpViewController()
     }
 }
 

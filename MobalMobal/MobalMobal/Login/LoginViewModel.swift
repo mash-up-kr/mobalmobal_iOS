@@ -8,7 +8,13 @@
 import Alamofire
 import Foundation
 
+protocol LoginViewModelDelegate: AnyObject {
+    func needToSignUp(with firestoreId: String)
+}
+
 class LoginViewModel {
+    weak var delegate: LoginViewModelDelegate?
+    
     private var fireStoreId: String?
     private var loginResponse: LoginResponse? {
         didSet { loginResponseParsed() }
@@ -31,23 +37,6 @@ class LoginViewModel {
         }
     }
     
-    private func loginResponseParsed() {
-        guard let parsedResponse = loginResponse else {
-            return
-        }
-        
-        switch parsedResponse.code {
-        case .success:
-            // 토큰 저장
-            break
-        case .unknownAccount:
-            // 회원가입으로 이동
-            break
-        default:
-            print(parsedResponse.message)
-        }
-    }
-    
     private func parse(response value: Any) throws -> LoginResponse {
         do {
             let data: Data = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
@@ -57,6 +46,21 @@ class LoginViewModel {
         } catch let error {
             print("🐻 Login Response Decode Error: \(error.localizedDescription)")
             throw error
+        }
+    }
+    
+    private func loginResponseParsed() {
+        guard let parsedResponse = loginResponse else { return }
+        
+        switch parsedResponse.code {
+        case .success:
+            // 토큰 저장 & 메인으로 이동
+            break
+        case .unknownAccount:
+            guard let fireStoreId = fireStoreId else { break }
+            delegate?.needToSignUp(with: fireStoreId)
+        default:
+            print(parsedResponse.message)
         }
     }
 }
