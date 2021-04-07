@@ -23,9 +23,8 @@ class DonationDetailViewController: UIViewController {
     }()
     
     // Top Image Area
-    lazy var detailImageView: UIImageView = {
-        let imageView: UIImageView = UIImageView()
-        imageView.image = UIImage(named: "doneImage") // 스켈레톤 데이터
+    let detailImageView: UIImageView = {
+        let imageView: UIImageView = UIImageView(image: UIImage(named: "doneImage"))
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
@@ -37,8 +36,8 @@ class DonationDetailViewController: UIViewController {
     }()
     let progressLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "0%" // 스켈레톤 데이터
-        label.font = UIFont(name: "Lato-Bold", size: 18)
+        label.text = "0%"
+        label.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
         label.textColor = .white
         return label
     }()
@@ -46,17 +45,14 @@ class DonationDetailViewController: UIViewController {
         let view: UIView = UIView()
         view.backgroundColor = .wheat
         // shadow 적용
-        view.layer.shadowColor = UIColor.yellowTan80.cgColor
-        view.layer.shadowRadius = 10 / UIScreen.main.scale
-        view.layer.shadowOpacity = 1.0
-        view.layer.shadowOffset = .zero
+        view.drawShadow(color: .yellowTan80, blur: 10)
         view.layer.masksToBounds = false
         return view
     }()
     let dDayLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "D-Day" // 스켈레톤 데이터
-        label.font = UIFont(name: "Lato-Regular", size: 13)
+        label.text = "D-알수없음"
+        label.font = .spoqaHanSansNeo(ofSize: 13, weight: .regular)
         label.textColor = .veryLightPink
         return label
     }()
@@ -64,8 +60,7 @@ class DonationDetailViewController: UIViewController {
     // Mid Description Area
     let nameGiftGroupView: UIView = UIView()
     let profileImageView: UIImageView = {
-        let imageView: UIImageView = UIImageView()
-        imageView.image = UIImage(named: "Profile") // 스켈레톤 데이터
+        let imageView: UIImageView = UIImageView(image: UIImage(named: "Profile"))
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 29
         imageView.layer.masksToBounds = true
@@ -73,22 +68,22 @@ class DonationDetailViewController: UIViewController {
     }()
     let nameLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "User" // 스켈레톤 데이터
-        label.font = .futra(ofSize: 16, weight: .medium)
+        label.text = "누군가"
+        label.font = .spoqaHanSansNeo(ofSize: 16, weight: .medium)
         label.textColor = .white
         return label
     }()
     let zosaLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "는" // 스켈레톤 데이터
+        label.text = "는"
         label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
         label.textColor = .white
         return label
     }()
     let giftLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "선물" // 스켈레톤 데이터
-        label.font = .futra(ofSize: 16, weight: .medium)
+        label.text = "선물"
+        label.font = .spoqaHanSansNeo(ofSize: 16, weight: .medium)
         label.textColor = .wheat
         // shadow 적용
         label.layer.shadowColor = UIColor.yellowTan80.cgColor
@@ -100,14 +95,14 @@ class DonationDetailViewController: UIViewController {
     }()
     let wantLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "가지고 싶어요" // 스켈레톤 데이터
+        label.text = "가지고 싶어요"
         label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
         label.textColor = .white
         return label
     }()
     let descriptionLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = ""  // 스켈레톤 데이터
+        label.text = "한마디"
         label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
         label.textColor = .white
         label.numberOfLines = 0
@@ -129,8 +124,8 @@ class DonationDetailViewController: UIViewController {
     }()
     let destinationNumberLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "0" // 스켈레톤 데이터
-        label.font = UIFont(name: "Lato-Bold", size: 16)
+        label.text = "0"
+        label.font = .spoqaHanSansNeo(ofSize: 16, weight: .bold)
         label.textColor = UIColor.white.withAlphaComponent(0.5)
         return label
     }()
@@ -143,8 +138,8 @@ class DonationDetailViewController: UIViewController {
     }()
     let fundAmountNumberLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "0" // 스켈레톤 데이터
-        label.font = UIFont(name: "Lato-Bold", size: 16)
+        label.text = "0"
+        label.font = .spoqaHanSansNeo(ofSize: 16, weight: .bold)
         label.textColor = .lightBluishGreen
         return label
     }()
@@ -157,7 +152,7 @@ class DonationDetailViewController: UIViewController {
     }()
     let participantsCountLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "" // 스켈레톤 데이터
+        label.text = ""
         label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
         label.textColor = .veryLightPink
         return label
@@ -177,16 +172,16 @@ class DonationDetailViewController: UIViewController {
     }()
     let endDateLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "20xx.xx.xx" // 스켈레톤 데이터
-        label.font = UIFont(name: "Lato-Bold", size: 16)
+        label.text = "YYYY.MM.dd"
+        label.font = .spoqaHanSansNeo(ofSize: 16, weight: .bold)
         label.textColor = UIColor.white.withAlphaComponent(0.5)
         return label
     }()
-    lazy var donationButton: UIButton = {
+    let donationButton: UIButton = {
         let button: UIButton = UIButton()
         button.backgroundColor = .purpleishBlue
         button.setTitleColor(.white, for: .normal)
-        button.setTitle("User 에게 후원하기", for: .normal)
+        button.setTitle("누군가 에게 후원하기", for: .normal)
         button.titleLabel?.font = .spoqaHanSansNeo(ofSize: 16, weight: .medium)
         button.addTarget(self, action: #selector(clickDonationButton), for: .touchUpInside)
         return button
@@ -266,12 +261,17 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
         progressLabel.text = "\(Int(progress) * 100)%"
         destinationNumberLabel.text = goal.changeToCommaFormat()
         fundAmountNumberLabel.text = current.changeToCommaFormat()
-        progressBarView.snp.updateConstraints { make in
+        
+        progressBarView.snp.remakeConstraints { make in
             make.width.equalToSuperview().multipliedBy(progress)
         }
     }
     func didEndDateChanged(to date: Date?) {
-        guard let date = date else { return }
+        guard let date = date else {
+            endDateLabel.text = "YYYY.MM.dd"
+            dDayLabel.text = "D-알수없음"
+            return
+        }
         
         // 종료 날짜
         let dateFormatter: DateFormatter = DateFormatter()

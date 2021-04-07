@@ -20,31 +20,31 @@ class DonationDetailViewModel {
     weak var delegate: DonationDetailViewModelDelegate?
     
     // MARK: - Properties
-    private var donationId: Int = 1 { // id가 정해지면 API 통신
+    private var donationId: Int = -1 { // id가 정해지면 API 통신
         didSet { callDonationInfoAPI() }
     }
     private var detailResponse: DonationDetailResponse? { // 응답이 들어오면 값 세팅
         didSet { setDonationInfo() }
     }
-    private var donationImageURL: String? { // 이미지
+    private lazy var donationImageURL: String? = nil { // 이미지
         didSet { delegate?.didImageChanged(to: donationImageURL) }
     }
-    private var donationPublisherName: String = "게시자" {
+    private lazy var donationPublisherName: String = "누군가" {
         didSet { delegate?.didPublisherChanged(to: donationPublisherName) }
     }
-    private var donationTitle: String = "도네이션 제목" {
+    private lazy var donationTitle: String = "선물" {
         didSet { delegate?.didTitleChanged(to: donationTitle) }
     }
-    private var donationDescription: String = "한마디" {
+    private lazy var donationDescription: String = "한마디" {
         didSet { delegate?.didDesciptionChanged(to: donationDescription) }
     }
-    private var donationGoal: Int = 0 { // 목표액
+    private lazy var donationGoal: Int = 0 { // 목표액
         didSet { delegate?.didProgressChanged(current: donationAmount, goal: donationGoal) }
     }
-    private var donationAmount: Int = 0 {   // 모금액
+    private lazy var donationAmount: Int = 0 {   // 모금액
         didSet { delegate?.didProgressChanged(current: donationAmount, goal: donationGoal) }
     }
-    private var donationEndDate: Date? {  // 종료 날짜
+    private lazy var donationEndDate: Date? = nil {  // 종료 날짜
         didSet { delegate?.didEndDateChanged(to: donationEndDate) }
     }
     
