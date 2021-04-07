@@ -262,10 +262,13 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
         descriptionLabel.text = description
     }
     func didProgressChanged(current: Int, goal: Int) {
-        let progress: Float = Float(current) / Float(goal) * 100
-        progressLabel.text = "\(Int(progress))%"
+        let progress: Float = Float(current) / Float(goal)
+        progressLabel.text = "\(Int(progress) * 100)%"
         destinationNumberLabel.text = goal.changeToCommaFormat()
         fundAmountNumberLabel.text = current.changeToCommaFormat()
+        progressBarView.snp.updateConstraints { make in
+            make.width.equalToSuperview().multipliedBy(progress)
+        }
     }
     func didEndDateChanged(to date: Date?) {
         guard let date = date else { return }
