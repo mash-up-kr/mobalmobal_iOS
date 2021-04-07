@@ -21,13 +21,17 @@ class ProfileViewController: UIViewController {
     private let myDonationCellIdentifier: String = "MyDonationTableViewCell"
     private let donatingCellIdentifier: String = "DonatingTableViewCell"
     private let sectionHeaderCellIdentifier: String = "SectionHeaderCell"
-    private let numberOfDonations: [Int] = [1, 1, 1]
+    private lazy var numberOfDonations: [Int] = [0,0,0]     //내연, 후원중, 종료 갯수
+    private let profileViewModel: ProfileViewModel = ProfileViewModel()
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
         setLayout()
         setNavigation()
+        profileViewModel.getProfileResponse()
+        profileViewModel.mainDelegate = self
     }
     
     // MARK: - Actions
@@ -68,8 +72,8 @@ class ProfileViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = .blackFour
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.isNavigationBarHidden = false
-        // dummy data
-        self.navigationItem.title = "Jercy"
+        
+        self.navigationItem.title = profileViewModel.getUserNickname()
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.whiteTwo]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
         
@@ -117,10 +121,25 @@ extension ProfileViewController: UITableViewDataSource {
             return numberOfDonations[section - 2]
         }
     }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        print("display")
+//        if indexPath.section == 0 {
+//            guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return }
+//            if let userNickname: String = profileViewModel.getUserNickname(),
+//                  let userCash = profileViewModel.getUserCash() {
+//                profileCell.binding(nickname: userNickname, cash: userCash)
+//                print("after section 0")
+//            }
+//        }
+//    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("cell for row at")
         if indexPath.section == 0 {
             guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return UITableViewCell() }
             profileCell.selectionStyle = .none
+            profileCell.cellViewModel.refViewModel(profileViewModel.profileResponseModel ?? nil)
+//            profileCell.cellViewModel.delegate?.setUIFromModel()
+//            print(profileCell.viewModel.getUserCash())
             return profileCell
         } else if indexPath.section == 1 {
             guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
@@ -156,4 +175,13 @@ extension ProfileViewController: UITableViewDataSource {
 
  // MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
+}
+
+extension ProfileViewController: ProfileViewModelDelegate {
+    func tableViewUpdate() {
+//        let section1Cell = ProfileTableViewCell()
+//        section1Cell.viewModel.profileCellDelegate?.setUIFromModel()
+        self.mainTableView.reloadData()
+        print("reload data")
+    }
 }

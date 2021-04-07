@@ -95,6 +95,7 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
     // MARK: - Properties
     // myDonationText는 변경가능성이있다고하여서 빼두었습니다.
     private let myDonationText: [String] = ["받는", "주는", "종료"]
+    private let profileViewModel: ProfileViewModel = ProfileViewModel()
     // dummy data
     private let myDonationNumber: [Int] = [1, 3, 10]
     
@@ -133,5 +134,8 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview().inset(15)
             make.leading.trailing.equalToSuperview().inset(48)
         }
+    }
+    private func mydonationBinding() {
+        
     }
 }

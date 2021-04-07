@@ -8,28 +8,29 @@
 import Foundation
 
 struct ProfileResponse: Codable {
-    let data: ProfileData?
+    let data: ProfileData
     let code: Int
-    let message: String?
+//    let message: String?
         // 요청 실패일 때만 메세지존재
 }
 
 struct ProfileData: Codable {
-    let user: UserInfo?
+    let user: UserInfo
 }
 
 struct UserInfo: Codable {
-    let userId: String
+    let userId: Int
     let nickname: String
     let phoneNumber: String?
     let accountNumber: String?
     let bankName: String?
     let profileImage: String?
     let cash: Int
+    let firestoreId: String
     let provider: String
-    let createdAt: Date
-    let updatedAt: Date
-    let deletedAt: Date
+    let createdAt: Date?
+    let updatedAt: Date?
+    let deletedAt: Date?
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
@@ -37,9 +38,7 @@ struct UserInfo: Codable {
         case bankName = "bank_name"
         case accountNumber = "account_number"
         case profileImage = "profile_image"
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case deletedAt = "deleted_at"
-        case nickname, cash, provider
+        case firestoreId = "firestore_id"
+        case nickname, cash, provider, createdAt, updatedAt, deletedAt
     }
 }
