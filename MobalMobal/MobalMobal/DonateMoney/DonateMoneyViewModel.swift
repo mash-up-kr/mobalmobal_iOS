@@ -18,7 +18,7 @@ class DonateMoneyViewModel {
     // MARK: - Properties
     let amounts: [Int] = [1_000, 2_000, 5_000, 10_000, 50_000, 100_000]
     
-    private var postId: Int?
+    private var postId: Int = -1
     private var amount: Int?
     private var donateResponse: DonateMoneyResponse? {  // 응답 받아오면 delegate 함수 호출
         didSet {
@@ -39,7 +39,7 @@ class DonateMoneyViewModel {
     func setPostId(_ postId: Int) {
         self.postId = postId
     }
-    func getPostId() -> Int? {
+    func getPostId() -> Int {
         self.postId
     }
     
@@ -48,7 +48,7 @@ class DonateMoneyViewModel {
         let donateURL: String = ServerURL.donateURL
         // TODO : testToken -> UserDefaults Token
         let header: HTTPHeaders = ["authorization": ServerString.testToken]
-        let params: Parameters = ["post_id": postId as Any, "amount": amount]
+        let params: Parameters = ["post_id": postId, "amount": amount]
         self.amount = amount
         
         AF.request(donateURL, method: .post, parameters: params, encoding: JSONEncoding.default, headers: header).responseJSON { [weak self] response in
