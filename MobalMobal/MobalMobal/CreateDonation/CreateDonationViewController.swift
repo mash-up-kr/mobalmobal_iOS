@@ -31,6 +31,8 @@ class CreateDonationViewController: UIViewController {
         return button
     }()
     
+    private let datePicker: UIDatePicker = UIDatePicker()
+    
     private let donationProductView: UIView = {
         let view: UIView = UIView()
         return view
@@ -46,6 +48,11 @@ class CreateDonationViewController: UIViewController {
         return view
     }()
     
+    private let donationStartDateView: UIView = {
+        let view: UIView = UIView()
+        return view
+    }()
+    
     private var donataionProductTextField: UITextField = {
         let textField: UITextField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "가지고 싶은 물건 이름은?", attributes: [
@@ -54,6 +61,41 @@ class CreateDonationViewController: UIViewController {
         ])
         textField.font = UIFont(name: "Roboto-Regular", size: 24)
         textField.textColor = .veryLightPink
+        return textField
+    }()
+    
+    private var donationTextField: UITextField = {
+        let textField: UITextField = UITextField()
+        textField.attributedPlaceholder = NSAttributedString(string: "하고싶은 말", attributes: [
+            NSAttributedString.Key.foregroundColor : UIColor.veryLightPink,
+//            NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 24)
+        ])
+        textField.font = UIFont(name: "Roboto-Regular", size: 24)
+        textField.textColor = .veryLightPink
+        return textField
+    }()
+    
+    private var donationPriceTextField: UITextField = {
+        let textField: UITextField = UITextField()
+        textField.attributedPlaceholder = NSAttributedString(string: "얼마를 모아볼까요?", attributes: [
+            NSAttributedString.Key.foregroundColor : UIColor.veryLightPink,
+//            NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 24)
+        ])
+        textField.font = UIFont(name: "Roboto-Regular", size: 24)
+        textField.textColor = .veryLightPink
+        textField.keyboardType = .numberPad
+        return textField
+    }()
+    
+    private var startDateTextField: UITextField = {
+        let textField: UITextField = UITextField()
+        textField.attributedPlaceholder = NSAttributedString(string: "시작 날짜를 선택해주세요", attributes: [
+            NSAttributedString.Key.foregroundColor : UIColor.veryLightPink,
+//            NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 24)
+        ])
+        textField.font = UIFont(name: "Roboto-Regular", size: 24)
+        textField.textColor = .veryLightPink
+        
         return textField
     }()
     
@@ -81,27 +123,12 @@ class CreateDonationViewController: UIViewController {
         return view
     }()
     
-    private var donationTextField: UITextField = {
-        let textField: UITextField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "하고싶은 말", attributes: [
-            NSAttributedString.Key.foregroundColor : UIColor.veryLightPink,
-//            NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 24)
-        ])
-        textField.font = UIFont(name: "Roboto-Regular", size: 24)
-        textField.textColor = .veryLightPink
-        return textField
-    }()
-    
-    private var donationPriceTextField: UITextField = {
-        let textField: UITextField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "얼마를 모아볼까요?", attributes: [
-            NSAttributedString.Key.foregroundColor : UIColor.veryLightPink,
-//            NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 24)
-        ])
-        textField.font = UIFont(name: "Roboto-Regular", size: 24)
-        textField.textColor = .veryLightPink
-        textField.keyboardType = .numberPad
-        return textField
+    private let dividerView4: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = .wheat
+        view.layer.shadowColor = UIColor.lemonLime80.cgColor
+        view.layer.shadowRadius = 10
+        return view
     }()
     
     // MARK: - Method
@@ -113,12 +140,30 @@ class CreateDonationViewController: UIViewController {
         donataionProductTextField.delegate = self
         
         addTapGesture(to: view)
+        
+        setBasicViewLayout()
+        setDonationProductView()
+        setDatePicker()
     }
     
-    func setScrollView() {
+    private func setScrollView() {
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    private func setDatePicker() {
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.locale = Locale(identifier: "ko_KR")
+        
+        if #available(iOS 14, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
+        
+        startDateTextField.inputView = datePicker
+        datePicker.snp.makeConstraints { make in
+            make.height.equalTo(200)
         }
     }
     
@@ -202,6 +247,30 @@ class CreateDonationViewController: UIViewController {
         resetConstraint(baseView: self.donationInputView, offset: 263)
     }
     
+    private func donationPriceViewIsFilled() {
+        self.view.addSubview(donationStartDateView)
+        donationStartDateView.snp.makeConstraints { make in
+            make.top.equalTo(createDonationLabel.snp.bottom).offset(177)
+            make.leading.trailing.equalToSuperview().inset(28)
+            make.height.equalTo(49)
+        }
+        
+        self.donationStartDateView.addSubview(startDateTextField)
+        startDateTextField.snp.makeConstraints { make in
+            make.top.leading.equalTo(donationStartDateView)
+        }
+        
+        self.donationStartDateView.addSubview(dividerView4)
+        dividerView4.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalTo(donationStartDateView)
+            make.height.equalTo(1)
+        }
+        
+        resetConstraint(baseView: self.donationPriceView, offset: 263)
+        resetConstraint(baseView: self.donationInputView, offset: 349)
+        resetConstraint(baseView: self.donationProductView, offset: 435)
+    }
+    
     private func resetConstraint(baseView: UIView, offset: Int) {
         baseView.snp.removeConstraints()
         UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseIn) {
@@ -209,6 +278,7 @@ class CreateDonationViewController: UIViewController {
                 make.top.equalTo(self.createDonationLabel.snp.bottom).offset(offset)
                 make.leading.trailing.equalToSuperview().inset(28)
                 make.height.equalTo(49)
+//                baseView.layoutIfNeeded()
             }
         }
     }
@@ -231,6 +301,9 @@ class CreateDonationViewController: UIViewController {
         } else if donationTextField.isEditing && !(donationTextField.text?.isEmpty ?? false) {
             print("2")
             donationInputViewIsFilled()
+        } else if donationPriceTextField.isEditing && !(donationPriceTextField.text?.isEmpty ?? false) {
+            print("3")
+            donationPriceViewIsFilled()
         }
         view.endEditing(true)
     }
@@ -240,8 +313,8 @@ class CreateDonationViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        setBasicViewLayout()
-        setDonationProductView()
+
+    
     }
 }
 
@@ -264,4 +337,3 @@ extension CreateDonationViewController: UITextFieldDelegate {
         return true
     }
 }
-
