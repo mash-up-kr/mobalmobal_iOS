@@ -12,8 +12,7 @@ protocol DonationDetailViewModelDelegate: class {
     func didPublisherChanged(to nickname: String)
     func didTitleChanged(to title: String)
     func didDesciptionChanged(to description: String)
-    func didGoalChanged(to goal: Int)
-    func didCurrentAmountChanged(to amount: Int)
+    func didProgressChanged(current: Int, goal: Int)
     func didEndDateChanged(to date: String)
 }
 
@@ -40,10 +39,10 @@ class DonationDetailViewModel {
         didSet { delegate?.didDesciptionChanged(to: donationDescription) }
     }
     private var donationGoal: Int = 0 { // 목표액
-        didSet { delegate?.didGoalChanged(to: donationGoal) }
+        didSet { delegate?.didProgressChanged(current: donationAmount, goal: donationGoal) }
     }
-    private var donationAmount: Int = 0 {   // 모금액
-        didSet { delegate?.didCurrentAmountChanged(to: donationAmount) }
+    private var donationAmount: Int = 1500 {   // 모금액
+        didSet { delegate?.didProgressChanged(current: donationAmount, goal: donationGoal) }
     }
     private var donationEndDate: String = "" {  // 종료 날짜
         didSet { delegate?.didEndDateChanged(to: donationEndDate) }
@@ -65,10 +64,10 @@ class DonationDetailViewModel {
         self.donationImageURL = info.postImage
         self.donationPublisherName = "\(info.userId)번 사용자" // 유저 id가 아닌 닉네임 가져와야 함!
         self.donationTitle = info.title
-        self.donationDescription = info.description
+        self.donationDescription = info.description ?? ""
         self.donationGoal = info.goal
 //        self.donationAmount = info.currentAmount
-        self.donationEndDate = info.endDate
+        self.donationEndDate = info.endDate ?? ""
     }
     
     // MARK: - API Method

@@ -29,6 +29,7 @@
 		3AC393D9261CBC3D008BB207 /* DonationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC393D8261CBC3D008BB207 /* DonationDetailViewModel.swift */; };
 		3AC393E5261CC08F008BB207 /* ServerURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC393E4261CC08F008BB207 /* ServerURL.swift */; };
 		3AC39404261DBDF5008BB207 /* DonationDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC39403261DBDF5008BB207 /* DonationDetailResponse.swift */; };
+		3AC39407261DBF59008BB207 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC39406261DBF59008BB207 /* Int+Extension.swift */; };
 		6A7F9880C2DD6C6782A998EE /* Pods_MobalMobal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */; };
 		7C04535625EA949B00870761 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535525EA949B00870761 /* ProfileViewController.swift */; };
 		7C04535A25EA98B900870761 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535925EA98B900870761 /* ProfileTableViewCell.swift */; };
@@ -102,6 +103,7 @@
 		3AC393D8261CBC3D008BB207 /* DonationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailViewModel.swift; sourceTree = "<group>"; };
 		3AC393E4261CC08F008BB207 /* ServerURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerURL.swift; sourceTree = "<group>"; };
 		3AC39403261DBDF5008BB207 /* DonationDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailResponse.swift; sourceTree = "<group>"; };
+		3AC39406261DBF59008BB207 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobalMobal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61483D18A64727D4EAFF1EDD /* Pods-MobalMobal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.debug.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.debug.xcconfig"; sourceTree = "<group>"; };
 		7C04535525EA949B00870761 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */,
 				3A179F7625FBC84F00901436 /* UITextField+Extension.swift */,
 				3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */,
+				3AC39406261DBF59008BB207 /* Int+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */,
 				3A1BD72425F1583D0079D56D /* DetailParticipantsMoreButtonView.swift in Sources */,
 				3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */,
+				3AC39407261DBF59008BB207 /* Int+Extension.swift in Sources */,
 				3AC393E5261CC08F008BB207 /* ServerURL.swift in Sources */,
 				3A1BD71D25F12F0C0079D56D /* DonationDetailViewController+Layout.swift in Sources */,
 				3A1BD73125F15EF20079D56D /* DetailParticipantsView.swift in Sources */,
