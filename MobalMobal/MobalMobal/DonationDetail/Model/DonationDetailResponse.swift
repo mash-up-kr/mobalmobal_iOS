@@ -14,7 +14,7 @@ struct DetailData: Codable {
     let title: String
     let description: String?
     let goal: Int
-//    let current: Int
+    let current: Int
     
     let startedDate: Date?
     let endDate: Date?
@@ -27,7 +27,7 @@ struct DetailData: Codable {
         case userId = "user_id"
         case postImage = "post_image"
         case title, description, goal
-//        case current = "current_amount"
+        case current = "current_amount"
         case startedDate = "started_at"
         case endDate = "end_at"
         case createdDate = "createdAt"

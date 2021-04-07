@@ -6,6 +6,7 @@
 //
 import Kingfisher
 import UIKit
+import SnapKit
 
 class DonationDetailViewController: UIViewController {
     // MARK: - UI Components
@@ -258,7 +259,9 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
         fundAmountNumberLabel.text = current.changeToCommaFormat()
         
         progressBarView.snp.remakeConstraints { make in
+            make.leading.bottom.equalTo(translucentView)
             make.width.equalToSuperview().multipliedBy(progress)
+            make.height.equalTo(2)
         }
     }
     func didEndDateChanged(to date: Date?) {

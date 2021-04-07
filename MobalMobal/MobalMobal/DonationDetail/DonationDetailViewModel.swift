@@ -66,7 +66,7 @@ class DonationDetailViewModel {
         self.donationTitle = info.title
         self.donationDescription = info.description ?? ""
         self.donationGoal = info.goal
-//        self.donationAmount = info.currentAmount
+        self.donationAmount = info.current
         self.donationEndDate = info.endDate
     }
     
