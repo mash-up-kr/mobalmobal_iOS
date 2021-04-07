@@ -58,6 +58,34 @@ class CreateDonationViewController: UIViewController {
         return view
     }()
     
+    private let photoView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = .darkGreyThree
+        return view
+    }()
+    
+    private let photoImageView: UIImageView = {
+        let imageView: UIImageView = UIImageView()
+        return imageView
+    }()
+    
+    private let cameraImageView: UIImageView = {
+        let imageView: UIImageView = UIImageView()
+        imageView.image = UIImage(named: "iconlyLightCamera")
+        return imageView
+    }()
+    
+    private let photoButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.addTarget(self, action: #selector(photoButtonIsTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc
+    func photoButtonIsTapped() {
+        print("사진 버튼 눌림")
+    }
+    
     private var donataionProductTextField: UITextField = {
         let textField: UITextField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "가지고 싶은 물건 이름은?", attributes: [
@@ -339,6 +367,31 @@ class CreateDonationViewController: UIViewController {
         resetConstraint(baseView: self.donationProductView, offset: 521)
     }
     
+    private func donationEndDateViewIsFilled() {
+        self.view.addSubview(photoView)
+        photoView.snp.makeConstraints { make in
+            make.top.equalTo(createDonationLabel.snp.bottom).offset(8)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(218)
+        }
+        
+        photoView.addSubview(photoImageView)
+        photoImageView.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        photoView.addSubview(cameraImageView)
+        cameraImageView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.height.equalTo(24)
+        }
+    
+        photoView.addSubview(photoButton)
+        photoButton.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
     private func resetConstraint(baseView: UIView, offset: Int) {
         baseView.snp.removeConstraints()
         UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseIn) {
@@ -371,6 +424,8 @@ class CreateDonationViewController: UIViewController {
             donationPriceViewIsFilled()
         } else if donationStartDateTextField.isEditing && !(donationStartDateTextField.text?.isEmpty ?? false) {
             donationStartDateViewIsFileld()
+        } else if donationEndDateTextField.isEditing && !(donationEndDateTextField.text?.isEmpty ?? false) {
+            donationEndDateViewIsFilled()
         }
         view.endEditing(true)
     }
@@ -380,8 +435,6 @@ class CreateDonationViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-
-    
     }
 }
 
@@ -408,6 +461,11 @@ extension CreateDonationViewController: UITextFieldDelegate {
                 return false
             }
             donationStartDateViewIsFileld()
+        } else if textField == donationEndDateTextField {
+            guard !(donationEndDateTextField.text?.isEmpty ?? false) else {
+                return false
+            }
+            donationEndDateViewIsFilled()
         }
         
         self.view.endEditing(true)
