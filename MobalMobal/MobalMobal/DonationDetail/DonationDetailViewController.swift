@@ -44,7 +44,6 @@ class DonationDetailViewController: UIViewController {
     let progressBarView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .wheat
-        // shadow 적용
         view.drawShadow(color: .yellowTan80, blur: 10)
         view.layer.masksToBounds = false
         return view
@@ -85,11 +84,7 @@ class DonationDetailViewController: UIViewController {
         label.text = "선물"
         label.font = .spoqaHanSansNeo(ofSize: 16, weight: .medium)
         label.textColor = .wheat
-        // shadow 적용
-        label.layer.shadowColor = UIColor.yellowTan80.cgColor
-        label.layer.shadowRadius = 10 / UIScreen.main.scale
-        label.layer.shadowOpacity = 1.0
-        label.layer.shadowOffset = .zero
+        label.drawShadow(color: .yellowTan80, blur: 10)
         label.layer.masksToBounds = false
         return label
     }()
