@@ -214,12 +214,12 @@ class DonationDetailViewController: UIViewController {
     }()
     
     // MARK: - Properties
-    let viewModel: DonationDetailViewModel = DonationDetailViewModel()
+    private lazy var viewModel: DonationDetailViewModel = DonationDetailViewModel(delegate: self)
     
     // MARK: - Initializer
     init(donationId: Int) {
-        viewModel.setDonationId(donationId)
         super.init(nibName: nil, bundle: nil)
+        viewModel.setDonationId(donationId)
     }
     
     required init?(coder: NSCoder) {
@@ -263,5 +263,36 @@ class DonationDetailViewController: UIViewController {
         
         let donationButtonTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickDonationButton))
         donationButton.addGestureRecognizer(donationButtonTap)
+    }
+}
+
+// MARK: - DonationDetailViewModelDelegate
+extension DonationDetailViewController: DonationDetailViewModelDelegate {
+    func didImageChanged(to url: String?) {
+        print("🐻 Image URL: \(url)")
+    }
+    
+    func didPublisherChanged(to nickname: String) {
+        print("🐻 Publisher: \(nickname)")
+    }
+    
+    func didTitleChanged(to title: String) {
+        print("🐻 Title: \(title)")
+    }
+    
+    func didDesciptionChanged(to description: String) {
+        print("🐻 Description: \(description)")
+    }
+    
+    func didGoalChanged(to goal: Int) {
+        print("🐻 Goal: \(goal)")
+    }
+    
+    func didCurrentAmountChanged(to amount: Int) {
+        print("🐻 Current: \(amount)")
+    }
+    
+    func didEndDateChanged(to date: String) {
+        print("🐻 End: \(date)")
     }
 }
