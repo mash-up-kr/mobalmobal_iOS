@@ -97,4 +97,8 @@ class ProfileViewModel {
     func getMydonation() -> MydonationData? {
         mydonationResponseModel?.data
     }
+    func checkOutDated(date: Date) -> Bool {
+        // 날자가 지났으면 true반환 종료된도네에 넣는다.
+        Date().getDueDay(of: date) < 0 ? true : false
+    }
 }

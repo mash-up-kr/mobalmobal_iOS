@@ -141,12 +141,18 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
 // MARK: - ProfileMydonationViewModelDelegate
 extension ProfileMyDonationTableViewCell: ProfileMydonationViewModelDelegate {
     func setUIFromModel() {
-        print("set ui mydonation")
+        print("보라색 도네이션 테이블 세팅")
         // 내가 연 도네이션 관련 정보 처리
         if let mydonationPosts: [MydonationPost] = cellViewModel.getPosts() {
-            print(mydonationPosts.count, "내 연 도네 갯수")
-            myDonationNumber[0] = mydonationPosts.count
-            takeNumberOfDonation.text = "\(mydonationPosts.count)"
+            for post in 0..<mydonationPosts.count {
+                if Date().getDueDay(of: mydonationPosts[post].endAt) < 0 {
+                    myDonationNumber[2] += 1
+                } else {
+                    myDonationNumber[0] += 1
+                }
+            }
+            takeNumberOfDonation.text = "\(myDonationNumber[0])"
+            endNumberOfDonation.text = "\(myDonationNumber[2])"
         }
     }
 }

@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController {
     private let myDonationCellIdentifier: String = "MyDonationTableViewCell"
     private let donatingCellIdentifier: String = "DonatingTableViewCell"
     private let sectionHeaderCellIdentifier: String = "SectionHeaderCell"
-    private lazy var numberOfDonations: [Int] = [1,0,0]     //내연, 후원중, 종료 갯수
+    private lazy var numberOfDonations: [Int] = [0,0,0]     // 내연, 후원중, 종료 갯수
     private let profileViewModel: ProfileViewModel = ProfileViewModel()
     
     // MARK: - LifeCycle
@@ -119,6 +119,15 @@ extension ProfileViewController: UITableViewDataSource {
             return 1
         } else {
             // 서버에서 받아온 값 만큼
+            numberOfDonations = [0,0,0]
+            if let mydonationData: MydonationResponse = profileViewModel.mydonationResponseModel {
+                for post in 0..<mydonationData.data.posts.count {
+                    if profileViewModel.checkOutDated(date: mydonationData.data.posts[post].endAt) {
+                        numberOfDonations[2] += 1
+                    }
+                }
+            }
+            print(numberOfDonations, "섹션 별 도네이션 갯수")
             return numberOfDonations[section - 2]
         }
     }
@@ -140,11 +149,12 @@ extension ProfileViewController: UITableViewDataSource {
             return myDonationCell
         }
         // 내가 연 도네
-        else if indexPath.section == 2 {
-            print("내가 연 도네 indexpath row at")
+        else if indexPath.section == 2 || indexPath.section == 4 {
+            print("내가 연 도네, 종료된도네 indexpath row at")
             guard let donatingCell: ProfileDonatingTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: donatingCellIdentifier, for: indexPath) as? ProfileDonatingTableViewCell
             else { return UITableViewCell() }
             donatingCell.selectionStyle = .none
+            
             if let mydonationData: MydonationResponse = profileViewModel.mydonationResponseModel {
                 donatingCell.viewModel.setGiveEndModel(mydonationData, row: indexPath.row)
                 print(indexPath.row, "row 정보")

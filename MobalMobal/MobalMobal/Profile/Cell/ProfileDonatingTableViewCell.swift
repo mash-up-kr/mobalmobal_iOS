@@ -133,12 +133,6 @@ class ProfileDonatingTableViewCell: UITableViewCell {
         }
     }
     func didEndDateChanged(to date: Date) {
-//        guard let date = date else { return }
-//        // 종료 날짜
-//        let dateFormatter: DateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "YYYY.MM.dd"
-//
-        
         // D-Day
         let dueDay: Int = Date().getDueDay(of: date)
         if dueDay > 0 {
