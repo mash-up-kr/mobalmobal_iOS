@@ -7,6 +7,7 @@
 
 import SnapKit
 import UIKit
+import Kingfisher
 
 class ProfileDonatingTableViewCell: UITableViewCell {
     // MARK: - UIComponents
@@ -18,10 +19,8 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     }()
     private lazy var donateImg: UIImageView = {
         let image: UIImageView = UIImageView()
-        image.image = UIImage(named: "\(self.imageName)")
         image.contentMode = .scaleAspectFill
-        image.layer.cornerRadius = 24
-        image.layer.masksToBounds = true
+        
         return image
     }()
     private let translucentView: UIView = {
@@ -31,14 +30,12 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     }()
     private lazy var donateDday: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "D- \(self.dDay)"
         label.font = UIFont(name: "Lato-Regular", size: 11)
         label.textColor = .brownGrey
         return label
     }()
     private lazy var donatePrice: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "\(self.price)"
         label.font = UIFont(name: "Lato-Bold", size: 18)
         label.textColor = .white
         return label
@@ -68,25 +65,20 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     }()
     private lazy var donateTitle: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "\(self.donateName)"
         label.textColor = .white
         label.font = .spoqaHanSansNeo(ofSize: 14, weight: .medium)
         return label
     }()
    
     // MARK: - Properties
-    // dummy data
-    private let dDay: Int = 12
-    private let price: String = "153,000"
-    private let donateName: String = "티끌모아 닌텐도스위치"
-    private let imageName: String = "doneImage"
-    
+    let viewModel: ProfileDonatingViewModel = ProfileDonatingViewModel()
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.backgroundColor = .backgroundColor
         setViewHierarchy()
         setLayout()
+        self.viewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -138,6 +130,44 @@ class ProfileDonatingTableViewCell: UITableViewCell {
             make.top.equalTo(ratingBackgroundBar.snp.bottom).offset(20)
             make.bottom.equalToSuperview().inset(20)
             make.leading.trailing.equalToSuperview().inset(25)
+        }
+    }
+    func didEndDateChanged(to date: Date) {
+//        guard let date = date else { return }
+//        // 종료 날짜
+//        let dateFormatter: DateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "YYYY.MM.dd"
+//
+        
+        // D-Day
+        let dueDay: Int = Date().getDueDay(of: date)
+        if dueDay > 0 {
+            donateDday.text = "D-\(dueDay)"
+        } else if dueDay == 0 {
+            donateDday.text = "D-Day"
+        } else {
+            donateDday.text = "D+\(-dueDay)"
+        }
+    }
+}
+
+extension ProfileDonatingTableViewCell: ProfileDonatingViewModelDelegate {
+    func setUIFromModel(row: Int) {
+        print("donating 정보들 셀에 세팅합니다")
+        if let imageURL: URL = URL(string: viewModel.getDonationImg(row: row) ?? "") {
+            donateImg.kf.setImage(with: imageURL)
+            donateImg.layer.cornerRadius = 24
+            donateImg.layer.masksToBounds = true
+        }
+        if let donationGoal: Int = viewModel.getGoal(row: row) {
+            donatePrice.text = "\(donationGoal)"
+        }
+        if let donationTitle: String = viewModel.getTitle(row: row) {
+            donateTitle.text = "\(donationTitle)"
+            print(donationTitle)
+        }
+        if let donationDate: Date = viewModel.getDate(row: row) {
+            didEndDateChanged(to: donationDate)
         }
     }
 }

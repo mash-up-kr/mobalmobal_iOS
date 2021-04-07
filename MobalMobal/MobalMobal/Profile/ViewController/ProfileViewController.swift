@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController {
     private let myDonationCellIdentifier: String = "MyDonationTableViewCell"
     private let donatingCellIdentifier: String = "DonatingTableViewCell"
     private let sectionHeaderCellIdentifier: String = "SectionHeaderCell"
-    private lazy var numberOfDonations: [Int] = [0,0,0]     //내연, 후원중, 종료 갯수
+    private lazy var numberOfDonations: [Int] = [1,0,0]     //내연, 후원중, 종료 갯수
     private let profileViewModel: ProfileViewModel = ProfileViewModel()
     
     // MARK: - LifeCycle
@@ -30,9 +30,9 @@ class ProfileViewController: UIViewController {
         setTableView()
         setLayout()
         setNavigation()
+        profileViewModel.getMydontaionResponse()
         profileViewModel.getProfileResponse()
         profileViewModel.mainDelegate = self
-        profileViewModel.getMydontaionResponse()
     }
     
     // MARK: - Actions
@@ -124,17 +124,32 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
         if indexPath.section == 0 {
             guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return UITableViewCell() }
             profileCell.selectionStyle = .none
-            profileCell.cellViewModel.setModel(profileViewModel.profileResponseModel ?? nil)
+            if let userProfileData: ProfileResponse = profileViewModel.profileResponseModel {
+                profileCell.cellViewModel.setModel(userProfileData)
+            }
             return profileCell
         } else if indexPath.section == 1 {
             guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
             myDonationCell.selectionStyle = .none
-            myDonationCell.cellViewModel.setModel(profileViewModel.mydonationResponseModel ?? nil)
+            if let mydonationData: MydonationResponse = profileViewModel.mydonationResponseModel {
+                myDonationCell.cellViewModel.setModel(mydonationData)
+            }
             return myDonationCell
+        }
+        // 내가 연 도네
+        else if indexPath.section == 2 {
+            print("내가 연 도네 indexpath row at")
+            guard let donatingCell: ProfileDonatingTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: donatingCellIdentifier, for: indexPath) as? ProfileDonatingTableViewCell
+            else { return UITableViewCell() }
+            donatingCell.selectionStyle = .none
+            if let mydonationData: MydonationResponse = profileViewModel.mydonationResponseModel {
+                donatingCell.viewModel.setGiveEndModel(mydonationData, row: indexPath.row)
+                print(indexPath.row, "row 정보")
+            }
+            return donatingCell
         } else {
             guard let donatingCell: ProfileDonatingTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: donatingCellIdentifier, for: indexPath) as? ProfileDonatingTableViewCell
             else { return UITableViewCell() }

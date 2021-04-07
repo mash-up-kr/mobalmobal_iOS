@@ -29,7 +29,7 @@ class ProfileViewModel {
         }
     }
     private lazy var headers: HTTPHeaders = [headerKey: tokenID]
-    
+    private let decoder: JSONDecoder = JSONDecoder()
     // MARK: - Methods
     func getProfileResponse() {
         let profileURL: String = "http://13.125.168.51:3000/users"
@@ -38,10 +38,10 @@ class ProfileViewModel {
             case .success(let value):
                 do {
                     let data: Data = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                    self?.decoder.dateDecodingStrategy = try .iso8610WithZ()
+                    let profileResponse: ProfileResponse? = try self?.decoder.decode(ProfileResponse.self, from: data)
                     
-                    let profileResponse: ProfileResponse = try JSONDecoder().decode(ProfileResponse.self, from: data)
-                    
-                    if profileResponse.code == 200 {
+                    if profileResponse?.code == 200 {
                         self?.profileResponseModel = profileResponse
                     } else {
                         print("code fail")
@@ -64,8 +64,9 @@ class ProfileViewModel {
             case .success(let value):
                 do {
                     let data: Data = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
-                    let mydonationResponse: MydonationResponse = try JSONDecoder().decode(MydonationResponse.self, from: data)
-                    if mydonationResponse.code == 200 {
+                    self?.decoder.dateDecodingStrategy = try .iso8610WithZ()
+                    let mydonationResponse: MydonationResponse? = try self?.decoder.decode(MydonationResponse.self, from: data)
+                    if mydonationResponse?.code == 200 {
                         self?.mydonationResponseModel = mydonationResponse
                         print(self?.mydonationResponseModel)
                     } else {

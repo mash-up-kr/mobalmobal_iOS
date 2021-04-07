@@ -23,12 +23,12 @@ struct MydonationPost: Codable {
     let description: String?
     let goal: Int
     let currentAmount: Int
-    let startedAt: String
-    let endAt: String
+    let startedAt: Date
+    let endAt: Date
     let postImage: String?
-    let createdAt: String?
-    let updatedAt: String?
-    let deletedAt: String?
+    let createdAt: Date?
+    let updatedAt: Date?
+    let deletedAt: Date?
     
     enum CodingKeys: String, CodingKey {
         case postId = "post_id"

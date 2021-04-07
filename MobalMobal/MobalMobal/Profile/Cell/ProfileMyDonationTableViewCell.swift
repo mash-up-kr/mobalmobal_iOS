@@ -144,8 +144,9 @@ extension ProfileMyDonationTableViewCell: ProfileMydonationViewModelDelegate {
         print("set ui mydonation")
         // 내가 연 도네이션 관련 정보 처리
         if let mydonationPosts: [MydonationPost] = cellViewModel.getPosts() {
+            print(mydonationPosts.count, "내 연 도네 갯수")
             myDonationNumber[0] = mydonationPosts.count
             takeNumberOfDonation.text = "\(mydonationPosts.count)"
         }
-    } 
+    }
 }
