@@ -267,10 +267,22 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
         destinationNumberLabel.text = goal.changeToCommaFormat()
         fundAmountNumberLabel.text = current.changeToCommaFormat()
     }
-    func didEndDateChanged(to date: String) {
-        // milisecond -> String 포맷 변경 필요
-        endDateLabel.text = date
+    func didEndDateChanged(to date: Date?) {
+        guard let date = date else { return }
         
-        // D-Day 설정 필요
+        // 종료 날짜
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY.MM.dd"
+        endDateLabel.text = dateFormatter.string(from: date)
+        
+        // D-Day
+        let dueDay: Int = Date().getDueDay(of: date)
+        if dueDay > 0 {
+            dDayLabel.text = "D-\(dueDay)"
+        } else if dueDay == 0 {
+            dDayLabel.text = "D-Day"
+        } else {
+            dDayLabel.text = "D+\(-dueDay)"
+        }
     }
 }

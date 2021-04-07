@@ -16,12 +16,11 @@ struct DetailData: Codable {
     let goal: Int
 //    let current: Int
     
-    // 추후 Date 타입은 number 타입으로 내려오게 마이그레이션 해야함
-    let startedDate: String?
-    let endDate: String?
-    let createdDate: String?
-    let updatedDate: String?
-    let deletedDate: String?
+    let startedDate: Date?
+    let endDate: Date?
+    let createdDate: Date?
+    let updatedDate: Date?
+    let deletedDate: Date?
     
     enum CodingKeys: String, CodingKey {
         case postId = "post_id"
@@ -36,6 +35,7 @@ struct DetailData: Codable {
         case deletedDate = "deletedAt"
     }
 }
+
 struct DonationDetailData: Codable {
     let post: DetailData
 }

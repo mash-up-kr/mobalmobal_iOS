@@ -13,7 +13,7 @@ protocol DonationDetailViewModelDelegate: class {
     func didTitleChanged(to title: String)
     func didDesciptionChanged(to description: String)
     func didProgressChanged(current: Int, goal: Int)
-    func didEndDateChanged(to date: String)
+    func didEndDateChanged(to date: Date?)
 }
 
 class DonationDetailViewModel {
@@ -41,10 +41,10 @@ class DonationDetailViewModel {
     private var donationGoal: Int = 0 { // 목표액
         didSet { delegate?.didProgressChanged(current: donationAmount, goal: donationGoal) }
     }
-    private var donationAmount: Int = 1500 {   // 모금액
+    private var donationAmount: Int = 0 {   // 모금액
         didSet { delegate?.didProgressChanged(current: donationAmount, goal: donationGoal) }
     }
-    private var donationEndDate: String = "" {  // 종료 날짜
+    private var donationEndDate: Date? {  // 종료 날짜
         didSet { delegate?.didEndDateChanged(to: donationEndDate) }
     }
     
@@ -67,7 +67,7 @@ class DonationDetailViewModel {
         self.donationDescription = info.description ?? ""
         self.donationGoal = info.goal
 //        self.donationAmount = info.currentAmount
-        self.donationEndDate = info.endDate ?? ""
+        self.donationEndDate = info.endDate
     }
     
     // MARK: - API Method
@@ -88,7 +88,10 @@ class DonationDetailViewModel {
     private func parse(detail value: Any) throws -> DonationDetailResponse {
         do {
             let data: Data = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
-            let parsedResponse: DonationDetailResponse = try JSONDecoder().decode(DonationDetailResponse.self, from: data)
+            let decoder: JSONDecoder = JSONDecoder()
+            decoder.dateDecodingStrategy = try .iso8610WithZ()
+            
+            let parsedResponse: DonationDetailResponse = try decoder.decode(DonationDetailResponse.self, from: data)
             print("🐻 Detail Parsed Data: \(parsedResponse)")
             return parsedResponse
         } catch let error {
