@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-class CreateDonationViewController: UIViewController {
+class CreateDonationViewController: UIViewController, UINavigationControllerDelegate {
     // MARK: - UIView
     let scrollView: UIScrollView = {
         let scrollView: UIScrollView = UIScrollView()
@@ -66,6 +66,8 @@ class CreateDonationViewController: UIViewController {
     
     private let photoImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
+        imageView.backgroundColor = .clear
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -83,7 +85,10 @@ class CreateDonationViewController: UIViewController {
     
     @objc
     func photoButtonIsTapped() {
-        print("사진 버튼 눌림")
+        let pickerController: UIImagePickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.sourceType = .photoLibrary
+        self.present(pickerController, animated: true, completion: nil)
     }
     
     private var donataionProductTextField: UITextField = {
@@ -473,3 +478,22 @@ extension CreateDonationViewController: UITextFieldDelegate {
         return true
     }
 }
+
+// MAKR: - UIImaePickerControlllerDelegate
+extension CreateDonationViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage: UIImage = info[.originalImage] as? UIImage {
+            photoImageView.contentMode = .scaleAspectFill
+            photoImageView.image = selectedImage
+            photoButton.backgroundColor = .clear
+            cameraImageView.isHidden = true
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
+
