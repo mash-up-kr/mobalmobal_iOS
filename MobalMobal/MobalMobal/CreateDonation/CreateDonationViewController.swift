@@ -87,7 +87,7 @@ class CreateDonationViewController: UIViewController {
         return textField
     }()
     
-    private var startDateTextField: UITextField = {
+    private var donationStartDateTextField: UITextField = {
         let textField: UITextField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "시작 날짜를 선택해주세요", attributes: [
             NSAttributedString.Key.foregroundColor : UIColor.veryLightPink,
@@ -138,6 +138,7 @@ class CreateDonationViewController: UIViewController {
         donationTextField.delegate = self
         donationPriceTextField.delegate = self
         donataionProductTextField.delegate = self
+        donationStartDateTextField.delegate = self
         
         addTapGesture(to: view)
         
@@ -154,16 +155,31 @@ class CreateDonationViewController: UIViewController {
     }
     
     private func setDatePicker() {
+        let dateFormatter: DateFormatter = DateFormatter()
+        let minho = dateFormatter.dateFormat = "YYYY-MM-DD hh:mm"
         datePicker.datePickerMode = .dateAndTime
         datePicker.locale = Locale(identifier: "ko_KR")
+        donationStartDateTextField.inputView = datePicker
         
         if #available(iOS 14, *) {
             datePicker.preferredDatePickerStyle = .wheels
         }
         
-        startDateTextField.inputView = datePicker
+        datePicker.addTarget(self, action: #selector(updateTextField), for: .valueChanged)
+        
         datePicker.snp.makeConstraints { make in
             make.height.equalTo(200)
+        }
+    }
+    
+    @objc
+    func updateTextField() {
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-DD hh:mm"
+        let datePickerDate: String = dateFormatter.string(from: datePicker.date)
+        
+        if donationStartDateTextField.isEditing {
+            donationStartDateTextField.text = datePickerDate
         }
     }
     
@@ -255,8 +271,8 @@ class CreateDonationViewController: UIViewController {
             make.height.equalTo(49)
         }
         
-        self.donationStartDateView.addSubview(startDateTextField)
-        startDateTextField.snp.makeConstraints { make in
+        self.donationStartDateView.addSubview(donationStartDateTextField)
+        donationStartDateTextField.snp.makeConstraints { make in
             make.top.leading.equalTo(donationStartDateView)
         }
         
@@ -331,7 +347,13 @@ extension CreateDonationViewController: UITextFieldDelegate {
                 return false
             }
             donationInputViewIsFilled()
+        } else if textField == donationPriceTextField {
+            guard !(donationPriceTextField.text?.isEmpty ?? false) else {
+                return false
+            }
+            donationPriceViewIsFilled()
         }
+        
         self.view.endEditing(true)
         
         return true
