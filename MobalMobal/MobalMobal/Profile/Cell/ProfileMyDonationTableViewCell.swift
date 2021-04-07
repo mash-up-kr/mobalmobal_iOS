@@ -12,28 +12,28 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
     // MARK: - UIComponents
     private lazy var giveDonationTitleLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = myDonationText[0]
+        label.text = myDonationText[1]
         label.font = .spoqaHanSansNeo(ofSize: 18, weight: .regular)
         label.textColor = .white
         return label
     }()
     private lazy var giveNumberOfDonation: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "\(myDonationNumber[0])"
+        label.text = "\(myDonationNumber[1])"
         label.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
         label.textColor = .white
         return label
     }()
     private lazy var takeDonationTitleLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = myDonationText[1]
+        label.text = myDonationText[0]
         label.font = .spoqaHanSansNeo(ofSize: 18, weight: .regular)
         label.textColor = .white
         return label
     }()
     private lazy var takeNumberOfDonation: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "\(myDonationNumber[1])"
+        label.text = "\(myDonationNumber[0])"
         label.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
         label.textColor = .white
         return label
@@ -74,7 +74,7 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
     
     private lazy var horizontalStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
-        [giveStackView, takeStackView, endStackView].forEach { stackView.addArrangedSubview($0) }
+        [takeStackView, giveStackView, endStackView].forEach { stackView.addArrangedSubview($0) }
         stackView.spacing = 69
         return stackView
     }()
@@ -97,13 +97,14 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
     private let myDonationText: [String] = ["받는", "주는", "종료"]
     private let profileViewModel: ProfileViewModel = ProfileViewModel()
     // dummy data
-    private let myDonationNumber: [Int] = [1, 3, 10]
-    
+    private lazy var myDonationNumber: [Int] = [0, 0, 0]
+    let cellViewModel: ProfileMydonationViewModel = ProfileMydonationViewModel()
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.backgroundColor = .backgroundColor
         setLayout()
+        self.cellViewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -135,7 +136,16 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
             make.leading.trailing.equalToSuperview().inset(48)
         }
     }
-    private func mydonationBinding() {
-        
-    }
+}
+
+// MARK: - ProfileMydonationViewModelDelegate
+extension ProfileMyDonationTableViewCell: ProfileMydonationViewModelDelegate {
+    func setUIFromModel() {
+        print("set ui mydonation")
+        // 내가 연 도네이션 관련 정보 처리
+        if let mydonationPosts: [MydonationPost] = cellViewModel.getPosts() {
+            myDonationNumber[0] = mydonationPosts.count
+            takeNumberOfDonation.text = "\(mydonationPosts.count)"
+        }
+    } 
 }

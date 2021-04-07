@@ -30,6 +30,7 @@
 		7C30C23F2617588500567520 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C30C23E2617588500567520 /* ProfileViewModel.swift */; };
 		7C30C2DB261AA8F500567520 /* MydonationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C30C2DA261AA8F500567520 /* MydonationResponse.swift */; };
 		7C30C345261DB5C500567520 /* ProfileCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C30C344261DB5C400567520 /* ProfileCellViewModel.swift */; };
+		7C30C348261E163D00567520 /* ProfileMydonationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C30C347261E163D00567520 /* ProfileMydonationViewModel.swift */; };
 		7C36DF4625F2014E001C2DBB /* InputChargingPointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */; };
 		7C39979125F75B5900EA82C2 /* SuccessChargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C39979025F75B5900EA82C2 /* SuccessChargingViewController.swift */; };
 		7C39985D25FA51AA00EA82C2 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C39985C25FA51AA00EA82C2 /* AccountViewController.swift */; };
@@ -90,6 +91,7 @@
 		7C30C23E2617588500567520 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		7C30C2DA261AA8F500567520 /* MydonationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydonationResponse.swift; sourceTree = "<group>"; };
 		7C30C344261DB5C400567520 /* ProfileCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellViewModel.swift; sourceTree = "<group>"; };
+		7C30C347261E163D00567520 /* ProfileMydonationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMydonationViewModel.swift; sourceTree = "<group>"; };
 		7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputChargingPointViewController.swift; sourceTree = "<group>"; };
 		7C39979025F75B5900EA82C2 /* SuccessChargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessChargingViewController.swift; sourceTree = "<group>"; };
 		7C39985C25FA51AA00EA82C2 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			children = (
 				7C30C23E2617588500567520 /* ProfileViewModel.swift */,
 				7C30C344261DB5C400567520 /* ProfileCellViewModel.swift */,
+				7C30C347261E163D00567520 /* ProfileMydonationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */,
 				E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */,
 				7C04536025EAA2DC00870761 /* ProfileDonatingTableViewCell.swift in Sources */,
+				7C30C348261E163D00567520 /* ProfileMydonationViewModel.swift in Sources */,
 				7C30C23B2617548E00567520 /* ProfileResponse.swift in Sources */,
 				7C30C2DB261AA8F500567520 /* MydonationResponse.swift in Sources */,
 				7C04535D25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift in Sources */,

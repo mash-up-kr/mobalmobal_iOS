@@ -50,10 +50,8 @@ class ProfileTableViewCell: UITableViewCell {
     }()
     
     // MARK: - Properties
-    // dummy data
-    var userImg: String = "profile"
-//    let viewModel: ProfileViewModel = ProfileViewModel()
     let cellViewModel: ProfileCellViewModel = ProfileCellViewModel()
+    
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -79,6 +77,8 @@ class ProfileTableViewCell: UITableViewCell {
         }
     }
 }
+
+// MARK: - ProfieCellViewModelDelegate
 extension ProfileTableViewCell: ProfileCellViewModelDelegate {
     func setUIFromModel() {
         print("set ui from model")

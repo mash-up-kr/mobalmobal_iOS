@@ -8,26 +8,27 @@
 import Foundation
 
 struct MydonationResponse: Codable {
-    let data: MydonationData?
     let code: Int
+    let data: MydonationData
 }
 
 struct MydonationData: Codable {
-    let post: [MydontaionPost]
+    let posts: [MydonationPost]
 }
 
-struct MydontaionPost: Codable {
+struct MydonationPost: Codable {
     let postId: Int
     let userId: Int
     let title: String
     let description: String?
     let goal: Int
+    let currentAmount: Int
     let startedAt: String
     let endAt: String
     let postImage: String?
-    let createdAt: String
-    let updatedAt: String
-    let deletedAt: String
+    let createdAt: String?
+    let updatedAt: String?
+    let deletedAt: String?
     
     enum CodingKeys: String, CodingKey {
         case postId = "post_id"
@@ -35,9 +36,8 @@ struct MydontaionPost: Codable {
         case startedAt = "started_at"
         case endAt = "end_at"
         case postImage = "post_image"
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
         case deletedAt = "deleted_at"
-        case title, description, goal
+        case currentAmount = "current_amount"
+        case title, description, goal, createdAt, updatedAt
     }
 }

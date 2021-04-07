@@ -32,6 +32,7 @@ class ProfileViewController: UIViewController {
         setNavigation()
         profileViewModel.getProfileResponse()
         profileViewModel.mainDelegate = self
+        profileViewModel.getMydontaionResponse()
     }
     
     // MARK: - Actions
@@ -121,29 +122,18 @@ extension ProfileViewController: UITableViewDataSource {
             return numberOfDonations[section - 2]
         }
     }
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        print("display")
-//        if indexPath.section == 0 {
-//            guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return }
-//            if let userNickname: String = profileViewModel.getUserNickname(),
-//                  let userCash = profileViewModel.getUserCash() {
-//                profileCell.binding(nickname: userNickname, cash: userCash)
-//                print("after section 0")
-//            }
-//        }
-//    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("cell for row at")
+       
         if indexPath.section == 0 {
             guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return UITableViewCell() }
             profileCell.selectionStyle = .none
-            profileCell.cellViewModel.refViewModel(profileViewModel.profileResponseModel ?? nil)
-//            profileCell.cellViewModel.delegate?.setUIFromModel()
-//            print(profileCell.viewModel.getUserCash())
+            profileCell.cellViewModel.setModel(profileViewModel.profileResponseModel ?? nil)
             return profileCell
         } else if indexPath.section == 1 {
             guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
             myDonationCell.selectionStyle = .none
+            myDonationCell.cellViewModel.setModel(profileViewModel.mydonationResponseModel ?? nil)
             return myDonationCell
         } else {
             guard let donatingCell: ProfileDonatingTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: donatingCellIdentifier, for: indexPath) as? ProfileDonatingTableViewCell
@@ -179,8 +169,6 @@ extension ProfileViewController: UITableViewDelegate {
 
 extension ProfileViewController: ProfileViewModelDelegate {
     func tableViewUpdate() {
-//        let section1Cell = ProfileTableViewCell()
-//        section1Cell.viewModel.profileCellDelegate?.setUIFromModel()
         self.mainTableView.reloadData()
         print("reload data")
     }

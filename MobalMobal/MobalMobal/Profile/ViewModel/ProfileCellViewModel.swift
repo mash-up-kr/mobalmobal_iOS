@@ -19,7 +19,7 @@ class ProfileCellViewModel {
             delegate?.setUIFromModel()
         }
     }
-    func refViewModel(_ model: ProfileResponse?) {
+    func setModel(_ model: ProfileResponse?) {
         print("cell set model")
         self.model = model
     }
