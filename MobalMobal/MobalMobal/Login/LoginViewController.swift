@@ -100,13 +100,23 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction private func clickFacebookLoginButton() {
-        loginWithFacebook()
+//        loginWithFacebook()
+        goToDonationDetail()
     }
     @IBAction private func clickGoogleLoginButton() {
-        loginWithGoogle()
+//        loginWithGoogle()
+        goToDonationDetail()
     }
     @IBAction private func clickAppleLoginButton() {
-        loginWithApple()
+//        loginWithApple()
+        goToDonationDetail()
+    }
+    
+    // 임시로 상세보기 화면으로 가는 코드
+    private func goToDonationDetail() {
+        let detailVC: DonationDetailViewController = DonationDetailViewController()
+        detailVC.modalPresentationStyle = .fullScreen
+        self.present(detailVC, animated: true)
     }
 }
 
@@ -131,11 +141,6 @@ extension LoginViewController {
                     return
                 }
                 print("🐻 FirebaseAuth :: idToken: \(idToken) 🐻")
-                
-                // 임시로 상세보기 화면으로 가는 코드
-                let detailVC: DonationDetailViewController = DonationDetailViewController()
-                detailVC.modalPresentationStyle = .fullScreen
-                self.present(detailVC, animated: true)
             }
         }
     }
@@ -170,6 +175,10 @@ extension LoginViewController: GIDSignInDelegate {
         guard let authentication = user.authentication else { return }
         let credential: AuthCredential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         loginWithFirebase(credential: credential)
+        
+        let mainVC: MainViewController = MainViewController()
+        mainVC.modalPresentationStyle = .fullScreen
+        self.present(mainVC, animated: true, completion: nil)
     }
     
     // 구글 로그인 연동 해제 시 호출

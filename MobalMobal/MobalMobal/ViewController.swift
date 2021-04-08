@@ -14,14 +14,15 @@ class ViewController: UIViewController {
     }
     
     // - MARK : 각자 view로 넘어감
-    @IBAction private func firstButtonIsTapped(_ sender: UIButton) {
-        let viewController = SignupViewController()
-        present(viewController, animated: true, completion: nil)
-       
+    @IBAction func firstButtonIsTapped(_ sender: UIButton) {
+        let viewController = SettingViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
-    @IBAction func secondButtonIsTapped(_ sender: UIButton) {
-        
+    @IBAction private func secondButtonIsTapped(_ sender: UIButton) {
+        let mainVC: MainViewController = MainViewController()
+        mainVC.modalPresentationStyle = .fullScreen
+        self.present(mainVC, animated: true, completion: nil)
     }
     
     @IBAction private func thirdButtonIsTapped(_ sender: UIButton) {
@@ -31,8 +32,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func fourthButtonIsTapped(_ sender: UIButton) {
-        let vc: ProfileViewController = ProfileViewController()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        let vc = ProfileViewController()
+        let navVc: UINavigationController = UINavigationController(rootViewController: vc)
+        navVc.modalPresentationStyle = .overFullScreen
+//        vc.modalPresentationStyle = .fullScreen
+        self.present(navVc, animated: true, completion: nil)
     }
 }

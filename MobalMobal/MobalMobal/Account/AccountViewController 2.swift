@@ -25,11 +25,10 @@ class AccountViewController: UIViewController {
     }()
     private lazy var priceLabel: UILabel = {
         let label: UILabel = UILabel()
-        guard let charge = self.charge else { return label }
-        let priceLabelAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(charge)을 보내주세요")
+        let priceLabelAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(self.charge)원을 보내주세요")
         
         priceLabelAttributedString.addAttributes(defaultAttributes, range: NSRange(location: 0, length: priceLabelAttributedString.length))
-        priceLabelAttributedString.addAttributes(emphasisAttributes, range: _NSRange(location: 0, length: charge.count))
+        priceLabelAttributedString.addAttributes(emphasisAttributes, range: _NSRange(location: 0, length: self.charge.count + 1))
         
         label.attributedText = priceLabelAttributedString
         label.numberOfLines = 0
@@ -72,8 +71,9 @@ class AccountViewController: UIViewController {
     // dummy data
     private var account: String = "110-436-3412421"
     private var bankName: String = "신한은행"
+    private var charge: String = "30,000"
     
-    var charge: String?
+    private var setLayoutFlag: Bool = false
     private let defaultAttributes: [NSAttributedString.Key: Any] = [
         .foregroundColor: UIColor.veryLightPink ,
         .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .regular)
@@ -92,11 +92,6 @@ class AccountViewController: UIViewController {
         super.viewDidLoad()
         accountLabelTapGesture()
         self.view.backgroundColor = .backgroundColor
-        view.setNeedsUpdateConstraints()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     override func updateViewConstraints() {
         self.view.addSubviews([verticalStackView, closeButton])
@@ -108,13 +103,14 @@ class AccountViewController: UIViewController {
         verticalStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+        setLayoutFlag = true
         super.updateViewConstraints()
     }
     
     // MARK: - Actions
     @objc
     private func closeBtn() {
-        navigationController?.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     @objc
     private func copyAccount() {

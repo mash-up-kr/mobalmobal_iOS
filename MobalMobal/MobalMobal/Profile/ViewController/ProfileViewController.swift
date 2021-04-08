@@ -34,19 +34,30 @@ class ProfileViewController: UIViewController {
         profileViewModel.getProfileResponse()
         profileViewModel.mainDelegate = self
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     // MARK: - Actions
     @objc
     private func popVC() {
         print("✨ pop viewcontroller")
+        navigationController?.dismiss(animated: true)
     }
     @objc
     private func modifyInfo() {
         print("✨ modify user info")
+        navigationController?.pushViewController(modifyVC, animated: true)
     }
     @objc
     private func pushSettingVC() {
         print("✨ push setting vc")
+        
+        // 임시로 PointCharging으로 이동하는 코드
+        let navVC: UINavigationController = UINavigationController(rootViewController: chargingVC)
+        navVC.modalPresentationStyle = .overFullScreen
+        self.present(navVC, animated: true)
     }
     
     // MARK: - Methods
@@ -78,6 +89,7 @@ class ProfileViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.whiteTwo]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
         
+        // 추가 네비게이션 아이템
         let editBtn: UIButton = UIButton()
         editBtn.setImage(UIImage(named: "iconlyLightSetting"), for: .normal)
         editBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
