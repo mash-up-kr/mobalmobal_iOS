@@ -80,6 +80,19 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     // MARK: - Properties
     let viewModel: ProfileDonatingViewModel = ProfileDonatingViewModel()
     var headerLabelText: String?
+    private let numberFormat: (Int) -> String = { number in
+        let str: String = "\(number)"
+        let regex: NSRegularExpression?
+        do {
+            regex = try? NSRegularExpression(pattern: "(?<=\\d)(?=(?:\\d{3})+(?!\\d))", options: [])
+        }
+        guard let regexString = regex else { return "" }
+        return regexString.stringByReplacingMatches(in: str,
+                                                    options: [],
+                                                    range: NSRange(location: 0, length: str.count),
+                                                    withTemplate: ",")
+    }
+    
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -150,7 +163,6 @@ class ProfileDonatingTableViewCell: UITableViewCell {
             donateDday.text = "D+\(-dueDay)"
         }
     }
-    
 }
 
 // MARK: - ProfileDonatingViewModelDelegate
@@ -163,7 +175,7 @@ extension ProfileDonatingTableViewCell: ProfileDonatingViewModelDelegate {
             donateImg.layer.masksToBounds = true
         }
         if let donationGoal: Int = viewModel.getGoal(row: row) {
-            donatePrice.text = "\(donationGoal)"
+            donatePrice.text = "\(numberFormat(donationGoal))"
         }
         if let donationTitle: String = viewModel.getTitle(row: row) {
             donateTitle.text = "\(donationTitle)"

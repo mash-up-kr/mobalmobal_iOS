@@ -100,7 +100,6 @@ class ProfileViewController: UIViewController {
     
     // 서버로부터 받아온 도네이션 갯수가 0개인지 체크하는 메서드
     func checkNumberOfDonationIsZero(_ section: Int) -> Bool {
-        print("\(section) 에 도네있나요?", numberOfDonations)
         if numberOfDonations[section - 2] == 0 {
             return true
         }
@@ -164,10 +163,6 @@ extension ProfileViewController: UITableViewDataSource {
             return donatingCell
         }
     }
-//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        guard let header = view as? UITableViewHeaderFooterView else { return }
-//        header.clipsToBounds = true
-//    }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if checkNumberOfDonationIsZero(section) {
             return nil

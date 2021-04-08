@@ -18,7 +18,7 @@ class ProfileTableViewCell: UITableViewCell {
     private lazy var nicknameLabel: UILabel = {
         let label: UILabel = UILabel()
         label.textColor = .white
-        label.font = .futra(ofSize: 24, weight: .medium)
+        
         return label
     }()
     private lazy var pointLabel: UILabel = {
@@ -50,6 +50,18 @@ class ProfileTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     let cellViewModel: ProfileCellViewModel = ProfileCellViewModel()
+    private let numberFormat: (Int) -> String = { number in
+        let str: String = "\(number)"
+        let regex: NSRegularExpression?
+        do {
+            regex = try? NSRegularExpression(pattern: "(?<=\\d)(?=(?:\\d{3})+(?!\\d))", options: [])
+        }
+        guard let regexString = regex else { return "" }
+        return regexString.stringByReplacingMatches(in: str,
+                                                    options: [],
+                                                    range: NSRange(location: 0, length: str.count),
+                                                    withTemplate: ",")
+    }
     
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -75,6 +87,30 @@ class ProfileTableViewCell: UITableViewCell {
             make.centerY.equalTo(profileImage)
         }
     }
+    private func nicknameLanguage(_ userNickname: String) -> String? {
+        let koPattern: String = "[가-힣]*"
+        let enPattern: String = "[A-Za-z0-9]*"
+        let koPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", koPattern)
+        let enPredicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", enPattern)
+        if koPredicate.evaluate(with: userNickname) {
+            return "ko"
+        }
+        if enPredicate.evaluate(with: userNickname) {
+            return "en"
+        }
+        return nil
+    }
+    private func setNicknameUI(_ nickname: String) {
+        nicknameLabel.text = "\(nickname)"
+        switch nicknameLanguage(nickname) {
+        case "ko":
+            nicknameLabel.font = .spoqaHanSansNeo(ofSize: 24, weight: .medium)
+        case "en":
+            nicknameLabel.font = .futra(ofSize: 24, weight: .medium)
+        default:
+            nicknameLabel.font = .futra(ofSize: 24, weight: .medium)
+        }
+    }
 }
 
 // MARK: - ProfieCellViewModelDelegate
@@ -82,8 +118,8 @@ extension ProfileTableViewCell: ProfileCellViewModelDelegate {
     func setUIFromModel() {
         if let userNickname: String = cellViewModel.getNickname(),
            let userCash: Int = cellViewModel.getCash() {
-            nicknameLabel.text = "\(userNickname)"
-            pointLabel.text = "\(userCash)원"
+            setNicknameUI(userNickname)
+            pointLabel.text = "\(numberFormat(userCash))원"
         }
         if let imageURL: URL = URL(string: cellViewModel.getProfileImg() ?? "") {
             profileImage.kf.setImage(with: imageURL)

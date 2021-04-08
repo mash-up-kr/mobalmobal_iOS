@@ -136,8 +136,7 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
 // MARK: - ProfileMydonationViewModelDelegate
 extension ProfileMyDonationTableViewCell: ProfileMydonationViewModelDelegate {
     func setUIFromModel() {
-        print("보라색 도네이션 테이블 세팅")
-        myDonationNumber = [0,0,0]
+        myDonationNumber = [0, 0, 0]
         // 내가 연 도네이션 관련 정보 처리
         if let mydonationPosts: [MydonationPost] = cellViewModel.getPosts() {
             for post in 0..<mydonationPosts.count {
