@@ -34,4 +34,7 @@ class ProfileDonatingViewModel {
     func getDate(row: Int) -> Date? {
         giveEndDonationModel?.endAt
     }
+    func getCurrentAmount(row: Int) -> Int? {
+        giveEndDonationModel?.currentAmount
+    }
 }

@@ -5,9 +5,9 @@
 //  Created by 송서영 on 2021/02/28.
 //
 
+import Kingfisher
 import SnapKit
 import UIKit
-import Kingfisher
 
 class ProfileDonatingTableViewCell: UITableViewCell {
     // MARK: - UIComponents
@@ -80,6 +80,7 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     // MARK: - Properties
     let viewModel: ProfileDonatingViewModel = ProfileDonatingViewModel()
     var headerLabelText: String?
+    private var ratingBarWidth: Float = 0.0
     private let numberFormat: (Int) -> String = { number in
         let str: String = "\(number)"
         let regex: NSRegularExpression?
@@ -136,7 +137,7 @@ class ProfileDonatingTableViewCell: UITableViewCell {
         }
         ratingBar.snp.makeConstraints { make in
             make.top.leading.bottom.equalToSuperview()
-            make.width.equalTo(182)
+            make.width.equalTo(ratingBarWidth)
         }
     }
     func setLayout() {
@@ -168,20 +169,31 @@ class ProfileDonatingTableViewCell: UITableViewCell {
 // MARK: - ProfileDonatingViewModelDelegate
 extension ProfileDonatingTableViewCell: ProfileDonatingViewModelDelegate {
     func setUIFromModel(row: Int) {
+        guard let donationGoal: Int = viewModel.getGoal(row: row) else {
+            return
+        }
+        donatePrice.text = "\(numberFormat(donationGoal))"
+        
         // image Placeholder 없음..!
         if let imageURL: URL = URL(string: viewModel.getDonationImg(row: row) ?? "") {
             donateImg.kf.setImage(with: imageURL)
             donateImg.layer.cornerRadius = 24
             donateImg.layer.masksToBounds = true
         }
-        if let donationGoal: Int = viewModel.getGoal(row: row) {
-            donatePrice.text = "\(numberFormat(donationGoal))"
-        }
         if let donationTitle: String = viewModel.getTitle(row: row) {
             donateTitle.text = "\(donationTitle)"
         }
         if let donationDate: Date = viewModel.getDate(row: row) {
             didEndDateChanged(to: donationDate)
+        }
+        if let currentAmount: Int = viewModel.getCurrentAmount(row: row) {
+            let ratingBackgroundBarWidth: Float = Float(ratingBackgroundBar.bounds.width)
+            // goal : 전체길이 = currentAmount : 보여질길이
+            ratingBarWidth = Float((ratingBackgroundBarWidth * Float(currentAmount))) / Float(donationGoal)
+            print(ratingBarWidth)
+            ratingBar.snp.updateConstraints { make in
+                make.width.equalTo(ratingBarWidth)
+            }
         }
     }
 }
