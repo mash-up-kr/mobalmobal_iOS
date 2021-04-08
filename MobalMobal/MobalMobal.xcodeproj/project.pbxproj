@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */; };
+		3A179F4D25FB5A3900901436 /* DonateMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A179F4C25FB5A3900901436 /* DonateMoneyViewController.swift */; };
+		3A179F5225FB62B700901436 /* DonateMoneyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A179F5125FB62B700901436 /* DonateMoneyTableViewCell.swift */; };
+		3A179F6025FB87AF00901436 /* InputDonationMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A179F5F25FB87AF00901436 /* InputDonationMoneyViewController.swift */; };
+		3A179F7725FBC84F00901436 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A179F7625FBC84F00901436 /* UITextField+Extension.swift */; };
+		3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */; };
+		3A1BD71D25F12F0C0079D56D /* DonationDetailViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD71C25F12F0C0079D56D /* DonationDetailViewController+Layout.swift */; };
+		3A1BD72425F1583D0079D56D /* DetailParticipantsMoreButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD72325F1583D0079D56D /* DetailParticipantsMoreButtonView.swift */; };
+		3A1BD73125F15EF20079D56D /* DetailParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD72F25F15EF20079D56D /* DetailParticipantsView.swift */; };
+		3A1BD73225F15EF20079D56D /* DetailParticipantsProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD73025F15EF20079D56D /* DetailParticipantsProfileImageView.swift */; };
 		3A1BD76D25F539D40079D56D /* Spoqa Han Sans Neo Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76825F539D20079D56D /* Spoqa Han Sans Neo Regular.otf */; };
 		3A1BD76E25F539D40079D56D /* Spoqa Han Sans Neo Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76925F539D30079D56D /* Spoqa Han Sans Neo Light.otf */; };
 		3A1BD76F25F539D40079D56D /* Spoqa Han Sans Neo Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76A25F539D30079D56D /* Spoqa Han Sans Neo Bold.otf */; };
@@ -15,11 +24,21 @@
 		3A1BD77125F539D40079D56D /* Spoqa Han Sans Neo Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76C25F539D40079D56D /* Spoqa Han Sans Neo Medium.otf */; };
 		3A1BD77C25F5443D0079D56D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */; };
 		3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */; };
+		3AB1D0252610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1D0242610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift */; };
+		3AB1CFD6260F7CB200EA94E8 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */; };
 		6A7F9880C2DD6C6782A998EE /* Pods_MobalMobal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */; };
-		7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */; };
-		7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */; };
+		7C04535625EA949B00870761 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535525EA949B00870761 /* ProfileViewController.swift */; };
+		7C04535A25EA98B900870761 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535925EA98B900870761 /* ProfileTableViewCell.swift */; };
+		7C04535D25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535C25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift */; };
+		7C04536025EAA2DC00870761 /* ProfileDonatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535F25EAA2DC00870761 /* ProfileDonatingTableViewCell.swift */; };
 		7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04536425EAAA3B00870761 /* UIColor+Additions.swift */; };
 		7C36DF4625F2014E001C2DBB /* InputChargingPointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */; };
+		7C39979125F75B5900EA82C2 /* SuccessChargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C39979025F75B5900EA82C2 /* SuccessChargingViewController.swift */; };
+		7C39985D25FA51AA00EA82C2 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C39985C25FA51AA00EA82C2 /* AccountViewController.swift */; };
+		7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */; };
+		7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */; };
+		7C842FA02606267400A66756 /* ModifyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C842F9F2606267400A66756 /* ModifyProfileViewController.swift */; };
+		7C842FA326063FB100A66756 /* ModifyProfileCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C842FA226063FB100A66756 /* ModifyProfileCustomView.swift */; };
 		D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37C825E103DD00898271 /* AppDelegate.swift */; };
 		D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37CA25E103DD00898271 /* SceneDelegate.swift */; };
 		D70C37CD25E103DD00898271 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70C37CC25E103DD00898271 /* ViewController.swift */; };
@@ -43,6 +62,13 @@
 		D7147D6525E7686800AA0878 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6425E7686800AA0878 /* FacebookCore */; };
 		D7147D6925E768B800AA0878 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = D7147D6825E768B800AA0878 /* Toast */; };
 		D7147D6C25E76A1900AA0878 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */; };
+		E3F1EA8425EA552800F34BDE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EA8325EA552800F34BDE /* SettingViewController.swift */; };
+		E3F1EA8A25EA5AE300F34BDE /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EA8925EA5AE300F34BDE /* SettingTableViewCell.swift */; };
+		D7AC0C9525EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9425EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift */; };
+		D7AC0C9925EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */; };
+		D7AC0C9D25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0C9C25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift */; };
+		D7AC0CA325EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0CA225EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift */; };
+		D7E44EF125EA5149007FDB4F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E44EF025EA5149007FDB4F /* MainViewController.swift */; };
 		E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */; };
 		E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */; };
 		E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EAB125EACC9F00F34BDE /* SignupCustomView.swift */; };
@@ -51,6 +77,16 @@
 /* Begin PBXFileReference section */
 		32D37E13F8458BE37D6BCAC0 /* Pods-MobalMobal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.release.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.release.xcconfig"; sourceTree = "<group>"; };
 		3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3A179F4C25FB5A3900901436 /* DonateMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateMoneyViewController.swift; sourceTree = "<group>"; };
+		3A179F5125FB62B700901436 /* DonateMoneyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateMoneyTableViewCell.swift; sourceTree = "<group>"; };
+		3A179F5F25FB87AF00901436 /* InputDonationMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDonationMoneyViewController.swift; sourceTree = "<group>"; };
+		3A179F7625FBC84F00901436 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailViewController.swift; sourceTree = "<group>"; };
+		3A1BD71C25F12F0C0079D56D /* DonationDetailViewController+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DonationDetailViewController+Layout.swift"; sourceTree = "<group>"; };
+		3A1BD72325F1583D0079D56D /* DetailParticipantsMoreButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailParticipantsMoreButtonView.swift; sourceTree = "<group>"; };
+		3A1BD72F25F15EF20079D56D /* DetailParticipantsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailParticipantsView.swift; sourceTree = "<group>"; };
+		3A1BD73025F15EF20079D56D /* DetailParticipantsProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailParticipantsProfileImageView.swift; sourceTree = "<group>"; };
+		3A1BD74A25F373EA0079D56D /* MobalMobal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobalMobal.entitlements; sourceTree = "<group>"; };
 		3A1BD76825F539D20079D56D /* Spoqa Han Sans Neo Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Regular.otf"; sourceTree = "<group>"; };
 		3A1BD76925F539D30079D56D /* Spoqa Han Sans Neo Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Light.otf"; sourceTree = "<group>"; };
 		3A1BD76A25F539D30079D56D /* Spoqa Han Sans Neo Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Bold.otf"; sourceTree = "<group>"; };
@@ -58,12 +94,22 @@
 		3A1BD76C25F539D40079D56D /* Spoqa Han Sans Neo Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Medium.otf"; sourceTree = "<group>"; };
 		3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginButton.swift; sourceTree = "<group>"; };
+		3AB1D0242610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOngoingDonationHeaderView.swift; sourceTree = "<group>"; };
+		3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobalMobal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61483D18A64727D4EAFF1EDD /* Pods-MobalMobal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.debug.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.debug.xcconfig"; sourceTree = "<group>"; };
-		7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingViewController.swift; sourceTree = "<group>"; };
-		7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingTableViewCell.swift; sourceTree = "<group>"; };
+		7C04535525EA949B00870761 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7C04535925EA98B900870761 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		7C04535C25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMyDonationTableViewCell.swift; sourceTree = "<group>"; };
+		7C04535F25EAA2DC00870761 /* ProfileDonatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDonatingTableViewCell.swift; sourceTree = "<group>"; };
 		7C04536425EAAA3B00870761 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputChargingPointViewController.swift; sourceTree = "<group>"; };
+		7C39979025F75B5900EA82C2 /* SuccessChargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessChargingViewController.swift; sourceTree = "<group>"; };
+		7C39985C25FA51AA00EA82C2 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingViewController.swift; sourceTree = "<group>"; };
+		7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingTableViewCell.swift; sourceTree = "<group>"; };
+		7C842F9F2606267400A66756 /* ModifyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyProfileViewController.swift; sourceTree = "<group>"; };
+		7C842FA226063FB100A66756 /* ModifyProfileCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyProfileCustomView.swift; sourceTree = "<group>"; };
 		D70C37C525E103DD00898271 /* MobalMobal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobalMobal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70C37C825E103DD00898271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D70C37CA25E103DD00898271 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +121,13 @@
 		D70C37DD25E103F100898271 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobalMobalDebug.entitlements; sourceTree = "<group>"; };
+		E3F1EA8325EA552800F34BDE /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		E3F1EA8925EA5AE300F34BDE /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		D7AC0C9425EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMyDonationCollectionViewCell.swift; sourceTree = "<group>"; };
+		D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAddMyDonationCollectionViewCell.swift; sourceTree = "<group>"; };
+		D7AC0C9C25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMyOngoingDonationCollectionViewCell.swift; sourceTree = "<group>"; };
+		D7AC0CA225EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOngoingDonationCollectionViewCell.swift; sourceTree = "<group>"; };
+		D7E44EF025EA5149007FDB4F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		E3F1EAB125EACC9F00F34BDE /* SignupCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCustomView.swift; sourceTree = "<group>"; };
@@ -107,15 +160,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7C61AECB25EA4CC900D9149F /* PointCharging */ = {
-			isa = PBXGroup;
-			children = (
-				7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */,
-				7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */,
-			);
-			path = PointCharging;
-            sourceTree = "<group>";
-        };
 		3A035F1625EA4D6000D3FB69 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +167,51 @@
 				3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		3A179F4B25FB5A2100901436 /* DonateMoney */ = {
+			isa = PBXGroup;
+			children = (
+				3A179F5025FB629F00901436 /* cell */,
+				3A179F4C25FB5A3900901436 /* DonateMoneyViewController.swift */,
+			);
+			path = DonateMoney;
+			sourceTree = "<group>";
+		};
+		3A179F5025FB629F00901436 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				3A179F5125FB62B700901436 /* DonateMoneyTableViewCell.swift */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		3A179F5E25FB878F00901436 /* InputDonationMoney */ = {
+			isa = PBXGroup;
+			children = (
+				3A179F5F25FB87AF00901436 /* InputDonationMoneyViewController.swift */,
+			);
+			path = InputDonationMoney;
+			sourceTree = "<group>";
+		};
+		3A1BD70F25ED26970079D56D /* DonationDetail */ = {
+			isa = PBXGroup;
+			children = (
+				3A1BD72225F157FD0079D56D /* CustomViews */,
+				3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */,
+				3A1BD71C25F12F0C0079D56D /* DonationDetailViewController+Layout.swift */,
+			);
+			path = DonationDetail;
+			sourceTree = "<group>";
+		};
+		3A1BD72225F157FD0079D56D /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				3A1BD73025F15EF20079D56D /* DetailParticipantsProfileImageView.swift */,
+				3A1BD72325F1583D0079D56D /* DetailParticipantsMoreButtonView.swift */,
+				3A1BD72F25F15EF20079D56D /* DetailParticipantsView.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 		3A1BD76625F5397F0079D56D /* Fonts */ = {
@@ -137,12 +226,41 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		7C04535225EA942F00870761 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7C04535425EA945300870761 /* Cell */,
+				7C04535325EA943400870761 /* ViewController */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7C04535325EA943400870761 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7C04535525EA949B00870761 /* ProfileViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		7C04535425EA945300870761 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7C04535925EA98B900870761 /* ProfileTableViewCell.swift */,
+				7C04535C25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift */,
+				7C04535F25EAA2DC00870761 /* ProfileDonatingTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		7C04536325EAAA2400870761 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				7C04536425EAAA3B00870761 /* UIColor+Additions.swift */,
 				E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */,
 				3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */,
+				3A179F7625FBC84F00901436 /* UITextField+Extension.swift */,
+				3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -153,6 +271,40 @@
 				7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */,
 			);
 			path = InputChargingPoint;
+			sourceTree = "<group>";
+		};
+		7C39978F25F75B3700EA82C2 /* SuccessCharging */ = {
+			isa = PBXGroup;
+			children = (
+				7C39979025F75B5900EA82C2 /* SuccessChargingViewController.swift */,
+			);
+			path = SuccessCharging;
+			sourceTree = "<group>";
+		};
+		7C39985B25FA517900EA82C2 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				7C39985C25FA51AA00EA82C2 /* AccountViewController.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		7C61AECB25EA4CC900D9149F /* PointCharging */ = {
+			isa = PBXGroup;
+			children = (
+				7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */,
+				7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */,
+			);
+			path = PointCharging;
+			sourceTree = "<group>";
+		};
+		7C842F9C2606265900A66756 /* ModifyProfile */ = {
+			isa = PBXGroup;
+			children = (
+				7C842F9F2606267400A66756 /* ModifyProfileViewController.swift */,
+				7C842FA226063FB100A66756 /* ModifyProfileCustomView.swift */,
+			);
+			path = ModifyProfile;
 			sourceTree = "<group>";
 		};
 		C838D65354D003A3D43925F2 /* Pods */ = {
@@ -186,12 +338,22 @@
 		D70C37C725E103DD00898271 /* MobalMobal */ = {
 			isa = PBXGroup;
 			children = (
+				E3F1EA8025EA551F00F34BDE /* Setting */,
+				D7E44EEF25EA5133007FDB4F /* Main */,
+				3A179F4B25FB5A2100901436 /* DonateMoney */,
+				3A179F5E25FB878F00901436 /* InputDonationMoney */,
+				7C842F9C2606265900A66756 /* ModifyProfile */,
+				3A1BD70F25ED26970079D56D /* DonationDetail */,
+				7C39978F25F75B3700EA82C2 /* SuccessCharging */,
+				7C39985B25FA517900EA82C2 /* Account */,
 				3A1BD76625F5397F0079D56D /* Fonts */,
 				7C61AECB25EA4CC900D9149F /* PointCharging */,
 				E3F1EA7625EA4AE800F34BDE /* Signup */,
 				3A035F1625EA4D6000D3FB69 /* Login */,
 				7C36DF4325F20129001C2DBB /* InputChargingPoint */,
+				7C04535225EA942F00870761 /* Profile */,
 				7C04536325EAAA2400870761 /* Extension */,
+				3A1BD74A25F373EA0079D56D /* MobalMobal.entitlements */,
 				D7147D6E25E7718A00AA0878 /* MobalMobalDebug.entitlements */,
 				D70C37C825E103DD00898271 /* AppDelegate.swift */,
 				D70C37CA25E103DD00898271 /* SceneDelegate.swift */,
@@ -203,6 +365,36 @@
 				D70C37D625E103DE00898271 /* Info.plist */,
 			);
 			path = MobalMobal;
+			sourceTree = "<group>";
+		};
+		E3F1EA8025EA551F00F34BDE /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				E3F1EA8325EA552800F34BDE /* SettingViewController.swift */,
+				E3F1EA8925EA5AE300F34BDE /* SettingTableViewCell.swift */,
+			);
+			path = Setting;
+            sourceTree = "<group>";
+        };
+		D7AC0C9325EAB610000A342A /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				D7AC0C9425EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift */,
+				D7AC0C9825EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift */,
+				D7AC0C9C25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift */,
+				D7AC0CA225EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift */,
+				3AB1D0242610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		D7E44EEF25EA5133007FDB4F /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D7AC0C9325EAB610000A342A /* cell */,
+				D7E44EF025EA5149007FDB4F /* MainViewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		E3F1EA7625EA4AE800F34BDE /* Signup */ = {
@@ -406,19 +598,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7AC0C9525EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift in Sources */,
+				D7AC0C9925EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift in Sources */,
 				3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */,
+				3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */,
+				3A1BD72425F1583D0079D56D /* DetailParticipantsMoreButtonView.swift in Sources */,
 				3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */,
+				3A1BD71D25F12F0C0079D56D /* DonationDetailViewController+Layout.swift in Sources */,
+				3A1BD73125F15EF20079D56D /* DetailParticipantsView.swift in Sources */,
+				7C39985D25FA51AA00EA82C2 /* AccountViewController.swift in Sources */,
 				D70C37CD25E103DD00898271 /* ViewController.swift in Sources */,
+				E3F1EA8A25EA5AE300F34BDE /* SettingTableViewCell.swift in Sources */,
+				3AB1D0252610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift in Sources */,
+				7C39979125F75B5900EA82C2 /* SuccessChargingViewController.swift in Sources */,
 				7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */,
 				E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */,
+				3AB1CFD6260F7CB200EA94E8 /* UIViewController+Extension.swift in Sources */,
 				E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */,
+				7C842FA02606267400A66756 /* ModifyProfileViewController.swift in Sources */,
+				7C04536025EAA2DC00870761 /* ProfileDonatingTableViewCell.swift in Sources */,
+				7C04535D25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift in Sources */,
 				7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */,
+				3A179F7725FBC84F00901436 /* UITextField+Extension.swift in Sources */,
 				D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */,
 				E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */,
 				3A1BD77C25F5443D0079D56D /* UIFont+Extension.swift in Sources */,
 				7C36DF4625F2014E001C2DBB /* InputChargingPointViewController.swift in Sources */,
+				7C04535625EA949B00870761 /* ProfileViewController.swift in Sources */,
+				7C04535A25EA98B900870761 /* ProfileTableViewCell.swift in Sources */,
 				D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */,
+				E3F1EA8425EA552800F34BDE /* SettingViewController.swift in Sources */,
+				D7AC0CA325EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift in Sources */,
+				D7E44EF125EA5149007FDB4F /* MainViewController.swift in Sources */,
+				D7AC0C9D25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift in Sources */,
+				3A1BD73225F15EF20079D56D /* DetailParticipantsProfileImageView.swift in Sources */,
 				7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */,
+				3A179F4D25FB5A3900901436 /* DonateMoneyViewController.swift in Sources */,
+				3A179F5225FB62B700901436 /* DonateMoneyTableViewCell.swift in Sources */,
+				3A179F6025FB87AF00901436 /* InputDonationMoneyViewController.swift in Sources */,
+				7C842FA326063FB100A66756 /* ModifyProfileCustomView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,6 +808,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MobalMobal/MobalMobal.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = TA757FA6NR;

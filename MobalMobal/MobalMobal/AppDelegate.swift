@@ -11,8 +11,12 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var shoudSupportAllOrientation: Bool = false
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        setNavigationAppearance()
+        
         FirebaseApp.configure()
         
         // setting Firebase Cloud Messaging
@@ -30,6 +34,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
+    
+    // screen orientation
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if shoudSupportAllOrientation {
+            return .all
+        }
+        return .portrait
+    }
 
     // MARK: UISceneSession Lifecycle
 
@@ -43,6 +55,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    private func setNavigationAppearance() {
+        let standard: UINavigationBarAppearance = UINavigationBarAppearance()
+        
+        // background
+        standard.configureWithOpaqueBackground()
+        standard.backgroundColor = .black94
+        
+        // title
+        standard.titleTextAttributes = [
+            .foregroundColor: UIColor.whiteTwo,
+            .font: UIFont.spoqaHanSansNeo(ofSize: 17, weight: .medium)
+        ]
+        
+        // button
+        let btnAppearance: UIBarButtonItemAppearance = UIBarButtonItemAppearance(style: .plain)
+        btnAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
+        standard.buttonAppearance = btnAppearance
+        
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().standardAppearance = standard
     }
 }
 
