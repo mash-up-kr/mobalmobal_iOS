@@ -23,7 +23,7 @@ class DonationDetailViewModel {
     private var donationId: Int = -1 { // id가 정해지면 API 통신
         didSet { callDonationInfoAPI() }
     }
-    private var detailResponse: DonationDetailResponse? { // 응답이 들어오면 값 세팅
+    private var detailResponse: DonationDetailData? { // 응답이 들어오면 값 세팅
         didSet { setDonationInfo() }
     }
     private lazy var donationImageURL: String? = nil { // 이미지
@@ -59,7 +59,7 @@ class DonationDetailViewModel {
     }
     
     private func setDonationInfo() {
-        guard let info = detailResponse?.data?.post else { return }
+        guard let info = detailResponse?.post else { return }
         
         self.donationImageURL = info.postImage
         self.donationPublisherName = "\(info.userId)번 사용자" // 유저 id가 아닌 닉네임 가져와야 함!
@@ -72,31 +72,10 @@ class DonationDetailViewModel {
     
     // MARK: - API Method
     func callDonationInfoAPI() {
-        let url: String = "\(ServerURL.detailURL)/\(donationId)"
-
-        AF.request(url, method: .get, encoding: JSONEncoding.default).responseJSON { [weak self] response in
-            switch response.result {
-            case .success(let data):
-                print("🐻 Detail Response: \(data)")
-                self?.detailResponse = try? self?.parse(detail: data)
-            case .failure(let error):
-                print("🐻 Detail API Error: \(error)")
-            }
-        }
-    }
-    
-    private func parse(detail value: Any) throws -> DonationDetailResponse {
-        do {
-            let data: Data = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
-            let decoder: JSONDecoder = JSONDecoder()
-            decoder.dateDecodingStrategy = try .iso8610WithZ()
-            
-            let parsedResponse: DonationDetailResponse = try decoder.decode(DonationDetailResponse.self, from: data)
-            print("🐻 Detail Parsed Data: \(parsedResponse)")
-            return parsedResponse
-        } catch let error {
-            print("🐻 Detail Response Decode Error: \(error)")
-            throw error
+        DoneProvider.getDonationDetail(postId: donationId) { [weak self] response in
+            self?.detailResponse = response.data
+        } failure: { _ in
+            return
         }
     }
 }
