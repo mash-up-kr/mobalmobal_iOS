@@ -201,5 +201,6 @@ extension ProfileViewController: ProfileViewModelDelegate {
     func tableViewUpdate() {
         self.mainTableView.reloadData()
         print("reload data")
+        self.navigationItem.title = profileViewModel.getUserNickname()
     }
 }
