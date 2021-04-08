@@ -18,14 +18,12 @@ class ProfileViewModel {
     weak var mainDelegate: ProfileViewModelDelegate?
     var profileResponseModel: ProfileResponse? {
         didSet {
-            print("model set!!")
-    
-//            profileCellDelegate?.setUIFromModel()
             mainDelegate?.tableViewUpdate()
         }
     }
     var mydonationResponseModel: MydonationResponse? {
         didSet {
+            mainDelegate?.tableViewUpdate()
         }
     }
     private lazy var headers: HTTPHeaders = [headerKey: tokenID]
@@ -68,10 +66,7 @@ class ProfileViewModel {
                     let mydonationResponse: MydonationResponse? = try self?.decoder.decode(MydonationResponse.self, from: data)
                     if mydonationResponse?.code == 200 {
                         self?.mydonationResponseModel = mydonationResponse
-                        print(self?.mydonationResponseModel)
-                    } else {
-                        return
-                    }
+                    } else { return }
                 } catch let error {
                     print(error.localizedDescription, "1")
                 }

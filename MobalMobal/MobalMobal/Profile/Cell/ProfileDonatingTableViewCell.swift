@@ -11,6 +11,13 @@ import Kingfisher
 
 class ProfileDonatingTableViewCell: UITableViewCell {
     // MARK: - UIComponents
+    private lazy var cellHeaderLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.textColor = .white
+        label.text = headerLabelText
+        label.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
+        return label
+    }()
     private let donateContentView: UIView = {
         let view: UIView = UIView()
         view.layer.cornerRadius = 12
@@ -72,6 +79,7 @@ class ProfileDonatingTableViewCell: UITableViewCell {
    
     // MARK: - Properties
     let viewModel: ProfileDonatingViewModel = ProfileDonatingViewModel()
+    var headerLabelText: String?
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -133,7 +141,6 @@ class ProfileDonatingTableViewCell: UITableViewCell {
         }
     }
     func didEndDateChanged(to date: Date) {
-        // D-Day
         let dueDay: Int = Date().getDueDay(of: date)
         if dueDay > 0 {
             donateDday.text = "D-\(dueDay)"
@@ -143,11 +150,13 @@ class ProfileDonatingTableViewCell: UITableViewCell {
             donateDday.text = "D+\(-dueDay)"
         }
     }
+    
 }
 
+// MARK: - ProfileDonatingViewModelDelegate
 extension ProfileDonatingTableViewCell: ProfileDonatingViewModelDelegate {
     func setUIFromModel(row: Int) {
-        print("donating 정보들 셀에 세팅합니다")
+        // image Placeholder 없음..!
         if let imageURL: URL = URL(string: viewModel.getDonationImg(row: row) ?? "") {
             donateImg.kf.setImage(with: imageURL)
             donateImg.layer.cornerRadius = 24
@@ -158,7 +167,6 @@ extension ProfileDonatingTableViewCell: ProfileDonatingViewModelDelegate {
         }
         if let donationTitle: String = viewModel.getTitle(row: row) {
             donateTitle.text = "\(donationTitle)"
-            print(donationTitle)
         }
         if let donationDate: Date = viewModel.getDate(row: row) {
             didEndDateChanged(to: donationDate)

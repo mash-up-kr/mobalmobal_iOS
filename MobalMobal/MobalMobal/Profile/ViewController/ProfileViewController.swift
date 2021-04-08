@@ -11,12 +11,12 @@ import UIKit
 class ProfileViewController: UIViewController {
     // MARK: - UIComponents
     private let mainTableView: UITableView = {
-        let tableview: UITableView = UITableView(frame: .zero, style: .grouped)
+        let tableview: UITableView = UITableView(frame: .zero, style: .plain)
         return tableview
     }()
     
     // MARK: - Properties
-    let sectionHeader: [String] = ["내 연 도네", "후원중인 도네", "종료된 도네"]
+    private let sectionHeader: [String] = ["내 연 도네", "후원중인 도네", "종료된 도네"]
     private let profileCellIdentifier: String = "ProfileTableViewCell"
     private let myDonationCellIdentifier: String = "MyDonationTableViewCell"
     private let donatingCellIdentifier: String = "DonatingTableViewCell"
@@ -95,12 +95,12 @@ class ProfileViewController: UIViewController {
     
     // 유동적으로 갯수가 변화하는 section인지 체크하는 메서드
     func checkDynamicSection(_ section: Int) -> Bool {
-        if section < 2 { return false }
-        return true
+        section >= 2 ? true : false
     }
     
     // 서버로부터 받아온 도네이션 갯수가 0개인지 체크하는 메서드
     func checkNumberOfDonationIsZero(_ section: Int) -> Bool {
+        print("\(section) 에 도네있나요?", numberOfDonations)
         if numberOfDonations[section - 2] == 0 {
             return true
         }
@@ -118,8 +118,7 @@ extension ProfileViewController: UITableViewDataSource {
         if !checkDynamicSection(section) {
             return 1
         } else {
-            // 서버에서 받아온 값 만큼
-            numberOfDonations = [0,0,0]
+            numberOfDonations = [0, 0, 0]
             if let mydonationData: MydonationResponse = profileViewModel.mydonationResponseModel {
                 for post in 0..<mydonationData.data.posts.count {
                     if profileViewModel.checkOutDated(date: mydonationData.data.posts[post].endAt) {
@@ -127,7 +126,6 @@ extension ProfileViewController: UITableViewDataSource {
                     }
                 }
             }
-            print(numberOfDonations, "섹션 별 도네이션 갯수")
             return numberOfDonations[section - 2]
         }
     }
@@ -148,31 +146,34 @@ extension ProfileViewController: UITableViewDataSource {
             }
             return myDonationCell
         }
-        // 내가 연 도네
+        // 내가 연 도네 && 종료도네.
         else if indexPath.section == 2 || indexPath.section == 4 {
-            print("내가 연 도네, 종료된도네 indexpath row at")
             guard let donatingCell: ProfileDonatingTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: donatingCellIdentifier, for: indexPath) as? ProfileDonatingTableViewCell
             else { return UITableViewCell() }
             donatingCell.selectionStyle = .none
-            
+            donatingCell.headerLabelText = sectionHeader[indexPath.section - 2]
             if let mydonationData: MydonationResponse = profileViewModel.mydonationResponseModel {
                 donatingCell.viewModel.setGiveEndModel(mydonationData, row: indexPath.row)
-                print(indexPath.row, "row 정보")
             }
             return donatingCell
-        } else {
+        } else {        // 내가 후원한 도네
             guard let donatingCell: ProfileDonatingTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: donatingCellIdentifier, for: indexPath) as? ProfileDonatingTableViewCell
             else { return UITableViewCell() }
+            donatingCell.headerLabelText = sectionHeader[indexPath.section - 2]
             donatingCell.selectionStyle = .none
             return donatingCell
         }
     }
+//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        guard let header = view as? UITableViewHeaderFooterView else { return }
+//        header.clipsToBounds = true
+//    }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if !checkDynamicSection(section) && checkNumberOfDonationIsZero(section) {
+        if checkNumberOfDonationIsZero(section) {
             return nil
         }
-        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 22))
-        let headerLabel: UILabel = UILabel(frame: CGRect(x: 20, y: 0, width: tableView.frame.width - 40, height: 22))
+        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 42))
+        let headerLabel: UILabel = UILabel(frame: CGRect(x: 20, y: 20, width: tableView.frame.width - 40, height: 42))
         headerLabel.text = sectionHeader[section - 2]
         headerLabel.textColor = .white
         headerLabel.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
@@ -184,7 +185,10 @@ extension ProfileViewController: UITableViewDataSource {
         if !checkDynamicSection(section) {
             return CGFloat.leastNormalMagnitude
         }
-        return 35
+        if checkNumberOfDonationIsZero(section) {
+            return CGFloat.leastNormalMagnitude
+        }
+        return 54
     }
 }
 

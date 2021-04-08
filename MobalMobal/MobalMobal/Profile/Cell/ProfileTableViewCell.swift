@@ -5,15 +5,14 @@
 //  Created by 송서영 on 2021/02/28.
 //
 
+import Kingfisher
 import SnapKit
 import UIKit
-import Kingfisher
 
 class ProfileTableViewCell: UITableViewCell {
     // MARK: - UIComponents
     private lazy var profileImage: UIImageView = {
         let image: UIImageView = UIImageView()
-//        image.image = UIImage(named: self.userImg)
         return image
     }()
     private lazy var nicknameLabel: UILabel = {
@@ -81,13 +80,12 @@ class ProfileTableViewCell: UITableViewCell {
 // MARK: - ProfieCellViewModelDelegate
 extension ProfileTableViewCell: ProfileCellViewModelDelegate {
     func setUIFromModel() {
-        print("set ui from model")
-        if let userNickname: String = cellViewModel.model?.data.user.nickname,
-           let userCash: Int = cellViewModel.model?.data.user.cash {
+        if let userNickname: String = cellViewModel.getNickname(),
+           let userCash: Int = cellViewModel.getCash() {
             nicknameLabel.text = "\(userNickname)"
             pointLabel.text = "\(userCash)원"
         }
-        if let imageURL: URL = URL(string: cellViewModel.model?.data.user.profileImage ?? "") {
+        if let imageURL: URL = URL(string: cellViewModel.getProfileImg() ?? "") {
             profileImage.kf.setImage(with: imageURL)
         } else {
             profileImage.image = UIImage(named: "profile")

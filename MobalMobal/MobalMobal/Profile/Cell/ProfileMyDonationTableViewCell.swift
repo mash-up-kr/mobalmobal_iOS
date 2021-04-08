@@ -19,7 +19,6 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
     }()
     private lazy var giveNumberOfDonation: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "\(myDonationNumber[1])"
         label.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
         label.textColor = .white
         return label
@@ -33,7 +32,6 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
     }()
     private lazy var takeNumberOfDonation: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "\(myDonationNumber[0])"
         label.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
         label.textColor = .white
         return label
@@ -47,7 +45,6 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
     }()
     private lazy var endNumberOfDonation: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "\(myDonationNumber[2])"
         label.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
         label.textColor = .white
         return label
@@ -93,12 +90,10 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
     }()
     
     // MARK: - Properties
-    // myDonationText는 변경가능성이있다고하여서 빼두었습니다.
     private let myDonationText: [String] = ["받는", "주는", "종료"]
-    private let profileViewModel: ProfileViewModel = ProfileViewModel()
-    // dummy data
     private lazy var myDonationNumber: [Int] = [0, 0, 0]
     let cellViewModel: ProfileMydonationViewModel = ProfileMydonationViewModel()
+    
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -142,10 +137,11 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
 extension ProfileMyDonationTableViewCell: ProfileMydonationViewModelDelegate {
     func setUIFromModel() {
         print("보라색 도네이션 테이블 세팅")
+        myDonationNumber = [0,0,0]
         // 내가 연 도네이션 관련 정보 처리
         if let mydonationPosts: [MydonationPost] = cellViewModel.getPosts() {
             for post in 0..<mydonationPosts.count {
-                if Date().getDueDay(of: mydonationPosts[post].endAt) < 0 {
+                if cellViewModel.checkOutDated(postNumber: post) {
                     myDonationNumber[2] += 1
                 } else {
                     myDonationNumber[0] += 1
@@ -153,6 +149,9 @@ extension ProfileMyDonationTableViewCell: ProfileMydonationViewModelDelegate {
             }
             takeNumberOfDonation.text = "\(myDonationNumber[0])"
             endNumberOfDonation.text = "\(myDonationNumber[2])"
+            giveNumberOfDonation.text = "\(myDonationNumber[1])"
         }
+        
+        //TODO: 주는 도네이션관련 API 배포되면 작업필요
     }
 }

@@ -15,12 +15,19 @@ class ProfileCellViewModel {
     weak var delegate: ProfileCellViewModelDelegate?
     var model: ProfileResponse? {
         didSet {
-            print("cell 의 모델이 세팅됨.")
             delegate?.setUIFromModel()
         }
     }
     func setModel(_ model: ProfileResponse?) {
-        print("cell set model")
         self.model = model
+    }
+    func getCash() -> Int? {
+        self.model?.data.user.cash
+    }
+    func getNickname() -> String? {
+        self.model?.data.user.nickname
+    }
+    func getProfileImg() -> String? {
+        self.model?.data.user.profileImage
     }
 }
