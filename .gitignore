@@ -67,3 +67,6 @@ fastlane/test_output
 
 ### Xcode Patch ###
 **/xcshareddata/WorkspaceSettings.xcsettings
+
+### Server Strings ###
+**/ServerURL.swift
