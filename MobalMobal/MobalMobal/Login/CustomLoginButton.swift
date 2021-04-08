@@ -8,39 +8,67 @@ import SnapKit
 import UIKit
 
 class CustomLoginButton: UIView {
-    let stackView: UIStackView = UIStackView()
+    // MARK: - Properties
+    let titleText: String
+    let iconName: String
     
-    let titleLabel: UILabel = {
+    // MARK: - UI Components
+    let stackView: UIStackView = {
+        let stackView: UIStackView = UIStackView()
+        stackView.alignment = .center
+        return stackView
+    }()
+    
+    lazy var iconImageView: UIImageView = UIImageView(image: UIImage(named: iconName))
+    
+    lazy var titleLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.font = UIFont(name: "SpoqaHanSansNeo-Medium", size: 14)
+        label.text = titleText
         label.textColor = .white
-        label.font = UIFont(name: "Futura-Medium", size: 14)
         label.textAlignment = .center
         return label
     }()
     
-    let iconImageView: UIImageView = UIImageView()
-    
+    // MARK: - Initializers
     init(title: String, iconName: String) {
-        super.init(frame: CGRect(x: 0, y: 0, width: 200, height: 60))
-        self.layer.cornerRadius = self.frame.height / 2
-        self.backgroundColor = UIColor(displayP3Red: 255, green: 255, blue: 255, alpha: 0.2)
-    
-        self.addSubview(stackView)
-        stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(10)
-        }
+        self.titleText = title
+        self.iconName = iconName
         
-        [iconImageView, titleLabel].forEach { stackView.addArrangedSubview($0) }
-        titleLabel.text = title
-        if let icon: UIImage = UIImage(named: iconName) {
-            iconImageView.image = icon
-        }
-        iconImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(40)
-        }
+        super.init(frame: .zero)
+        
+        setupView()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Methods
+    override func updateConstraints() {
+        [stackView].forEach { self.addSubview($0) }
+        stackView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(2.0 / 3.0)
+            make.width.equalToSuperview().multipliedBy(299.0 / 319.0)
+            make.height.greaterThanOrEqualTo(30)
+            make.height.lessThanOrEqualTo(60)
+        }
+        
+        [iconImageView, titleLabel].forEach { stackView.addArrangedSubview($0) }
+        iconImageView.snp.makeConstraints { make in
+            make.width.equalTo(iconImageView.snp.height)
+        }
+        
+        super.updateConstraints()
+    }
+    
+    override func layoutSubviews() {
+        self.roundCorner()
+        super.layoutSubviews()
+    }
+    
+    private func setupView() {
+        self.backgroundColor = .white20
     }
 }
