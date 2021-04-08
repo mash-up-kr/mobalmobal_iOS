@@ -330,15 +330,20 @@
 			sourceTree = "<group>";
 		};
 		7C61AECB25EA4CC900D9149F /* PointCharging */ = {
-		7C842F9C2606265900A66756 /* ModifyProfile */ = {
 			isa = PBXGroup;
 			children = (
 				7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */,
 				7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */,
+			);
+			path = PointCharging;
+			sourceTree = "<group>";
+		};
+		7C842F9C2606265900A66756 /* ModifyProfile */ = {
+			isa = PBXGroup;
+			children = (
 				7C842F9F2606267400A66756 /* ModifyProfileViewController.swift */,
 				7C842FA226063FB100A66756 /* ModifyProfileCustomView.swift */,
 			);
-			path = PointCharging;
 			path = ModifyProfile;
 			sourceTree = "<group>";
 		};
