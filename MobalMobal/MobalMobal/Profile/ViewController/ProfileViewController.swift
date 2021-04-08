@@ -48,16 +48,10 @@ class ProfileViewController: UIViewController {
     @objc
     private func modifyInfo() {
         print("✨ modify user info")
-        navigationController?.pushViewController(modifyVC, animated: true)
     }
     @objc
     private func pushSettingVC() {
         print("✨ push setting vc")
-        
-        // 임시로 PointCharging으로 이동하는 코드
-        let navVC: UINavigationController = UINavigationController(rootViewController: chargingVC)
-        navVC.modalPresentationStyle = .overFullScreen
-        self.present(navVC, animated: true)
     }
     
     // MARK: - Methods
