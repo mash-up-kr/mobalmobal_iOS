@@ -220,7 +220,7 @@ class CreateDonationViewController: UIViewController, UINavigationControllerDele
     
     @objc
     private func doneButtonClicked() {
-        print("minho")
+        print("Done button is clicked")
     }
     
     private func setScrollView() {
@@ -408,6 +408,12 @@ class CreateDonationViewController: UIViewController, UINavigationControllerDele
         photoButton.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview()
         }
+        
+        resetConstraint(baseView: self.donationEndDateView, offset: 263)
+        resetConstraint(baseView: self.donationStartDateView, offset: 349)
+        resetConstraint(baseView: self.donationPriceView, offset: 435)
+        resetConstraint(baseView: self.donationInputView, offset: 521)
+        resetConstraint(baseView: self.donationProductView, offset: 607)
     }
     
     private func resetConstraint(baseView: UIView, offset: Int) {
@@ -491,6 +497,17 @@ extension CreateDonationViewController: UITextFieldDelegate {
         self.view.endEditing(true)
         
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        if textField == donationPriceTextField {
+            let numberFormatter: NumberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .decimal
+            if let input: Int = Int(textField.text!) {
+                let formattedNumber: String? = numberFormatter.string(from: NSNumber(value: input))
+                textField.text = formattedNumber
+            }
+        }
     }
 }
 
