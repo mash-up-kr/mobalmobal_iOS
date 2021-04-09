@@ -241,10 +241,6 @@ class CreateDonationViewController: UIViewController, UINavigationControllerDele
         }
         
         datePicker.addTarget(self, action: #selector(updateTextField), for: .valueChanged)
-        
-        datePicker.snp.makeConstraints { make in
-            make.height.equalTo(200)
-        }
     }
     
     @objc
@@ -514,5 +510,3 @@ extension CreateDonationViewController: UIImagePickerControllerDelegate {
         self.dismiss(animated: true, completion: nil)
     }
 }
-
-
