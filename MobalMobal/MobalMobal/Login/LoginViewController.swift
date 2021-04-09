@@ -83,7 +83,9 @@ class LoginViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
         
-        setStackViewCustomSpacing()
+        stackView.setCustomSpacing(view.frame.height * 58 / 812, after: logoImageView)
+        stackView.setCustomSpacing(view.frame.height * 13 / 812, after: googleButton)
+        stackView.setCustomSpacing(view.frame.height * 13 / 812, after: facebookButton)
         super.updateViewConstraints()
     }
         
@@ -99,12 +101,6 @@ class LoginViewController: UIViewController {
         appleButton.addGestureRecognizer(appleLoginTap)
     }
     
-    private func setStackViewCustomSpacing() {
-        stackView.setCustomSpacing(view.frame.height * 58 / 812, after: logoImageView)
-        stackView.setCustomSpacing(view.frame.height * 13 / 812, after: googleButton)
-        stackView.setCustomSpacing(view.frame.height * 13 / 812, after: facebookButton)
-    }
-    
     @IBAction private func clickGoogleLoginButton() {
         loginWithGoogle()
     }
@@ -115,6 +111,7 @@ class LoginViewController: UIViewController {
         loginWithApple()
     }
     
+    // MARK: - Methods
     private func presentMainViewController() {
         let mainVC: MainViewController = MainViewController()
         let navigation: UINavigationController = UINavigationController(rootViewController: mainVC)
@@ -125,13 +122,6 @@ class LoginViewController: UIViewController {
     private func pushSignUpViewController() {
         let signUpVC: SignupViewController = SignupViewController()
         navigationController?.pushViewController(signUpVC, animated: true)
-    }
-
-    // 임시로 상세보기 화면으로 가는 코드
-    private func goToDonationDetail() {
-        let detailVC: DonationDetailViewController = DonationDetailViewController(donationId: 1)
-        detailVC.modalPresentationStyle = .fullScreen
-        self.present(detailVC, animated: true)
     }
 }
 
@@ -157,9 +147,8 @@ extension LoginViewController {
             guard let authResult = authResult else { return }
             let fireStoreId: String = authResult.user.uid
             print("🐻 fireStoreId: \(fireStoreId)")
-            self?.viewModel.login(with: fireStoreId)
             
-//            user?.getIDTokenForcingRefresh(true) {idToken, error in ... }
+            self?.viewModel.login(with: fireStoreId)
         }
     }
 }
@@ -174,30 +163,20 @@ extension LoginViewController: GIDSignInDelegate {
     }
     
     // MARK: Google Guideline
-    
     // 구글 로그인 연동 시도 했을 시 호출
     func sign(_ signIn: GIDSignIn?, didSignInFor user: GIDGoogleUser?, withError error: Error?) {
         if let error: Error = error {
-            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
-                print("🐻 GoogleLogin :: The user has not signed in before or they have since signed out. 🐻")
-            } else {
-                print("🐻 GoogleLogin :: error: \(error.localizedDescription) 🐻")
-            }
+            print("🐻 Google Login Error :: \(error.localizedDescription) 🐻")
             return
         }
-        guard let user = user else {
-            print("🐻 GoogleLogin :: error: User Data Not Found 🐻")
-            return
-        }
-        print("🐻 GoogleLogin :: user: \(user)")
-        guard let authentication = user.authentication else { return }
+        guard let authentication = user?.authentication else { return }
         let credential: AuthCredential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         loginWithFirebase(credential: credential)
     }
     
     // 구글 로그인 연동 해제 시 호출
     func sign(_ signIn: GIDSignIn?, didDisconnectWith user: GIDGoogleUser?, withError error: Error?) {
-        print("🐻 GoogleLogin :: disconnected 🐻")
+        print("🐻 Google Login :: disconnected 🐻")
     }
 }
 
@@ -207,23 +186,11 @@ extension LoginViewController {
         let manager: LoginManager = LoginManager()
         manager.logIn(permissions: ["public_profile"], from: self) { [weak self] result, error in
             if let error: Error = error {
-                print("🐻 Facebook Login :: Process error: \(error)🐻")
+                print("🐻 Facebook Login Error :: \(error)🐻")
                 return
             }
-            guard let result = result else {
-                print("🐻 FacebookLogin :: No Result 🐻")
-                return
-            }
-            if result.isCancelled {
-                print("🐻 FacebookLogin :: Cancelled 🐻")
-                return
-            }
-            guard let token: AccessToken = result.token else {
-                print("🐻 FacebookLogin :: Token Error 🐻")
-                return
-            }
-            print("🐻 FacebookLogin :: Token: \(token) 🐻")
-            
+            guard let token: AccessToken = result?.token else { return }
+            print("🐻 Facebook Login Token :: \(token) 🐻")
             // 토큰 받아오는 데 성공하면 파이어베이스로 인증
             self?.loginWithFirebase(credential: FacebookAuthProvider.credential(withAccessToken: token.tokenString))
         }
@@ -270,7 +237,6 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
             
             randoms.forEach { random in
                 if remainingLength == 0 { return }
-                
                 if random < charset.count {
                     result.append(charset[Int(random)])
                     remainingLength -= 1
@@ -292,7 +258,6 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
     }
     
     // MARK: Apple Guideline
-    
     // Apple login 모달 창 띄우기
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         self.view.window!
@@ -304,20 +269,17 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
         // Apple ID
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             
-            guard let nonce: String = currentNonce else {
-                print("🐻 AppleLogin :: nonce 없음")
-                return
-            }
+            guard let nonce: String = currentNonce else { return }
+            
             guard let token: Data = appleIDCredential.identityToken else {
-                print("🐻 AppleLogin :: Unable to fetch identity token")
+                print("🐻 Apple Login :: Unable to fetch identity token")
                 return
             }
             guard let tokenString: String = String(data: token, encoding: .utf8) else {
-                print("🐻 AppleLogin :: Unable to serialize token string from data: \(token.debugDescription)")
+                print("🐻 Apple Login :: Unable to serialize token string from data: \(token.debugDescription)")
                 return
             }
-            print("🐻 AppleLogin :: Token: \(tokenString)")
-            print("🐻 AppleLogin :: ID: \(appleIDCredential.user)")
+            print("🐻 Apple Login Token: \(tokenString)")
             
             // 토큰 받아오는 데 성공하면 파이어베이스로 인증
             let credential: AuthCredential = OAuthProvider.credential(withProviderID: "apple.com", idToken: tokenString, rawNonce: nonce)
@@ -330,6 +292,6 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
     
     // Apple ID 연동 실패 시 호출
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print("🐻 AppleLogin :: 로그인 실패 \(error.localizedDescription)")
+        print("🐻 Apple Login :: 로그인 실패 \(error.localizedDescription)")
     }
 }
