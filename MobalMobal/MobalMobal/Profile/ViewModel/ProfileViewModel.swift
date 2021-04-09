@@ -9,25 +9,23 @@ import Alamofire
 import Foundation
 
 protocol ProfileViewModelDelegate: AnyObject {
-    func tableViewUpdate()
+    func tableViewUpdate(section: IndexSet)
 }
 class ProfileViewModel {
     // MARK: - Properties
-    
     weak var mainDelegate: ProfileViewModelDelegate?
     var profileResponseModel: ProfileData? {
         didSet {
-            mainDelegate?.tableViewUpdate()
+            let sectionRange: IndexSet = IndexSet(0...0)
+            mainDelegate?.tableViewUpdate(section: sectionRange)
         }
     }
-
     var mydonationResponseModel: MydonationData? {
         didSet {
-            mainDelegate?.tableViewUpdate()
+            let sectionRange: IndexSet = IndexSet(1...4)
+            mainDelegate?.tableViewUpdate(section: sectionRange)
         }
     }
-    
-    private let decoder: JSONDecoder = JSONDecoder()
     // MARK: - Methods
     func getProfileResponse() {
         DoneProvider.getUserProfile() { [weak self] response in
@@ -36,19 +34,12 @@ class ProfileViewModel {
             print(err.localizedDescription)
         }
     }
-
     func getMydontaionResponse() {
-        print("get mydonation response")
         DoneProvider.getMyDonation { [weak self] response in
             self?.mydonationResponseModel = response.data
         } failure: { err in
             print(err.localizedDescription)
         }
-
-    }
-    
-    func checkSuccess(code: Int) -> Bool {
-        code == 200 ? true : false
     }
     
     func getUserNickname() -> String? {
@@ -64,7 +55,7 @@ class ProfileViewModel {
         mydonationResponseModel
     }
     func checkOutDated(date: Date) -> Bool {
-        // 날자가 지났으면 true반환 종료된도네에 넣는다.
+        // 날자가 지났으면 true반환 -> 종료된도네에 넣는다.
         Date().getDueDay(of: date) < 0 ? true : false
     }
 }

@@ -11,13 +11,6 @@ import UIKit
 
 class ProfileDonatingTableViewCell: UITableViewCell {
     // MARK: - UIComponents
-    private lazy var cellHeaderLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.textColor = .white
-        label.text = headerLabelText
-        label.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
-        return label
-    }()
     private let donateContentView: UIView = {
         let view: UIView = UIView()
         view.layer.cornerRadius = 12
@@ -27,7 +20,8 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     private lazy var donateImg: UIImageView = {
         let image: UIImageView = UIImageView()
         image.contentMode = .scaleAspectFill
-        
+        image.layer.cornerRadius = 24
+        image.layer.masksToBounds = true
         return image
     }()
     private let translucentView: UIView = {
@@ -37,13 +31,13 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     }()
     private lazy var donateDday: UILabel = {
         let label: UILabel = UILabel()
-        label.font = UIFont(name: "Lato-Regular", size: 11)
+        label.font = .systemFont(ofSize: 11, weight: .regular)
         label.textColor = .brownGrey
         return label
     }()
     private lazy var donatePrice: UILabel = {
         let label: UILabel = UILabel()
-        label.font = UIFont(name: "Lato-Bold", size: 18)
+        label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .white
         return label
     }()
@@ -81,19 +75,6 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     let viewModel: ProfileDonatingViewModel = ProfileDonatingViewModel()
     var headerLabelText: String?
     private var ratingBarWidth: Float = 0.0
-    private let numberFormat: (Int) -> String = { number in
-        let str: String = "\(number)"
-        let regex: NSRegularExpression?
-        do {
-            regex = try? NSRegularExpression(pattern: "(?<=\\d)(?=(?:\\d{3})+(?!\\d))", options: [])
-        }
-        guard let regexString = regex else { return "" }
-        return regexString.stringByReplacingMatches(in: str,
-                                                    options: [],
-                                                    range: NSRange(location: 0, length: str.count),
-                                                    withTemplate: ",")
-    }
-    
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -172,13 +153,13 @@ extension ProfileDonatingTableViewCell: ProfileDonatingViewModelDelegate {
         guard let donationGoal: Int = viewModel.getGoal(row: row) else {
             return
         }
-        donatePrice.text = "\(numberFormat(donationGoal))"
-        
-        // image Placeholder 없음..!
+        if let donationGoalFormat: String = donationGoal.changeToCommaFormat() {
+            donatePrice.text = "\(donationGoalFormat)"
+        }
         if let imageURL: URL = URL(string: viewModel.getDonationImg(row: row) ?? "") {
             donateImg.kf.setImage(with: imageURL)
-            donateImg.layer.cornerRadius = 24
-            donateImg.layer.masksToBounds = true
+        } else {
+            donateImg.image = UIImage(named: "profile_default")
         }
         if let donationTitle: String = viewModel.getTitle(row: row) {
             donateTitle.text = "\(donationTitle)"
@@ -187,10 +168,9 @@ extension ProfileDonatingTableViewCell: ProfileDonatingViewModelDelegate {
             didEndDateChanged(to: donationDate)
         }
         if let currentAmount: Int = viewModel.getCurrentAmount(row: row) {
-            let ratingBackgroundBarWidth: Float = Float(ratingBackgroundBar.bounds.width)
+            let ratingBackgroundBarWidth: Float = Float(UIScreen.main.bounds.width) - 40.0
             // goal : 전체길이 = currentAmount : 보여질길이
             ratingBarWidth = Float((ratingBackgroundBarWidth * Float(currentAmount))) / Float(donationGoal)
-            print(ratingBarWidth)
             ratingBar.snp.updateConstraints { make in
                 make.width.equalTo(ratingBarWidth)
             }

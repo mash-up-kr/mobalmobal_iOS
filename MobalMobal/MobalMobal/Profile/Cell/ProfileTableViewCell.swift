@@ -13,6 +13,9 @@ class ProfileTableViewCell: UITableViewCell {
     // MARK: - UIComponents
     private lazy var profileImage: UIImageView = {
         let image: UIImageView = UIImageView()
+        image.image = UIImage(named: "profile_default")
+        image.layer.cornerRadius = 24
+        image.layer.masksToBounds = true
         return image
     }()
     private lazy var nicknameLabel: UILabel = {
@@ -117,14 +120,15 @@ class ProfileTableViewCell: UITableViewCell {
 extension ProfileTableViewCell: ProfileCellViewModelDelegate {
     func setUIFromModel() {
         if let userNickname: String = cellViewModel.getNickname(),
-           let userCash: Int = cellViewModel.getCash() {
+           let userCash: Int = cellViewModel.getCash(),
+           let userCashFormat: String = userCash.changeToCommaFormat(){
             setNicknameUI(userNickname)
-            pointLabel.text = "\(numberFormat(userCash))원"
+            pointLabel.text = "\(userCashFormat)원"
         }
         if let imageURL: URL = URL(string: cellViewModel.getProfileImg() ?? "") {
             profileImage.kf.setImage(with: imageURL)
         } else {
-            profileImage.image = UIImage(named: "profile")
+            profileImage.image = UIImage(named: "profile_default")
         }
     }
 }

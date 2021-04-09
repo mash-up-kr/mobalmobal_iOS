@@ -124,10 +124,13 @@ extension ProfileViewController: UITableViewDataSource {
             return 1
         } else {
             numberOfDonations = [0, 0, 0]
+            // 내가 연 도네이션으로 -> 내연도네, 종료도네 구문
             if let mydonationData: MydonationData = profileViewModel.mydonationResponseModel {
                 for post in 0..<mydonationData.posts.count {
                     if profileViewModel.checkOutDated(date: mydonationData.posts[post].endAt) {
                         numberOfDonations[2] += 1
+                    } else {
+                        numberOfDonations[0] += 1
                     }
                 }
             }
@@ -198,9 +201,8 @@ extension ProfileViewController: UITableViewDelegate {
 }
 
 extension ProfileViewController: ProfileViewModelDelegate {
-    func tableViewUpdate() {
-        self.mainTableView.reloadData()
-        print("reload data")
+    func tableViewUpdate(section: IndexSet) {
+        self.mainTableView.reloadSections(section, with: .automatic)
         self.navigationItem.title = profileViewModel.getUserNickname()
     }
 }
