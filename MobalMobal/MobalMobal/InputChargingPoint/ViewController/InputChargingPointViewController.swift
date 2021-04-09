@@ -57,7 +57,7 @@ class InputChargingPointViewController: UIViewController {
                                                     withTemplate: ",")
     }
     private let maxChargingPoint: Int = 10_000_000
-    
+    private let viewModel: InputChargingPointViewModel = InputChargingPointViewModel()
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +80,7 @@ class InputChargingPointViewController: UIViewController {
             return
         }
         accountVC.charge = "\(inputText)원"
+        viewModel.postCharging()
         self.navigationController?.pushViewController(accountVC, animated: true)
         //여기서 서버에 얼만큼 요청했는지 보내줘야한다.
     }

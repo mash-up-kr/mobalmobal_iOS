@@ -19,8 +19,17 @@ struct ChargeInfo: Codable {
     let chargeID: Int
     let amount: Int
     let userName: String
-    let chargedAt: Int
+    let chargedAt: Date
     let userID: Int
-    let updatedAt: String
-    let createdAt: String
+    let updatedAt: Date?
+    let createdAt: Date?
+    
+    enum CodingKeys: String, CodingKey {
+        case isCharge = "is_charge"
+        case chargeID = "charge_id"
+        case userName = "user_name"
+        case chargedAt = "charged_at"
+        case userID = "user_id"
+        case amount, updatedAt, createdAt
+    }
 }
