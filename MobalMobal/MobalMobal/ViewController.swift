@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func fourthButtonIsTapped(_ sender: UIButton) {
-        let vc = InputChargingPointViewController()
+        let vc = PointChargingViewController()
         let navVc: UINavigationController = UINavigationController(rootViewController: vc)
         navVc.modalPresentationStyle = .overFullScreen
 //        vc.modalPresentationStyle = .fullScreen

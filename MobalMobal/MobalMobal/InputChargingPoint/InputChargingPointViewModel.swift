@@ -14,9 +14,15 @@ class InputChargingPointViewModel {
             print("🍎🍎response set!!!!🍎🍎")
         }
     }
+    var amount: Int?
+    var userName: String?
+    var chargedAt: String?
     func postCharging() {
         print("🍎🍎post charging🍎🍎")
-        DoneProvider.charge(amount: 1000, userName: "ee", chargedAt: "2021-04-09T12:26:35.793Z") { [weak self] response in
+        guard let amount = amount,
+              let userName = userName,
+              let chargedAt = chargedAt else { return }
+        DoneProvider.charge(amount: amount, userName: userName, chargedAt: chargedAt) { [weak self] response in
             self?.model = response.data
         } failure: { (err) in
             print(err.localizedDescription)
