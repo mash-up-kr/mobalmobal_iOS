@@ -26,7 +26,7 @@ class LoginViewModel {
     func login(with fireStoreId: String) {
         self.fireStoreId = fireStoreId
         
-        let loginURL: String = ServerURL.loginURL
+        let loginURL: String = "http://13.125.168.51:3000/users/login"
         let params: Parameters = ["fireStoreId": fireStoreId]
         
         AF.request(loginURL, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { [weak self] response in

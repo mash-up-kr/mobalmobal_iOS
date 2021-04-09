@@ -142,8 +142,8 @@ class MainViewController: UIViewController {
         // navigationController?.pushViewController(notiListVC, animated: true)
     }
     
-    func presentDonationDetailVC() {
-        let detailVC: DonationDetailViewController = DonationDetailViewController()
+    func presentDonationDetailVC(donationId: Int) {
+        let detailVC: DonationDetailViewController = DonationDetailViewController(donationId: donationId)
         present(detailVC, animated: true)
     }
     
@@ -177,7 +177,7 @@ extension MainViewController: UICollectionViewDelegate {
         switch indexPath.section {
         case 1:
             print("🐰 진행중 도네이션 : \(indexPath.item)")
-            presentDonationDetailVC()
+            presentDonationDetailVC(donationId: indexPath.item)
         default:
             break
         }
@@ -288,6 +288,6 @@ extension MainViewController: MainMyDonationCollectionViewCellDelegate {
     
     func didSelectMyOngoingDonationItem(at indexPath: IndexPath) {
         print("🐰 나의 진행 도네이션 : \(indexPath.item)")
-        presentDonationDetailVC()
+        presentDonationDetailVC(donationId: indexPath.item)
     }
 }

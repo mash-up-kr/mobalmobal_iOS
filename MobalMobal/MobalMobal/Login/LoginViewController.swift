@@ -126,6 +126,13 @@ class LoginViewController: UIViewController {
         let signUpVC: SignupViewController = SignupViewController()
         navigationController?.pushViewController(signUpVC, animated: true)
     }
+
+    // 임시로 상세보기 화면으로 가는 코드
+    private func goToDonationDetail() {
+        let detailVC: DonationDetailViewController = DonationDetailViewController(donationId: 1)
+        detailVC.modalPresentationStyle = .fullScreen
+        self.present(detailVC, animated: true)
+    }
 }
 
 // MARK: - LoginViewModelDelegate
