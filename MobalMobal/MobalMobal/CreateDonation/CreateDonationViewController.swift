@@ -193,6 +193,7 @@ class CreateDonationViewController: UIViewController, UINavigationControllerDele
     private func setup() {
         self.view.backgroundColor = .backgroundColor
         setScrollView()
+        addToolBar()
         donationTextField.delegate = self
         donationPriceTextField.delegate = self
         donataionProductTextField.delegate = self
@@ -204,6 +205,22 @@ class CreateDonationViewController: UIViewController, UINavigationControllerDele
         setBasicViewLayout()
         setDonationProductView()
         setDatePicker()
+    }
+    
+    private func addToolBar() {
+        let toolBarKeyboard: UIToolbar = UIToolbar()
+        toolBarKeyboard.sizeToFit()
+        
+        let flexibleButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneButtonClicked))
+        toolBarKeyboard.items = [flexibleButton, doneButton]
+        let textField: [UITextField] = [donationTextField, donationPriceTextField, donataionProductTextField, donationStartDateTextField,donationEndDateTextField]
+        textField.forEach { $0.inputAccessoryView = toolBarKeyboard }
+    }
+    
+    @objc
+    private func doneButtonClicked() {
+        print("minho")
     }
     
     private func setScrollView() {
