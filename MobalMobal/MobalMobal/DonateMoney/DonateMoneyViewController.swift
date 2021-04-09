@@ -82,8 +82,12 @@ class DonateMoneyViewController: UIViewController {
         let clearViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
         clearView.addGestureRecognizer(clearViewTap)
     }
-    private func showDonateFailAlert() {
-        let alert: UIAlertController = UIAlertController(title: "후원 실패", message: "에러가 발생했습니다. 잠시 후 다시 시도해주세요.", preferredStyle: .alert)
+    private func showDonateFailAlert(message: String?) {
+        var alertMessage: String = "에러가 발생했습니다. 잠시 후 다시 시도해주세요."
+        if let message = message {
+            alertMessage = message
+        }
+        let alert: UIAlertController = UIAlertController(title: "후원 실패", message: alertMessage, preferredStyle: .alert)
         let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             self?.navigationController?.dismiss(animated: true)
         }
@@ -151,20 +155,12 @@ extension DonateMoneyViewController: UITableViewDataSource {
 
 extension DonateMoneyViewController: DonateMoneyViewModelDelegate {
     func failDonateMoney(message: String?) {
-        showDonateFailAlert()
+        showDonateFailAlert(message: message)
     }
     
     func completeDonateMoney(amount: Int) {
         print("🐻 Donation Success")
+        dismiss(animated: true)
         // 후원완료 페이지로 이동
-    }
-}
-
-extension Int {
-    func changeToCommaFormat() -> String? {
-        let numberFormatter: NumberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        guard let formattedNumber = numberFormatter.string(from: NSNumber(value: self)) else { return nil }
-        return formattedNumber
     }
 }

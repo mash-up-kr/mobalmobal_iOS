@@ -20,14 +20,8 @@ class DonateMoneyViewModel {
     
     private var postId: Int = -1
     private var amount: Int?
-    private var donateResponse: DonateMoneyResponse? {  // 응답 받아오면 delegate 함수 호출
-        didSet {
-            if donateResponse?.code == .success, let amount: Int = amount {
-                delegate?.completeDonateMoney(amount: amount)
-            } else {
-                delegate?.failDonateMoney(message: donateResponse?.message)
-            }
-        }
+    private var donateData: DonateMoneyData? {
+        didSet { donateDataChanged() }
     }
     
     // MARK: - Initializer
@@ -45,32 +39,20 @@ class DonateMoneyViewModel {
     
     // MARK: - API
     func donate(amount: Int) {
-        let donateURL: String = ServerURL.donateURL
-        // TODO : testToken -> UserDefaults Token
-        let header: HTTPHeaders = ["authorization": ServerString.testToken]
-        let params: Parameters = ["post_id": postId, "amount": amount]
         self.amount = amount
-        
-        AF.request(donateURL, method: .post, parameters: params, encoding: JSONEncoding.default, headers: header).responseJSON { [weak self] response in
-            switch response.result {
-            case .success(let value):
-                print("🐻 Donate Response: \(value)")
-                self?.donateResponse = try? self?.parse(donate: value)
-            case .failure(let error):
-                print("🐻 Donate API Error: \(error)")
+        DoneProvider.donate(amount, to: postId) { [weak self] response in
+            self?.donateData = response.data
+            if let message = response.message {
+                self?.delegate?.failDonateMoney(message: message)
             }
+        } failure: { error in
+            self.delegate?.failDonateMoney(message: error.localizedDescription)
         }
     }
     
-    func parse(donate value: Any) throws -> DonateMoneyResponse {
-        do {
-            let data: Data = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
-            let parsedResponse: DonateMoneyResponse = try JSONDecoder().decode(DonateMoneyResponse.self, from: data)
-            print("🐻 Donate Parsed Data: \(parsedResponse)")
-            return parsedResponse
-        } catch let error {
-            print("🐻 Donate Response Decode Error: \(error.localizedDescription)")
-            throw error
+    private func donateDataChanged() {
+        if let amount = self.donateData?.donate?.amount {
+            delegate?.completeDonateMoney(amount: amount)
         }
     }
 }
