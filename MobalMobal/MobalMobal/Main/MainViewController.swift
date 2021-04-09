@@ -156,7 +156,7 @@ class MainViewController: UIViewController {
             make.leading.trailing.bottom.equalToSuperview()
         }
         
-        titleView.addSubviews([titleLabel, profileButton, notiListButton])
+        titleView.addSubviews([titleLabel, profileButton]) // notiListButton 임시 삭제
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(30)
@@ -165,16 +165,17 @@ class MainViewController: UIViewController {
         }
         
         profileButton.snp.makeConstraints { make in
-            make.centerY.equalTo(titleLabel)
-            make.size.equalTo(44)
-        }
-        
-        notiListButton.snp.makeConstraints { make in
-            make.leading.equalTo(profileButton.snp.trailing)
             make.trailing.equalToSuperview().inset(10)
             make.centerY.equalTo(titleLabel)
             make.size.equalTo(44)
         }
+        
+//        notiListButton.snp.makeConstraints { make in
+//            make.leading.equalTo(profileButton.snp.trailing)
+//            make.trailing.equalToSuperview().inset(10)
+//            make.centerY.equalTo(titleLabel)
+//            make.size.equalTo(44)
+//        }
     }
     
     private func getMain() {
