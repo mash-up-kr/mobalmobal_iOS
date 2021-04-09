@@ -39,26 +39,15 @@ class LoginViewModel {
     }
     
     private func loginDataChanged() {
-        guard let token = loginData?.token.token else {
-            resetUserToken()
-            return
-        }
-        setUserToken(token)
+        setUserToken(loginData?.token.token)
     }
     
     private func setFireStoreId() {
-        guard let fireStoreId: String = fireStoreId else {
-            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.fireStoreId)
-            return
-        }
-        UserDefaults.standard.setValue(fireStoreId, forKey: UserDefaultsKeys.fireStoreId)
+        UserInfo.shared.fireStoreId = fireStoreId
     }
     
-    private func setUserToken(_ token: String) {
+    private func setUserToken(_ token: String?) {
         UserDefaults.standard.setValue(token, forKey: UserDefaultsKeys.userToken)
-    }
-    
-    private func resetUserToken() {
-        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userToken)
+        UserInfo.shared.token = token
     }
 }

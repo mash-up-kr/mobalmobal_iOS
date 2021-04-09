@@ -10,6 +10,8 @@ import Then
 import UIKit
 
 class SignupViewController: UIViewController {
+    // Fire Store ID: UserInfo.shared.fireStoreId 사용하면 됩니다.
+    
     // MARK: - UIView
     private let nickNameView: UIView = {
         let view: UIView = SignupCustomView(imageName: "iconlyLightProfile", inputText: "닉네임을 입력해주세요.")

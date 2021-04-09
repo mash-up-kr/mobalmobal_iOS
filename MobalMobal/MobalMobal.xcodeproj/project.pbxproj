@@ -23,6 +23,7 @@
 		3A1BD77025F539D40079D56D /* Spoqa Han Sans Neo Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76B25F539D30079D56D /* Spoqa Han Sans Neo Thin.otf */; };
 		3A1BD77125F539D40079D56D /* Spoqa Han Sans Neo Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76C25F539D40079D56D /* Spoqa Han Sans Neo Medium.otf */; };
 		3A1BD77C25F5443D0079D56D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */; };
+		3A1E6DC12620445A00FAF0CC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E6DC02620445A00FAF0CC /* UserInfo.swift */; };
 		3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */; };
 		3AB1CFD6260F7CB200EA94E8 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */; };
 		3AB1D0252610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1D0242610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift */; };
@@ -107,6 +108,7 @@
 		3A1BD76B25F539D30079D56D /* Spoqa Han Sans Neo Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Thin.otf"; sourceTree = "<group>"; };
 		3A1BD76C25F539D40079D56D /* Spoqa Han Sans Neo Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Medium.otf"; sourceTree = "<group>"; };
 		3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		3A1E6DC02620445A00FAF0CC /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginButton.swift; sourceTree = "<group>"; };
 		3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		3AB1D0242610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOngoingDonationHeaderView.swift; sourceTree = "<group>"; };
@@ -258,6 +260,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		3A1E6DBF2620444A00FAF0CC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3A1E6DC02620445A00FAF0CC /* UserInfo.swift */,
+				3AC393CD261C7439008BB207 /* UserDefaultsKeys.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		3AB1D0352615DAF300EA94E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -407,6 +418,7 @@
 		D70C37C725E103DD00898271 /* MobalMobal */ = {
 			isa = PBXGroup;
 			children = (
+				3A1E6DBF2620444A00FAF0CC /* Common */,
 				4DBDB4E6261F540200B5E08D /* Network */,
 				E3F1EA8025EA551F00F34BDE /* Setting */,
 				D7E44EEF25EA5133007FDB4F /* Main */,
@@ -433,7 +445,6 @@
 				D70C37D125E103DE00898271 /* Assets.xcassets */,
 				D7147D6B25E76A1900AA0878 /* GoogleService-Info.plist */,
 				D70C37D625E103DE00898271 /* Info.plist */,
-				3AC393CD261C7439008BB207 /* UserDefaultsKeys.swift */,
 			);
 			path = MobalMobal;
 			sourceTree = "<group>";
@@ -726,6 +737,7 @@
 				3A179F4D25FB5A3900901436 /* DonateMoneyViewController.swift in Sources */,
 				3A179F5225FB62B700901436 /* DonateMoneyTableViewCell.swift in Sources */,
 				3A179F6025FB87AF00901436 /* InputDonationMoneyViewController.swift in Sources */,
+				3A1E6DC12620445A00FAF0CC /* UserInfo.swift in Sources */,
 				7C842FA326063FB100A66756 /* ModifyProfileCustomView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
