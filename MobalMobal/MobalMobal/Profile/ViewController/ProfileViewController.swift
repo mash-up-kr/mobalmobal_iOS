@@ -11,7 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     // MARK: - UIComponents
     private let mainTableView: UITableView = {
-        let tableview: UITableView = UITableView(frame: .zero, style: .plain)
+        let tableview: UITableView = UITableView(frame: .zero, style: .grouped)
         return tableview
     }()
     
@@ -34,6 +34,7 @@ class ProfileViewController: UIViewController {
         profileViewModel.getProfileResponse()
         profileViewModel.getMyDonateResponse()
         profileViewModel.mainDelegate = self
+        mainTableView.tableFooterView = UIView(frame: .zero)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -86,13 +87,13 @@ class ProfileViewController: UIViewController {
         
         // 추가 네비게이션 아이템
 //        let editBtn: UIButton = UIButton()
-//        editBtn.setImage(UIImage(named: "iconlyLightSetting"), for: .normal)
+//        editBtn.setImage(UIImage(named: "iconlyLightEditSquare"), for: .normal)
 //        editBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
 //        editBtn.addTarget(self, action: #selector(pushSettingVC), for: .touchUpInside)
 //        let editBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: editBtn)
         
         let settingBtn: UIButton = UIButton()
-        settingBtn.setImage(UIImage(named: "iconlyLightEditSquare"), for: .normal)
+        settingBtn.setImage(UIImage(named: "iconlyLightSetting"), for: .normal)
         settingBtn.addTarget(self, action: #selector(modifyInfo), for: .touchUpInside)
         settingBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         let settingBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: settingBtn)
@@ -135,10 +136,7 @@ extension ProfileViewController: UITableViewDataSource {
                     }
                 }
             }
-            // 내가 후원한 도네
-            if let myDonateData: MyDonates = profileViewModel.myDonateResponseModel {
-                numberOfDonations[1] = myDonateData.donate.count
-            }
+            numberOfDonations[1] = profileViewModel.myDonateResponseModel.count
             return numberOfDonations[section - 2]
         }
     }
@@ -154,11 +152,9 @@ extension ProfileViewController: UITableViewDataSource {
         } else if indexPath.section == 1 {
             guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
             myDonationCell.selectionStyle = .none
-            if let mydonationData: MydonationData = profileViewModel.mydonationResponseModel,
-               let myDonateData: MyDonates = profileViewModel.myDonateResponseModel{
-                myDonationCell.myDonationViewModel.setMyDonationModel(mydonationData)
-                myDonationCell.myDonationViewModel.setMyDonateModel(myDonateData)
-            }
+            
+            myDonationCell.myDonationViewModel.setMyDonationModel(profileViewModel.mydonationResponseModel)
+            myDonationCell.myDonationViewModel.setMyDonateModel(profileViewModel.myDonateResponseModel)
             return myDonationCell
         }
         // 내가 연 도네 && 종료도네.
@@ -168,13 +164,14 @@ extension ProfileViewController: UITableViewDataSource {
             donatingCell.selectionStyle = .none
             donatingCell.headerLabelText = sectionHeader[indexPath.section - 2]
             if let mydonationData: MydonationData = profileViewModel.mydonationResponseModel {
-                donatingCell.viewModel.setGiveEndModel(mydonationData.posts[indexPath.row])
+                donatingCell.viewModel.setMyDonationData(mydonationData.posts[indexPath.row])
             }
             return donatingCell
         } else {        // 내가 후원한 도네
             guard let donatingCell: ProfileDonatingTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: donatingCellIdentifier, for: indexPath) as? ProfileDonatingTableViewCell
             else { return UITableViewCell() }
             donatingCell.headerLabelText = sectionHeader[indexPath.section - 2]
+            donatingCell.viewModel.setMyDonateData(profileViewModel.myDonateResponseModel[indexPath.row])
             donatingCell.selectionStyle = .none
             return donatingCell
         }
@@ -200,6 +197,9 @@ extension ProfileViewController: UITableViewDataSource {
             return CGFloat.leastNormalMagnitude
         }
         return 54
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNonzeroMagnitude
     }
 }
 

@@ -22,12 +22,12 @@ class ProfileMydonationViewModel {
             delegate?.setMyDonationUI()
         }
     }
-    var myDonateModel: MyDonates? {
+    var myDonateModel: [Donate]? {
         didSet {
             delegate?.setMyDonateUI()
         }
     }
-    func setMyDonateModel(_ model: MyDonates?) {
+    func setMyDonateModel(_ model: [Donate]) {
         self.myDonateModel = model
     }
     func setMyDonationModel(_ model: MydonationData?) {
@@ -36,7 +36,7 @@ class ProfileMydonationViewModel {
     // postId 중복 체
     func getMyDonatePostsNumber() -> Int {
         var postIdSet: Set<Int> = Set<Int>()
-        guard let donates = myDonateModel?.donate else { return 0 }
+        guard let donates = myDonateModel else { return 0}
         for post in donates {
             postIdSet.insert(post.postId)
         }

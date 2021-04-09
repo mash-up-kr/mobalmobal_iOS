@@ -20,7 +20,6 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     private lazy var donateImg: UIImageView = {
         let image: UIImageView = UIImageView()
         image.contentMode = .scaleAspectFill
-        image.layer.cornerRadius = 24
         image.layer.masksToBounds = true
         return image
     }()
@@ -125,7 +124,7 @@ class ProfileDonatingTableViewCell: UITableViewCell {
         donateContentView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(10)
         }
         setDonationImageLayout()
         setRatingBarLayout()
@@ -149,28 +148,32 @@ class ProfileDonatingTableViewCell: UITableViewCell {
 
 // MARK: - ProfileDonatingViewModelDelegate
 extension ProfileDonatingTableViewCell: ProfileDonatingViewModelDelegate {
-    func setUIFromModel() {
-        guard let donationGoal: Int = viewModel.getGoal() else {
+    func setMyDonationUI(mydonate: Bool) {
+        guard let donationGoal: Int = viewModel.getGoal(myDonate: mydonate) else {
             return
         }
         if let donationGoalFormat: String = donationGoal.changeToCommaFormat() {
             donatePrice.text = "\(donationGoalFormat)"
         }
-        if let imageURL: URL = URL(string: viewModel.getDonationImg() ?? "") {
+        if let imageURL: URL = URL(string: viewModel.getDonationImg(myDonate: mydonate) ?? "") {
             donateImg.kf.setImage(with: imageURL)
         } else {
             donateImg.image = UIImage(named: "profile_default")
         }
-        if let donationTitle: String = viewModel.getTitle() {
+        if let donationTitle: String = viewModel.getTitle(myDonate: mydonate) {
             donateTitle.text = "\(donationTitle)"
         }
-        if let donationDate: Date = viewModel.getDate() {
+        if let donationDate: Date = viewModel.getDate(myDonate: mydonate) {
             didEndDateChanged(to: donationDate)
         }
-        if let currentAmount: Int = viewModel.getCurrentAmount() {
+        if let currentAmount: Int = viewModel.getCurrentAmount(myDonate: mydonate) {
             let ratingBackgroundBarWidth: Float = Float(UIScreen.main.bounds.width) - 40.0
+            
             // goal : 전체길이 = currentAmount : 보여질길이
             ratingBarWidth = Float((ratingBackgroundBarWidth * Float(currentAmount))) / Float(donationGoal)
+            if ratingBarWidth >= ratingBackgroundBarWidth {
+                ratingBarWidth = ratingBackgroundBarWidth
+            }
             ratingBar.snp.updateConstraints { make in
                 make.width.equalTo(ratingBarWidth)
             }

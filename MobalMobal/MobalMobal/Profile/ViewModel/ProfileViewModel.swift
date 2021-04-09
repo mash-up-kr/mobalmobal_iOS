@@ -16,7 +16,6 @@ class ProfileViewModel {
     weak var mainDelegate: ProfileViewModelDelegate?
     var profileResponseModel: ProfileData? {
         didSet {
-            print("🍎🍎 내 프로필 🍎🍎")
             let sectionRange: IndexSet = IndexSet(0...0)
             mainDelegate?.tableViewUpdate(section: sectionRange)
         }
@@ -24,19 +23,13 @@ class ProfileViewModel {
     // 내가 열은 도네 (종료 & 내연도네)
     var mydonationResponseModel: MydonationData? {
         didSet {
-            print("🍎🍎 내가 열은 도네 🍎🍎")
             let sectionRange: IndexSet = IndexSet(1...4)
             mainDelegate?.tableViewUpdate(section: sectionRange)
         }
     }
     // 내가 후원한 도네
-    var myDonateResponseModel: MyDonates? {
-        didSet {
-            print("🍎🍎 내가 후원한 도네 🍎🍎")
-            let sectionRange: IndexSet = IndexSet(1...4)
-            mainDelegate?.tableViewUpdate(section: sectionRange)
-        }
-    }
+    var myDonateResponseModel: [Donate] = [Donate]()
+    
     // MARK: - Methods
     func getProfileResponse() {
         DoneProvider.getUserProfile() { [weak self] response in
@@ -54,12 +47,23 @@ class ProfileViewModel {
     }
     func getMyDonateResponse() {
         DoneProvider.getMyDonate { [weak self] response in
-            self?.myDonateResponseModel = response.data
+            self?.myDonateResponseDuplicateCheck(response)
         } failure: { (err) in
             print(err.localizedDescription)
         }
     }
-    
+    // 후원중인도네 중복체크
+    func myDonateResponseDuplicateCheck(_ response: ParseResponse<MyDonates>) {
+        var donationPostId: Set<Int> = Set<Int>()
+        for donate in response.data.donate {
+            if !donationPostId.contains(donate.postId) {
+                donationPostId.insert(donate.postId)
+                self.myDonateResponseModel.append(donate)
+            }
+        }
+        let sectionRange: IndexSet = IndexSet(1...4)
+        self.mainDelegate?.tableViewUpdate(section: sectionRange)
+    }
     func getUserNickname() -> String? {
         profileResponseModel?.user.nickname
     }
@@ -77,6 +81,6 @@ class ProfileViewModel {
         Date().getDueDay(of: date) < 0 ? true : false
     }
     func getMyDonate() -> [Donate]? {
-        myDonateResponseModel?.donate
+        myDonateResponseModel
     }
 }

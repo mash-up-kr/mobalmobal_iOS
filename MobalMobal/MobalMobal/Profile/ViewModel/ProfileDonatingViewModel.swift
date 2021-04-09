@@ -8,32 +8,40 @@
 import Foundation
 
 protocol ProfileDonatingViewModelDelegate: AnyObject {
-    func setUIFromModel()
+    func setMyDonationUI(mydonate: Bool)
 }
 class ProfileDonatingViewModel {
     weak var delegate: ProfileDonatingViewModelDelegate?
-    var giveEndDonationModel: MydonationPost? {
+    var myDonationData: MydonationPost? {
         didSet {
-            delegate?.setUIFromModel()
+            delegate?.setMyDonationUI(mydonate: false)
         }
     }
-    var row: Int = 0
-    func setGiveEndModel(_ rowData: MydonationPost) {
-        self.giveEndDonationModel = rowData
+    var myDonateData: Donate? {
+        didSet {
+            delegate?.setMyDonationUI(mydonate: true)
+        }
     }
-    func getDonationImg() -> String? {
-        giveEndDonationModel?.postImage
+    func setMyDonationData(_ rowData: MydonationPost) {
+        self.myDonationData = rowData
     }
-    func getGoal() -> Int? {
-        giveEndDonationModel?.goal
+    func setMyDonateData(_ rowData: Donate) {
+        self.myDonateData = rowData
     }
-    func getTitle() -> String? {
-        giveEndDonationModel?.title
+    
+    func getDonationImg(myDonate: Bool) -> String? {
+        myDonate ? myDonateData?.post.postImage : myDonationData?.postImage
     }
-    func getDate() -> Date? {
-        giveEndDonationModel?.endAt
+    func getGoal(myDonate: Bool) -> Int? {
+        myDonate ? myDonateData?.post.goal : myDonationData?.goal
     }
-    func getCurrentAmount() -> Int? {
-        giveEndDonationModel?.currentAmount
+    func getTitle(myDonate: Bool) -> String? {
+        myDonate ? myDonateData?.post.title : myDonationData?.title
+    }
+    func getDate(myDonate: Bool) -> Date? {
+        myDonate ? myDonateData?.post.endAt : myDonationData?.endAt
+    }
+    func getCurrentAmount(myDonate: Bool) -> Int? {
+        myDonate ? myDonateData?.post.currentAmount : myDonationData?.currentAmount
     }
 }
