@@ -18,8 +18,8 @@ class ProfileDonatingViewModel {
         }
     }
     var row: Int = 0
-    func setGiveEndModel(_ model: MydonationResponse?, row: Int) {
-        self.giveEndDonationModel = model?.data.posts[row]
+    func setGiveEndModel(_ model: MydonationData?, row: Int) {
+        self.giveEndDonationModel = model?.posts[row]
         self.row = row
     }
     func getDonationImg(row: Int) -> String? {

@@ -716,8 +716,6 @@
 				7C30C34B261E282300567520 /* ProfileDonatingViewModel.swift in Sources */,
 				7C30C345261DB5C500567520 /* ProfileCellViewModel.swift in Sources */,
 				7C30C23F2617588500567520 /* ProfileViewModel.swift in Sources */,
-				7C30C34E261E2E2B00567520 /* Date+Extension.swift in Sources */,
-				7C30C351261E2E4F00567520 /* JSONDecoder+Extension.swift in Sources */,
 				E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */,
 				3AB1CFD6260F7CB200EA94E8 /* UIViewController+Extension.swift in Sources */,
 				E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */,

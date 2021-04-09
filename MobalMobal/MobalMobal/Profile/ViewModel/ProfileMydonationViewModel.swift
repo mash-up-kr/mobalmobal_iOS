@@ -13,22 +13,22 @@ protocol ProfileMydonationViewModelDelegate: AnyObject {
 class ProfileMydonationViewModel {
     // MARK: - Properties
     weak var delegate: ProfileMydonationViewModelDelegate?
-    var model: MydonationResponse? {
+    var model: MydonationData? {
         didSet {
             delegate?.setUIFromModel()
         }
     }
-    func setModel(_ model: MydonationResponse?) {
+    func setModel(_ model: MydonationData?) {
         self.model = model
     }
     
     func getPosts() -> [MydonationPost]? {
-        model?.data.posts
+        model?.posts
     }
     // 종료된도네 파악
     // true -> 종료
     func checkOutDated(postNumber: Int) -> Bool {
-        guard let endDate = model?.data.posts[postNumber].endAt else {
+        guard let endDate = model?.posts[postNumber].endAt else {
             return false
         }
         return Date().getDueDay(of: endDate) < 0 ? true : false

@@ -13,67 +13,38 @@ protocol ProfileViewModelDelegate: AnyObject {
 }
 class ProfileViewModel {
     // MARK: - Properties
-    private let headerKey: String = "authorization"
-    var tokenID: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2MTc3ODIzNzgsImV4cCI6MTY0OTMzOTk3OCwiaXNzIjoiaHllb25pIn0.EylJ0O9zsOePeB6WmQ5-Xfm6X63L29s6iUxZL6dxzdA"      // UserDefault로 받아올 값
+    
     weak var mainDelegate: ProfileViewModelDelegate?
-    var profileResponseModel: ProfileResponse? {
+    var profileResponseModel: ProfileData? {
         didSet {
             mainDelegate?.tableViewUpdate()
         }
     }
-    var mydonationResponseModel: MydonationResponse? {
+
+    var mydonationResponseModel: MydonationData? {
         didSet {
             mainDelegate?.tableViewUpdate()
-        }
-    }
-    private lazy var headers: HTTPHeaders = [headerKey: tokenID]
-    private let decoder: JSONDecoder = JSONDecoder()
-    // MARK: - Methods
-    func getProfileResponse() {
-        let profileURL: String = "http://13.125.168.51:3000/users"
-        AF.request(profileURL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { [weak self] response in
-            switch response.result {
-            case .success(let value):
-                do {
-                    let data: Data = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
-                    self?.decoder.dateDecodingStrategy = try .iso8610WithZ()
-                    let profileResponse: ProfileResponse? = try self?.decoder.decode(ProfileResponse.self, from: data)
-                    
-                    if profileResponse?.code == 200 {
-                        self?.profileResponseModel = profileResponse
-                    } else {
-                        print("code fail")
-                        return
-                    }
-                } catch let error {
-                    print(error.localizedDescription, "1")
-                }
-            case .failure(let error):
-                print(error.localizedDescription, "2")
-            }
         }
     }
     
+    private let decoder: JSONDecoder = JSONDecoder()
+    // MARK: - Methods
+    func getProfileResponse() {
+        DoneProvider.getUserProfile() { [weak self] response in
+            self?.profileResponseModel = response.data
+        } failure: { err in
+            print(err.localizedDescription)
+        }
+    }
+
     func getMydontaionResponse() {
         print("get mydonation response")
-        let mydontaionURL: String = "http://13.125.168.51:3000/posts/my"
-        AF.request(mydontaionURL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { [weak self] response in
-            switch response.result {
-            case .success(let value):
-                do {
-                    let data: Data = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
-                    self?.decoder.dateDecodingStrategy = try .iso8610WithZ()
-                    let mydonationResponse: MydonationResponse? = try self?.decoder.decode(MydonationResponse.self, from: data)
-                    if mydonationResponse?.code == 200 {
-                        self?.mydonationResponseModel = mydonationResponse
-                    } else { return }
-                } catch let error {
-                    print(error.localizedDescription, "1")
-                }
-            case .failure(let error):
-                print(error.localizedDescription, "2")
-            }
+        DoneProvider.getMyDonation { [weak self] response in
+            self?.mydonationResponseModel = response.data
+        } failure: { err in
+            print(err.localizedDescription)
         }
+
     }
     
     func checkSuccess(code: Int) -> Bool {
@@ -81,16 +52,16 @@ class ProfileViewModel {
     }
     
     func getUserNickname() -> String? {
-        profileResponseModel?.data.user.nickname
+        profileResponseModel?.user.nickname
     }
     func getUserCash() -> Int? {
-        profileResponseModel?.data.user.cash
+        profileResponseModel?.user.cash
     }
     func getUserProfileImage() -> String? {
-        profileResponseModel?.data.user.profileImage
+        profileResponseModel?.user.profileImage
     }
     func getMydonation() -> MydonationData? {
-        mydonationResponseModel?.data
+        mydonationResponseModel
     }
     func checkOutDated(date: Date) -> Bool {
         // 날자가 지났으면 true반환 종료된도네에 넣는다.

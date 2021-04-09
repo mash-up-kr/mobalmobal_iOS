@@ -124,9 +124,9 @@ extension ProfileViewController: UITableViewDataSource {
             return 1
         } else {
             numberOfDonations = [0, 0, 0]
-            if let mydonationData: MydonationResponse = profileViewModel.mydonationResponseModel {
-                for post in 0..<mydonationData.data.posts.count {
-                    if profileViewModel.checkOutDated(date: mydonationData.data.posts[post].endAt) {
+            if let mydonationData: MydonationData = profileViewModel.mydonationResponseModel {
+                for post in 0..<mydonationData.posts.count {
+                    if profileViewModel.checkOutDated(date: mydonationData.posts[post].endAt) {
                         numberOfDonations[2] += 1
                     }
                 }
@@ -139,14 +139,14 @@ extension ProfileViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return UITableViewCell() }
             profileCell.selectionStyle = .none
-            if let userProfileData: ProfileResponse = profileViewModel.profileResponseModel {
+            if let userProfileData: ProfileData = profileViewModel.profileResponseModel {
                 profileCell.cellViewModel.setModel(userProfileData)
             }
             return profileCell
         } else if indexPath.section == 1 {
             guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
             myDonationCell.selectionStyle = .none
-            if let mydonationData: MydonationResponse = profileViewModel.mydonationResponseModel {
+            if let mydonationData: MydonationData = profileViewModel.mydonationResponseModel {
                 myDonationCell.cellViewModel.setModel(mydonationData)
             }
             return myDonationCell
@@ -157,7 +157,7 @@ extension ProfileViewController: UITableViewDataSource {
             else { return UITableViewCell() }
             donatingCell.selectionStyle = .none
             donatingCell.headerLabelText = sectionHeader[indexPath.section - 2]
-            if let mydonationData: MydonationResponse = profileViewModel.mydonationResponseModel {
+            if let mydonationData: MydonationData = profileViewModel.mydonationResponseModel {
                 donatingCell.viewModel.setGiveEndModel(mydonationData, row: indexPath.row)
             }
             return donatingCell

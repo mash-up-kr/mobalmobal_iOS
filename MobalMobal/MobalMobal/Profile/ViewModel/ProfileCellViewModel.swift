@@ -13,21 +13,21 @@ protocol ProfileCellViewModelDelegate: AnyObject {
 
 class ProfileCellViewModel {
     weak var delegate: ProfileCellViewModelDelegate?
-    var model: ProfileResponse? {
+    var model: ProfileData? {
         didSet {
             delegate?.setUIFromModel()
         }
     }
-    func setModel(_ model: ProfileResponse?) {
+    func setModel(_ model: ProfileData?) {
         self.model = model
     }
     func getCash() -> Int? {
-        self.model?.data.user.cash
+        self.model?.user.cash
     }
     func getNickname() -> String? {
-        self.model?.data.user.nickname
+        self.model?.user.nickname
     }
     func getProfileImg() -> String? {
-        self.model?.data.user.profileImage
+        self.model?.user.profileImage
     }
 }
