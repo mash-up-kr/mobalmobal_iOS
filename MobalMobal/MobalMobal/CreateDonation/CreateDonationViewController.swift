@@ -83,12 +83,23 @@ class CreateDonationViewController: UIViewController, UINavigationControllerDele
         return button
     }()
     
+    private let completButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.addTarget(self, action: #selector(completeButtonIsTapped), for: .touchUpInside)
+        return button
+    }()
+    
     @objc
     func photoButtonIsTapped() {
         let pickerController: UIImagePickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.sourceType = .photoLibrary
         self.present(pickerController, animated: true, completion: nil)
+    }
+    
+    @objc
+    func completeButtonIsTapped() {
+        print("API")
     }
     
     private var donataionProductTextField: UITextField = {
@@ -246,7 +257,7 @@ class CreateDonationViewController: UIViewController, UINavigationControllerDele
     @objc
     func updateTextField() {
         let dateFormatter: DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-DD hh:mm"
+        dateFormatter.dateFormat = "YYYY-MM-dd hh:mm"
         let datePickerDate: String = dateFormatter.string(from: datePicker.date)
         
         if donationStartDateTextField.isEditing {
