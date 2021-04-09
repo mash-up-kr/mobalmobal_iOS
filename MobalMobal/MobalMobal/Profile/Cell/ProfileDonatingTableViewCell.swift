@@ -149,25 +149,25 @@ class ProfileDonatingTableViewCell: UITableViewCell {
 
 // MARK: - ProfileDonatingViewModelDelegate
 extension ProfileDonatingTableViewCell: ProfileDonatingViewModelDelegate {
-    func setUIFromModel(row: Int) {
-        guard let donationGoal: Int = viewModel.getGoal(row: row) else {
+    func setUIFromModel() {
+        guard let donationGoal: Int = viewModel.getGoal() else {
             return
         }
         if let donationGoalFormat: String = donationGoal.changeToCommaFormat() {
             donatePrice.text = "\(donationGoalFormat)"
         }
-        if let imageURL: URL = URL(string: viewModel.getDonationImg(row: row) ?? "") {
+        if let imageURL: URL = URL(string: viewModel.getDonationImg() ?? "") {
             donateImg.kf.setImage(with: imageURL)
         } else {
             donateImg.image = UIImage(named: "profile_default")
         }
-        if let donationTitle: String = viewModel.getTitle(row: row) {
+        if let donationTitle: String = viewModel.getTitle() {
             donateTitle.text = "\(donationTitle)"
         }
-        if let donationDate: Date = viewModel.getDate(row: row) {
+        if let donationDate: Date = viewModel.getDate() {
             didEndDateChanged(to: donationDate)
         }
-        if let currentAmount: Int = viewModel.getCurrentAmount(row: row) {
+        if let currentAmount: Int = viewModel.getCurrentAmount() {
             let ratingBackgroundBarWidth: Float = Float(UIScreen.main.bounds.width) - 40.0
             // goal : 전체길이 = currentAmount : 보여질길이
             ratingBarWidth = Float((ratingBackgroundBarWidth * Float(currentAmount))) / Float(donationGoal)

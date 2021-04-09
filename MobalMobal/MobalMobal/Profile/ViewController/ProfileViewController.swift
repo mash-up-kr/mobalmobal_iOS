@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController {
     private let myDonationCellIdentifier: String = "MyDonationTableViewCell"
     private let donatingCellIdentifier: String = "DonatingTableViewCell"
     private let sectionHeaderCellIdentifier: String = "SectionHeaderCell"
-    private lazy var numberOfDonations: [Int] = [0,0,0]     // 내연, 후원중, 종료 갯수
+    private lazy var numberOfDonations: [Int] = [0, 0, 0]     // 내연, 후원중, 종료 갯수
     private let profileViewModel: ProfileViewModel = ProfileViewModel()
     
     // MARK: - LifeCycle
@@ -32,6 +32,7 @@ class ProfileViewController: UIViewController {
         setNavigation()
         profileViewModel.getMydontaionResponse()
         profileViewModel.getProfileResponse()
+        profileViewModel.getMyDonateResponse()
         profileViewModel.mainDelegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -84,11 +85,11 @@ class ProfileViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
         
         // 추가 네비게이션 아이템
-        let editBtn: UIButton = UIButton()
-        editBtn.setImage(UIImage(named: "iconlyLightSetting"), for: .normal)
-        editBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        editBtn.addTarget(self, action: #selector(pushSettingVC), for: .touchUpInside)
-        let editBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: editBtn)
+//        let editBtn: UIButton = UIButton()
+//        editBtn.setImage(UIImage(named: "iconlyLightSetting"), for: .normal)
+//        editBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+//        editBtn.addTarget(self, action: #selector(pushSettingVC), for: .touchUpInside)
+//        let editBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: editBtn)
         
         let settingBtn: UIButton = UIButton()
         settingBtn.setImage(UIImage(named: "iconlyLightEditSquare"), for: .normal)
@@ -96,7 +97,7 @@ class ProfileViewController: UIViewController {
         settingBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         let settingBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: settingBtn)
         
-        self.navigationItem.setRightBarButtonItems([editBtnBarItem, settingBtnBarItem], animated: true)
+        self.navigationItem.setRightBarButtonItems([settingBtnBarItem], animated: true)
     }
     
     // 유동적으로 갯수가 변화하는 section인지 체크하는 메서드
@@ -116,9 +117,9 @@ class ProfileViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        // profile / 내 도네 현황 / 내 연도네 / 후원중인도네 / 종료된도네
         5
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if !checkDynamicSection(section) {
             return 1
@@ -133,6 +134,10 @@ extension ProfileViewController: UITableViewDataSource {
                         numberOfDonations[0] += 1
                     }
                 }
+            }
+            // 내가 후원한 도네
+            if let myDonateData: MyDonates = profileViewModel.myDonateResponseModel {
+                numberOfDonations[1] = myDonateData.donate.count
             }
             return numberOfDonations[section - 2]
         }
@@ -149,8 +154,10 @@ extension ProfileViewController: UITableViewDataSource {
         } else if indexPath.section == 1 {
             guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
             myDonationCell.selectionStyle = .none
-            if let mydonationData: MydonationData = profileViewModel.mydonationResponseModel {
-                myDonationCell.cellViewModel.setModel(mydonationData)
+            if let mydonationData: MydonationData = profileViewModel.mydonationResponseModel,
+               let myDonateData: MyDonates = profileViewModel.myDonateResponseModel{
+                myDonationCell.myDonationViewModel.setMyDonationModel(mydonationData)
+                myDonationCell.myDonationViewModel.setMyDonateModel(myDonateData)
             }
             return myDonationCell
         }
@@ -161,7 +168,7 @@ extension ProfileViewController: UITableViewDataSource {
             donatingCell.selectionStyle = .none
             donatingCell.headerLabelText = sectionHeader[indexPath.section - 2]
             if let mydonationData: MydonationData = profileViewModel.mydonationResponseModel {
-                donatingCell.viewModel.setGiveEndModel(mydonationData, row: indexPath.row)
+                donatingCell.viewModel.setGiveEndModel(mydonationData.posts[indexPath.row])
             }
             return donatingCell
         } else {        // 내가 후원한 도네

@@ -8,33 +8,32 @@
 import Foundation
 
 protocol ProfileDonatingViewModelDelegate: AnyObject {
-    func setUIFromModel(row: Int)
+    func setUIFromModel()
 }
 class ProfileDonatingViewModel {
     weak var delegate: ProfileDonatingViewModelDelegate?
     var giveEndDonationModel: MydonationPost? {
         didSet {
-            delegate?.setUIFromModel(row: row)
+            delegate?.setUIFromModel()
         }
     }
     var row: Int = 0
-    func setGiveEndModel(_ model: MydonationData?, row: Int) {
-        self.giveEndDonationModel = model?.posts[row]
-        self.row = row
+    func setGiveEndModel(_ rowData: MydonationPost) {
+        self.giveEndDonationModel = rowData
     }
-    func getDonationImg(row: Int) -> String? {
+    func getDonationImg() -> String? {
         giveEndDonationModel?.postImage
     }
-    func getGoal(row: Int) -> Int? {
+    func getGoal() -> Int? {
         giveEndDonationModel?.goal
     }
-    func getTitle(row: Int) -> String? {
+    func getTitle() -> String? {
         giveEndDonationModel?.title
     }
-    func getDate(row: Int) -> Date? {
+    func getDate() -> Date? {
         giveEndDonationModel?.endAt
     }
-    func getCurrentAmount(row: Int) -> Int? {
+    func getCurrentAmount() -> Int? {
         giveEndDonationModel?.currentAmount
     }
 }

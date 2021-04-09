@@ -92,14 +92,14 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
     // MARK: - Properties
     private let myDonationText: [String] = ["받는", "주는", "종료"]
     private lazy var myDonationNumber: [Int] = [0, 0, 0]
-    let cellViewModel: ProfileMydonationViewModel = ProfileMydonationViewModel()
+    let myDonationViewModel: ProfileMydonationViewModel = ProfileMydonationViewModel()
     
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.backgroundColor = .backgroundColor
         setLayout()
-        self.cellViewModel.delegate = self
+        self.myDonationViewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -131,16 +131,21 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
             make.leading.trailing.equalToSuperview().inset(48)
         }
     }
+    private func initMyDonationInfoNumber(_ index: Int...) {
+        for indexNumber in index {
+            myDonationNumber[indexNumber] = 0
+        }
+    }
 }
 
 // MARK: - ProfileMydonationViewModelDelegate
 extension ProfileMyDonationTableViewCell: ProfileMydonationViewModelDelegate {
-    func setUIFromModel() {
-        myDonationNumber = [0, 0, 0]
+    func setMyDonationUI() {
+        initMyDonationInfoNumber(0, 2)
         // 내가 연 도네이션 관련 정보 처리
-        if let mydonationPosts: [MydonationPost] = cellViewModel.getPosts() {
+        if let mydonationPosts: [MydonationPost] = myDonationViewModel.getMyDonationPosts() {
             for post in 0..<mydonationPosts.count {
-                if cellViewModel.checkOutDated(postNumber: post) {
+                if myDonationViewModel.checkOutDated(postNumber: post) {
                     myDonationNumber[2] += 1
                 } else {
                     myDonationNumber[0] += 1
@@ -148,9 +153,11 @@ extension ProfileMyDonationTableViewCell: ProfileMydonationViewModelDelegate {
             }
             takeNumberOfDonation.text = "\(myDonationNumber[0])"
             endNumberOfDonation.text = "\(myDonationNumber[2])"
-            giveNumberOfDonation.text = "\(myDonationNumber[1])"
         }
-        
-        //TODO: 주는 도네이션관련 API 배포되면 작업필요
+    }
+    func setMyDonateUI() {
+        initMyDonationInfoNumber(1)
+        myDonationNumber[1] = myDonationViewModel.getMyDonatePostsNumber()
+        giveNumberOfDonation.text = "\(myDonationNumber[1])"
     }
 }

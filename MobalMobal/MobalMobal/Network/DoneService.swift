@@ -14,6 +14,7 @@ enum DoneService {
     case getDetail(posts: Int)
     case getUserProfile
     case getMyDonation
+    case getMyDonate
 }
 
 extension DoneService: TargetType {
@@ -37,12 +38,14 @@ extension DoneService: TargetType {
             return "/users"
         case .getMyDonation:
             return "/posts/my"
+        case .getMyDonate:
+            return "/donate/my"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getMain, .getDetail, .getUserProfile, .getMyDonation:
+        case .getMain, .getDetail, .getUserProfile, .getMyDonation, .getMyDonate:
             return .get
         case .login:
             return .post
@@ -55,18 +58,17 @@ extension DoneService: TargetType {
             return .requestParameters(parameters: ["item": item,
                                                    "limit": limit,
                                                    "order": "ASC"], encoding: URLEncoding.queryString)
-        case .getDetail, .getUserProfile, .getMyDonation:
+        case .getDetail, .getUserProfile, .getMyDonation, .getMyDonate:
             return .requestPlain
         case .login(let fireStoreId):
             return .requestParameters(parameters: ["fireStoreId": fireStoreId], encoding: JSONEncoding.default)
         }
     }
-    
     var headers: [String: String]? {
         switch self {
         case .login:
             return nil
-        case .getMain, .getDetail, .getUserProfile, .getMyDonation:
+        case .getMain, .getDetail, .getUserProfile, .getMyDonation, .getMyDonate:
 //            guard let token = token else { return nil }
             return ["authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2MTc3ODIzNzgsImV4cCI6MTY0OTMzOTk3OCwiaXNzIjoiaHllb25pIn0.EylJ0O9zsOePeB6WmQ5-Xfm6X63L29s6iUxZL6dxzdA"]
         }

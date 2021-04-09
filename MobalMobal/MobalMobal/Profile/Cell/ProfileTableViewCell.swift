@@ -21,7 +21,6 @@ class ProfileTableViewCell: UITableViewCell {
     private lazy var nicknameLabel: UILabel = {
         let label: UILabel = UILabel()
         label.textColor = .white
-        
         return label
     }()
     private lazy var pointLabel: UILabel = {
@@ -121,7 +120,7 @@ extension ProfileTableViewCell: ProfileCellViewModelDelegate {
     func setUIFromModel() {
         if let userNickname: String = cellViewModel.getNickname(),
            let userCash: Int = cellViewModel.getCash(),
-           let userCashFormat: String = userCash.changeToCommaFormat(){
+           let userCashFormat: String = userCash.changeToCommaFormat() {
             setNicknameUI(userNickname)
             pointLabel.text = "\(userCashFormat)원"
         }

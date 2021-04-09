@@ -16,12 +16,23 @@ class ProfileViewModel {
     weak var mainDelegate: ProfileViewModelDelegate?
     var profileResponseModel: ProfileData? {
         didSet {
+            print("🍎🍎 내 프로필 🍎🍎")
             let sectionRange: IndexSet = IndexSet(0...0)
             mainDelegate?.tableViewUpdate(section: sectionRange)
         }
     }
+    // 내가 열은 도네 (종료 & 내연도네)
     var mydonationResponseModel: MydonationData? {
         didSet {
+            print("🍎🍎 내가 열은 도네 🍎🍎")
+            let sectionRange: IndexSet = IndexSet(1...4)
+            mainDelegate?.tableViewUpdate(section: sectionRange)
+        }
+    }
+    // 내가 후원한 도네
+    var myDonateResponseModel: MyDonates? {
+        didSet {
+            print("🍎🍎 내가 후원한 도네 🍎🍎")
             let sectionRange: IndexSet = IndexSet(1...4)
             mainDelegate?.tableViewUpdate(section: sectionRange)
         }
@@ -41,6 +52,13 @@ class ProfileViewModel {
             print(err.localizedDescription)
         }
     }
+    func getMyDonateResponse() {
+        DoneProvider.getMyDonate { [weak self] response in
+            self?.myDonateResponseModel = response.data
+        } failure: { (err) in
+            print(err.localizedDescription)
+        }
+    }
     
     func getUserNickname() -> String? {
         profileResponseModel?.user.nickname
@@ -57,5 +75,8 @@ class ProfileViewModel {
     func checkOutDated(date: Date) -> Bool {
         // 날자가 지났으면 true반환 -> 종료된도네에 넣는다.
         Date().getDueDay(of: date) < 0 ? true : false
+    }
+    func getMyDonate() -> [Donate]? {
+        myDonateResponseModel?.donate
     }
 }
