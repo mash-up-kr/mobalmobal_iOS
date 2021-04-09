@@ -72,7 +72,7 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
     private lazy var horizontalStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         [takeStackView, giveStackView, endStackView].forEach { stackView.addArrangedSubview($0) }
-        stackView.spacing = 69
+        stackView.distribution = .equalSpacing
         return stackView
     }()
     private let myDontaionView: UIView = {

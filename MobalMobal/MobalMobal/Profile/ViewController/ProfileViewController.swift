@@ -30,9 +30,7 @@ class ProfileViewController: UIViewController {
         setTableView()
         setLayout()
         setNavigation()
-        profileViewModel.getMydontaionResponse()
-        profileViewModel.getProfileResponse()
-        profileViewModel.getMyDonateResponse()
+        callAPI()
         profileViewModel.mainDelegate = self
         mainTableView.tableFooterView = UIView(frame: .zero)
     }
@@ -57,6 +55,11 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Methods
+    func callAPI() {
+        profileViewModel.getMydontaionResponse()
+        profileViewModel.getProfileResponse()
+        profileViewModel.getMyDonateResponse()
+    }
     func setTableView() {
         self.mainTableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: self.profileCellIdentifier)
         self.mainTableView.register(ProfileMyDonationTableViewCell.self, forCellReuseIdentifier: self.myDonationCellIdentifier)
@@ -181,7 +184,7 @@ extension ProfileViewController: UITableViewDataSource {
             return nil
         }
         let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 42))
-        let headerLabel: UILabel = UILabel(frame: CGRect(x: 20, y: 20, width: tableView.frame.width - 40, height: 42))
+        let headerLabel: UILabel = UILabel(frame: CGRect(x: 20, y: 20, width: tableView.frame.width - 40, height: 45))
         headerLabel.text = sectionHeader[section - 2]
         headerLabel.textColor = .white
         headerLabel.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
