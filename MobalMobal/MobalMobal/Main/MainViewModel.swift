@@ -11,10 +11,21 @@ class MainViewModel {
     // MARK: - property
     var posts: [Post] = []
     
+    var limit: Int = 10
+    var item: Int = Int.max
+    var isEnd: Bool = false
+    
     // MARK: - API Method
-    func callMainInfoApi(item: Int, limit: Int, completion: @escaping (Result<Void, DoneError>) -> Void) {
+    func callMainInfoApi(completion: @escaping (Result<Void, DoneError>) -> Void) {
         DoneProvider.getMain(item: item, limit: limit) { response in
-            self.posts = response.data.posts
+            if self.posts.isEmpty {
+                self.posts = response.data.posts
+            } else {
+                if response.data.posts.isEmpty {
+                    self.isEnd = true
+                }
+                self.posts.append(contentsOf: response.data.posts)
+            }
             completion(.success(()))
         } failure: { (error) in
             print(error)

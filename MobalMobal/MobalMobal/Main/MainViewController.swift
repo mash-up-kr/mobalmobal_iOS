@@ -52,7 +52,11 @@ class MainViewController: UIViewController {
     }()
     
     // MARK: - Properties
-    var viewModel: MainViewModel
+    var viewModel: MainViewModel {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     var lastContentOffset: CGFloat = 0.0
     
@@ -64,6 +68,7 @@ class MainViewController: UIViewController {
     let myCellIdentifier: String = "MainMyDonationCollectionViewCell"
     let ongoingCellIdentifier: String = "MainOngoingDonationCollectionViewCell"
     let ongoingHeaderIdentifier: String = "MainOngoingDonationHeaderView"
+    let indicatorCellIdentifier: String = "MainIndicatorCollectionViewCell"
     
     // MARK: - Initializer
     init(viewModel: MainViewModel) {
@@ -135,6 +140,7 @@ class MainViewController: UIViewController {
         collectionView.register(MainMyDonationCollectionViewCell.self, forCellWithReuseIdentifier: myCellIdentifier)
         collectionView.register(MainOngoingDonationCollectionViewCell.self, forCellWithReuseIdentifier: ongoingCellIdentifier)
         collectionView.register(MainOngoingDonationHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ongoingHeaderIdentifier)
+        collectionView.register(MainIndicatorCollectionViewCell.self, forCellWithReuseIdentifier: indicatorCellIdentifier)
     }
     
     private func setLayout() {
@@ -172,7 +178,7 @@ class MainViewController: UIViewController {
     }
     
     private func getMain() {
-        viewModel.callMainInfoApi(item: Int.max, limit: 10) { result in
+        viewModel.callMainInfoApi { result in
             switch result {
             case .success:
                 self.collectionView.reloadData()
@@ -227,10 +233,25 @@ extension MainViewController: UICollectionViewDataSource {
         case 0:
             return 1
         case 1:
-            return viewModel.posts.count
+            if viewModel.isEnd {
+                return viewModel.posts.count
+            }
+            return viewModel.posts.count + 1
         default:
             return 0
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if isIndicatorCell(indexPath) {
+            viewModel.item = viewModel.posts[indexPath.item].postID
+            getMain()
+        }
+    }
+    
+    private func isIndicatorCell(_ indexPath: IndexPath) -> Bool {
+        if viewModel.posts.isEmpty { return false }
+        return viewModel.posts[indexPath.item].postID == viewModel.posts.last?.postID
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -241,13 +262,22 @@ extension MainViewController: UICollectionViewDataSource {
             return cell
             
         default:
-            guard let cell: MainOngoingDonationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationCollectionViewCell else { return .init() }
-            cell.dday = Date().getDDayString(to: viewModel.posts[indexPath.item].endAt)
-            if let money = viewModel.posts[indexPath.item].currentAmount.changeToCommaFormat() {
+            if isIndicatorCell(indexPath) {
+                guard let cell: MainIndicatorCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: indicatorCellIdentifier, for: indexPath) as? MainIndicatorCollectionViewCell else { return .init() }
+                cell.animationIndicatorView()
+                return cell
+            }
+            
+            guard let cell: MainOngoingDonationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationCollectionViewCell,
+                  !viewModel.posts.isEmpty else { return .init() }
+            
+            let post = viewModel.posts[indexPath.item]
+            cell.dday = Date().getDDayString(to: post.endAt)
+            if let money = post.currentAmount.changeToCommaFormat() {
                 cell.money = money
             }
-            cell.title = viewModel.posts[indexPath.item].title
-            cell.progress = Float(viewModel.posts[indexPath.item].currentAmount / viewModel.posts[indexPath.item].goal)
+            cell.title = post.title
+            cell.progress = Float(post.currentAmount / post.goal)
             return cell
         }
     }
@@ -273,6 +303,9 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: availableWidth, height: 142)
             
         case 1:
+            if isIndicatorCell(indexPath) {
+                return CGSize(width: collectionView.frame.width, height: 65)
+            }
             let insetSpace: CGFloat = secondSectionInsets.left * 2
             let paddingSpace: CGFloat = 12 * (itemsPerRow - 1)
             let availableWidth: CGFloat = view.frame.width - insetSpace - paddingSpace
