@@ -125,4 +125,8 @@ extension UIColor {
     @nonobjc class var pastelGreen50: UIColor {
         return UIColor(red: 167.0 / 255.0, green: 1.0, blue: 159.0 / 255.0, alpha: 0.5)
     }
+    
+    @nonobjc class var dandelion: UIColor {
+      return UIColor(red: 248.0 / 255.0, green: 233.0 / 255.0, blue: 9.0 / 255.0, alpha: 1.0)
+    }
 }

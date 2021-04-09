@@ -9,16 +9,11 @@ import Alamofire
 import Foundation
 
 class InputChargingPointViewModel {
-    var model: ChargingData? {
-        didSet {
-            print("🍎🍎response set!!!!🍎🍎")
-        }
-    }
+    var model: ChargingData?
     var amount: Int?
     var userName: String?
     var chargedAt: String?
     func postCharging() {
-        print("🍎🍎post charging🍎🍎")
         guard let amount = amount,
               let userName = userName,
               let chargedAt = chargedAt else { return }
