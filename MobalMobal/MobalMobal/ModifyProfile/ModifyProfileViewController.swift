@@ -143,7 +143,7 @@ class ModifyProfileViewController: UIViewController {
         modifyCompleteBtn.titleLabel?.textColor = .blackThree
     }
     private func setNavigationItems() {
-        setNavigationItems(title: "프로필 수정", backButtonImageName: "arrowChevronBigLeft", action:  #selector(popVC))
+        setNavigationItems(title: "프로필 수정", backButtonImageName: "arrowChevronBigLeft", action: #selector(popVC))
     }
     private func getImgFromLibrary() {
         self.imagePicker.sourceType = .photoLibrary

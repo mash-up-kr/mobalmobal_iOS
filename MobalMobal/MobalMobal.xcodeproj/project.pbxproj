@@ -26,6 +26,17 @@
 		3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */; };
 		3AB1CFD6260F7CB200EA94E8 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */; };
 		3AB1D0252610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1D0242610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift */; };
+		3AC393D9261CBC3D008BB207 /* DonationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC393D8261CBC3D008BB207 /* DonationDetailViewModel.swift */; };
+		3AC39404261DBDF5008BB207 /* DonationDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC39403261DBDF5008BB207 /* DonationDetailResponse.swift */; };
+		3AC39407261DBF59008BB207 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC39406261DBF59008BB207 /* Int+Extension.swift */; };
+		3AC3940E261DF7FC008BB207 /* JSONDecoder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3940D261DF7FC008BB207 /* JSONDecoder+Extension.swift */; };
+		3AC39411261DFBF2008BB207 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC39410261DFBF2008BB207 /* Date+Extension.swift */; };
+		4DBDB4E4261F53C900B5E08D /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 4DBDB4E3261F53C900B5E08D /* Moya */; };
+		4DBDB4EA261F542B00B5E08D /* DoneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDB4E9261F542B00B5E08D /* DoneService.swift */; };
+		4DBDB4F2261F593F00B5E08D /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDB4F1261F593F00B5E08D /* MainViewModel.swift */; };
+		4DBDB4F5261F59A500B5E08D /* DoneProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDB4F4261F59A500B5E08D /* DoneProvider.swift */; };
+		4DBDB4F8261F614F00B5E08D /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDB4F7261F614F00B5E08D /* NetworkProvider.swift */; };
+		4DBDB4FC261F623600B5E08D /* MainResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDB4FB261F623600B5E08D /* MainResponse.swift */; };
 		6A7F9880C2DD6C6782A998EE /* Pods_MobalMobal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */; };
 		7C04535625EA949B00870761 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535525EA949B00870761 /* ProfileViewController.swift */; };
 		7C04535A25EA98B900870761 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535925EA98B900870761 /* ProfileTableViewCell.swift */; };
@@ -97,6 +108,16 @@
 		3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginButton.swift; sourceTree = "<group>"; };
 		3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		3AB1D0242610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOngoingDonationHeaderView.swift; sourceTree = "<group>"; };
+		3AC393D8261CBC3D008BB207 /* DonationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailViewModel.swift; sourceTree = "<group>"; };
+		3AC39403261DBDF5008BB207 /* DonationDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailResponse.swift; sourceTree = "<group>"; };
+		3AC39406261DBF59008BB207 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		3AC3940D261DF7FC008BB207 /* JSONDecoder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extension.swift"; sourceTree = "<group>"; };
+		3AC39410261DFBF2008BB207 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		4DBDB4E9261F542B00B5E08D /* DoneService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneService.swift; sourceTree = "<group>"; };
+		4DBDB4F1261F593F00B5E08D /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		4DBDB4F4261F59A500B5E08D /* DoneProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneProvider.swift; sourceTree = "<group>"; };
+		4DBDB4F7261F614F00B5E08D /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
+		4DBDB4FB261F623600B5E08D /* MainResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainResponse.swift; sourceTree = "<group>"; };
 		5A5C411755E7FEF436016D7E /* Pods_MobalMobal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobalMobal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61483D18A64727D4EAFF1EDD /* Pods-MobalMobal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobalMobal.debug.xcconfig"; path = "Target Support Files/Pods-MobalMobal/Pods-MobalMobal.debug.xcconfig"; sourceTree = "<group>"; };
 		7C04535525EA949B00870761 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DBDB4E4261F53C900B5E08D /* Moya in Frameworks */,
 				D7147D6925E768B800AA0878 /* Toast in Frameworks */,
 				D7147D4925E763DC00AA0878 /* FirebaseMessaging in Frameworks */,
 				D7147D6525E7686800AA0878 /* FacebookCore in Frameworks */,
@@ -199,9 +221,11 @@
 		3A1BD70F25ED26970079D56D /* DonationDetail */ = {
 			isa = PBXGroup;
 			children = (
+				3AC393E8261D9DA0008BB207 /* Model */,
 				3A1BD72225F157FD0079D56D /* CustomViews */,
 				3A1BD71025ED26D00079D56D /* DonationDetailViewController.swift */,
 				3A1BD71C25F12F0C0079D56D /* DonationDetailViewController+Layout.swift */,
+				3AC393D8261CBC3D008BB207 /* DonationDetailViewModel.swift */,
 			);
 			path = DonationDetail;
 			sourceTree = "<group>";
@@ -226,6 +250,32 @@
 				3A1BD76B25F539D30079D56D /* Spoqa Han Sans Neo Thin.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		3AC393E8261D9DA0008BB207 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3AC39403261DBDF5008BB207 /* DonationDetailResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4DBDB4E6261F540200B5E08D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				4DBDB4E9261F542B00B5E08D /* DoneService.swift */,
+				4DBDB4F4261F59A500B5E08D /* DoneProvider.swift */,
+				4DBDB4F7261F614F00B5E08D /* NetworkProvider.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		4DBDB4FA261F622900B5E08D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4DBDB4FB261F623600B5E08D /* MainResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		7C04535225EA942F00870761 /* Profile */ = {
@@ -263,6 +313,9 @@
 				3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */,
 				3A179F7625FBC84F00901436 /* UITextField+Extension.swift */,
 				3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */,
+				3AC39406261DBF59008BB207 /* Int+Extension.swift */,
+				3AC3940D261DF7FC008BB207 /* JSONDecoder+Extension.swift */,
+				3AC39410261DFBF2008BB207 /* Date+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -341,6 +394,7 @@
 			isa = PBXGroup;
 			children = (
 				E359440C260F124F0078903E /* CreateDonation */,
+				4DBDB4E6261F540200B5E08D /* Network */,
 				E3F1EA8025EA551F00F34BDE /* Setting */,
 				D7E44EEF25EA5133007FDB4F /* Main */,
 				3A179F4B25FB5A2100901436 /* DonateMoney */,
@@ -385,8 +439,10 @@
 		D7E44EEF25EA5133007FDB4F /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				4DBDB4FA261F622900B5E08D /* Model */,
 				D7AC0C9325EAB610000A342A /* cell */,
 				D7E44EF025EA5149007FDB4F /* MainViewController.swift */,
+				4DBDB4F1261F593F00B5E08D /* MainViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -461,6 +517,7 @@
 				D7147D6225E7686800AA0878 /* FacebookLogin */,
 				D7147D6425E7686800AA0878 /* FacebookCore */,
 				D7147D6825E768B800AA0878 /* Toast */,
+				4DBDB4E3261F53C900B5E08D /* Moya */,
 			);
 			productName = MobalMobal;
 			productReference = D70C37C525E103DD00898271 /* MobalMobal.app */;
@@ -497,6 +554,7 @@
 				D7147D5D25E766CC00AA0878 /* XCRemoteSwiftPackageReference "Then" */,
 				D7147D6125E7686800AA0878 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				D7147D6725E768B800AA0878 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				4DBDB4E2261F53C900B5E08D /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = D70C37C625E103DD00898271 /* Products */;
 			projectDirPath = "";
@@ -612,9 +670,14 @@
 				D7AC0C9525EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift in Sources */,
 				D7AC0C9925EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift in Sources */,
 				3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */,
+				4DBDB4F5261F59A500B5E08D /* DoneProvider.swift in Sources */,
+				3AC39404261DBDF5008BB207 /* DonationDetailResponse.swift in Sources */,
+				4DBDB4F8261F614F00B5E08D /* NetworkProvider.swift in Sources */,
 				3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */,
+				4DBDB4EA261F542B00B5E08D /* DoneService.swift in Sources */,
 				3A1BD72425F1583D0079D56D /* DetailParticipantsMoreButtonView.swift in Sources */,
 				3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */,
+				3AC39407261DBF59008BB207 /* Int+Extension.swift in Sources */,
 				3A1BD71D25F12F0C0079D56D /* DonationDetailViewController+Layout.swift in Sources */,
 				3A1BD73125F15EF20079D56D /* DetailParticipantsView.swift in Sources */,
 				7C39985D25FA51AA00EA82C2 /* AccountViewController.swift in Sources */,
@@ -627,8 +690,11 @@
 				E359440E260F125D0078903E /* CreateDonationViewController.swift in Sources */,
 				3AB1CFD6260F7CB200EA94E8 /* UIViewController+Extension.swift in Sources */,
 				E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */,
+				4DBDB4FC261F623600B5E08D /* MainResponse.swift in Sources */,
 				7C842FA02606267400A66756 /* ModifyProfileViewController.swift in Sources */,
+				4DBDB4F2261F593F00B5E08D /* MainViewModel.swift in Sources */,
 				7C04536025EAA2DC00870761 /* ProfileDonatingTableViewCell.swift in Sources */,
+				3AC393D9261CBC3D008BB207 /* DonationDetailViewModel.swift in Sources */,
 				7C04535D25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift in Sources */,
 				7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */,
 				3A179F7725FBC84F00901436 /* UITextField+Extension.swift in Sources */,
@@ -636,10 +702,12 @@
 				E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */,
 				3A1BD77C25F5443D0079D56D /* UIFont+Extension.swift in Sources */,
 				7C36DF4625F2014E001C2DBB /* InputChargingPointViewController.swift in Sources */,
+				3AC3940E261DF7FC008BB207 /* JSONDecoder+Extension.swift in Sources */,
 				7C04535625EA949B00870761 /* ProfileViewController.swift in Sources */,
 				7C04535A25EA98B900870761 /* ProfileTableViewCell.swift in Sources */,
 				D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */,
 				E3F1EA8425EA552800F34BDE /* SettingViewController.swift in Sources */,
+				3AC39411261DFBF2008BB207 /* Date+Extension.swift in Sources */,
 				D7AC0CA325EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift in Sources */,
 				D7E44EF125EA5149007FDB4F /* MainViewController.swift in Sources */,
 				D7AC0C9D25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift in Sources */,
@@ -862,6 +930,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4DBDB4E2261F53C900B5E08D /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.0.1;
+			};
+		};
 		D7147D3F25E763DC00AA0878 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -921,6 +997,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4DBDB4E3261F53C900B5E08D /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4DBDB4E2261F53C900B5E08D /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
 		D7147D4025E763DC00AA0878 /* FirebaseDynamicLinks */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D7147D3F25E763DC00AA0878 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
