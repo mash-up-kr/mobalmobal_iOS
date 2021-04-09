@@ -44,18 +44,6 @@ class InputChargingPointViewController: UIViewController {
         return button
     }()
     // MARK: - Properties
-    private let numberFormat: (Int) -> String = { number in
-        let str: String = "\(number)"
-        let regex: NSRegularExpression?
-        do {
-            regex = try? NSRegularExpression(pattern: "(?<=\\d)(?=(?:\\d{3})+(?!\\d))", options: [])
-        }
-        guard let regexString = regex else { return "" }
-        return regexString.stringByReplacingMatches(in: str,
-                                                    options: [],
-                                                    range: NSRange(location: 0, length: str.count),
-                                                    withTemplate: ",")
-    }
     private let maxChargingPoint: Int = 10_000_000
     private let viewModel: InputChargingPointViewModel = InputChargingPointViewModel()
   
@@ -99,7 +87,7 @@ class InputChargingPointViewController: UIViewController {
                 showAlertController()
                 disactivateButtonUI()
             } else {
-                chargingInputField.text = numberFormat(chargingPointInt)
+                chargingInputField.text = chargingPointInt.changeToCommaFormat()
                 activateButtonUI()
             }
         } else {

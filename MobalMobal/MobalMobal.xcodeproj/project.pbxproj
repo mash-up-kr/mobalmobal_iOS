@@ -326,8 +326,6 @@
 			isa = PBXGroup;
 			children = (
 				7CC7C089261F1C8C0038900A /* ViewController */,
-				7CC7C08A261F1CAD0038900A /* InputChargingPointViewModel.swift */,
-				7CC7C08E261F20680038900A /* InputChargingPointModel.swift */,
 			);
 			path = InputChargingPoint;
 			sourceTree = "<group>";
@@ -351,6 +349,9 @@
 		7C61AECB25EA4CC900D9149F /* PointCharging */ = {
 			isa = PBXGroup;
 			children = (
+				7C8BF18326208F65008A491C /* ViewModel */,
+				7C8BF18426208F6A008A491C /* Model */,
+				7C36DF4325F20129001C2DBB /* InputChargingPoint */,
 				7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */,
 				7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */,
 			);
@@ -364,6 +365,22 @@
 				7C842FA226063FB100A66756 /* ModifyProfileCustomView.swift */,
 			);
 			path = ModifyProfile;
+			sourceTree = "<group>";
+		};
+		7C8BF18326208F65008A491C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7CC7C08A261F1CAD0038900A /* InputChargingPointViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7C8BF18426208F6A008A491C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7CC7C08E261F20680038900A /* InputChargingPointModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		7CC7C089261F1C8C0038900A /* ViewController */ = {
@@ -418,7 +435,6 @@
 				7C61AECB25EA4CC900D9149F /* PointCharging */,
 				E3F1EA7625EA4AE800F34BDE /* Signup */,
 				3A035F1625EA4D6000D3FB69 /* Login */,
-				7C36DF4325F20129001C2DBB /* InputChargingPoint */,
 				7C04535225EA942F00870761 /* Profile */,
 				7C04536325EAAA2400870761 /* Extension */,
 				3A1BD74A25F373EA0079D56D /* MobalMobal.entitlements */,
