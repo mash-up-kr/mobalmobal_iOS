@@ -139,26 +139,26 @@ class DonationDetailViewController: UIViewController {
         label.textColor = .lightBluishGreen
         return label
     }()
-    let participantsTitleLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.text = "참여자"
-        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
-        label.textColor = .veryLightPink
-        return label
-    }()
-    let participantsCountLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.text = ""
-        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
-        label.textColor = .veryLightPink
-        return label
-    }()
-    lazy var participantsProfilesView: DetailParticipantsView = {
-        let view: DetailParticipantsView = DetailParticipantsView()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickParticipantsMoreButton))
-        view.moreButtonView.addGestureRecognizer(tap)
-        return view
-    }()
+//    let participantsTitleLabel: UILabel = {
+//        let label: UILabel = UILabel()
+//        label.text = "참여자"
+//        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
+//        label.textColor = .veryLightPink
+//        return label
+//    }()
+//    let participantsCountLabel: UILabel = {
+//        let label: UILabel = UILabel()
+//        label.text = ""
+//        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
+//        label.textColor = .veryLightPink
+//        return label
+//    }()
+//    lazy var participantsProfilesView: DetailParticipantsView = {
+//        let view: DetailParticipantsView = DetailParticipantsView()
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickParticipantsMoreButton))
+//        view.moreButtonView.addGestureRecognizer(tap)
+//        return view
+//    }()
     let endDateTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "종료날짜"

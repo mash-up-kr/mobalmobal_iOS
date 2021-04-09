@@ -125,10 +125,10 @@ extension DonationDetailViewController {
         setDetailGroupViewConstraints()
         setDonationButtonConstraints()
         
-        detailGroupView.addSubviews([destinationTitleLabel, destinationNumberLabel, fundAmountTitleLabel, fundAmountNumberLabel, participantsTitleLabel, participantsCountLabel, participantsProfilesView, endDateTitleLabel, endDateLabel])
+        detailGroupView.addSubviews([destinationTitleLabel, destinationNumberLabel, fundAmountTitleLabel, fundAmountNumberLabel, /* participantsTitleLabel, participantsCountLabel, participantsProfilesView,*/ endDateTitleLabel, endDateLabel])
         setDestinationConstraints()
         setFundAmountConstraints()
-        setParticipantsConstraints()
+//        setParticipantsConstraints()
         setEndDateConstraints()
     }
     private func setDetailGroupViewConstraints() {
@@ -165,23 +165,24 @@ extension DonationDetailViewController {
             make.centerY.equalTo(fundAmountTitleLabel)
         }
     }
-    private func setParticipantsConstraints() {
-        participantsTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(fundAmountTitleLabel.snp.bottom).offset(41)
-            make.leading.equalTo(destinationTitleLabel)
-        }
-        participantsCountLabel.snp.makeConstraints { make in
-            make.leading.equalTo(participantsTitleLabel.snp.trailing).offset(6)
-            make.centerY.equalTo(participantsTitleLabel)
-        }
-        participantsProfilesView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(26)
-            make.centerY.equalTo(participantsTitleLabel)
-        }
-    }
+//    private func setParticipantsConstraints() {
+//        participantsTitleLabel.snp.makeConstraints { make in
+//            make.top.equalTo(fundAmountTitleLabel.snp.bottom).offset(41)
+//            make.leading.equalTo(destinationTitleLabel)
+//        }
+//        participantsCountLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(participantsTitleLabel.snp.trailing).offset(6)
+//            make.centerY.equalTo(participantsTitleLabel)
+//        }
+//        participantsProfilesView.snp.makeConstraints { make in
+//            make.trailing.equalToSuperview().inset(26)
+//            make.centerY.equalTo(participantsTitleLabel)
+//        }
+//    }
     private func setEndDateConstraints() {
         endDateTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(participantsTitleLabel.snp.bottom).offset(41)
+//            make.top.equalTo(participantsTitleLabel.snp.bottom).offset(41)
+            make.top.equalTo(fundAmountTitleLabel.snp.bottom).offset(32)
             make.leading.equalTo(destinationTitleLabel)
             make.bottom.equalToSuperview().inset(48)
         }
