@@ -242,6 +242,7 @@ extension MainViewController: UICollectionViewDataSource {
             
         default:
             guard let cell: MainOngoingDonationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationCollectionViewCell else { return .init() }
+            cell.dday = Date().getDDayString(to: viewModel.posts[indexPath.item].endAt)
             if let money = viewModel.posts[indexPath.item].currentAmount.changeToCommaFormat() {
                 cell.money = money
             }
