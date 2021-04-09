@@ -39,14 +39,3 @@ struct DetailData: Codable {
 struct DonationDetailData: Codable {
     let post: DetailData
 }
-
-enum ResponseState: Int, Codable {
-    case success = 200
-    case missingParam = 400
-}
-
-struct DonationDetailResponse: Codable {
-    let code: ResponseState
-    let data: DonationDetailData?
-    let message: String?
-}
