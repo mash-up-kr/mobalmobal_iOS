@@ -70,17 +70,21 @@ class MainViewController: UIViewController {
         setCollectionView()
         setLayout()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
     
     // MARK: - Actions
     @objc
     private func touchProfileButton() {
         print("🐰 프로필")
-        presentProfileVC()
+        psuhProfileVC()
     }
     @objc
     private func touchNotiListButton() {
         print("🐰 알림")
-         presentNotiListVC()
+         pushNotiListVC()
     }
     
     // MARK: - Methods
@@ -127,20 +131,15 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func presentProfileVC() {
+    private func psuhProfileVC() {
         let profileVC: ProfileViewController = ProfileViewController()
-        let navigation: UINavigationController = UINavigationController(rootViewController: profileVC)
-        navigation.modalPresentationStyle = .fullScreen
-        navigation.setNavigationBarHidden(false, animated: true)
-        present(navigation, animated: true)
+        navigationController?.pushViewController(profileVC, animated: true)
     }
     
     // 변경 가능
-    private func presentNotiListVC() {
+    private func pushNotiListVC() {
         // let notiListVC: NotiListViewController = NotiListViewController()
-        // let navigation: UINavigationController = UINavigationController(rootViewController: notiListVC)
-        // navigation.modalPresentationStyle = .fullScreen
-        // present(navigation, animated: true, completion: nil)
+        // navigationController?.pushViewController(notiListVC, animated: true)
     }
     
     func presentDonationDetailVC(donationId: Int) {
