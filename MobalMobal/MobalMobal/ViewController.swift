@@ -28,7 +28,8 @@ class ViewController: UIViewController {
     @IBAction private func thirdButtonIsTapped(_ sender: UIButton) {
         let loginVC: LoginViewController = LoginViewController()
         loginVC.modalPresentationStyle = .fullScreen
-        self.present(loginVC, animated: true)
+//        self.present(loginVC, animated: true)
+        self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
     @IBAction func fourthButtonIsTapped(_ sender: UIButton) {

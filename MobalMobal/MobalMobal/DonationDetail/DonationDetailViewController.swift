@@ -60,7 +60,7 @@ class DonationDetailViewController: UIViewController {
     // Mid Description Area
     let nameGiftGroupView: UIView = UIView()
     let profileImageView: UIImageView = {
-        let imageView: UIImageView = UIImageView(image: UIImage(named: "Profile"))
+        let imageView: UIImageView = UIImageView(image: UIImage(named: "profile_default"))
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 29
         imageView.layer.masksToBounds = true
