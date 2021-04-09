@@ -62,6 +62,6 @@ enum NetworkProvider {
     private static func parse<Response: Decodable>(_ data: Data) throws -> ParseResponse<Response> {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = try .iso8610WithZ()
-        return try JSONDecoder().decode(ParseResponse<Response>.self, from: data)
+        return try decoder.decode(ParseResponse<Response>.self, from: data)
     }
 }
