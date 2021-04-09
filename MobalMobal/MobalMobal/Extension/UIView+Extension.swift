@@ -25,7 +25,7 @@ extension UIView {
         self.layer.mask = mask
     }
     
-    func drawShadow(color: UIColor = .black, alpha: Float = 0.2, shadowX: CGFloat = 0, shadowY: CGFloat = 2, blur: CGFloat = 4, spread: CGFloat = 0) {
+    func drawShadow(color: UIColor = .black, alpha: Float = 1, shadowX: CGFloat = 0, shadowY: CGFloat = 0, blur: CGFloat = 4, spread: CGFloat = 0) {
         layer.shadowColor = color.cgColor
         layer.shadowOpacity = alpha
         layer.shadowOffset = CGSize(width: shadowX, height: shadowY)

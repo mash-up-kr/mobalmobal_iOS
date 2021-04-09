@@ -57,7 +57,7 @@ extension DonationDetailViewController {
     private func setProgressBarViewConstraints() {
         progressBarView.snp.makeConstraints { make in
             make.leading.bottom.equalTo(translucentView)
-            make.width.equalTo(200)
+            make.width.equalToSuperview()
             make.height.equalTo(2)
         }
     }
