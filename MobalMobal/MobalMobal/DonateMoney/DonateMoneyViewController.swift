@@ -82,7 +82,8 @@ extension DonateMoneyViewController: UITableViewDelegate {
             inputDonateMoneyVC.modalPresentationStyle = .fullScreen
             navigationController?.pushViewController(inputDonateMoneyVC, animated: true)
         } else {
-            let completeVC: DonateCompleteViewController = DonateCompleteViewController()
+//            let completeVC: DonateCompleteViewController = DonateCompleteViewController()
+            let completeVC: MakeCompleteViewController = MakeCompleteViewController()
             completeVC.modalPresentationStyle = .fullScreen
             navigationController?.pushViewController(completeVC, animated: true)
         }
