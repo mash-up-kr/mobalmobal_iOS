@@ -176,7 +176,7 @@ extension LoginViewController: GIDSignInDelegate {
         let credential: AuthCredential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         loginWithFirebase(credential: credential)
         
-        let mainVC: MainViewController = MainViewController()
+        let mainVC: MainViewController = MainViewController(viewModel: MainViewModel())
         mainVC.modalPresentationStyle = .fullScreen
         self.present(mainVC, animated: true, completion: nil)
     }

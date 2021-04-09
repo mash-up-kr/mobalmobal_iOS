@@ -12,7 +12,7 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     // MARK: - UIComponents
     private let thumbnailImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.image = UIImage(named: "doneImage")
+        imageView.image = UIImage(named: "profile_default")
         imageView.backgroundColor = .white
         imageView.contentMode = .scaleAspectFill
         return imageView

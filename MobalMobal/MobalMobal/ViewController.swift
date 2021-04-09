@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func secondButtonIsTapped(_ sender: UIButton) {
-        let mainVC: MainViewController = MainViewController()
+        let mainVC: MainViewController = MainViewController(viewModel: MainViewModel())
         mainVC.modalPresentationStyle = .fullScreen
         self.present(mainVC, animated: true, completion: nil)
     }

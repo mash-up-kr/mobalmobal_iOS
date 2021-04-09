@@ -49,7 +49,7 @@ extension DoneService: TargetType {
         case .getMain(let item, let limit):
             return .requestParameters(parameters: ["item": item,
                                                    "limit": limit,
-                                                   "order": "ASC"], encoding: URLEncoding.queryString)
+                                                   "order": "DESC"], encoding: URLEncoding.queryString)
         case .getDetail:
             return .requestPlain
         case .login(let fireStoreId):

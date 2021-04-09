@@ -52,6 +52,8 @@ class MainViewController: UIViewController {
     }()
     
     // MARK: - Properties
+    var viewModel: MainViewModel
+    
     var lastContentOffset: CGFloat = 0.0
     
     private let itemsPerRow: CGFloat = 2
@@ -63,12 +65,27 @@ class MainViewController: UIViewController {
     let ongoingCellIdentifier: String = "MainOngoingDonationCollectionViewCell"
     let ongoingHeaderIdentifier: String = "MainOngoingDonationHeaderView"
     
+    // MARK: - Initializer
+    init(viewModel: MainViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
         setCollectionView()
         setLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getMain()
     }
     
     // MARK: - Actions
@@ -81,6 +98,33 @@ class MainViewController: UIViewController {
     private func touchNotiListButton() {
         print("🐰 알림")
          presentNotiListVC()
+    }
+    
+    private func presentProfileVC() {
+        let profileVC: ProfileViewController = ProfileViewController()
+        let navigation: UINavigationController = UINavigationController(rootViewController: profileVC)
+        navigation.modalPresentationStyle = .fullScreen
+        navigation.setNavigationBarHidden(false, animated: true)
+        present(navigation, animated: true)
+    }
+    
+    // 변경 가능
+    private func presentNotiListVC() {
+        // let notiListVC: NotiListViewController = NotiListViewController()
+        // let navigation: UINavigationController = UINavigationController(rootViewController: notiListVC)
+        // navigation.modalPresentationStyle = .fullScreen
+        // present(navigation, animated: true, completion: nil)
+    }
+    
+    func presentDonationDetailVC(donationId: Int) {
+        let detailVC: DonationDetailViewController = DonationDetailViewController(donationId: donationId)
+        present(detailVC, animated: true)
+    }
+    
+    // 변경 가능
+    func presentAddMyDonationVC() {
+        // let addMyDonationVC: AddMyDonationViewController = AddMyDonationViewController()
+        // present(addMyDonationVC, animated: true)
     }
     
     // MARK: - Methods
@@ -127,31 +171,18 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func presentProfileVC() {
-        let profileVC: ProfileViewController = ProfileViewController()
-        let navigation: UINavigationController = UINavigationController(rootViewController: profileVC)
-        navigation.modalPresentationStyle = .fullScreen
-        navigation.setNavigationBarHidden(false, animated: true)
-        present(navigation, animated: true)
-    }
-    
-    // 변경 가능
-    private func presentNotiListVC() {
-        // let notiListVC: NotiListViewController = NotiListViewController()
-        // let navigation: UINavigationController = UINavigationController(rootViewController: notiListVC)
-        // navigation.modalPresentationStyle = .fullScreen
-        // present(navigation, animated: true, completion: nil)
-    }
-    
-    func presentDonationDetailVC(donationId: Int) {
-        let detailVC: DonationDetailViewController = DonationDetailViewController(donationId: donationId)
-        present(detailVC, animated: true)
-    }
-    
-    // 변경 가능
-    func presentAddMyDonationVC() {
-        // let addMyDonationVC: AddMyDonationViewController = AddMyDonationViewController()
-        // present(addMyDonationVC, animated: true)
+    private func getMain() {
+        viewModel.callMainInfoApi(item: Int.max, limit: 10) { result in
+            switch result {
+            case .success:
+                self.collectionView.reloadData()
+            case .failure(.client), .failure(.noData), .failure(.server), .failure(.unknown):
+                let alertVC = UIAlertController(title: "나중에 다시 시도해 주세요.", message: "서버 또는 네트워크에 이상이 있을 수 있습니다.", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                alertVC.addAction(okAction)
+                self.present(alertVC, animated: true, completion: nil)
+            }
+        }
     }
 }
 
@@ -196,7 +227,7 @@ extension MainViewController: UICollectionViewDataSource {
         case 0:
             return 1
         case 1:
-            return 12
+            return viewModel.posts.count
         default:
             return 0
         }
@@ -211,6 +242,11 @@ extension MainViewController: UICollectionViewDataSource {
             
         default:
             guard let cell: MainOngoingDonationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationCollectionViewCell else { return .init() }
+            if let money = viewModel.posts[indexPath.item].currentAmount.changeToCommaFormat() {
+                cell.money = money
+            }
+            cell.title = viewModel.posts[indexPath.item].title
+            cell.progress = Float(viewModel.posts[indexPath.item].currentAmount / viewModel.posts[indexPath.item].goal)
             return cell
         }
     }
