@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
     
     let titleLabel: UILabel = {
         let label: UILabel = UILabel(frame: .zero)
-        label.text = "Hi, jaehui"
+        label.text = "Hi, \(UserInfo.shared.nickName ?? "nickName")"
         label.font = UIFont(name: "Futura-Bold", size: 30)
         label.textColor = .white
         return label
@@ -87,9 +87,9 @@ class MainViewController: UIViewController {
         setCollectionView()
         setLayout()
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
         getMain()
     }
     
@@ -102,7 +102,7 @@ class MainViewController: UIViewController {
     @objc
     private func touchNotiListButton() {
         print("🐰 알림")
-         presentNotiListVC()
+        presentNotiListVC()
     }
     
     private func presentProfileVC() {

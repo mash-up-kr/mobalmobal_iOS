@@ -18,13 +18,17 @@ class MainViewModel {
     // MARK: - API Method
     func callMainInfoApi(completion: @escaping (Result<Void, DoneError>) -> Void) {
         DoneProvider.getMain(item: item, limit: limit) { response in
+            guard let posts = response.data?.posts else {
+                completion(.failure(.unknown))
+                return
+            }
             if self.posts.isEmpty {
-                self.posts = response.data.posts
+                self.posts = posts
             } else {
-                if response.data.posts.isEmpty {
+                if posts.isEmpty {
                     self.isEnd = true
                 }
-                self.posts.append(contentsOf: response.data.posts)
+                self.posts.append(contentsOf: posts)
             }
             completion(.success(()))
         } failure: { (error) in
