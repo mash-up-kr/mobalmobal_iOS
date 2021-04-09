@@ -303,12 +303,12 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: availableWidth, height: 142)
             
         case 1:
-            if isIndicatorCell(indexPath) {
-                return CGSize(width: collectionView.frame.width, height: 65)
-            }
             let insetSpace: CGFloat = secondSectionInsets.left * 2
             let paddingSpace: CGFloat = 12 * (itemsPerRow - 1)
             let availableWidth: CGFloat = view.frame.width - insetSpace - paddingSpace
+            if isIndicatorCell(indexPath) {
+                return CGSize(width: availableWidth, height: 65)
+            }
             let widthPerItem: CGFloat = availableWidth / itemsPerRow
             let heightPerItem: CGFloat = widthPerItem / 159 * 198
             return CGSize(width: widthPerItem, height: heightPerItem)
