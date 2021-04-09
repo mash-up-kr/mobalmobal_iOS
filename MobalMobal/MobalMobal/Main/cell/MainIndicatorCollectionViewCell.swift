@@ -17,8 +17,7 @@ class MainIndicatorCollectionViewCell: UICollectionViewCell {
     // MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        contentView.backgroundColor = .darkGrey
-        setLayout()
+        contentView.backgroundColor = .backgroundColor
     }
     
     required init?(coder: NSCoder) {
@@ -26,7 +25,7 @@ class MainIndicatorCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Method
-    private func setLayout() {
+    override func layoutSubviews() {
         [activityIndicatorView].forEach { contentView.addSubview($0) }
         
         activityIndicatorView.snp.makeConstraints { make in

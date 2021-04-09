@@ -62,7 +62,7 @@ class MainViewController: UIViewController {
     
     private let itemsPerRow: CGFloat = 2
     private let firstSectionInsets: UIEdgeInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0)
-    private let secondSectionInsets: UIEdgeInsets = UIEdgeInsets(top: 15.0, left: 22.0, bottom: 0.0, right: 22.0)
+    private let secondSectionInsets: UIEdgeInsets = UIEdgeInsets(top: 15.0, left: 22.0, bottom: 15.0, right: 22.0)
     
     let sectionTitle: [String] = ["나의 진행", "진행중"]
     let myCellIdentifier: String = "MainMyDonationCollectionViewCell"
@@ -244,14 +244,14 @@ extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if isIndicatorCell(indexPath) {
-            viewModel.item = viewModel.posts[indexPath.item].postID
+            viewModel.item = viewModel.posts[indexPath.item - 1].postID - 1
             getMain()
         }
     }
     
     private func isIndicatorCell(_ indexPath: IndexPath) -> Bool {
         if viewModel.posts.isEmpty { return false }
-        return viewModel.posts[indexPath.item].postID == viewModel.posts.last?.postID
+        return indexPath.item == viewModel.posts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -268,16 +268,17 @@ extension MainViewController: UICollectionViewDataSource {
                 return cell
             }
             
-            guard let cell: MainOngoingDonationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationCollectionViewCell,
-                  !viewModel.posts.isEmpty else { return .init() }
+            guard let cell: MainOngoingDonationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationCollectionViewCell else { return .init() }
             
-            let post = viewModel.posts[indexPath.item]
-            cell.dday = Date().getDDayString(to: post.endAt)
-            if let money = post.currentAmount.changeToCommaFormat() {
-                cell.money = money
+            if !viewModel.posts.isEmpty {
+                let post = viewModel.posts[indexPath.item]
+                cell.dday = Date().getDDayString(to: post.endAt)
+                if let money = post.currentAmount.changeToCommaFormat() {
+                    cell.money = money
+                }
+                cell.title = post.title
+                cell.progress = Float(post.currentAmount / post.goal)
             }
-            cell.title = post.title
-            cell.progress = Float(post.currentAmount / post.goal)
             return cell
         }
     }
@@ -303,12 +304,13 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: availableWidth, height: 142)
             
         case 1:
+            
+            if isIndicatorCell(indexPath) {
+                return CGSize(width: view.frame.width, height: 65)
+            }
             let insetSpace: CGFloat = secondSectionInsets.left * 2
             let paddingSpace: CGFloat = 12 * (itemsPerRow - 1)
             let availableWidth: CGFloat = view.frame.width - insetSpace - paddingSpace
-            if isIndicatorCell(indexPath) {
-                return CGSize(width: availableWidth, height: 65)
-            }
             let widthPerItem: CGFloat = availableWidth / itemsPerRow
             let heightPerItem: CGFloat = widthPerItem / 159 * 198
             return CGSize(width: widthPerItem, height: heightPerItem)
