@@ -81,6 +81,7 @@ class InputChargingPointViewController: UIViewController {
         }
         accountVC.charge = "\(inputText)원"
         self.navigationController?.pushViewController(accountVC, animated: true)
+        //여기서 서버에 얼만큼 요청했는지 보내줘야한다.
     }
     @objc
     private func popVC() {
