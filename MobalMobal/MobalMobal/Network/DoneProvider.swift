@@ -8,6 +8,10 @@
 import Foundation
 
 enum DoneProvider {
+    static func login(fireStoreId: String, success: @escaping (ParseResponse<LoginData>) -> Void, failure: @escaping (Error) -> Void) {
+        NetworkProvider.request(.login(fireStoreId: fireStoreId), to: LoginData.self, success: success, failure: failure)
+    }
+    
     static func getMain(item: Int, limit: Int, success: @escaping (ParseResponse<MainResponse>) -> Void, failure: @escaping (Error) -> Void) {
         NetworkProvider.request(.getMain(item: item, limit: limit), to: MainResponse.self, success: success, failure: failure)
     }
