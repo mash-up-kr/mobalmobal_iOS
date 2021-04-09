@@ -398,13 +398,15 @@ class CreateDonationViewController: UIViewController, UINavigationControllerDele
     }
     
     private func resetConstraint(baseView: UIView, offset: Int) {
+        let createDonationLabelBottom: CGFloat = 58
+        
         baseView.snp.removeConstraints()
-        UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseIn) {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
             baseView.snp.makeConstraints { make in
-                make.top.equalTo(self.createDonationLabel.snp.bottom).offset(offset)
+                let tranform: CGAffineTransform = CGAffineTransform(translationX: 0, y: createDonationLabelBottom + CGFloat(offset))
                 make.leading.trailing.equalToSuperview().inset(28)
                 make.height.equalTo(49)
-//                baseView.layoutIfNeeded()
+                baseView.transform = tranform
             }
         }
     }
