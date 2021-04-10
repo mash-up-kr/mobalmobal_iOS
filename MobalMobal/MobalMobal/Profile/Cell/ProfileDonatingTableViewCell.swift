@@ -20,6 +20,8 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     private lazy var donateImg: UIImageView = {
         let image: UIImageView = UIImageView()
         image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 12
+        image.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         image.layer.masksToBounds = true
         return image
     }()

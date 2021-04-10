@@ -55,7 +55,7 @@ class ProfileViewModel {
     // 후원중인도네 중복체크
     func myDonateResponseDuplicateCheck(_ response: ParseResponse<MyDonates>) {
         var donationPostId: Set<Int> = Set<Int>()
-        for donate in response.data.donate {
+        for donate in response.data!.donate {
             if !donationPostId.contains(donate.postId) {
                 donationPostId.insert(donate.postId)
                 self.myDonateResponseModel.append(donate)

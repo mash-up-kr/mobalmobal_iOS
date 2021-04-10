@@ -79,7 +79,7 @@ class ProfileViewController: UIViewController {
         }
     }
     private func setNavigation() {
-        self.navigationController?.navigationBar.backgroundColor = .blackFour
+
         self.navigationController?.navigationBar.barTintColor = .blackFour
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.isNavigationBarHidden = false

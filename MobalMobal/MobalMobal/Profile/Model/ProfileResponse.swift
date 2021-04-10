@@ -15,10 +15,10 @@ struct ProfileResponse: Codable {
 }
 
 struct ProfileData: Codable {
-    let user: UserInfo
+    let user: ProfileUser
 }
 
-struct UserInfo: Codable {
+struct ProfileUser: Codable {
     let userId: Int
     let nickname: String
     let phoneNumber: String?
