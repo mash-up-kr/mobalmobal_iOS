@@ -225,8 +225,9 @@ class DonationDetailViewController: UIViewController {
         alert.addAction(action)
         present(alert, animated: true)
     }
+    
     private func presentDonateMoneyVC() {
-        let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController()
+        let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController(postId: viewModel.getDonationId() )
         let navigationController: UINavigationController = UINavigationController(rootViewController: donateMoneyVC)
         navigationController.modalPresentationStyle = .overFullScreen
         present(navigationController, animated: true)
@@ -254,7 +255,7 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
     }
     func didProgressChanged(current: Int, goal: Int) {
         let progress: Float = Float(current) / Float(goal)
-        progressLabel.text = "\(Int(progress) * 100)%"
+        progressLabel.text = "\(Int(progress * 100))%"
         destinationNumberLabel.text = goal.changeToCommaFormat()
         fundAmountNumberLabel.text = current.changeToCommaFormat()
         

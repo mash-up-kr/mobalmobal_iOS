@@ -23,6 +23,7 @@
 		3A1BD77025F539D40079D56D /* Spoqa Han Sans Neo Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76B25F539D30079D56D /* Spoqa Han Sans Neo Thin.otf */; };
 		3A1BD77125F539D40079D56D /* Spoqa Han Sans Neo Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76C25F539D40079D56D /* Spoqa Han Sans Neo Medium.otf */; };
 		3A1BD77C25F5443D0079D56D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */; };
+		3A1E6DDD262065BF00FAF0CC /* DonateMoneyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E6DDC262065BF00FAF0CC /* DonateMoneyData.swift */; };
 		3A1E6DE92620D69E00FAF0CC /* DonateCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E6DE82620D69E00FAF0CC /* DonateCompleteViewController.swift */; };
 		3A1E6DED2620E59700FAF0CC /* MakeCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E6DEC2620E59700FAF0CC /* MakeCompleteViewController.swift */; };
 		3A1E6DC12620445A00FAF0CC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E6DC02620445A00FAF0CC /* UserInfo.swift */; };
@@ -37,6 +38,7 @@
 		3AC39407261DBF59008BB207 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC39406261DBF59008BB207 /* Int+Extension.swift */; };
 		3AC3940E261DF7FC008BB207 /* JSONDecoder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3940D261DF7FC008BB207 /* JSONDecoder+Extension.swift */; };
 		3AC39411261DFBF2008BB207 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC39410261DFBF2008BB207 /* Date+Extension.swift */; };
+		3AC3941A261E2724008BB207 /* DonateMoneyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC39419261E2724008BB207 /* DonateMoneyViewModel.swift */; };
 		4DBDB4E4261F53C900B5E08D /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 4DBDB4E3261F53C900B5E08D /* Moya */; };
 		4DBDB4EA261F542B00B5E08D /* DoneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDB4E9261F542B00B5E08D /* DoneService.swift */; };
 		4DBDB4F2261F593F00B5E08D /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDB4F1261F593F00B5E08D /* MainViewModel.swift */; };
@@ -111,6 +113,7 @@
 		3A1BD76B25F539D30079D56D /* Spoqa Han Sans Neo Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Thin.otf"; sourceTree = "<group>"; };
 		3A1BD76C25F539D40079D56D /* Spoqa Han Sans Neo Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Medium.otf"; sourceTree = "<group>"; };
 		3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		3A1E6DDC262065BF00FAF0CC /* DonateMoneyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateMoneyData.swift; sourceTree = "<group>"; };
 		3A1E6DE82620D69E00FAF0CC /* DonateCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateCompleteViewController.swift; sourceTree = "<group>"; };
 		3A1E6DEC2620E59700FAF0CC /* MakeCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeCompleteViewController.swift; sourceTree = "<group>"; };
 		3A1E6DC02620445A00FAF0CC /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -125,6 +128,7 @@
 		3AC39406261DBF59008BB207 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		3AC3940D261DF7FC008BB207 /* JSONDecoder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extension.swift"; sourceTree = "<group>"; };
 		3AC39410261DFBF2008BB207 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		3AC39419261E2724008BB207 /* DonateMoneyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateMoneyViewModel.swift; sourceTree = "<group>"; };
 		4DBDB4E9261F542B00B5E08D /* DoneService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneService.swift; sourceTree = "<group>"; };
 		4DBDB4F1261F593F00B5E08D /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		4DBDB4F4261F59A500B5E08D /* DoneProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneProvider.swift; sourceTree = "<group>"; };
@@ -210,8 +214,10 @@
 		3A179F4B25FB5A2100901436 /* DonateMoney */ = {
 			isa = PBXGroup;
 			children = (
+				3AC39423261E28C3008BB207 /* Model */,
 				3A179F5025FB629F00901436 /* cell */,
 				3A179F4C25FB5A3900901436 /* DonateMoneyViewController.swift */,
+				3AC39419261E2724008BB207 /* DonateMoneyViewModel.swift */,
 			);
 			path = DonateMoney;
 			sourceTree = "<group>";
@@ -319,6 +325,14 @@
 			isa = PBXGroup;
 			children = (
 				3AC39403261DBDF5008BB207 /* DonationDetailResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3AC39423261E28C3008BB207 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3A1E6DDC262065BF00FAF0CC /* DonateMoneyData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -766,6 +780,8 @@
 				7C04536025EAA2DC00870761 /* ProfileDonatingTableViewCell.swift in Sources */,
 				3AC393D9261CBC3D008BB207 /* DonationDetailViewModel.swift in Sources */,
 				7C04535D25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift in Sources */,
+				3AC3941A261E2724008BB207 /* DonateMoneyViewModel.swift in Sources */,
+				3A1E6DDD262065BF00FAF0CC /* DonateMoneyData.swift in Sources */,
 				7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */,
 				3A179F7725FBC84F00901436 /* UITextField+Extension.swift in Sources */,
 				D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */,

@@ -30,12 +30,11 @@ class ViewController: UIViewController {
     
     @IBAction private func thirdButtonIsTapped(_ sender: UIButton) {
         let loginVC: LoginViewController = LoginViewController()
-//         loginVC.modalPresentationStyle = .fullScreen
-// //        self.present(loginVC, animated: true)
-//         self.navigationController?.pushViewController(loginVC, animated: true)
         let navVc: UINavigationController = UINavigationController(rootViewController: loginVC)
         navVc.modalPresentationStyle = .fullScreen
         self.present(navVc, animated: true)
+//        loginVC.modalPresentationStyle = .fullScreen
+//        self.present(loginVC, animated: true)
 //        self.navigationController?.pushViewController(loginVC, animated: true)
     }
     

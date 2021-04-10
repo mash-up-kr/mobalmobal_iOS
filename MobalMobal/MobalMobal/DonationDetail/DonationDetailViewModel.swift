@@ -70,6 +70,11 @@ class DonationDetailViewModel {
         self.donationEndDate = info.endDate
     }
     
+    // MARK: - Get Method
+    func getDonationId() -> Int {
+        self.donationId
+    }
+    
     // MARK: - API Method
     func callDonationInfoAPI() {
         DoneProvider.getDonationDetail(postId: donationId) { [weak self] response in
