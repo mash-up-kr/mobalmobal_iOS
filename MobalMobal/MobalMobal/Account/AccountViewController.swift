@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-class AccountViewController: UIViewController {
+class AccountViewController: DoneBaseViewController {
     // MARK: - UIComponents
     private lazy var accountLabel: UILabel = {
         let label: UILabel = UILabel()

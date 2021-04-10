@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-class InputChargingPointViewController: UIViewController {
+class InputChargingPointViewController: DoneBaseViewController {
     // MARK: - UIComponents
     private let chargingInputView: UIView = {
         let view: UIView = UIView()

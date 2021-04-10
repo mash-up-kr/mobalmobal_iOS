@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-class ModifyProfileViewController: UIViewController {
+class ModifyProfileViewController: DoneBaseViewController {
     // MARK: - UIComponents
     private var profileImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()

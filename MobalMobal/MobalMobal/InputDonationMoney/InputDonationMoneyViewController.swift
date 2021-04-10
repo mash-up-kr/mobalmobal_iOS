@@ -7,7 +7,7 @@
 import SnapKit
 import UIKit
 
-class InputDonationMoneyViewController: UIViewController {
+class InputDonationMoneyViewController: DoneBaseViewController {
     // MARK: - UIComponents
     private let roundView: UIView = {
         let view: UIView = UIView()

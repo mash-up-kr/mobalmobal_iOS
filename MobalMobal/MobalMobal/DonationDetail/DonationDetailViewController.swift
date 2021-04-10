@@ -8,7 +8,7 @@ import Kingfisher
 import UIKit
 import SnapKit
 
-class DonationDetailViewController: UIViewController {
+class DonationDetailViewController: DoneBaseViewController {
     // MARK: - UI Components
     let scrollView: UIScrollView = {
         let scrollView: UIScrollView = UIScrollView()

@@ -35,6 +35,8 @@
 		3AC39407261DBF59008BB207 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC39406261DBF59008BB207 /* Int+Extension.swift */; };
 		3AC3940E261DF7FC008BB207 /* JSONDecoder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3940D261DF7FC008BB207 /* JSONDecoder+Extension.swift */; };
 		3AC39411261DFBF2008BB207 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC39410261DFBF2008BB207 /* Date+Extension.swift */; };
+		4D46FEB526215F7B00471475 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D46FEB426215F7B00471475 /* Logger.swift */; };
+		4D46FEB82621607200471475 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D46FEB72621607200471475 /* BaseViewController.swift */; };
 		4DBDB4E4261F53C900B5E08D /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 4DBDB4E3261F53C900B5E08D /* Moya */; };
 		4DBDB4EA261F542B00B5E08D /* DoneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDB4E9261F542B00B5E08D /* DoneService.swift */; };
 		4DBDB4F2261F593F00B5E08D /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDB4F1261F593F00B5E08D /* MainViewModel.swift */; };
@@ -121,6 +123,8 @@
 		3AC39406261DBF59008BB207 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		3AC3940D261DF7FC008BB207 /* JSONDecoder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extension.swift"; sourceTree = "<group>"; };
 		3AC39410261DFBF2008BB207 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		4D46FEB426215F7B00471475 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		4D46FEB72621607200471475 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		4DBDB4E9261F542B00B5E08D /* DoneService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneService.swift; sourceTree = "<group>"; };
 		4DBDB4F1261F593F00B5E08D /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		4DBDB4F4261F59A500B5E08D /* DoneProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneProvider.swift; sourceTree = "<group>"; };
@@ -267,6 +271,8 @@
 			children = (
 				3A1E6DC02620445A00FAF0CC /* UserInfo.swift */,
 				3AC393CD261C7439008BB207 /* UserDefaultsKeys.swift */,
+				4D46FEB426215F7B00471475 /* Logger.swift */,
+				4D46FEB72621607200471475 /* BaseViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -730,6 +736,7 @@
 				7C39985D25FA51AA00EA82C2 /* AccountViewController.swift in Sources */,
 				D70C37CD25E103DD00898271 /* ViewController.swift in Sources */,
 				E3F1EA8A25EA5AE300F34BDE /* SettingTableViewCell.swift in Sources */,
+				4D46FEB526215F7B00471475 /* Logger.swift in Sources */,
 				3AB1D0252610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift in Sources */,
 				7C39979125F75B5900EA82C2 /* SuccessChargingViewController.swift in Sources */,
 				7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */,
@@ -768,6 +775,7 @@
 				3A179F6025FB87AF00901436 /* InputDonationMoneyViewController.swift in Sources */,
 				3A1E6DC12620445A00FAF0CC /* UserInfo.swift in Sources */,
 				7C842FA326063FB100A66756 /* ModifyProfileCustomView.swift in Sources */,
+				4D46FEB82621607200471475 /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

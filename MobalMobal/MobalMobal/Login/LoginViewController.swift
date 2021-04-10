@@ -12,7 +12,7 @@ import GoogleSignIn
 import SnapKit
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: DoneBaseViewController {
     // MARK: - UI Components
     let stackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
