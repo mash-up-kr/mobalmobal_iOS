@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DonateMoneyViewController: UIViewController {
+class DonateMoneyViewController: DoneBaseViewController {
     // MARK: - UIComponents
     private let clearView: UIView = UIView()
     private lazy var tableView: UITableView = {

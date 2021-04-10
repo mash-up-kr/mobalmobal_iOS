@@ -9,7 +9,7 @@ import SnapKit
 import Then
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: DoneBaseViewController {
     // MARK: - UIComponents
     let titleView: UIView = {
         let view: UIView = UIView(frame: .zero)

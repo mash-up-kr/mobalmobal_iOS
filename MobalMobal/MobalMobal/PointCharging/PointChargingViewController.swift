@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-class PointChargingViewController: UIViewController {
+class PointChargingViewController: DoneBaseViewController {
     // MARK: - UIComponents
     private let chargingTableView: UITableView = {
         let pointTableView: UITableView = UITableView(frame: .zero, style: .plain)
