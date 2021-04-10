@@ -23,7 +23,8 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
         let imageView: UIImageView = UIImageView()
         imageView.image = UIImage(named: "profile_default")
         imageView.backgroundColor = .white
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
