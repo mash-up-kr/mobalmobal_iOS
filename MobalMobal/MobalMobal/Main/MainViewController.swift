@@ -20,7 +20,7 @@ class MainViewController: UIViewController {
     let titleLabel: UILabel = {
         let label: UILabel = UILabel(frame: .zero)
         label.text = "Hi, jaehui"
-        label.font = UIFont(name: "Futura-Bold", size: 30)
+        label.font = UIFont(name: "Futura-Bold", size: 25)
         label.textColor = .white
         return label
     }()
@@ -53,6 +53,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     var lastContentOffset: CGFloat = 0.0
+    var lastMinContentOffset: CGFloat = 0.0
     
     private let itemsPerRow: CGFloat = 2
     private let firstSectionInsets: UIEdgeInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0)
@@ -70,17 +71,21 @@ class MainViewController: UIViewController {
         setCollectionView()
         setLayout()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
     
     // MARK: - Actions
     @objc
     private func touchProfileButton() {
         print("🐰 프로필")
-        presentProfileVC()
+        psuhProfileVC()
     }
     @objc
     private func touchNotiListButton() {
         print("🐰 알림")
-         presentNotiListVC()
+         pushNotiListVC()
     }
     
     // MARK: - Methods
@@ -91,10 +96,12 @@ class MainViewController: UIViewController {
         collectionView.register(MainMyDonationCollectionViewCell.self, forCellWithReuseIdentifier: myCellIdentifier)
         collectionView.register(MainOngoingDonationCollectionViewCell.self, forCellWithReuseIdentifier: ongoingCellIdentifier)
         collectionView.register(MainOngoingDonationHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ongoingHeaderIdentifier)
+        
+        collectionView.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
     }
     
     private func setLayout() {
-        view.addSubviews([titleView, collectionView])
+        view.addSubviews([collectionView, titleView])
         
         titleView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -102,7 +109,7 @@ class MainViewController: UIViewController {
         }
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(titleView.snp.bottom)
+            make.top.equalTo(titleView.snp.bottom).offset(-20)
             make.leading.trailing.bottom.equalToSuperview()
         }
         
@@ -127,20 +134,15 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func presentProfileVC() {
+    private func psuhProfileVC() {
         let profileVC: ProfileViewController = ProfileViewController()
-        let navigation: UINavigationController = UINavigationController(rootViewController: profileVC)
-        navigation.modalPresentationStyle = .fullScreen
-        navigation.setNavigationBarHidden(false, animated: true)
-        present(navigation, animated: true)
+        navigationController?.pushViewController(profileVC, animated: true)
     }
     
     // 변경 가능
-    private func presentNotiListVC() {
+    private func pushNotiListVC() {
         // let notiListVC: NotiListViewController = NotiListViewController()
-        // let navigation: UINavigationController = UINavigationController(rootViewController: notiListVC)
-        // navigation.modalPresentationStyle = .fullScreen
-        // present(navigation, animated: true, completion: nil)
+        // navigationController?.pushViewController(notiListVC, animated: true)
     }
     
     func presentDonationDetailVC(donationId: Int) {
@@ -159,16 +161,26 @@ class MainViewController: UIViewController {
 extension MainViewController: UICollectionViewDelegate {
     // 스크롤 - 헤더뷰 사이즈 조정
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.lastContentOffset <= 0 {
-            titleLabel.font = UIFont(name: "Futura-Bold", size: 25)
+        print(scrollView.contentOffset.y)
+        if scrollView.contentOffset.y <= 0 {
+            if lastMinContentOffset > scrollView.contentOffset.y {
+                lastMinContentOffset = scrollView.contentOffset.y
+            }
+            let maxSize = min(16 - lastMinContentOffset, 25)
+            let maxInset = min(13 - lastMinContentOffset, 30)
+            titleLabel.font = UIFont(name: "Futura-Bold", size: maxSize)
             titleLabel.snp.updateConstraints { make in
-                make.top.equalToSuperview().inset(30)
+                make.top.equalToSuperview().inset(maxInset)
             }
         } else if self.lastContentOffset < scrollView.contentOffset.y {
-            titleLabel.font = UIFont(name: "Futura-Bold", size: 16)
+            let minSize = max(25 - scrollView.contentOffset.y, 16)
+            let minInset = max(30 - scrollView.contentOffset.y, 13)
+            titleLabel.font = UIFont(name: "Futura-Bold", size: minSize)
             titleLabel.snp.updateConstraints { make in
-                make.top.equalToSuperview().inset(13)
+                make.top.equalToSuperview().inset(minInset)
             }
+            
+            lastMinContentOffset = 0
         }
         self.lastContentOffset = scrollView.contentOffset.y
     }

@@ -26,9 +26,20 @@ class DonateMoneyViewController: UIViewController {
     }()
     
     // MARK: - Properties
+    private lazy var viewModel: DonateMoneyViewModel = DonateMoneyViewModel(delegate: self)
+    
     private let headerString: String = "후원"
-    private let moneyStrings: [String] = ["1,000원", "2,000원", "5,000원", "10,000원", "50,000원", "100,000원", "직접입력"]
     private let cellIdentifier: String = "DonateMoneyTableViewCell"
+    
+    // MARK: - Initializer
+    init(postId: Int) {
+        super.init(nibName: nil, bundle: nil)
+        viewModel.setPostId(postId)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Lifecycles
     override func viewDidLoad() {
@@ -60,7 +71,7 @@ class DonateMoneyViewController: UIViewController {
         view.addSubviews([tableView, clearView])
         tableView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(51 * moneyStrings.count + 77)
+            make.height.equalTo(51 * (viewModel.amounts.count + 1) + 77)
         }
         clearView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
@@ -71,14 +82,28 @@ class DonateMoneyViewController: UIViewController {
         let clearViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissViewController))
         clearView.addGestureRecognizer(clearViewTap)
     }
+    private func showDonateFailAlert(message: String?) {
+        var alertMessage: String = "에러가 발생했습니다. 잠시 후 다시 시도해주세요."
+        if let message = message {
+            alertMessage = message
+        }
+        let alert: UIAlertController = UIAlertController(title: "후원 실패", message: alertMessage, preferredStyle: .alert)
+        let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+            self?.navigationController?.dismiss(animated: true)
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
 }
 
 // MARK: - UITableViewDelegate
 extension DonateMoneyViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == moneyStrings.count - 1 {
+        if indexPath.row < viewModel.amounts.count {
+            viewModel.donate(amount: viewModel.amounts[indexPath.row])
+        } else {
             print("🐻 직접 입력 🐻")
-            let inputDonateMoneyVC: InputDonationMoneyViewController = InputDonationMoneyViewController()
+            let inputDonateMoneyVC: InputDonationMoneyViewController = InputDonationMoneyViewController(postId: viewModel.getPostId())
             inputDonateMoneyVC.modalPresentationStyle = .fullScreen
             navigationController?.pushViewController(inputDonateMoneyVC, animated: true)
         }
@@ -111,14 +136,33 @@ extension DonateMoneyViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        moneyStrings.count
+        viewModel.amounts.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? DonateMoneyTableViewCell else {
             return UITableViewCell()
         }
-        cell.setTitle(moneyStrings[indexPath.row])
+        if indexPath.row < viewModel.amounts.count {
+            let title: String = viewModel.amounts[indexPath.row].changeToCommaFormat() ?? "???"
+            cell.setTitle("\(title)원")
+        } else {
+            cell.setTitle("직접 입력")
+        }
         return cell
+    }
+}
+
+extension DonateMoneyViewController: DonateMoneyViewModelDelegate {
+    func failDonateMoney(message: String?) {
+        showDonateFailAlert(message: message)
+    }
+    
+    func completeDonateMoney(amount: Int) {
+        print("🐻 Donation Success")
+        // 후원완료 페이지로 이동
+        let completeVC: DonateCompleteViewController = DonateCompleteViewController()
+        completeVC.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(completeVC, animated: true)
     }
 }

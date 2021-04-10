@@ -26,7 +26,7 @@ class SignupCustomView: UIView {
     lazy var textFieldView: UITextField = {
         let textField: UITextField = UITextField()
         textField.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 15)
-        textField.textColor = .textColor
+        textField.textColor = .brownGreyTwo
         textField.textColor = .white
         textField.placeholder = inputText
         return textField
