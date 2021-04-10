@@ -19,7 +19,11 @@ class ViewController: UIViewController {
     
     // - MARK : 각자 view로 넘어감
     @IBAction private func firstButtonIsTapped(_ sender: UIButton) {
-    
+        guard let vc = UIStoryboard(name: "CreateDonation", bundle: nil).instantiateViewController(withIdentifier: "CreateDonationViewController2") as? CreateDonationViewController2 else {
+            return
+        }
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction private func secondButtonIsTapped(_ sender: UIButton) {

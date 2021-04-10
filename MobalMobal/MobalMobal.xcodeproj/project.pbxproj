@@ -83,6 +83,8 @@
 		D7AC0CA325EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AC0CA225EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift */; };
 		D7E44EF125EA5149007FDB4F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E44EF025EA5149007FDB4F /* MainViewController.swift */; };
 		E359440E260F125D0078903E /* CreateDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E359440D260F125D0078903E /* CreateDonationViewController.swift */; };
+		E365FBBD26210B480036617A /* CreateDonationViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E365FBBC26210B480036617A /* CreateDonationViewController2.swift */; };
+		E365FBC326210EFA0036617A /* CreateDonation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E365FBC226210EFA0036617A /* CreateDonation.storyboard */; };
 		E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */; };
 		E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */; };
 		E3F1EA8425EA552800F34BDE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EA8325EA552800F34BDE /* SettingViewController.swift */; };
@@ -157,6 +159,8 @@
 		D7AC0CA225EAF8F9000A342A /* MainOngoingDonationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOngoingDonationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D7E44EF025EA5149007FDB4F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E359440D260F125D0078903E /* CreateDonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDonationViewController.swift; sourceTree = "<group>"; };
+		E365FBBC26210B480036617A /* CreateDonationViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDonationViewController2.swift; sourceTree = "<group>"; };
+		E365FBC226210EFA0036617A /* CreateDonation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateDonation.storyboard; sourceTree = "<group>"; };
 		E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		E3F1EA8325EA552800F34BDE /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -495,6 +499,8 @@
 			isa = PBXGroup;
 			children = (
 				E359440D260F125D0078903E /* CreateDonationViewController.swift */,
+				E365FBBC26210B480036617A /* CreateDonationViewController2.swift */,
+				E365FBC226210EFA0036617A /* CreateDonation.storyboard */,
 			);
 			path = CreateDonation;
 			sourceTree = "<group>";
@@ -624,6 +630,7 @@
 				3A1BD76F25F539D40079D56D /* Spoqa Han Sans Neo Bold.otf in Resources */,
 				D70C37D025E103DD00898271 /* Main.storyboard in Resources */,
 				3A1BD76D25F539D40079D56D /* Spoqa Han Sans Neo Regular.otf in Resources */,
+				E365FBC326210EFA0036617A /* CreateDonation.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,6 +722,7 @@
 				D7AC0C9925EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift in Sources */,
 				3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */,
 				4DBDB4F5261F59A500B5E08D /* DoneProvider.swift in Sources */,
+				E365FBBD26210B480036617A /* CreateDonationViewController2.swift in Sources */,
 				3AC39404261DBDF5008BB207 /* DonationDetailResponse.swift in Sources */,
 				4DBDB4F8261F614F00B5E08D /* NetworkProvider.swift in Sources */,
 				3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */,
