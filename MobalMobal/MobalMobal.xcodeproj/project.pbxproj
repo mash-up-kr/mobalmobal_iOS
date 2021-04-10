@@ -43,6 +43,7 @@
 		7C04535D25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535C25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift */; };
 		7C04536025EAA2DC00870761 /* ProfileDonatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04535F25EAA2DC00870761 /* ProfileDonatingTableViewCell.swift */; };
 		7C04536525EAAA3B00870761 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04536425EAAA3B00870761 /* UIColor+Additions.swift */; };
+		7C062D9F2621111000F5D58D /* WebviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C062D9E2621111000F5D58D /* WebviewController.swift */; };
 		7C36DF4625F2014E001C2DBB /* InputChargingPointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */; };
 		7C39979125F75B5900EA82C2 /* SuccessChargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C39979025F75B5900EA82C2 /* SuccessChargingViewController.swift */; };
 		7C39985D25FA51AA00EA82C2 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C39985C25FA51AA00EA82C2 /* AccountViewController.swift */; };
@@ -124,6 +125,7 @@
 		7C04535C25EAA2C000870761 /* ProfileMyDonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMyDonationTableViewCell.swift; sourceTree = "<group>"; };
 		7C04535F25EAA2DC00870761 /* ProfileDonatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDonatingTableViewCell.swift; sourceTree = "<group>"; };
 		7C04536425EAAA3B00870761 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
+		7C062D9E2621111000F5D58D /* WebviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebviewController.swift; sourceTree = "<group>"; };
 		7C36DF4525F2014E001C2DBB /* InputChargingPointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputChargingPointViewController.swift; sourceTree = "<group>"; };
 		7C39979025F75B5900EA82C2 /* SuccessChargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessChargingViewController.swift; sourceTree = "<group>"; };
 		7C39985C25FA51AA00EA82C2 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 			children = (
 				E3F1EA8325EA552800F34BDE /* SettingViewController.swift */,
 				E3F1EA8925EA5AE300F34BDE /* SettingTableViewCell.swift */,
+				7C062D9E2621111000F5D58D /* WebviewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				3AB1D0252610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift in Sources */,
 				7C39979125F75B5900EA82C2 /* SuccessChargingViewController.swift in Sources */,
 				7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */,
+				7C062D9F2621111000F5D58D /* WebviewController.swift in Sources */,
 				E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */,
 				3AB1CFD6260F7CB200EA94E8 /* UIViewController+Extension.swift in Sources */,
 				E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */,
