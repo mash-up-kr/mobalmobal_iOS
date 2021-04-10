@@ -10,15 +10,15 @@ import Moya
 
 struct ParseResponse<Response: Decodable>: Decodable {
     var code: Int
-    var data: Response
+    var data: Response?
     var message: String?
 }
 
 enum DoneError: Error {
-  case noData
-  case client
-  case server
-  case unknown
+    case noData
+    case client
+    case server
+    case unknown
 }
 
 enum NetworkProvider {
@@ -30,7 +30,6 @@ enum NetworkProvider {
         request(target) { data in
             do {
                 let parseData: ParseResponse<Response> = try parse(data)
-                print("\(parseData)")
                 success(parseData)
             } catch {
                 print("🛑 Parse Fail: \(error)")
@@ -42,6 +41,7 @@ enum NetworkProvider {
     private static func request(_ target: DoneService, success: @escaping (Data) -> Void, failure: @escaping (Error) -> Void) {
         provider.session.sessionConfiguration.timeoutIntervalForRequest = 5
         provider.request(target) { result in
+            print("result: \(result)")
             switch result {
             case .success(let response):
                 if 400..<500 ~= response.statusCode {

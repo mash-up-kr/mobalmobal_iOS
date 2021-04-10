@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "graphic_wallet.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
