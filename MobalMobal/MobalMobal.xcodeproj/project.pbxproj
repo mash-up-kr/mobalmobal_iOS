@@ -23,6 +23,8 @@
 		3A1BD77025F539D40079D56D /* Spoqa Han Sans Neo Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76B25F539D30079D56D /* Spoqa Han Sans Neo Thin.otf */; };
 		3A1BD77125F539D40079D56D /* Spoqa Han Sans Neo Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76C25F539D40079D56D /* Spoqa Han Sans Neo Medium.otf */; };
 		3A1BD77C25F5443D0079D56D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */; };
+		3A1E6DE92620D69E00FAF0CC /* DonateCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E6DE82620D69E00FAF0CC /* DonateCompleteViewController.swift */; };
+		3A1E6DED2620E59700FAF0CC /* MakeCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E6DEC2620E59700FAF0CC /* MakeCompleteViewController.swift */; };
 		3A1E6DC12620445A00FAF0CC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E6DC02620445A00FAF0CC /* UserInfo.swift */; };
 		3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */; };
 		3AB1CFD6260F7CB200EA94E8 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */; };
@@ -109,6 +111,8 @@
 		3A1BD76B25F539D30079D56D /* Spoqa Han Sans Neo Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Thin.otf"; sourceTree = "<group>"; };
 		3A1BD76C25F539D40079D56D /* Spoqa Han Sans Neo Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Medium.otf"; sourceTree = "<group>"; };
 		3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		3A1E6DE82620D69E00FAF0CC /* DonateCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateCompleteViewController.swift; sourceTree = "<group>"; };
+		3A1E6DEC2620E59700FAF0CC /* MakeCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeCompleteViewController.swift; sourceTree = "<group>"; };
 		3A1E6DC02620445A00FAF0CC /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginButton.swift; sourceTree = "<group>"; };
 		3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -260,6 +264,22 @@
 				3A1BD76B25F539D30079D56D /* Spoqa Han Sans Neo Thin.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		3A1E6DE72620D67C00FAF0CC /* DonateComplete */ = {
+			isa = PBXGroup;
+			children = (
+				3A1E6DE82620D69E00FAF0CC /* DonateCompleteViewController.swift */,
+			);
+			path = DonateComplete;
+			sourceTree = "<group>";
+		};
+		3A1E6DEB2620E52400FAF0CC /* MakeComplete */ = {
+			isa = PBXGroup;
+			children = (
+				3A1E6DEC2620E59700FAF0CC /* MakeCompleteViewController.swift */,
+			);
+			path = MakeComplete;
 			sourceTree = "<group>";
 		};
 		3A1E6DBF2620444A00FAF0CC /* Common */ = {
@@ -436,6 +456,7 @@
 		D70C37C725E103DD00898271 /* MobalMobal */ = {
 			isa = PBXGroup;
 			children = (
+				3A1E6DEB2620E52400FAF0CC /* MakeComplete */,
 				E359440C260F124F0078903E /* CreateDonation */,
 				3A1E6DBF2620444A00FAF0CC /* Common */,
 				4DBDB4E6261F540200B5E08D /* Network */,
@@ -443,6 +464,7 @@
 				D7E44EEF25EA5133007FDB4F /* Main */,
 				3A179F4B25FB5A2100901436 /* DonateMoney */,
 				3A179F5E25FB878F00901436 /* InputDonationMoney */,
+				3A1E6DE72620D67C00FAF0CC /* DonateComplete */,
 				7C842F9C2606265900A66756 /* ModifyProfile */,
 				3A1BD70F25ED26970079D56D /* DonationDetail */,
 				7C39978F25F75B3700EA82C2 /* SuccessCharging */,
@@ -723,6 +745,7 @@
 				3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */,
 				4DBDB4EA261F542B00B5E08D /* DoneService.swift in Sources */,
 				3A1BD72425F1583D0079D56D /* DetailParticipantsMoreButtonView.swift in Sources */,
+				3A1E6DED2620E59700FAF0CC /* MakeCompleteViewController.swift in Sources */,
 				3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */,
 				3AC39407261DBF59008BB207 /* Int+Extension.swift in Sources */,
 				3A1BD71D25F12F0C0079D56D /* DonationDetailViewController+Layout.swift in Sources */,
@@ -747,7 +770,7 @@
 				3A179F7725FBC84F00901436 /* UITextField+Extension.swift in Sources */,
 				D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */,
 				E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */,
-				4DBDB4D8261F45CC00B5E08D /* ServerURL.swift in Sources */,
+				3A1E6DE92620D69E00FAF0CC /* DonateCompleteViewController.swift in Sources */,
 				3A1BD77C25F5443D0079D56D /* UIFont+Extension.swift in Sources */,
 				7C36DF4625F2014E001C2DBB /* InputChargingPointViewController.swift in Sources */,
 				3AB1D0372615DB1900EA94E8 /* LoginData.swift in Sources */,
