@@ -16,22 +16,23 @@ class ProfileViewController: UIViewController {
     }()
     
     // MARK: - Properties
-    let sectionHeader: [String] = ["내 연 도네", "후원중인 도네", "종료된 도네"]
+    private let sectionHeader: [String] = ["내 연 도네", "후원중인 도네", "종료된 도네"]
     private let profileCellIdentifier: String = "ProfileTableViewCell"
     private let myDonationCellIdentifier: String = "MyDonationTableViewCell"
     private let donatingCellIdentifier: String = "DonatingTableViewCell"
     private let sectionHeaderCellIdentifier: String = "SectionHeaderCell"
-    private let numberOfDonations: [Int] = [1, 1, 1]
-    
-    private let modifyVC: UIViewController = ModifyProfileViewController()
-    private let chargingVC: UIViewController = PointChargingViewController()
+    private lazy var numberOfDonations: [Int] = [0, 0, 0]     // 내연, 후원중, 종료 갯수
+    private let profileViewModel: ProfileViewModel = ProfileViewModel()
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
         setLayout()
-        setNavigationItems()
+        setNavigation()
+        callAPI()
+        profileViewModel.mainDelegate = self
+        mainTableView.tableFooterView = UIView(frame: .zero)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -47,19 +48,18 @@ class ProfileViewController: UIViewController {
     @objc
     private func modifyInfo() {
         print("✨ modify user info")
-        navigationController?.pushViewController(modifyVC, animated: true)
     }
     @objc
     private func pushSettingVC() {
         print("✨ push setting vc")
-        
-        // 임시로 PointCharging으로 이동하는 코드
-        let navVC: UINavigationController = UINavigationController(rootViewController: chargingVC)
-        navVC.modalPresentationStyle = .overFullScreen
-        self.present(navVC, animated: true)
     }
     
     // MARK: - Methods
+    func callAPI() {
+        profileViewModel.getMydontaionResponse()
+        profileViewModel.getProfileResponse()
+        profileViewModel.getMyDonateResponse()
+    }
     func setTableView() {
         self.mainTableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: self.profileCellIdentifier)
         self.mainTableView.register(ProfileMyDonationTableViewCell.self, forCellReuseIdentifier: self.myDonationCellIdentifier)
@@ -78,29 +78,35 @@ class ProfileViewController: UIViewController {
             make.height.equalTo(UIScreen.main.bounds.height)        
         }
     }
-    private func setNavigationItems() {
-        setNavigationItems(title: "Jercy", backButtonImageName: "arrowChevronBigLeft", action: #selector(popVC))
+    private func setNavigation() {
+
+        self.navigationController?.navigationBar.barTintColor = .blackFour
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.isNavigationBarHidden = false
+        
+        self.navigationItem.title = profileViewModel.getUserNickname()
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.whiteTwo]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
         
         // 추가 네비게이션 아이템
-        let editBtn: UIButton = UIButton()
-        editBtn.setImage(UIImage(named: "iconlyLightSetting"), for: .normal)
-        editBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        editBtn.addTarget(self, action: #selector(pushSettingVC), for: .touchUpInside)
-        let editBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: editBtn)
+//        let editBtn: UIButton = UIButton()
+//        editBtn.setImage(UIImage(named: "iconlyLightEditSquare"), for: .normal)
+//        editBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+//        editBtn.addTarget(self, action: #selector(pushSettingVC), for: .touchUpInside)
+//        let editBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: editBtn)
         
         let settingBtn: UIButton = UIButton()
-        settingBtn.setImage(UIImage(named: "iconlyLightEditSquare"), for: .normal)
+        settingBtn.setImage(UIImage(named: "iconlyLightSetting"), for: .normal)
         settingBtn.addTarget(self, action: #selector(modifyInfo), for: .touchUpInside)
         settingBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         let settingBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: settingBtn)
         
-        self.navigationItem.setRightBarButtonItems([editBtnBarItem, settingBtnBarItem], animated: true)
+        self.navigationItem.setRightBarButtonItems([settingBtnBarItem], animated: true)
     }
     
     // 유동적으로 갯수가 변화하는 section인지 체크하는 메서드
     func checkDynamicSection(_ section: Int) -> Bool {
-        if section < 2 { return false }
-        return true
+        section >= 2 ? true : false
     }
     
     // 서버로부터 받아온 도네이션 갯수가 0개인지 체크하는 메서드
@@ -115,39 +121,70 @@ class ProfileViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        // profile / 내 도네 현황 / 내 연도네 / 후원중인도네 / 종료된도네
         5
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if !checkDynamicSection(section) {
             return 1
         } else {
-            // 서버에서 받아온 값 만큼
+            numberOfDonations = [0, 0, 0]
+            // 내가 연 도네이션으로 -> 내연도네, 종료도네 구문
+            if let mydonationData: MydonationData = profileViewModel.mydonationResponseModel {
+                for post in 0..<mydonationData.posts.count {
+                    if profileViewModel.checkOutDated(date: mydonationData.posts[post].endAt) {
+                        numberOfDonations[2] += 1
+                    } else {
+                        numberOfDonations[0] += 1
+                    }
+                }
+            }
+            numberOfDonations[1] = profileViewModel.myDonateResponseModel.count
             return numberOfDonations[section - 2]
         }
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return UITableViewCell() }
             profileCell.selectionStyle = .none
+            if let userProfileData: ProfileData = profileViewModel.profileResponseModel {
+                profileCell.cellViewModel.setModel(userProfileData)
+            }
             return profileCell
         } else if indexPath.section == 1 {
             guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
             myDonationCell.selectionStyle = .none
+            
+            myDonationCell.myDonationViewModel.setMyDonationModel(profileViewModel.mydonationResponseModel)
+            myDonationCell.myDonationViewModel.setMyDonateModel(profileViewModel.myDonateResponseModel)
             return myDonationCell
-        } else {
+        }
+        // 내가 연 도네 && 종료도네.
+        else if indexPath.section == 2 || indexPath.section == 4 {
             guard let donatingCell: ProfileDonatingTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: donatingCellIdentifier, for: indexPath) as? ProfileDonatingTableViewCell
             else { return UITableViewCell() }
+            donatingCell.selectionStyle = .none
+            donatingCell.headerLabelText = sectionHeader[indexPath.section - 2]
+            if let mydonationData: MydonationData = profileViewModel.mydonationResponseModel {
+                donatingCell.viewModel.setMyDonationData(mydonationData.posts[indexPath.row])
+            }
+            return donatingCell
+        } else {        // 내가 후원한 도네
+            guard let donatingCell: ProfileDonatingTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: donatingCellIdentifier, for: indexPath) as? ProfileDonatingTableViewCell
+            else { return UITableViewCell() }
+            donatingCell.headerLabelText = sectionHeader[indexPath.section - 2]
+            donatingCell.viewModel.setMyDonateData(profileViewModel.myDonateResponseModel[indexPath.row])
             donatingCell.selectionStyle = .none
             return donatingCell
         }
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if !checkDynamicSection(section) && checkNumberOfDonationIsZero(section) {
+        if checkNumberOfDonationIsZero(section) {
             return nil
         }
-        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 22))
-        let headerLabel: UILabel = UILabel(frame: CGRect(x: 20, y: 0, width: tableView.frame.width - 40, height: 22))
+        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 42))
+        let headerLabel: UILabel = UILabel(frame: CGRect(x: 20, y: 20, width: tableView.frame.width - 40, height: 45))
         headerLabel.text = sectionHeader[section - 2]
         headerLabel.textColor = .white
         headerLabel.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
@@ -159,10 +196,23 @@ extension ProfileViewController: UITableViewDataSource {
         if !checkDynamicSection(section) {
             return CGFloat.leastNormalMagnitude
         }
-        return 35
+        if checkNumberOfDonationIsZero(section) {
+            return CGFloat.leastNormalMagnitude
+        }
+        return 54
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNonzeroMagnitude
     }
 }
 
  // MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
+}
+
+extension ProfileViewController: ProfileViewModelDelegate {
+    func tableViewUpdate(section: IndexSet) {
+        self.mainTableView.reloadSections(section, with: .automatic)
+        self.navigationItem.title = profileViewModel.getUserNickname()
+    }
 }

@@ -13,6 +13,9 @@ enum DoneService {
     case getMain(item: Int, limit: Int)
     case getDetail(posts: Int)
     case donate(post: Int, money: Int)
+    case getUserProfile
+    case getMyDonation
+    case getMyDonate
 }
 
 extension DoneService: TargetType {
@@ -34,12 +37,18 @@ extension DoneService: TargetType {
             return "/posts/\(posts)"
         case .donate:
             return "/donate"
+        case .getUserProfile:
+            return "/users"
+        case .getMyDonation:
+            return "/posts/my"
+        case .getMyDonate:
+            return "/donate/my"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getMain, .getDetail:
+        case .getMain, .getDetail, .getUserProfile, .getMyDonation, .getMyDonate:
             return .get
         case .login, .donate:
             return .post
@@ -52,7 +61,7 @@ extension DoneService: TargetType {
             return .requestParameters(parameters: ["item": item,
                                                    "limit": limit,
                                                    "order": "ASC"], encoding: URLEncoding.queryString)
-        case .getDetail:
+        case .getDetail, .getUserProfile, .getMyDonation, .getMyDonate:
             return .requestPlain
         case .login(let fireStoreId):
             return .requestParameters(parameters: ["fireStoreId": fireStoreId], encoding: JSONEncoding.default)
@@ -60,12 +69,11 @@ extension DoneService: TargetType {
             return .requestParameters(parameters: ["post_id": post, "amount": money], encoding: JSONEncoding.default)
         }
     }
-    
     var headers: [String: String]? {
         switch self {
         case .login:
             return nil
-        case .getMain, .getDetail, .donate:
+        case .getMain, .getDetail, .donate, .getUserProfile, .getMyDonate, .getMyDonation:
 //            guard let token = token else { return nil }
             return ["authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2MTc3ODIzNzgsImV4cCI6MTY0OTMzOTk3OCwiaXNzIjoiaHllb25pIn0.EylJ0O9zsOePeB6WmQ5-Xfm6X63L29s6iUxZL6dxzdA"]
         }
