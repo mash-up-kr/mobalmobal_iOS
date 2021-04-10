@@ -23,7 +23,7 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
         let imageView: UIImageView = UIImageView()
         imageView.image = UIImage(named: "profile_default")
         imageView.backgroundColor = .white
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -103,7 +103,8 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
             make.edges.equalTo(thumbnailImageView)
         }
         progressBackgroundView.snp.makeConstraints { make in
-            make.centerY.equalTo(translucentView.snp.bottom)
+//            make.centerY.equalTo(translucentView.snp.bottom)
+            make.top.equalTo(thumbnailImageView.snp.bottom)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(2)
         }
