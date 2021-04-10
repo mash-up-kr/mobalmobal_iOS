@@ -273,12 +273,13 @@ extension MainViewController: UICollectionViewDataSource {
             
             if !viewModel.posts.isEmpty {
                 let post = viewModel.posts[indexPath.item]
-                cell.dday = Date().getDDayString(to: post.endAt)
-                if let money = post.currentAmount.changeToCommaFormat() {
-                    cell.money = money
-                }
-                cell.title = post.title
-                cell.progress = Float(post.currentAmount / post.goal)
+                guard let money = post.currentAmount.changeToCommaFormat() else { return .init() }
+                cell.setModel(OngoingDonationModel(imageUrl: post.postImage,
+                                                   dday: Date().getDDayString(to: post.endAt),
+                                                   money: money,
+                                                   title: post.title,
+                                                   progress: Float(post.currentAmount) / Float(post.goal)
+                ))
             }
             return cell
         }

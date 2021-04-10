@@ -5,8 +5,17 @@
 //  Created by 김재희 on 2021/02/28.
 //
 
+import Kingfisher
 import SnapKit
 import UIKit
+
+struct OngoingDonationModel {
+    let imageUrl: String?
+    let dday: String
+    let money: String
+    let title: String
+    let progress: Float
+}
 
 class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     // MARK: - UIComponents
@@ -44,7 +53,6 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     
     private lazy var dDayLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = dday
         label.textColor = .brownGrey
         label.font = .spoqaHanSansNeo(ofSize: 11, weight: .regular)
         return label
@@ -52,7 +60,6 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     
     private lazy var moneyLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = money
         label.textColor = .white
         label.font = .spoqaHanSansNeo(ofSize: 18, weight: .bold)
         return label
@@ -60,7 +67,6 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     
     private lazy var titleLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = title
         label.textColor = .white
         label.font = .spoqaHanSansNeo(ofSize: 13, weight: .medium)
         label.numberOfLines = 2
@@ -68,14 +74,15 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     }()
     
     // MARK: - Properties
-    // dummy data
-    var dday: String = "D-12"
-    var money: String = "123,456"
-    var title: String = "티끌모아 닌텐도 스위치 사주세요 제발요 부탁드립니다!!!!!!"
-    var progress: Float = 0.3
+    private var model: OngoingDonationModel {
+        didSet {
+            populate()
+        }
+    }
     
     // MARK: - Initializer
     override init(frame: CGRect) {
+        self.model = OngoingDonationModel(imageUrl: nil, dday: "D", money: "0", title: "title", progress: 0.0)
         super.init(frame: .zero)
         contentView.backgroundColor = .darkGrey
         contentView.layer.cornerRadius = 12
@@ -113,14 +120,27 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
             make.leading.trailing.equalTo(dDayLabel)
         }
         
-        progressBackgroundView.addSubview(progressBarView)
-        progressBarView.snp.makeConstraints { make in
-            make.top.leading.bottom.equalToSuperview()
-            make.width.lessThanOrEqualToSuperview().multipliedBy(progress)
-        }
-        
         super.layoutSubviews()
     }
     
     // MARK: - Methods
+    func setModel(_ model: OngoingDonationModel) {
+        self.model = model
+    }
+    
+    private func populate() {
+        if let url = model.imageUrl {
+            let imageURL: URL? = URL(string: url)
+            thumbnailImageView.kf.setImage(with: imageURL)
+        }
+        dDayLabel.text = model.dday
+        moneyLabel.text = model.money
+        titleLabel.text = model.title
+        progressBarView.snp.removeConstraints()
+        progressBackgroundView.addSubview(progressBarView)
+        progressBarView.snp.makeConstraints { make in
+            make.top.leading.bottom.equalToSuperview()
+            make.width.lessThanOrEqualToSuperview().multipliedBy(model.progress)
+        }
+    }
 }
