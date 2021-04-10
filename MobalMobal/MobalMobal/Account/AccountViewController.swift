@@ -10,35 +10,52 @@ import UIKit
 
 class AccountViewController: UIViewController {
     // MARK: - UIComponents
+    private lazy var accountNameLabel: UILabel = {
+        let label: UILabel = UILabel()
+        let attributeText: NSMutableAttributedString = NSMutableAttributedString(string: "받는통장표시: \(accountName)")
+        attributeText.addAttributes(defaultAttributes, range: NSRange(location: 0, length: attributeText.length))
+        attributeText.addAttributes(accountNameAttributes, range: NSRange(location: 8, length: accountName.count))
+        
+        label.numberOfLines = 0
+        label.attributedText = attributeText
+        return label
+    }()
     private lazy var accountLabel: UILabel = {
         let label: UILabel = UILabel()
-        let accountLabelAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(self.account) \(self.bankName)으로")
+        let accountLabelAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: "계좌: \(account) \(bankName)")
         
         accountLabelAttributedString.addAttributes(defaultAttributes, range: NSRange(location: 0, length: accountLabelAttributedString.length))
-        accountLabelAttributedString.addAttributes(underLineAttributes, range: NSRange(location: 0, length: self.account.count))
-        accountLabelAttributedString.addAttributes(underLineAttributes, range: NSRange(location: self.account.count + 1, length: self.bankName.count))
+        accountLabelAttributedString.addAttributes(underLineAttributes, range: NSRange(location: 4, length: self.account.count))
+        accountLabelAttributedString.addAttributes(underLineAttributes, range: NSRange(location: 4 + self.account.count + 1, length: self.bankName.count))
        
         label.attributedText = accountLabelAttributedString
         label.numberOfLines = 0
-        label.textAlignment = .center
         return label
     }()
     private lazy var priceLabel: UILabel = {
         let label: UILabel = UILabel()
         guard let charge = self.charge else { return label }
-        let priceLabelAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(charge)을 보내주세요")
+        let priceLabelAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: "금액: \(charge)")
         
         priceLabelAttributedString.addAttributes(defaultAttributes, range: NSRange(location: 0, length: priceLabelAttributedString.length))
-        priceLabelAttributedString.addAttributes(emphasisAttributes, range: _NSRange(location: 0, length: charge.count))
+        priceLabelAttributedString.addAttributes(emphasisAttributes, range: _NSRange(location: 4, length: charge.count))
         
         label.attributedText = priceLabelAttributedString
         label.numberOfLines = 0
-        label.textAlignment = .center
         return label
+    }()
+    private lazy var accountViewInfoStackView: UIStackView = {
+        let stackView: UIStackView = UIStackView()
+        stackView.alignment = .leading
+        stackView.axis = .vertical
+        [accountNameLabel, accountLabel, priceLabel].forEach { stackView.addArrangedSubview($0) }
+        stackView.setCustomSpacing(0, after: accountNameLabel)
+        stackView.setCustomSpacing(0, after: accountLabel)
+        return stackView
     }()
     private let accountImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.image = UIImage(named: "errorImage")
+        imageView.image = UIImage(named: "pig_01")
         return imageView
     }()
     private let accountDetailLabel: UILabel = {
@@ -58,13 +75,9 @@ class AccountViewController: UIViewController {
         let stackView: UIStackView = UIStackView()
         stackView.alignment = .center
         stackView.axis = .vertical
-        stackView.addArrangedSubview(accountLabel)
-        stackView.addArrangedSubview(priceLabel)
-        stackView.addArrangedSubview(accountImageView)
-        stackView.addArrangedSubview(accountDetailLabel)
-        stackView.setCustomSpacing(0, after: accountLabel)
-        stackView.setCustomSpacing(40, after: priceLabel)
-        stackView.setCustomSpacing(24, after: accountImageView)
+        [accountViewInfoStackView, accountImageView, accountDetailLabel].forEach { stackView.addArrangedSubview($0) }
+        stackView.setCustomSpacing(20, after: accountViewInfoStackView)
+        stackView.setCustomSpacing(28, after: accountImageView)
         return stackView
     }()
     
@@ -72,6 +85,7 @@ class AccountViewController: UIViewController {
     // dummy data
     private var account: String = "110-436-3412421"
     private var bankName: String = "신한은행"
+    private var accountName: String = "재르시"
     
     var charge: String?
     private let defaultAttributes: [NSAttributedString.Key: Any] = [
@@ -86,6 +100,10 @@ class AccountViewController: UIViewController {
         .foregroundColor: UIColor.white ,
         .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .medium),
         .underlineStyle: 1
+    ]
+    private let accountNameAttributes: [NSAttributedString.Key: Any] = [
+        .foregroundColor: UIColor.dandelion,
+        .font: UIFont.spoqaHanSansNeo(ofSize: 18, weight: .regular)
     ]
     // MARK: - Lifecycle
     override func viewDidLoad() {

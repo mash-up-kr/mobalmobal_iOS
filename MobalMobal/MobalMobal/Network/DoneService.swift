@@ -16,6 +16,7 @@ enum DoneService {
     case getUserProfile
     case getMyDonation
     case getMyDonate
+    case charge(amount: Int, userName: String, chargedAt: String)
 }
 
 extension DoneService: TargetType {
@@ -43,6 +44,8 @@ extension DoneService: TargetType {
             return "/posts/my"
         case .getMyDonate:
             return "/donate/my"
+        case .charge:
+            return "/charge"
         }
     }
     
@@ -50,7 +53,7 @@ extension DoneService: TargetType {
         switch self {
         case .getMain, .getDetail, .getUserProfile, .getMyDonation, .getMyDonate:
             return .get
-        case .login, .donate:
+        case .login, .donate, .charge:
             return .post
         }
     }
@@ -67,13 +70,19 @@ extension DoneService: TargetType {
             return .requestParameters(parameters: ["fireStoreId": fireStoreId], encoding: JSONEncoding.default)
         case .donate(let post, let money):
             return .requestParameters(parameters: ["post_id": post, "amount": money], encoding: JSONEncoding.default)
+        case .charge(let amount, let userName, let chargedAt):
+            return .requestCompositeParameters(bodyParameters: ["amount": amount,
+                                                                "user_name": userName,
+                                                                "charged_at": chargedAt]
+                                               , bodyEncoding: JSONEncoding.default
+                                               , urlParameters: [:])
         }
     }
     var headers: [String: String]? {
         switch self {
         case .login:
             return nil
-        case .getMain, .getDetail, .donate, .getUserProfile, .getMyDonate, .getMyDonation:
+        case .getMain, .getDetail, .donate, .getUserProfile, .getMyDonate, .getMyDonation, .charge:
 //            guard let token = token else { return nil }
             return ["authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2MTc3ODIzNzgsImV4cCI6MTY0OTMzOTk3OCwiaXNzIjoiaHllb25pIn0.EylJ0O9zsOePeB6WmQ5-Xfm6X63L29s6iUxZL6dxzdA"]
         }
