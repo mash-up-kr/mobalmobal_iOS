@@ -12,11 +12,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
     
     // - MARK : 각자 view로 넘어감
-    @IBAction func firstButtonIsTapped(_ sender: UIButton) {
-        let viewController = SettingViewController()
-        self.navigationController?.pushViewController(viewController, animated: true)
+    @IBAction private func firstButtonIsTapped(_ sender: UIButton) {
+    
     }
     
     @IBAction private func secondButtonIsTapped(_ sender: UIButton) {
@@ -27,8 +30,12 @@ class ViewController: UIViewController {
     
     @IBAction private func thirdButtonIsTapped(_ sender: UIButton) {
         let loginVC: LoginViewController = LoginViewController()
-        loginVC.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(loginVC, animated: true)
+        let navVc: UINavigationController = UINavigationController(rootViewController: loginVC)
+        navVc.modalPresentationStyle = .fullScreen
+        self.present(navVc, animated: true)
+//        loginVC.modalPresentationStyle = .fullScreen
+//        self.present(loginVC, animated: true)
+//        self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
     @IBAction func fourthButtonIsTapped(_ sender: UIButton) {

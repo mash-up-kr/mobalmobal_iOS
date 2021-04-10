@@ -34,7 +34,7 @@ class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
     }()
     
     let donationImageView: UIImageView = {
-        let imageView: UIImageView = UIImageView(image: UIImage(named: "imgGuzi"))
+        let imageView: UIImageView = UIImageView(image: UIImage(named: "process-01_poor-guji"))
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()

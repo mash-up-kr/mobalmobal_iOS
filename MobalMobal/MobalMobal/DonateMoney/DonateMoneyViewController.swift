@@ -160,7 +160,9 @@ extension DonateMoneyViewController: DonateMoneyViewModelDelegate {
     
     func completeDonateMoney(amount: Int) {
         print("🐻 Donation Success")
-        dismiss(animated: true)
         // 후원완료 페이지로 이동
+        let completeVC: DonateCompleteViewController = DonateCompleteViewController()
+        completeVC.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(completeVC, animated: true)
     }
 }

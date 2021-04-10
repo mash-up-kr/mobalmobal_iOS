@@ -15,10 +15,10 @@ struct ParseResponse<Response: Decodable>: Decodable {
 }
 
 enum DoneError: Error {
-  case noData
-  case client
-  case server
-  case unknown
+    case noData
+    case client
+    case server
+    case unknown
 }
 
 enum NetworkProvider {

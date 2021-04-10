@@ -54,7 +54,7 @@ class ProfileTableViewCell: UITableViewCell {
     // dummy data
     let nickname: String = "Jercy"
     let point: String = "12,340원"
-    let userImg: String = "profile"
+    let userImg: String = "profile_default"
     
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
