@@ -747,6 +747,7 @@
 				3A179F7725FBC84F00901436 /* UITextField+Extension.swift in Sources */,
 				D70C37C925E103DD00898271 /* AppDelegate.swift in Sources */,
 				E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */,
+				4DBDB4D8261F45CC00B5E08D /* ServerURL.swift in Sources */,
 				3A1BD77C25F5443D0079D56D /* UIFont+Extension.swift in Sources */,
 				7C36DF4625F2014E001C2DBB /* InputChargingPointViewController.swift in Sources */,
 				3AB1D0372615DB1900EA94E8 /* LoginData.swift in Sources */,
