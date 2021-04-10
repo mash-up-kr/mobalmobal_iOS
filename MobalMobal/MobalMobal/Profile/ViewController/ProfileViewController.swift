@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController {
     @objc
     private func popVC() {
         print("✨ pop viewcontroller")
-        navigationController?.dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     @objc
     private func modifyInfo() {
