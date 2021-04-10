@@ -9,7 +9,7 @@ import UIKit
 /// [도네이션 상세 페이지] 참여자 프로필 이미지 뷰
 class DetailParticipantsProfileImageView: UIImageView {
     // MARK: - Properties
-    private let defaultImageName: String = "profile"
+    private let defaultImageName: String = "profile_default"
     
     // MARK: - Initializers
     init() {

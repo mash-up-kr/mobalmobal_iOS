@@ -39,6 +39,7 @@ class PointChargingViewController: DoneBaseViewController {
     // MARK: - Properties
     private let pointItemList: [String] = ["1,000원", "2,000원", "5,000원", "10,000원", "50,000원", "100,000원", "직접입력"]
     private let cellIdentifier: String = "PointChargingTableViewCell"
+    private let viewModel: InputChargingPointViewModel = InputChargingPointViewModel()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -92,6 +93,15 @@ class PointChargingViewController: DoneBaseViewController {
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissVC))
         self.transparencyView.addGestureRecognizer(tapGestureRecognizer)
     }
+    private func setNetwork(_ textFieldText: String) {
+        viewModel.amount = Int(textFieldText)!
+        // TODO
+        // 싱글톤객체에서 받아와야함!!!!!
+        viewModel.userName = "ㅅㅇ"
+        viewModel.chargedAt = Date().iso8601withFractionalSeconds
+        viewModel.postCharging()
+
+    }
 }
 
  // MARK: - TableViewDataSource
@@ -117,6 +127,7 @@ extension PointChargingViewController: UITableViewDelegate {
     func pushAccountVC(_ indexNumber: Int) {
         let accountVC: AccountViewController = AccountViewController()
         accountVC.charge = pointItemList[indexNumber]
+        setNetwork(pointItemList[indexNumber].components(separatedBy: [",", "원"]).joined())
         self.navigationController?.pushViewController(accountVC, animated: true)
     }
     func pushInputVC() {

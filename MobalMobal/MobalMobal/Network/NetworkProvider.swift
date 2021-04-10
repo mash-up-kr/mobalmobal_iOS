@@ -41,6 +41,7 @@ enum NetworkProvider {
     private static func request(_ target: DoneService, success: @escaping (Data) -> Void, failure: @escaping (Error) -> Void) {
         provider.session.sessionConfiguration.timeoutIntervalForRequest = 5
         provider.request(target) { result in
+            print("result: \(result)")
             switch result {
             case .success(let response):
                 if 400..<500 ~= response.statusCode {

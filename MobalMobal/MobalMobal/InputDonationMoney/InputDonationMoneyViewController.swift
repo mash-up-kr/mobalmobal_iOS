@@ -53,6 +53,7 @@ class InputDonationMoneyViewController: DoneBaseViewController {
     }()
     
     // MARK: - Properties
+    private lazy var viewModel: DonateMoneyViewModel = DonateMoneyViewModel(delegate: self)
     private let navigationTitle: String = "후원"
     private let backButtonImageName: String = "arrowChevronBigLeft"
     private let iconImageName: String = "iconlyBrokenBuy"
@@ -60,6 +61,16 @@ class InputDonationMoneyViewController: DoneBaseViewController {
     private let buttonString: String = "후원하기"
     
     private let maxMoneyRange: Int = 10_000_000
+    
+    // MARK: - Initializer
+    init(postId: Int) {
+        super.init(nibName: nil, bundle: nil)
+        viewModel.setPostId(postId)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Lifecycles
     override func viewDidLoad() {
@@ -97,7 +108,11 @@ class InputDonationMoneyViewController: DoneBaseViewController {
     // MARK: - Actions
     @objc
     private func clickDonationButton() {
-        print("🐻 \(textField.text!)원 후원하기 🐻")
+        guard let intAmount = Int(makeRawString(from: textField.text)) else {
+            print("🐻 잘못된 입력값 \(textField.text!)")
+            return
+        }
+        viewModel.donate(amount: intAmount)
     }
     @objc
     private func clickNavigationBackButton() {
@@ -171,9 +186,17 @@ class InputDonationMoneyViewController: DoneBaseViewController {
         }
     }
     
-    private func showAlert() {
+    private func showRangeAlert() {
         let alert: UIAlertController = UIAlertController(title: "후원 금액", message: "최대 후원 금액은 10,000,000원 입니다.", preferredStyle: .alert)
         let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+    private func showFailAlert() {
+        let alert: UIAlertController = UIAlertController(title: "후원 실패", message: "에러가 발생했습니다. 잠시 후 다시 시도해주세요.", preferredStyle: .alert)
+        let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+            self?.navigationController?.dismiss(animated: true)
+        }
         alert.addAction(okAction)
         present(alert, animated: true)
     }
@@ -212,7 +235,7 @@ extension InputDonationMoneyViewController: UITextFieldDelegate {
         if isOverMaxRange(newRawString) {
             dismissKeyboard()
             textField.text = "10,000,000"
-            showAlert()
+            showRangeAlert()
             return false
         }
         
@@ -245,5 +268,17 @@ extension InputDonationMoneyViewController: UITextFieldDelegate {
             return nil
         }
         return formattedString
+    }
+}
+
+extension InputDonationMoneyViewController: DonateMoneyViewModelDelegate {
+    func failDonateMoney(message: String?) {
+        print("🐻 Donation fail: \(message!)")
+        showFailAlert()
+    }
+    
+    func completeDonateMoney(amount: Int) {
+        print("🐻 Donation success: \(amount)원")
+        // 후원 완료 페이지로 이동
     }
 }

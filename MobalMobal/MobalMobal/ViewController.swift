@@ -33,11 +33,13 @@ class ViewController: DoneBaseViewController {
         let navVc: UINavigationController = UINavigationController(rootViewController: loginVC)
         navVc.modalPresentationStyle = .fullScreen
         self.present(navVc, animated: true)
+//        loginVC.modalPresentationStyle = .fullScreen
+//        self.present(loginVC, animated: true)
 //        self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
     @IBAction func fourthButtonIsTapped(_ sender: UIButton) {
-        let vc = ProfileViewController()
+        let vc = PointChargingViewController()
         let navVc: UINavigationController = UINavigationController(rootViewController: vc)
         navVc.modalPresentationStyle = .overFullScreen
 //        vc.modalPresentationStyle = .fullScreen

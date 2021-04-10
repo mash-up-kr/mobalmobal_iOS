@@ -60,7 +60,7 @@ class DonationDetailViewController: DoneBaseViewController {
     // Mid Description Area
     let nameGiftGroupView: UIView = UIView()
     let profileImageView: UIImageView = {
-        let imageView: UIImageView = UIImageView(image: UIImage(named: "Profile"))
+        let imageView: UIImageView = UIImageView(image: UIImage(named: "profile_default"))
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 29
         imageView.layer.masksToBounds = true
@@ -139,26 +139,26 @@ class DonationDetailViewController: DoneBaseViewController {
         label.textColor = .lightBluishGreen
         return label
     }()
-    let participantsTitleLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.text = "참여자"
-        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
-        label.textColor = .veryLightPink
-        return label
-    }()
-    let participantsCountLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.text = ""
-        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
-        label.textColor = .veryLightPink
-        return label
-    }()
-    lazy var participantsProfilesView: DetailParticipantsView = {
-        let view: DetailParticipantsView = DetailParticipantsView()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickParticipantsMoreButton))
-        view.moreButtonView.addGestureRecognizer(tap)
-        return view
-    }()
+//    let participantsTitleLabel: UILabel = {
+//        let label: UILabel = UILabel()
+//        label.text = "참여자"
+//        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
+//        label.textColor = .veryLightPink
+//        return label
+//    }()
+//    let participantsCountLabel: UILabel = {
+//        let label: UILabel = UILabel()
+//        label.text = ""
+//        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
+//        label.textColor = .veryLightPink
+//        return label
+//    }()
+//    lazy var participantsProfilesView: DetailParticipantsView = {
+//        let view: DetailParticipantsView = DetailParticipantsView()
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickParticipantsMoreButton))
+//        view.moreButtonView.addGestureRecognizer(tap)
+//        return view
+//    }()
     let endDateTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "종료날짜"
@@ -225,8 +225,9 @@ class DonationDetailViewController: DoneBaseViewController {
         alert.addAction(action)
         present(alert, animated: true)
     }
+    
     private func presentDonateMoneyVC() {
-        let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController()
+        let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController(postId: viewModel.getDonationId() )
         let navigationController: UINavigationController = UINavigationController(rootViewController: donateMoneyVC)
         navigationController.modalPresentationStyle = .overFullScreen
         present(navigationController, animated: true)
@@ -254,7 +255,7 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
     }
     func didProgressChanged(current: Int, goal: Int) {
         let progress: Float = Float(current) / Float(goal)
-        progressLabel.text = "\(Int(progress) * 100)%"
+        progressLabel.text = "\(Int(progress * 100))%"
         destinationNumberLabel.text = goal.changeToCommaFormat()
         fundAmountNumberLabel.text = current.changeToCommaFormat()
         
