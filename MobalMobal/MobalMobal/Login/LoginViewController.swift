@@ -113,7 +113,7 @@ class LoginViewController: DoneBaseViewController {
     
     // MARK: - Methods
     private func presentMainViewController() {
-        let mainVC: MainViewController = MainViewController()
+        let mainVC: MainViewController = MainViewController(viewModel: MainViewModel())
         let navigation: UINavigationController = UINavigationController(rootViewController: mainVC)
         navigation.modalPresentationStyle = .fullScreen
         self.present(navigation, animated: true)
