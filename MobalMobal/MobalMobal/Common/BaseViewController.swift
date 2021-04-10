@@ -8,6 +8,10 @@
 import UIKit
 
 class DoneBaseViewController: UIViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
     deinit {
         Log(.deinit).logger(self)
     }
