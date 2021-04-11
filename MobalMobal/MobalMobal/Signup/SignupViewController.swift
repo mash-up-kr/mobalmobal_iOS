@@ -14,6 +14,7 @@ class SignupViewController: DoneBaseViewController {
     
     // MARK: - UIView
     private let signupViewModel = SignupViewModel()
+    private var signupUser: SignupUser?
     
     private let nickNameView: SignupCustomView = {
         let view: SignupCustomView = SignupCustomView(imageName: "iconlyLightProfile", inputText: "닉네임을 입력해주세요.")
@@ -79,8 +80,15 @@ class SignupViewController: DoneBaseViewController {
         button.layer.cornerRadius = 30
         button.backgroundColor = .greyishBrown
         button.isEnabled = false
+        button.addTarget(self, action: #selector(completButtonIsTapped), for: .touchUpInside)
         return button
     }()
+    
+    @objc
+    private func completButtonIsTapped() {
+        self.signupUser?.fireStoreId = UserInfo.shared.fireStoreId ?? ""
+        signupViewModel.signup(signupUser: self.signupUser!)
+    }
     
     private let completeButtonLabel: UILabel = {
         let label: UILabel = UILabel()
@@ -244,11 +252,20 @@ extension SignupViewController: UITextFieldDelegate {
                 completButtonCheck()
                 return false
             }
+            
+            if let nicknameInput = nickNameView.textFieldView.text {
+                self.signupUser?.nickname = nicknameInput
+            }
+            
         } else if textField == phoneNumberView.textFieldView {
             guard signupViewModel.phoneNumberTextFieldIsFilled(textField) == true else {
                 textField.text = ""
                 alertController("올바르지 않은 형식입니다 !")
                 return false
+            }
+            
+            if let phoneNumberInput = phoneNumberView.textFieldView.text {
+                self.signupUser?.phoneNumber = phoneNumberInput
             }
         } else if textField == emailView.textFieldView {
             guard signupViewModel.emailTextFieldIsFilled(textField) == true else {

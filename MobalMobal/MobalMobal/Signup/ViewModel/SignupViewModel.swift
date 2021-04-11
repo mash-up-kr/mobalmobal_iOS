@@ -13,7 +13,7 @@ protocol SignupViewModelProtocol {
     func emailTextFieldIsFilled(_ textField: UITextField) -> Bool
     func agreementButtonIsChecked(_ button: UIButton) -> Bool
     func apiValidation(_ nicknameTextField: UITextField, agreementButtonIsPressed: Bool) -> Bool
-    func signup(signupUser: SignupUser, success: @escaping (ParseResponse<LoginData>) -> Void, failure: @escaping (Error) -> Void)
+    func signup(signupUser: SignupUser)
 }
 
 protocol SignUpViewModelDelegate: class {
@@ -25,7 +25,6 @@ class SignupViewModel: SignupViewModelProtocol {
     
     // MARK: - Property
     var loginData: LoginData?
-    var signupUser: SignupUser?
     weak var delegate: SignUpViewModelDelegate?
     
     // MARK: - Method
@@ -56,7 +55,7 @@ class SignupViewModel: SignupViewModelProtocol {
         return button.state == .selected
     }
     
-    func signup(signupUser: SignupUser, success: @escaping (ParseResponse<LoginData>) -> Void, failure: @escaping (Error) -> Void) {
+    func signup(signupUser: SignupUser) {
         DoneProvider.signup(signupUser: signupUser) { [weak self] response in
             guard let self = self else {
                 return
@@ -73,7 +72,8 @@ class SignupViewModel: SignupViewModelProtocol {
                 }
             }
         } failure: { (error) in
-            failure(error)
+            print(error.localizedDescription)
+            return
         }
     }
     
@@ -83,6 +83,6 @@ class SignupViewModel: SignupViewModelProtocol {
     }
     
     func apiValidation(_ nicknameTextField: UITextField, agreementButtonIsPressed: Bool) -> Bool {
-        return nicknameTextFieldIsFilled(nicknameTextField) && agreementButtonIsPressed 
+        return nicknameTextFieldIsFilled(nicknameTextField) && agreementButtonIsPressed
     }
 }
