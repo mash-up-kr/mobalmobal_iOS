@@ -48,12 +48,29 @@ class SignupViewController: DoneBaseViewController {
     
     private let agreementLabel: UILabel = {
         let label: UILabel = UILabel()
+        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
+        let underlineAttributedString = NSAttributedString(string: "이용약관, 개인정보 수집 및 이용", attributes: underlineAttribute)
+        label.attributedText = underlineAttributedString
+        let remainText: String = "에 모두 동의 합니다."
         label.numberOfLines = 0
         label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 15)
-        label.text = "이용약관, 개인정보 수집 및 이용에 모두 동의 합니다."
+        
+        label.text = label.attributedText!.string + remainText
         label.textColor = .white
         return label
     }()
+    
+    private let termsOfServiceButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(termsOfServiceButtonIsTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc
+    private func termsOfServiceButtonIsTapped() {
+        print("이용약관 버튼 눌림")
+    }
     
     private let completeButton: UIButton = {
         let button: UIButton = UIButton()
@@ -144,6 +161,13 @@ class SignupViewController: DoneBaseViewController {
             make.centerY.equalTo(self.agreementView)
             make.leading.equalTo(self.agreementButton.snp.trailing).offset(7)
             make.trailing.equalTo(self.agreementView.snp.trailing).offset(0)
+        }
+        
+        self.agreementView.addSubview(termsOfServiceButton)
+        self.termsOfServiceButton.snp.makeConstraints { make in
+            make.centerY.equalTo(self.agreementLabel)
+            make.leading.top.equalTo(self.agreementLabel)
+            make.width.equalTo(self.agreementLabel)
         }
     }
     

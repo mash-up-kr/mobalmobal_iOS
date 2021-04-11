@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SignupUser {
+struct SignupUser: Codable {
     var nickname: String
     var provider: String
     var fireStoreId: String
