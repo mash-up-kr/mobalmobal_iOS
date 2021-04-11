@@ -100,6 +100,7 @@
 		D9A4E1412620DD8600539C27 /* MainIndicatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4E1402620DD8600539C27 /* MainIndicatorCollectionViewCell.swift */; };
 		E359440E260F125D0078903E /* CreateDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E359440D260F125D0078903E /* CreateDonationViewController.swift */; };
 		E365FBC926232D050036617A /* SignupUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E365FBC826232D050036617A /* SignupUser.swift */; };
+		E365FBD2262345360036617A /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E365FBD1262345360036617A /* SignupViewModel.swift */; };
 		E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */; };
 		E3F1EA7825EA4B0600F34BDE /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */; };
 		E3F1EA8425EA552800F34BDE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1EA8325EA552800F34BDE /* SettingViewController.swift */; };
@@ -191,6 +192,7 @@
 		D9A4E1402620DD8600539C27 /* MainIndicatorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainIndicatorCollectionViewCell.swift; sourceTree = "<group>"; };
 		E359440D260F125D0078903E /* CreateDonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDonationViewController.swift; sourceTree = "<group>"; };
 		E365FBC826232D050036617A /* SignupUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupUser.swift; sourceTree = "<group>"; };
+		E365FBD1262345360036617A /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		E3692D1C25F4F9C500755FBF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		E3F1EA8325EA552800F34BDE /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -621,9 +623,18 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		E365FBCF2623452C0036617A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E365FBD1262345360036617A /* SignupViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		E3F1EA7625EA4AE800F34BDE /* Signup */ = {
 			isa = PBXGroup;
 			children = (
+				E365FBCF2623452C0036617A /* ViewModel */,
 				E365FBC726232CBD0036617A /* Entity */,
 				E3F1EA7725EA4B0600F34BDE /* SignupViewController.swift */,
 				E3F1EAB125EACC9F00F34BDE /* SignupCustomView.swift */,
@@ -900,6 +911,7 @@
 				D7AC0C9D25EACF9A000A342A /* MainMyOngoingDonationCollectionViewCell.swift in Sources */,
 				3A1BD73225F15EF20079D56D /* DetailParticipantsProfileImageView.swift in Sources */,
 				7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */,
+				E365FBD2262345360036617A /* SignupViewModel.swift in Sources */,
 				3A179F4D25FB5A3900901436 /* DonateMoneyViewController.swift in Sources */,
 				3A179F5225FB62B700901436 /* DonateMoneyTableViewCell.swift in Sources */,
 				3A179F6025FB87AF00901436 /* InputDonationMoneyViewController.swift in Sources */,
