@@ -19,7 +19,8 @@ class ViewController: DoneBaseViewController {
     
     // - MARK : 각자 view로 넘어감
     @IBAction private func firstButtonIsTapped(_ sender: UIButton) {
-    
+        let vc: SignupViewController = SignupViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction private func secondButtonIsTapped(_ sender: UIButton) {
