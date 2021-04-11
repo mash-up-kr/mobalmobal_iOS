@@ -13,22 +13,24 @@ class SignupViewController: DoneBaseViewController {
     // Fire Store ID: UserInfo.shared.fireStoreId 사용하면 됩니다.
     
     // MARK: - UIView
-    private let nickNameView: UIView = {
-        let view: UIView = SignupCustomView(imageName: "iconlyLightProfile", inputText: "닉네임을 입력해주세요.")
+    private let signupViewModel = SignupViewModel()
+    
+    private let nickNameView: SignupCustomView = {
+        let view: SignupCustomView = SignupCustomView(imageName: "iconlyLightProfile", inputText: "닉네임을 입력해주세요.")
         view.backgroundColor = .white7
         view.layer.cornerRadius = 30
         return view
     }()
     
-    private let phoneNumberView: UIView = {
-        let view: UIView = SignupCustomView(imageName: "iconlyLightCall", inputText: "전화번호를 입력해주세요. (선택)")
+    private let phoneNumberView: SignupCustomView = {
+        let view: SignupCustomView = SignupCustomView(imageName: "iconlyLightCall", inputText: "전화번호를 입력해주세요. (선택)")
         view.backgroundColor = .white7
         view.layer.cornerRadius = 30
         return view
     }()
     
-    private let emailView: UIView = {
-        let view: UIView = SignupCustomView(imageName: "iconlyLightMessage", inputText: "이메일을 입력해주세요. (선택)")
+    private let emailView: SignupCustomView = {
+        let view: SignupCustomView = SignupCustomView(imageName: "iconlyLightMessage", inputText: "이메일을 입력해주세요. (선택)")
         view.backgroundColor = .white7
         view.layer.cornerRadius = 30
         return view
@@ -93,6 +95,7 @@ class SignupViewController: DoneBaseViewController {
     // MARK: - Method
     private func setup() {
         self.view.backgroundColor = .backgroundColor
+        self.signupViewModel.delegate = self
         
         setUIViewLayout()
         setNavigationItems(title: "회원 가입", backButtonImageName: "arrowChevronBigLeft", action: #selector(backButtonTapped))
@@ -121,6 +124,7 @@ class SignupViewController: DoneBaseViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).inset(59)
             make.leading.trailing.equalToSuperview().inset(15)
         }
+        nickNameView.textFieldView.delegate = self
     }
     
     private func setPhoneNumberView() {
@@ -130,6 +134,7 @@ class SignupViewController: DoneBaseViewController {
             make.top.equalTo(nickNameView.snp.bottom).offset(28)
             make.leading.trailing.equalToSuperview().inset(15)
         }
+        phoneNumberView.textFieldView.delegate = self
     }
     
     private func setEmailView() {
@@ -139,6 +144,7 @@ class SignupViewController: DoneBaseViewController {
             make.top.equalTo(phoneNumberView.snp.bottom).offset(28)
             make.leading.trailing.equalToSuperview().inset(15)
         }
+        emailView.textFieldView.delegate = self
     }
     
     private func setAgreementView() {
@@ -205,5 +211,25 @@ extension SignupViewController {
         setEmailView()
         setAgreementView()
         setCompleteButtonView()
+    }
+}
+
+extension SignupViewController: SignUpViewModelDelegate {
+    func requestNickNameAgain() {
+        print("닉네임 다시 입력하게")
+    }
+    
+    func success() {
+        let vc: MainViewController = MainViewController(viewModel: MainViewModel())
+        let navigation: UINavigationController = UINavigationController(rootViewController: vc)
+        navigation.modalPresentationStyle = .fullScreen
+        self.present(navigation, animated: true)
+    }
+}
+
+extension SignupViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("minho")
+        return true
     }
 }
