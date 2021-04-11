@@ -12,6 +12,7 @@ protocol SignupViewModelProtocol {
     func phoneNumberTextFieldIsFilled(_ textField: UITextField) -> Bool
     func emailTextFieldIsFilled(_ textField: UITextField) -> Bool
     func agreementButtonIsChecked(_ button: UIButton) -> Bool
+    func apiValidation(_ nicknameTextField: UITextField, agreementButtonIsPressed: Bool) -> Bool
     func signup(signupUser: SignupUser, success: @escaping (ParseResponse<LoginData>) -> Void, failure: @escaping (Error) -> Void)
 }
 
@@ -21,9 +22,10 @@ protocol SignUpViewModelDelegate: class {
 }
 
 class SignupViewModel: SignupViewModelProtocol {
-
+    
     // MARK: - Property
     var loginData: LoginData?
+    var signupUser: SignupUser?
     weak var delegate: SignUpViewModelDelegate?
     
     // MARK: - Method
@@ -78,5 +80,9 @@ class SignupViewModel: SignupViewModelProtocol {
     private func setUserToken(loginData: LoginData) {
         UserDefaults.standard.setValue(loginData.token.token, forKey: UserDefaultsKeys.userToken)
         UserInfo.shared.token = loginData.token.token
+    }
+    
+    func apiValidation(_ nicknameTextField: UITextField, agreementButtonIsPressed: Bool) -> Bool {
+        return nicknameTextFieldIsFilled(nicknameTextField) && agreementButtonIsPressed 
     }
 }

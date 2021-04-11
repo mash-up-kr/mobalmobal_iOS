@@ -44,7 +44,7 @@ class SignupViewController: DoneBaseViewController {
     private let agreementButton: UIButton = {
         let button: UIButton = UIButton()
         button.setImage(UIImage(named: "iconlyLightCheckOff"), for: .normal)
-//        button.addTarget(self, action: agreementButtonIsTapped(self), for: .touchUpInside)
+        button.addTarget(self, action: #selector(agreementButtonIsTapped), for: .touchUpInside)
         return button
     }()
     
@@ -77,7 +77,8 @@ class SignupViewController: DoneBaseViewController {
     private let completeButton: UIButton = {
         let button: UIButton = UIButton()
         button.layer.cornerRadius = 30
-        button.backgroundColor = UIColor(red: 71.0 / 255, green: 71.0 / 255, blue: 71.0 / 255, alpha: 1)
+        button.backgroundColor = .greyishBrown
+        button.isEnabled = false
         return button
     }()
     
@@ -90,7 +91,7 @@ class SignupViewController: DoneBaseViewController {
     }()
     
     // MARK: - Property
-    private var agreementButtonState: Bool = true
+    private var agreementButtonState: Bool = false
     
     // MARK: - Method
     private func setup() {
@@ -102,18 +103,19 @@ class SignupViewController: DoneBaseViewController {
     }
     
     @objc
-    func agreementButtonIsTapped(button: UIButton) {
+    private func agreementButtonIsTapped() {
         agreementButtonState.toggle()
         
-        if agreementButtonState {
-            button.setImage(UIImage(named: "iconlyLightCheckOff"), for: .normal)
+        if !agreementButtonState {
+            agreementButton.setImage(UIImage(named: "iconlyLightCheckOff"), for: .normal)
         } else {
-            button.setImage(UIImage(named: "iconlyLightCheckOn"), for: .normal)
+            agreementButton.setImage(UIImage(named: "iconlyLightCheckOn"), for: .normal)
+            completButtonCheck()
         }
     }
     
     @objc
-    func backButtonTapped() {
+    private func backButtonTapped() {
          navigationController?.popViewController(animated: true)
     }
     
@@ -191,6 +193,16 @@ class SignupViewController: DoneBaseViewController {
         }
     }
     
+    private func completButtonCheck() {
+        if signupViewModel.apiValidation(nickNameView.textFieldView, agreementButtonIsPressed: self.agreementButtonState) {
+            self.completeButton.isEnabled = true
+            self.completeButton.backgroundColor = .lightBluishGreen
+        } else {
+            self.completeButton.isEnabled = false
+            self.completeButton.backgroundColor = .greyishBrown
+        }
+    }
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -220,10 +232,7 @@ extension SignupViewController: SignUpViewModelDelegate {
     }
     
     func success() {
-//        let vc: MainViewController = MainViewController(viewModel: MainViewModel())
-//        let navigation: UINavigationController = UINavigationController(rootViewController: vc)
-//        navigation.modalPresentationStyle = .fullScreen
-//        self.present(navigation, animated: true)
+        print("성공")
     }
 }
 
@@ -232,6 +241,7 @@ extension SignupViewController: UITextFieldDelegate {
         if textField == nickNameView.textFieldView {
             guard signupViewModel.nicknameTextFieldIsFilled(textField) == true else {
                 alertController("빈칸입니다 !")
+                completButtonCheck()
                 return false
             }
         } else if textField == phoneNumberView.textFieldView {
@@ -246,6 +256,8 @@ extension SignupViewController: UITextFieldDelegate {
                 return false
             }
         }
+        
+        completButtonCheck()
         self.view.endEditing(true)
         return true
     }
