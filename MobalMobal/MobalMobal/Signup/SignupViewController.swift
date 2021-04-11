@@ -118,8 +118,8 @@ class SignupViewController: DoneBaseViewController {
             agreementButton.setImage(UIImage(named: "iconlyLightCheckOff"), for: .normal)
         } else {
             agreementButton.setImage(UIImage(named: "iconlyLightCheckOn"), for: .normal)
-            completButtonCheck()
         }
+        completButtonCheck()
     }
     
     @objc
