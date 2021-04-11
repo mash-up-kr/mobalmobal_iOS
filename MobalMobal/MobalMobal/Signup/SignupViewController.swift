@@ -220,16 +220,33 @@ extension SignupViewController: SignUpViewModelDelegate {
     }
     
     func success() {
-        let vc: MainViewController = MainViewController(viewModel: MainViewModel())
-        let navigation: UINavigationController = UINavigationController(rootViewController: vc)
-        navigation.modalPresentationStyle = .fullScreen
-        self.present(navigation, animated: true)
+//        let vc: MainViewController = MainViewController(viewModel: MainViewModel())
+//        let navigation: UINavigationController = UINavigationController(rootViewController: vc)
+//        navigation.modalPresentationStyle = .fullScreen
+//        self.present(navigation, animated: true)
     }
 }
 
 extension SignupViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("minho")
+        if textField == nickNameView.textFieldView {
+            guard signupViewModel.nicknameTextFieldIsFilled(textField) == true else {
+                alertController("빈칸입니다 !")
+                return false
+            }
+        } else if textField == phoneNumberView.textFieldView {
+            guard signupViewModel.phoneNumberTextFieldIsFilled(textField) == true else {
+                textField.text = ""
+                alertController("올바르지 않은 형식입니다 !")
+                return false
+            }
+        } else if textField == emailView.textFieldView {
+            guard signupViewModel.emailTextFieldIsFilled(textField) == true else {
+                alertController("올바르지 않은 이메일 형식입니다 !")
+                return false
+            }
+        }
+        self.view.endEditing(true)
         return true
     }
 }

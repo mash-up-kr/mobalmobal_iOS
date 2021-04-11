@@ -29,26 +29,22 @@ class SignupViewModel: SignupViewModelProtocol {
     // MARK: - Method
     func nicknameTextFieldIsFilled(_ textField: UITextField) -> Bool {
         guard let inputText = textField.text else { return false }
-        if !inputText.isEmpty {
-            return true
-        } else {
-            return false
-        }
+        return !inputText.isEmpty 
     }
     
     func phoneNumberTextFieldIsFilled(_ textField: UITextField) -> Bool {
-        if var number = textField.text {
-            number = "^[0-9+]{0,1}+[0-9]{5,16}$"
-            let checkNumber = NSPredicate(format: "%@", number)
+        if let number = textField.text {
+            let numberRegularExpression = "[0-9]{11}"
+            let checkNumber = NSPredicate(format: "SELF MATCHES %@", numberRegularExpression)
             return checkNumber.evaluate(with: number)
         }
         return false
     }
     
     func emailTextFieldIsFilled(_ textField: UITextField) -> Bool {
-        if var email = textField.text {
-            email = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-            let checkEmail = NSPredicate(format: "%@", email)
+        if let email = textField.text {
+            let emailRegularExpression = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+            let checkEmail = NSPredicate(format: "SELF MATCHES %@", emailRegularExpression)
             return checkEmail.evaluate(with: email)
         }
         return false
