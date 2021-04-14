@@ -11,27 +11,28 @@ class CreateDonationViewController2: UIViewController {
     
     // MARK: - IBOutlet
     @IBOutlet private weak var contentView: UIView!
-    @IBOutlet weak var productView: UIView!
-    @IBOutlet weak var productTextField: UITextField!
-    @IBOutlet weak var donationInputView: UIView!
-    @IBOutlet weak var priceView: UIView!
-    @IBOutlet weak var inputTextField: UITextField!
-    @IBOutlet weak var priceTextField: UITextField!
+    @IBOutlet private weak var productView: UIView!
+    @IBOutlet private weak var productTextField: UITextField!
+    @IBOutlet private weak var donationInputView: UIView!
+    @IBOutlet private weak var inputTextField: UITextField!
+    @IBOutlet private weak var priceView: UIView!
+    @IBOutlet private weak var priceTextField: UITextField!
+    @IBOutlet private weak var startDateTextField: UITextField!
+    @IBOutlet private weak var startDateView: UIView!
+    @IBOutlet private var donationViewArray: [UIView] = []
     
     // MARK: - IBAction
     @IBAction func dismissButtonIsTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    // MARK: - Property
-    @IBOutlet var donationViewArray: [UIView] = []
-    
+ 
     // MARK: - Method
     private func setup() {
         self.view.backgroundColor = .backgroundColor
         self.contentView.backgroundColor = .backgroundColor
         
         donationViewArray.forEach { $0.isHidden = true }
+        
         setTextField()
     }
     
@@ -60,11 +61,11 @@ class CreateDonationViewController2: UIViewController {
 extension CreateDonationViewController2: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == productTextField {
-            transformAnimation(productView, translationY: 100)
+            transformAnimation(productView, translationY: 86)
             self.donationInputView.isHidden = false
         } else if textField == inputTextField {
-            transformAnimation(donationInputView, translationY: 100)
-            transformAnimation(productView, translationY: 200)
+            transformAnimation(donationInputView, translationY: 86)
+            transformAnimation(productView, translationY: 172)
             self.priceView.isHidden = false
         }
         return true

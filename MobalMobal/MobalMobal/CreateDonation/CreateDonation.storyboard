@@ -130,12 +130,43 @@
                                                     <constraint firstAttribute="height" constant="49" id="k7r-Cm-vbv"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fi9-OW-6ra">
+                                                <rect key="frame" x="28" y="237" width="358" height="49"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="시작 날짜를 선택해주세요" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VEV-yW-dBV">
+                                                        <rect key="frame" x="0.0" y="0.0" width="267.5" height="38.5"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="textColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    </textField>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSY-Z5-ahr">
+                                                        <rect key="frame" x="0.0" y="48" width="358" height="1"/>
+                                                        <color key="backgroundColor" red="1" green="0.89411764709999997" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="36Q-FZ-sYS"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="VEV-yW-dBV" firstAttribute="top" secondItem="fi9-OW-6ra" secondAttribute="top" id="6GJ-74-wYb"/>
+                                                    <constraint firstAttribute="bottom" secondItem="jSY-Z5-ahr" secondAttribute="bottom" id="8IH-x6-AMT"/>
+                                                    <constraint firstItem="jSY-Z5-ahr" firstAttribute="leading" secondItem="fi9-OW-6ra" secondAttribute="leading" id="8iD-R7-rNy"/>
+                                                    <constraint firstAttribute="height" constant="49" id="BXg-5R-g4b"/>
+                                                    <constraint firstItem="VEV-yW-dBV" firstAttribute="leading" secondItem="fi9-OW-6ra" secondAttribute="leading" id="OJW-1B-XhB"/>
+                                                    <constraint firstAttribute="trailing" secondItem="jSY-Z5-ahr" secondAttribute="trailing" id="n4G-dS-ncR"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.08235294118" green="0.08235294118" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstItem="fi9-OW-6ra" firstAttribute="trailing" secondItem="TsS-QW-o65" secondAttribute="trailing" id="5rM-EL-hP5"/>
                                             <constraint firstItem="27b-oO-gZd" firstAttribute="top" secondItem="b7d-1Z-KId" secondAttribute="top" constant="18" id="6zf-iq-WQ9"/>
                                             <constraint firstItem="iWF-bW-oIC" firstAttribute="leading" secondItem="b7d-1Z-KId" secondAttribute="leading" constant="28" id="7IU-3z-yef"/>
                                             <constraint firstItem="TsS-QW-o65" firstAttribute="leading" secondItem="VD9-8o-5cF" secondAttribute="leading" id="7hG-Jv-wbi"/>
+                                            <constraint firstItem="fi9-OW-6ra" firstAttribute="bottom" secondItem="TsS-QW-o65" secondAttribute="bottom" id="HWL-kc-Oun"/>
+                                            <constraint firstItem="fi9-OW-6ra" firstAttribute="top" secondItem="TsS-QW-o65" secondAttribute="top" id="JT0-nT-9dD"/>
                                             <constraint firstAttribute="trailing" secondItem="ARc-Uf-baz" secondAttribute="trailing" constant="7" id="Ndr-dS-dkt"/>
                                             <constraint firstItem="ARc-Uf-baz" firstAttribute="top" secondItem="b7d-1Z-KId" secondAttribute="top" id="OZc-FO-PBA"/>
                                             <constraint firstAttribute="trailing" secondItem="iWF-bW-oIC" secondAttribute="trailing" constant="28" id="SIj-Ck-2ih"/>
@@ -143,6 +174,7 @@
                                             <constraint firstAttribute="height" constant="1000" id="VxM-jD-OZN"/>
                                             <constraint firstItem="VD9-8o-5cF" firstAttribute="leading" secondItem="iWF-bW-oIC" secondAttribute="leading" id="Xp3-0R-bEE"/>
                                             <constraint firstItem="VD9-8o-5cF" firstAttribute="top" secondItem="iWF-bW-oIC" secondAttribute="top" id="ZWz-PV-gGm"/>
+                                            <constraint firstItem="fi9-OW-6ra" firstAttribute="leading" secondItem="TsS-QW-o65" secondAttribute="leading" id="bog-NB-hSl"/>
                                             <constraint firstItem="TsS-QW-o65" firstAttribute="trailing" secondItem="VD9-8o-5cF" secondAttribute="trailing" id="cSG-0r-YAp"/>
                                             <constraint firstItem="VD9-8o-5cF" firstAttribute="trailing" secondItem="iWF-bW-oIC" secondAttribute="trailing" id="cpN-Pq-MoC"/>
                                             <constraint firstItem="27b-oO-gZd" firstAttribute="centerX" secondItem="b7d-1Z-KId" secondAttribute="centerX" id="lDi-tA-4NE"/>
@@ -181,8 +213,12 @@
                         <outlet property="priceView" destination="TsS-QW-o65" id="qmR-qt-bmd"/>
                         <outlet property="productTextField" destination="lfb-KT-a4o" id="5ss-gU-lpz"/>
                         <outlet property="productView" destination="iWF-bW-oIC" id="HN6-Xc-FaE"/>
+                        <outlet property="startDateTextField" destination="VEV-yW-dBV" id="Tc2-qg-qLk"/>
+                        <outlet property="startDateView" destination="fi9-OW-6ra" id="YNM-Pq-nob"/>
                         <outletCollection property="donationViewArray" destination="VD9-8o-5cF" collectionClass="NSMutableArray" id="h4C-sH-kwy"/>
                         <outletCollection property="donationViewArray" destination="TsS-QW-o65" collectionClass="NSMutableArray" id="fTf-HC-xTq"/>
+                        <outletCollection property="donationViewArray" destination="TsS-QW-o65" collectionClass="NSMutableArray" id="4d2-1x-llc"/>
+                        <outletCollection property="donationViewArray" destination="fi9-OW-6ra" collectionClass="NSMutableArray" id="yjS-F6-Nfg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2iO-XD-OwO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
