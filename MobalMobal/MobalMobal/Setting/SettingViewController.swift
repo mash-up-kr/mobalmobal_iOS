@@ -9,7 +9,13 @@ import SnapKit
 import UIKit
 import WebKit
 
-class SettingViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
+enum SettingURL: String {
+    case openSource = "https://www.notion.so/b384c72d60cc4475af49284625f81a0e"
+    case termsAndConditioin = "https://www.notion.so/26c36382cd8448188c7532519b9019cc"
+    case openKakaoTalk = "https://open.kakao.com/o/sRo0Df7c"
+}
+
+class SettingViewController: UIViewController {
     // MARK: - UIView
     private let myAccountLabel: UILabel = {
         let label: UILabel = UILabel()
@@ -72,41 +78,34 @@ class SettingViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
         button.addTarget(self, action: #selector(inquiryAction), for: .touchUpInside)
         return button
     }()
-    private lazy var webView: WKWebView = {
-        let webView: WKWebView = WKWebView()
-        webView.uiDelegate = self
-        webView.navigationDelegate = self
-        return webView
-    }()
     // MARK: - Property
-    let webVC: WebviewController = WebviewController()
+    private let webVC: WebviewController = WebviewController()
+
     // MARK: - Actions
-    private var webView1: WKWebView?
     @objc
     func openSourceAction() {
-        self.navigationController?.showDetailViewController(webVC, sender: self)
+        webVC.webURL = SettingURL.openSource.rawValue
+        webVC.navTitle = "오픈소스 약관"
+        self.navigationController?.pushViewController(webVC, animated: true)
     }
     @objc
     func termsAndConditionAction() {
-        self.navigationController?.showDetailViewController(webVC, sender: self)
+        webVC.webURL = SettingURL.termsAndConditioin.rawValue
+        webVC.navTitle = "이용약관"
+        self.navigationController?.pushViewController(webVC, animated: true)
     }
     @objc
     func inquiryAction() {
-        self.present(webVC, animated: true) {
-            
-        }
+        webVC.webURL = SettingURL.openKakaoTalk.rawValue
+        webVC.navTitle = "문의하기"
+        self.navigationController?.pushViewController(webVC, animated: true)
     }
-    
     // MARK: - Method
-    private func setURLRequest(to url: String) -> URLRequest? {
-        guard let url: URL = URL(string: "https://www.naver.com") else { return nil }
-        let request: URLRequest = URLRequest(url: url)
-        return request
-    }
+
     private func setup() {
         self.view.backgroundColor = .backgroundColor
         self.setNavigationController()
-        self.view.addSubviews([myAccountLabel, openSourceLabel, termsAndConditionLabel, alarmLabel, alarmSwitch, inquiryLabel])
+        self.view.addSubviews([myAccountLabel, openSourceLabel, termsAndConditionLabel, inquiryLabel])
         self.view.addSubviews([myAccountButton, openSourceButton, termsAndConditionButton, inquiryButton])
         self.setConstraint()
     }
@@ -152,19 +151,19 @@ class SettingViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
             make.top.bottom.equalTo(termsAndConditionLabel)
             make.leading.trailing.equalTo(openSourceButton)
         }
-        alarmLabel.snp.makeConstraints { make in
+//        alarmLabel.snp.makeConstraints { make in
+//            make.top.equalTo(termsAndConditionLabel.snp.bottom).offset(31)
+//            make.leading.equalTo(termsAndConditionLabel)
+//        }
+        
+//        alarmSwitch.snp.makeConstraints { make in
+//            make.centerY.equalTo(alarmLabel)
+//            make.trailing.equalToSuperview().inset(20)
+//        }
+//
+        inquiryLabel.snp.makeConstraints { make in
             make.top.equalTo(termsAndConditionLabel.snp.bottom).offset(31)
             make.leading.equalTo(termsAndConditionLabel)
-        }
-        
-        alarmSwitch.snp.makeConstraints { make in
-            make.centerY.equalTo(alarmLabel)
-            make.trailing.equalToSuperview().inset(20)
-        }
-        
-        inquiryLabel.snp.makeConstraints { make in
-            make.top.equalTo(alarmLabel.snp.bottom).offset(31)
-            make.leading.equalTo(alarmLabel)
         }
         inquiryButton.snp.makeConstraints { make in
             make.top.bottom.equalTo(inquiryLabel)
