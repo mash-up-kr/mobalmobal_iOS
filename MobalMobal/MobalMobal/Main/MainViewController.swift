@@ -9,7 +9,7 @@ import SnapKit
 import Then
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: DoneBaseViewController {
     // MARK: - UIComponents
     let titleView: UIView = {
         let view: UIView = UIView(frame: .zero)
@@ -19,8 +19,8 @@ class MainViewController: UIViewController {
     
     let titleLabel: UILabel = {
         let label: UILabel = UILabel(frame: .zero)
-        label.text = "Hi, jaehui"
-        label.font = UIFont(name: "Futura-Bold", size: 30)
+        label.text = "Hi, \(UserInfo.shared.nickName ?? "nickName")"
+        label.font = UIFont(name: "Futura-Bold", size: 25)
         label.textColor = .white
         return label
     }()
@@ -52,16 +52,34 @@ class MainViewController: UIViewController {
     }()
     
     // MARK: - Properties
+    var viewModel: MainViewModel {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     var lastContentOffset: CGFloat = 0.0
+    var lastMinContentOffset: CGFloat = 0.0
     
     private let itemsPerRow: CGFloat = 2
     private let firstSectionInsets: UIEdgeInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0)
-    private let secondSectionInsets: UIEdgeInsets = UIEdgeInsets(top: 15.0, left: 22.0, bottom: 0.0, right: 22.0)
+    private let secondSectionInsets: UIEdgeInsets = UIEdgeInsets(top: 15.0, left: 22.0, bottom: 15.0, right: 22.0)
     
     let sectionTitle: [String] = ["나의 진행", "진행중"]
     let myCellIdentifier: String = "MainMyDonationCollectionViewCell"
     let ongoingCellIdentifier: String = "MainOngoingDonationCollectionViewCell"
     let ongoingHeaderIdentifier: String = "MainOngoingDonationHeaderView"
+    let indicatorCellIdentifier: String = "MainIndicatorCollectionViewCell"
+    
+    // MARK: - Initializer
+    init(viewModel: MainViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -73,73 +91,35 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        getMain()
     }
     
     // MARK: - Actions
     @objc
     private func touchProfileButton() {
         print("🐰 프로필")
-        psuhProfileVC()
+        presentProfileVC()
     }
     @objc
     private func touchNotiListButton() {
         print("🐰 알림")
-         pushNotiListVC()
+        presentNotiListVC()
     }
     
-    // MARK: - Methods
-    private func setCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        collectionView.register(MainMyDonationCollectionViewCell.self, forCellWithReuseIdentifier: myCellIdentifier)
-        collectionView.register(MainOngoingDonationCollectionViewCell.self, forCellWithReuseIdentifier: ongoingCellIdentifier)
-        collectionView.register(MainOngoingDonationHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ongoingHeaderIdentifier)
-    }
-    
-    private func setLayout() {
-        view.addSubviews([titleView, collectionView])
-        
-        titleView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.equalToSuperview()
-        }
-        
-        collectionView.snp.makeConstraints { make in
-            make.top.equalTo(titleView.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
-        }
-        
-        titleView.addSubviews([titleLabel, profileButton, notiListButton])
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(30)
-            make.leading.equalToSuperview().inset(22)
-            make.bottom.equalToSuperview().inset(10)
-        }
-        
-        profileButton.snp.makeConstraints { make in
-            make.centerY.equalTo(titleLabel)
-            make.size.equalTo(44)
-        }
-        
-        notiListButton.snp.makeConstraints { make in
-            make.leading.equalTo(profileButton.snp.trailing)
-            make.trailing.equalToSuperview().inset(10)
-            make.centerY.equalTo(titleLabel)
-            make.size.equalTo(44)
-        }
-    }
-    
-    private func psuhProfileVC() {
+    private func presentProfileVC() {
         let profileVC: ProfileViewController = ProfileViewController()
-        navigationController?.pushViewController(profileVC, animated: true)
+        let navigation: UINavigationController = UINavigationController(rootViewController: profileVC)
+        navigation.modalPresentationStyle = .fullScreen
+        navigation.setNavigationBarHidden(false, animated: true)
+        present(navigation, animated: true)
     }
     
     // 변경 가능
-    private func pushNotiListVC() {
+    private func presentNotiListVC() {
         // let notiListVC: NotiListViewController = NotiListViewController()
-        // navigationController?.pushViewController(notiListVC, animated: true)
+        // let navigation: UINavigationController = UINavigationController(rootViewController: notiListVC)
+        // navigation.modalPresentationStyle = .fullScreen
+        // present(navigation, animated: true, completion: nil)
     }
     
     func presentDonationDetailVC(donationId: Int) {
@@ -152,22 +132,93 @@ class MainViewController: UIViewController {
         // let addMyDonationVC: AddMyDonationViewController = AddMyDonationViewController()
         // present(addMyDonationVC, animated: true)
     }
+    
+    // MARK: - Methods
+    private func setCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        collectionView.register(MainMyDonationCollectionViewCell.self, forCellWithReuseIdentifier: myCellIdentifier)
+        collectionView.register(MainOngoingDonationCollectionViewCell.self, forCellWithReuseIdentifier: ongoingCellIdentifier)
+        collectionView.register(MainOngoingDonationHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ongoingHeaderIdentifier)
+        collectionView.register(MainIndicatorCollectionViewCell.self, forCellWithReuseIdentifier: indicatorCellIdentifier)
+        collectionView.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
+    }
+    
+    private func setLayout() {
+        view.addSubviews([collectionView, titleView])
+        
+        titleView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(titleView.snp.bottom).offset(-20)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        titleView.addSubviews([titleLabel, profileButton]) // notiListButton 임시 삭제
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(30)
+            make.leading.equalToSuperview().inset(22)
+            make.bottom.equalToSuperview().inset(10)
+        }
+        
+        profileButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(10)
+            make.centerY.equalTo(titleLabel)
+            make.size.equalTo(44)
+        }
+        
+//        notiListButton.snp.makeConstraints { make in
+//            make.leading.equalTo(profileButton.snp.trailing)
+//            make.trailing.equalToSuperview().inset(10)
+//            make.centerY.equalTo(titleLabel)
+//            make.size.equalTo(44)
+//        }
+    }
+    
+    private func getMain() {
+        viewModel.callMainInfoApi { result in
+            switch result {
+            case .success:
+                self.collectionView.reloadData()
+            case .failure(.client), .failure(.noData), .failure(.server), .failure(.unknown):
+                let alertVC = UIAlertController(title: "나중에 다시 시도해 주세요.", message: "서버 또는 네트워크에 이상이 있을 수 있습니다.", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                alertVC.addAction(okAction)
+                self.present(alertVC, animated: true, completion: nil)
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegate
 extension MainViewController: UICollectionViewDelegate {
     // 스크롤 - 헤더뷰 사이즈 조정
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.lastContentOffset <= 0 {
-            titleLabel.font = UIFont(name: "Futura-Bold", size: 25)
+        print(scrollView.contentOffset.y)
+        if scrollView.contentOffset.y <= 0 {
+            if lastMinContentOffset > scrollView.contentOffset.y {
+                lastMinContentOffset = scrollView.contentOffset.y
+            }
+            let maxSize = min(16 - lastMinContentOffset, 25)
+            let maxInset = min(13 - lastMinContentOffset, 30)
+            titleLabel.font = UIFont(name: "Futura-Bold", size: maxSize)
             titleLabel.snp.updateConstraints { make in
-                make.top.equalToSuperview().inset(30)
+                make.top.equalToSuperview().inset(maxInset)
             }
         } else if self.lastContentOffset < scrollView.contentOffset.y {
-            titleLabel.font = UIFont(name: "Futura-Bold", size: 16)
+            let minSize = max(25 - scrollView.contentOffset.y, 16)
+            let minInset = max(30 - scrollView.contentOffset.y, 13)
+            titleLabel.font = UIFont(name: "Futura-Bold", size: minSize)
             titleLabel.snp.updateConstraints { make in
-                make.top.equalToSuperview().inset(13)
+                make.top.equalToSuperview().inset(minInset)
             }
+            
+            lastMinContentOffset = 0
         }
         self.lastContentOffset = scrollView.contentOffset.y
     }
@@ -195,10 +246,25 @@ extension MainViewController: UICollectionViewDataSource {
         case 0:
             return 1
         case 1:
-            return 12
+            if viewModel.isEnd {
+                return viewModel.posts.count
+            }
+            return viewModel.posts.count + 1
         default:
             return 0
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if isIndicatorCell(indexPath) {
+            viewModel.item = viewModel.posts[indexPath.item - 1].postID - 1
+            getMain()
+        }
+    }
+    
+    private func isIndicatorCell(_ indexPath: IndexPath) -> Bool {
+        if viewModel.posts.isEmpty { return false }
+        return indexPath.item == viewModel.posts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -209,7 +275,24 @@ extension MainViewController: UICollectionViewDataSource {
             return cell
             
         default:
+            if isIndicatorCell(indexPath) {
+                guard let cell: MainIndicatorCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: indicatorCellIdentifier, for: indexPath) as? MainIndicatorCollectionViewCell else { return .init() }
+                cell.animationIndicatorView()
+                return cell
+            }
+            
             guard let cell: MainOngoingDonationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationCollectionViewCell else { return .init() }
+            
+            if !viewModel.posts.isEmpty {
+                let post = viewModel.posts[indexPath.item]
+                guard let money = post.currentAmount.changeToCommaFormat() else { return .init() }
+                cell.setModel(OngoingDonationModel(imageUrl: post.postImage,
+                                                   dday: Date().getDDayString(to: post.endAt),
+                                                   money: money,
+                                                   title: post.title,
+                                                   progress: Float(post.currentAmount) / Float(post.goal)
+                ))
+            }
             return cell
         }
     }
@@ -237,6 +320,9 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         case 1:
             let insetSpace: CGFloat = secondSectionInsets.left * 2
             let paddingSpace: CGFloat = 12 * (itemsPerRow - 1)
+            if isIndicatorCell(indexPath) {
+                return CGSize(width: view.frame.width - insetSpace, height: 65)
+            }
             let availableWidth: CGFloat = view.frame.width - insetSpace - paddingSpace
             let widthPerItem: CGFloat = availableWidth / itemsPerRow
             let heightPerItem: CGFloat = widthPerItem / 159 * 198

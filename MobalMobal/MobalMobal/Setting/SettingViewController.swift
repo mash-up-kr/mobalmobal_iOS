@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-class SettingViewController: UIViewController {
+class SettingViewController: DoneBaseViewController {
     // MARK: - UIView
     private let myAccountLabel: UILabel = {
         let label: UILabel = UILabel()

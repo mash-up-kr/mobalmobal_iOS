@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-class CreateDonationViewController: UIViewController, UINavigationControllerDelegate {
+class CreateDonationViewController: DoneBaseViewController, UINavigationControllerDelegate {
     // MARK: - UIView
     let scrollView: UIScrollView = {
         let scrollView: UIScrollView = UIScrollView()
@@ -99,7 +99,7 @@ class CreateDonationViewController: UIViewController, UINavigationControllerDele
     
     @objc
     func completeButtonIsTapped() {
-        print("API")
+        Log(.debug).logger("API")
     }
     
     private var donataionProductTextField: UITextField = {
@@ -231,7 +231,7 @@ class CreateDonationViewController: UIViewController, UINavigationControllerDele
     
     @objc
     private func doneButtonClicked() {
-        print("Done button is clicked")
+        Log(.debug).logger("Done button is clicked")
     }
     
     private func setScrollView() {

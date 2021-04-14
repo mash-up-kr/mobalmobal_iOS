@@ -12,7 +12,7 @@ import GoogleSignIn
 import SnapKit
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: DoneBaseViewController {
     // MARK: - UI Components
     let stackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
@@ -113,7 +113,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Methods
     private func presentMainViewController() {
-        let mainVC: MainViewController = MainViewController()
+        let mainVC: MainViewController = MainViewController(viewModel: MainViewModel())
         let navigation: UINavigationController = UINavigationController(rootViewController: mainVC)
         navigation.modalPresentationStyle = .fullScreen
         self.present(navigation, animated: true)
