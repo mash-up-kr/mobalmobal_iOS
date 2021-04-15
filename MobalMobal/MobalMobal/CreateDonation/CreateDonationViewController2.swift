@@ -13,18 +13,25 @@ class CreateDonationViewController2: UIViewController {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var productView: UIView!
     @IBOutlet private weak var productTextField: UITextField!
-    @IBOutlet private weak var donationInputView: UIView!
+    @IBOutlet private weak var donationDescriptionView: UIView!
     @IBOutlet private weak var inputTextField: UITextField!
     @IBOutlet private weak var priceView: UIView!
     @IBOutlet private weak var priceTextField: UITextField!
-    @IBOutlet private weak var startDateTextField: UITextField!
     @IBOutlet private weak var startDateView: UIView!
+    @IBOutlet private weak var startDateTextField: UITextField!
+    @IBOutlet private weak var endDateView: UIView!
+    @IBOutlet private weak var endDateTextField: UITextField!
     @IBOutlet private var donationViewArray: [UIView] = []
+    @IBOutlet private var textFieldArray: [UITextField] = []
     
     // MARK: - IBAction
     @IBAction func dismissButtonIsTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    // MARK: - Property
+    private var filledView: [UITextField] = []
+    private let topConstraint: Int = 86
  
     // MARK: - Method
     private func setup() {
@@ -44,9 +51,7 @@ class CreateDonationViewController2: UIViewController {
     }
     
     private func setTextField() {
-        self.productTextField.delegate = self
-        self.inputTextField.delegate = self
-        self.priceTextField.delegate = self
+        self.textFieldArray.forEach { $0.delegate = self }
     }
     
     // MARK: - View Life Cycle
@@ -60,13 +65,16 @@ class CreateDonationViewController2: UIViewController {
 // MARK: - UITextFieldDelegate
 extension CreateDonationViewController2: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == productTextField {
-            transformAnimation(productView, translationY: 86)
-            self.donationInputView.isHidden = false
-        } else if textField == inputTextField {
-            transformAnimation(donationInputView, translationY: 86)
-            transformAnimation(productView, translationY: 172)
-            self.priceView.isHidden = false
+    
+        if textFieldArray.count > 0 && textFieldArray.contains(textField) {
+            textFieldArray.removeAll { $0 == textField }
+            filledView.insert(textField, at: 0)
+            textFieldArray.first?.superview?.isHidden = false
+            
+            for index in 0..<filledView.count {
+                let view = filledView[index].superview
+                transformAnimation(view!, translationY: CGFloat(topConstraint * (index + 1)))
+            }
         }
         return true
     }
