@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateDonationViewController2: UIViewController {
+class CreateDonationViewController2: UIViewController, UINavigationControllerDelegate {
     
     // MARK: - IBOutlet
     @IBOutlet private weak var contentView: UIView!
@@ -21,22 +21,35 @@ class CreateDonationViewController2: UIViewController {
     @IBOutlet private weak var startDateTextField: UITextField!
     @IBOutlet private weak var endDateView: UIView!
     @IBOutlet private weak var endDateTextField: UITextField!
+    @IBOutlet private weak var imageView: UIView!
+    @IBOutlet private weak var photoImageView: UIImageView!
+    @IBOutlet private weak var imagePickerButton: UIButton!
     @IBOutlet private var donationViewArray: [UIView] = []
     @IBOutlet private var textFieldArray: [UITextField] = []
     
     // MARK: - IBAction
-    @IBAction func dismissButtonIsTapped(_ sender: UIButton) {
+    @IBAction private func dismissButtonIsTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction private func imagePickerButtonIsTapped(_ sender: UIButton) {
+        let pickerController: UIImagePickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.sourceType = .photoLibrary
+        self.present(pickerController, animated: true, completion: nil)
     }
     
     // MARK: - Property
     private var filledView: [UITextField] = []
     private let topConstraint: Int = 86
+    private let datePicker: UIDatePicker = UIDatePicker()
  
     // MARK: - Method
     private func setup() {
         self.view.backgroundColor = .backgroundColor
         self.contentView.backgroundColor = .backgroundColor
+        self.imageView.backgroundColor = .darkGreyThree
+        self.imageView.isHidden = true
         
         donationViewArray.forEach { $0.isHidden = true }
         
@@ -48,10 +61,37 @@ class CreateDonationViewController2: UIViewController {
             let transform = CGAffineTransform(translationX: 0, y: translationY)
             view.transform = transform
         }
+        setDatePicker()
     }
     
     private func setTextField() {
         self.textFieldArray.forEach { $0.delegate = self }
+    }
+    
+    private func setDatePicker() {
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.locale = Locale(identifier: "ko_KR")
+        startDateTextField.inputView = datePicker
+        endDateTextField.inputView = datePicker
+        
+        if #available(iOS 14, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
+        
+        datePicker.addTarget(self, action: #selector(updateTextField), for: .valueChanged)
+    }
+    
+    @objc
+    func updateTextField() {
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd hh:mm"
+        let datePickerDate: String = dateFormatter.string(from: datePicker.date)
+        
+        if startDateTextField.isEditing {
+            startDateTextField.text = datePickerDate
+        } else if endDateTextField.isEditing {
+            endDateTextField.text = datePickerDate
+        }
     }
     
     // MARK: - View Life Cycle
@@ -68,6 +108,11 @@ extension CreateDonationViewController2: UITextFieldDelegate {
     
         if textFieldArray.count > 0 && textFieldArray.contains(textField) {
             textFieldArray.removeAll { $0 == textField }
+            
+            if textFieldArray.isEmpty {
+                imageView.isHidden = false
+            }
+            
             filledView.insert(textField, at: 0)
             textFieldArray.first?.superview?.isHidden = false
             
@@ -88,5 +133,21 @@ extension CreateDonationViewController2: UITextFieldDelegate {
                 textField.text = formattedNumber
             }
         }
+    }
+}
+
+// MAKR: - UIImaePickerControlllerDelegate
+extension CreateDonationViewController2: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage: UIImage = info[.originalImage] as? UIImage {
+            photoImageView.contentMode = .scaleAspectFill
+            photoImageView.image = selectedImage
+            imagePickerButton.backgroundColor = .clear
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
