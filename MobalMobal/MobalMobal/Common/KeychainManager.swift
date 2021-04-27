@@ -22,7 +22,7 @@ class KeychainManager {
         // 남길 부분
         guard let fireStoreId = fireStoreId, let token = token else { return false }
         let query: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
-                                        kSecAttrService: "돈에이션",
+                                        kSecAttrService: serviceName,
                                         kSecAttrAccount: fireStoreId,
                                         kSecAttrGeneric: token]
 
@@ -32,7 +32,7 @@ class KeychainManager {
     func getUserToken() -> String? {
         guard let fireStoreId = fireStoreId else { return nil }
         let query: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
-                                        kSecAttrService: "돈에이션",
+                                        kSecAttrService: serviceName,
                                         kSecAttrAccount: fireStoreId,
                                         kSecMatchLimit: kSecMatchLimitOne,
                                         kSecReturnAttributes: true,
@@ -49,7 +49,7 @@ class KeychainManager {
         guard let fireStoreId = fireStoreId, let token = token else { return false }
         
         let query: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
-                                        kSecAttrService: "돈에이션",
+                                        kSecAttrService: serviceName,
                                         kSecAttrAccount: fireStoreId]
         let attributes: [CFString: Any] = [kSecAttrAccount: fireStoreId, kSecAttrGeneric: token]
         return SecItemUpdate(query as CFDictionary, attributes as CFDictionary) == errSecSuccess
@@ -58,7 +58,7 @@ class KeychainManager {
     func deleteUserToken() -> Bool {
         guard let fireStoreId = fireStoreId else { return false }
         let query: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
-                                        kSecAttrService: "돈에이션",
+                                        kSecAttrService: serviceName,
                                         kSecAttrAccount: fireStoreId]
      
       return SecItemDelete(query as CFDictionary) == errSecSuccess
