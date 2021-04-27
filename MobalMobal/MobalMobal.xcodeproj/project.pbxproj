@@ -23,10 +23,15 @@
 		3A1BD77025F539D40079D56D /* Spoqa Han Sans Neo Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76B25F539D30079D56D /* Spoqa Han Sans Neo Thin.otf */; };
 		3A1BD77125F539D40079D56D /* Spoqa Han Sans Neo Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BD76C25F539D40079D56D /* Spoqa Han Sans Neo Medium.otf */; };
 		3A1BD77C25F5443D0079D56D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */; };
+		3A1E6DC12620445A00FAF0CC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E6DC02620445A00FAF0CC /* UserInfo.swift */; };
 		3A1E6DDD262065BF00FAF0CC /* DonateMoneyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E6DDC262065BF00FAF0CC /* DonateMoneyData.swift */; };
 		3A1E6DE92620D69E00FAF0CC /* DonateCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E6DE82620D69E00FAF0CC /* DonateCompleteViewController.swift */; };
 		3A1E6DED2620E59700FAF0CC /* MakeCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E6DEC2620E59700FAF0CC /* MakeCompleteViewController.swift */; };
-		3A1E6DC12620445A00FAF0CC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E6DC02620445A00FAF0CC /* UserInfo.swift */; };
+		3A61D74F2637FF7800DC27CF /* Login+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61D74E2637FF7800DC27CF /* Login+Firebase.swift */; };
+		3A61D7532638000900DC27CF /* Login+Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61D7522638000900DC27CF /* Login+Google.swift */; };
+		3A61D7572638003B00DC27CF /* Login+Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61D7562638003B00DC27CF /* Login+Facebook.swift */; };
+		3A61D75B263800A000DC27CF /* Login+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61D75A263800A000DC27CF /* Login+Apple.swift */; };
+		3A61D7662638173E00DC27CF /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61D7652638173E00DC27CF /* KeychainManager.swift */; };
 		3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */; };
 		3AB1CFD6260F7CB200EA94E8 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */; };
 		3AB1D0252610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1D0242610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift */; };
@@ -125,10 +130,15 @@
 		3A1BD76B25F539D30079D56D /* Spoqa Han Sans Neo Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Thin.otf"; sourceTree = "<group>"; };
 		3A1BD76C25F539D40079D56D /* Spoqa Han Sans Neo Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Medium.otf"; sourceTree = "<group>"; };
 		3A1BD77B25F5443D0079D56D /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		3A1E6DC02620445A00FAF0CC /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		3A1E6DDC262065BF00FAF0CC /* DonateMoneyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateMoneyData.swift; sourceTree = "<group>"; };
 		3A1E6DE82620D69E00FAF0CC /* DonateCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateCompleteViewController.swift; sourceTree = "<group>"; };
 		3A1E6DEC2620E59700FAF0CC /* MakeCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeCompleteViewController.swift; sourceTree = "<group>"; };
-		3A1E6DC02620445A00FAF0CC /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		3A61D74E2637FF7800DC27CF /* Login+Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Login+Firebase.swift"; sourceTree = "<group>"; };
+		3A61D7522638000900DC27CF /* Login+Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Login+Google.swift"; sourceTree = "<group>"; };
+		3A61D7562638003B00DC27CF /* Login+Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Login+Facebook.swift"; sourceTree = "<group>"; };
+		3A61D75A263800A000DC27CF /* Login+Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Login+Apple.swift"; sourceTree = "<group>"; };
+		3A61D7652638173E00DC27CF /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginButton.swift; sourceTree = "<group>"; };
 		3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		3AB1D0242610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOngoingDonationHeaderView.swift; sourceTree = "<group>"; };
@@ -228,6 +238,10 @@
 			isa = PBXGroup;
 			children = (
 				3A035F1725EA4D8C00D3FB69 /* LoginViewController.swift */,
+				3A61D74E2637FF7800DC27CF /* Login+Firebase.swift */,
+				3A61D7522638000900DC27CF /* Login+Google.swift */,
+				3A61D7562638003B00DC27CF /* Login+Facebook.swift */,
+				3A61D75A263800A000DC27CF /* Login+Apple.swift */,
 				3AB1D0352615DAF300EA94E8 /* Model */,
 				3A1E6DD02620557100FAF0CC /* View */,
 				3A1E6DD12620557B00FAF0CC /* ViewModel */,
@@ -296,25 +310,10 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		3A1E6DE72620D67C00FAF0CC /* DonateComplete */ = {
-			isa = PBXGroup;
-			children = (
-				3A1E6DE82620D69E00FAF0CC /* DonateCompleteViewController.swift */,
-			);
-			path = DonateComplete;
-			sourceTree = "<group>";
-		};
-		3A1E6DEB2620E52400FAF0CC /* MakeComplete */ = {
-			isa = PBXGroup;
-			children = (
-				3A1E6DEC2620E59700FAF0CC /* MakeCompleteViewController.swift */,
-			);
-			path = MakeComplete;
-			sourceTree = "<group>";
-		};
 		3A1E6DBF2620444A00FAF0CC /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3A61D7652638173E00DC27CF /* KeychainManager.swift */,
 				3A1E6DC02620445A00FAF0CC /* UserInfo.swift */,
 				3AC393CD261C7439008BB207 /* UserDefaultsKeys.swift */,
 				4D46FEB426215F7B00471475 /* Logger.swift */,
@@ -337,6 +336,22 @@
 				3AB1D03E2615DCB600EA94E8 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3A1E6DE72620D67C00FAF0CC /* DonateComplete */ = {
+			isa = PBXGroup;
+			children = (
+				3A1E6DE82620D69E00FAF0CC /* DonateCompleteViewController.swift */,
+			);
+			path = DonateComplete;
+			sourceTree = "<group>";
+		};
+		3A1E6DEB2620E52400FAF0CC /* MakeComplete */ = {
+			isa = PBXGroup;
+			children = (
+				3A1E6DEC2620E59700FAF0CC /* MakeCompleteViewController.swift */,
+			);
+			path = MakeComplete;
 			sourceTree = "<group>";
 		};
 		3AB1D0352615DAF300EA94E8 /* Model */ = {
@@ -832,6 +847,7 @@
 				3A1BD71125ED26D00079D56D /* DonationDetailViewController.swift in Sources */,
 				3AB1D03F2615DCB600EA94E8 /* LoginViewModel.swift in Sources */,
 				3A1BD72425F1583D0079D56D /* DetailParticipantsMoreButtonView.swift in Sources */,
+				3A61D7572638003B00DC27CF /* Login+Facebook.swift in Sources */,
 				3A035F1825EA4D8C00D3FB69 /* LoginViewController.swift in Sources */,
 				4DBDB4EA261F542B00B5E08D /* DoneService.swift in Sources */,
 				3A1BD72425F1583D0079D56D /* DetailParticipantsMoreButtonView.swift in Sources */,
@@ -853,12 +869,14 @@
 				7C30C23F2617588500567520 /* ProfileViewModel.swift in Sources */,
 				E3692D1D25F4F9C500755FBF /* UIView+Extension.swift in Sources */,
 				E359440E260F125D0078903E /* CreateDonationViewController.swift in Sources */,
+				3A61D7532638000900DC27CF /* Login+Google.swift in Sources */,
 				3AB1CFD6260F7CB200EA94E8 /* UIViewController+Extension.swift in Sources */,
 				E3F1EAB225EACC9F00F34BDE /* SignupCustomView.swift in Sources */,
 				4DBDB4FC261F623600B5E08D /* MainResponse.swift in Sources */,
 				7C842FA02606267400A66756 /* ModifyProfileViewController.swift in Sources */,
 				D9A4E1412620DD8600539C27 /* MainIndicatorCollectionViewCell.swift in Sources */,
 				4DBDB4F2261F593F00B5E08D /* MainViewModel.swift in Sources */,
+				3A61D75B263800A000DC27CF /* Login+Apple.swift in Sources */,
 				7C04536025EAA2DC00870761 /* ProfileDonatingTableViewCell.swift in Sources */,
 				3AC393D9261CBC3D008BB207 /* DonationDetailViewModel.swift in Sources */,
 				7C30C348261E163D00567520 /* ProfileMydonationViewModel.swift in Sources */,
@@ -892,6 +910,8 @@
 				3A179F5225FB62B700901436 /* DonateMoneyTableViewCell.swift in Sources */,
 				3A179F6025FB87AF00901436 /* InputDonationMoneyViewController.swift in Sources */,
 				3A1E6DC12620445A00FAF0CC /* UserInfo.swift in Sources */,
+				3A61D7662638173E00DC27CF /* KeychainManager.swift in Sources */,
+				3A61D74F2637FF7800DC27CF /* Login+Firebase.swift in Sources */,
 				7C842FA326063FB100A66756 /* ModifyProfileCustomView.swift in Sources */,
 				7CC7C08F261F20680038900A /* InputChargingPointModel.swift in Sources */,
 				4D46FEB82621607200471475 /* BaseViewController.swift in Sources */,
