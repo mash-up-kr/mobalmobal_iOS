@@ -9,7 +9,7 @@ import Firebase
 
 // MARK: - Firebase
 extension LoginViewController {
-    func loginWithFirebase(credential: AuthCredential) {
+    func loginWithFirebase(credential: AuthCredential, provider: Provider) {
         Auth.auth().signIn(with: credential) { [weak self] authResult, error in
             if let error: Error = error {
                 print("🐻 FirebaseAuth :: error: \(error) 🐻")
@@ -19,7 +19,7 @@ extension LoginViewController {
             let fireStoreId: String = authResult.user.uid
             print("🐻 fireStoreId: \(fireStoreId)")
             
-            self?.viewModel.login(with: fireStoreId)
+            self?.viewModel.login(with: fireStoreId, provider: provider)
         }
     }
 }

@@ -95,7 +95,7 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
             
             // 토큰 받아오는 데 성공하면 파이어베이스로 인증
             let credential: AuthCredential = OAuthProvider.credential(withProviderID: "apple.com", idToken: tokenString, rawNonce: nonce)
-            loginWithFirebase(credential: credential)
+            loginWithFirebase(credential: credential, provider: .apple)
             
         default:
             break

@@ -20,7 +20,7 @@ extension LoginViewController {
             guard let token: AccessToken = result?.token else { return }
             print("🐻 Facebook Login Token :: \(token) 🐻")
             // 토큰 받아오는 데 성공하면 파이어베이스로 인증
-            self?.loginWithFirebase(credential: FacebookAuthProvider.credential(withAccessToken: token.tokenString))
+            self?.loginWithFirebase(credential: FacebookAuthProvider.credential(withAccessToken: token.tokenString), provider: .facebook)
         }
     }
 }
