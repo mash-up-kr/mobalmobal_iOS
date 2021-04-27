@@ -7,10 +7,15 @@
 
 import Foundation
 
+enum Provider: String {
+    case google, facebook, apple
+}
+
 class UserInfo {
     static let shared: UserInfo = UserInfo()
     
     var token: String?
+    var provider: Provider?
     var fireStoreId: String?
     
     var userId: Int?
