@@ -31,6 +31,7 @@
 		3A61D7532638000900DC27CF /* Login+Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61D7522638000900DC27CF /* Login+Google.swift */; };
 		3A61D7572638003B00DC27CF /* Login+Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61D7562638003B00DC27CF /* Login+Facebook.swift */; };
 		3A61D75B263800A000DC27CF /* Login+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61D75A263800A000DC27CF /* Login+Apple.swift */; };
+		3A61D7662638173E00DC27CF /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61D7652638173E00DC27CF /* KeychainManager.swift */; };
 		3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */; };
 		3AB1CFD6260F7CB200EA94E8 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */; };
 		3AB1D0252610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1D0242610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift */; };
@@ -137,6 +138,7 @@
 		3A61D7522638000900DC27CF /* Login+Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Login+Google.swift"; sourceTree = "<group>"; };
 		3A61D7562638003B00DC27CF /* Login+Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Login+Facebook.swift"; sourceTree = "<group>"; };
 		3A61D75A263800A000DC27CF /* Login+Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Login+Apple.swift"; sourceTree = "<group>"; };
+		3A61D7652638173E00DC27CF /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		3A6CFF3225EAEC7A00214E43 /* CustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginButton.swift; sourceTree = "<group>"; };
 		3AB1CFD5260F7CB200EA94E8 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		3AB1D0242610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOngoingDonationHeaderView.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 		3A1E6DBF2620444A00FAF0CC /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3A61D7652638173E00DC27CF /* KeychainManager.swift */,
 				3A1E6DC02620445A00FAF0CC /* UserInfo.swift */,
 				3AC393CD261C7439008BB207 /* UserDefaultsKeys.swift */,
 				4D46FEB426215F7B00471475 /* Logger.swift */,
@@ -907,6 +910,7 @@
 				3A179F5225FB62B700901436 /* DonateMoneyTableViewCell.swift in Sources */,
 				3A179F6025FB87AF00901436 /* InputDonationMoneyViewController.swift in Sources */,
 				3A1E6DC12620445A00FAF0CC /* UserInfo.swift in Sources */,
+				3A61D7662638173E00DC27CF /* KeychainManager.swift in Sources */,
 				3A61D74F2637FF7800DC27CF /* Login+Firebase.swift in Sources */,
 				7C842FA326063FB100A66756 /* ModifyProfileCustomView.swift in Sources */,
 				7CC7C08F261F20680038900A /* InputChargingPointModel.swift in Sources */,
