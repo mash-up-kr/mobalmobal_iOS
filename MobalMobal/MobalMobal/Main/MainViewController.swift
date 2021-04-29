@@ -19,7 +19,7 @@ class MainViewController: DoneBaseViewController {
     
     let titleLabel: UILabel = {
         let label: UILabel = UILabel(frame: .zero)
-        label.text = "Hi, \(UserInfo.shared.nickName ?? "nickName")"
+        label.text = "Hi, \(UserInfo.shared.nickName ?? "Guest")"
         label.font = UIFont(name: "Futura-Bold", size: 25)
         label.textColor = .white
         return label
@@ -199,7 +199,6 @@ class MainViewController: DoneBaseViewController {
 extension MainViewController: UICollectionViewDelegate {
     // 스크롤 - 헤더뷰 사이즈 조정
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y)
         if scrollView.contentOffset.y <= 0 {
             if lastMinContentOffset > scrollView.contentOffset.y {
                 lastMinContentOffset = scrollView.contentOffset.y
