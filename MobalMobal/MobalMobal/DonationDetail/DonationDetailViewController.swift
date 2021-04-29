@@ -241,7 +241,7 @@ class DonationDetailViewController: DoneBaseViewController {
     private func presentLoginVC() {
         let loginVC: LoginViewController = LoginViewController()
         let navVc: UINavigationController = UINavigationController(rootViewController: loginVC)
-//        navVc.modalPresentationStyle = .fullScreen
+        navVc.modalPresentationStyle = .fullScreen
         self.present(navVc, animated: true)
     }
 }

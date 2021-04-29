@@ -47,6 +47,10 @@ class LoginViewController: DoneBaseViewController {
         view.backgroundColor = .backgroundColor
         setActions()
         updateViewConstraints()
+        
+        // UserInfo와 키체인 초기화
+        UserInfo.shared.resetUserInfo()
+        _ = KeychainManager.deleteUserToken()
     }
     
     override func viewWillAppear(_ animated: Bool) {

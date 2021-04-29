@@ -17,10 +17,10 @@ class LoginViewModel {
     weak var delegate: LoginViewModelDelegate?
     
     private var fireStoreId: String? {
-        didSet { setFireStoreId() }
+        didSet { fireStoreIdChanged() }
     }
     private var provider: Provider? {
-        didSet { setProvider() }
+        didSet { providerChanged() }
     }
     private var userToken: String? {
         didSet { userTokenChanged() }
@@ -55,41 +55,34 @@ class LoginViewModel {
         } failure: { _ in return }
     }
     
-    private func userDataChanged() {
-        setUserInfo()
+    private func fireStoreIdChanged() {
+        UserInfo.shared.fireStoreId = fireStoreId
+    }
+    
+    private func providerChanged() {
+        UserInfo.shared.provider = provider
     }
     
     private func userTokenChanged() {
-        setUserToken()
+        UserInfo.shared.token = userToken
         
+        guard let token = userToken else { return }
         if KeychainManager.isEmptyUserToken() {
-            if KeychainManager.updateUserToken(userToken) {
-                print("🐻 키체인 업데이트 성공")
-            } else {
-                print("🐻 키체인 업데이트 실패")
-            }
-        } else {
-            if KeychainManager.setUserToken(userToken) {
+            if KeychainManager.setUserToken(token) {
                 print("🐻 키체인 저장 성공")
             } else {
                 print("🐻 키체인 저장 실패")
             }
+        } else {
+            if KeychainManager.updateUserToken(token) {
+                print("🐻 키체인 업데이트 성공")
+            } else {
+                print("🐻 키체인 업데이트 실패")
+            }
         }
     }
     
-    private func setUserToken() {
-        UserInfo.shared.token = userToken
-    }
-    
-    private func setFireStoreId() {
-        UserInfo.shared.fireStoreId = fireStoreId
-    }
-    
-    private func setProvider() {
-        UserInfo.shared.provider = provider
-    }
-    
-    private func setUserInfo() {
+    private func userDataChanged() {
         UserInfo.shared.updateUserInfo(data: userData)
     }
 }

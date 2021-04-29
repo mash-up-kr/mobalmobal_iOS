@@ -38,4 +38,17 @@ class UserInfo {
         bankName = user.bankName
         cash = user.cash
     }
+    
+    func resetUserInfo() {
+        token = nil
+        provider = nil
+        fireStoreId = nil
+        userId = nil
+        nickName = nil
+        profileImage = nil
+        phoneNumber = nil
+        accountNumber = nil
+        bankName = nil
+        cash = nil
+    }
 }
