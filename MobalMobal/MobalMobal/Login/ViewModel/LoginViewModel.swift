@@ -62,7 +62,7 @@ class LoginViewModel {
     private func userTokenChanged() {
         setUserToken()
         
-        if KeychainManager.getUserToken() != nil {
+        if KeychainManager.isEmptyUserToken() {
             if KeychainManager.updateUserToken(userToken) {
                 print("🐻 키체인 업데이트 성공")
             } else {

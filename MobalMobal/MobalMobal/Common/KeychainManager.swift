@@ -24,6 +24,19 @@ struct KeychainManager {
         return SecItemAdd(query as CFDictionary, nil) == errSecSuccess
     }
     
+    static func isEmptyUserToken() -> Bool {
+        let query: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
+                                        kSecAttrService: serviceName,
+                                        kSecMatchLimit: kSecMatchLimitOne,
+                                        kSecReturnAttributes: true,
+                                        kSecReturnData: true]
+
+        var item: CFTypeRef?
+        if SecItemCopyMatching(query as CFDictionary, &item) != errSecSuccess { return true }
+        guard let existingItem = item as? [CFString: Any], let _ = existingItem[kSecAttrGeneric] as? String else { return true }
+        return false
+    }
+    
     static func getUserToken() -> String? {
         let query: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
                                         kSecAttrService: serviceName,

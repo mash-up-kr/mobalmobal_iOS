@@ -84,7 +84,7 @@ extension DoneService: TargetType {
             return nil
         case .getMain, .getDetail, .donate, .getUserProfile, .getMyDonate, .getMyDonation, .charge:
             guard let token = KeychainManager.getUserToken() else {
-                print("🐻 keychain token : nil")
+                print("🐻 [Login Required] keychain token nil")
                 return nil
             }
             print("🐻 keychain token : \(token)")

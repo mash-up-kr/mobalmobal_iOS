@@ -97,13 +97,19 @@ class MainViewController: DoneBaseViewController {
     // MARK: - Actions
     @objc
     private func touchProfileButton() {
-        print("🐰 프로필")
-        presentProfileVC()
+        if KeychainManager.isEmptyUserToken() {
+            presentLoginVC()
+        } else {
+            presentProfileVC()
+        }
     }
     @objc
     private func touchNotiListButton() {
-        print("🐰 알림")
-        presentNotiListVC()
+        if KeychainManager.isEmptyUserToken() {
+            presentLoginVC()
+        } else {
+            presentNotiListVC()
+        }
     }
     
     private func presentProfileVC() {
@@ -112,6 +118,13 @@ class MainViewController: DoneBaseViewController {
         navigation.modalPresentationStyle = .fullScreen
         navigation.setNavigationBarHidden(false, animated: true)
         present(navigation, animated: true)
+    }
+    
+    private func presentLoginVC() {
+        let loginVC: LoginViewController = LoginViewController()
+        let navVc: UINavigationController = UINavigationController(rootViewController: loginVC)
+//        navVc.modalPresentationStyle = .fullScreen
+        self.present(navVc, animated: true)
     }
     
     // 변경 가능
@@ -367,8 +380,12 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 
 extension MainViewController: MainMyDonationCollectionViewCellDelegate {
     func didSelectAddMyDonationButton() {
-        print("🐰 나의 도네이션 추가하기")
-        presentAddMyDonationVC()
+        if KeychainManager.isEmptyUserToken() {
+            presentLoginVC()
+        } else {
+            print("🐰 나의 도네이션 추가하기")
+            presentAddMyDonationVC()
+        }
     }
     
     func didSelectMyOngoingDonationItem(at indexPath: IndexPath) {
