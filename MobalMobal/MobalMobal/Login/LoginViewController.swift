@@ -112,11 +112,8 @@ class LoginViewController: DoneBaseViewController {
     }
     
     // MARK: - Methods
-    private func presentMainViewController() {
-        let mainVC: MainViewController = MainViewController(viewModel: MainViewModel())
-        let navigation: UINavigationController = UINavigationController(rootViewController: mainVC)
-        navigation.modalPresentationStyle = .fullScreen
-        self.present(navigation, animated: true)
+    private func dismissNavigationController() {
+        navigationController?.dismiss(animated: true)
     }
     
     private func pushSignUpViewController() {
@@ -128,11 +125,10 @@ class LoginViewController: DoneBaseViewController {
 // MARK: - LoginViewModelDelegate
 extension LoginViewController: LoginViewModelDelegate {
     func successLogin() {
-        presentMainViewController()
+        dismissNavigationController()
     }
     
     func needToSignUp() {
         pushSignUpViewController()
     }
 }
-
