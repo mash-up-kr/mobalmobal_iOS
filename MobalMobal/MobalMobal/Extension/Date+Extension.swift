@@ -13,4 +13,19 @@ extension Date {
         let period = gregorian.dateComponents([.day], from: self, to: dueDate).day!
         return period
     }
+    
+    func getDDayString(to date: Date?) -> String {
+        guard let date = date else {
+            return "D-알수없음"
+        }
+        
+        let dueDay: Int = Date().getDueDay(of: date)
+        if dueDay > 0 {
+            return "D-\(dueDay)"
+        } else if dueDay == 0 {
+            return "D-Day"
+        } else {
+            return "D+\(-dueDay)"
+        }
+    }
 }

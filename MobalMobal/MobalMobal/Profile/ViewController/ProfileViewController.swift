@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: DoneBaseViewController {
     // MARK: - UIComponents
     private let mainTableView: UITableView = {
         let tableview: UITableView = UITableView(frame: .zero, style: .grouped)

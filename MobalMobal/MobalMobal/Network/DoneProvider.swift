@@ -32,4 +32,8 @@ enum DoneProvider {
     static func getMyDonate(success: @escaping (ParseResponse<MyDonates>) -> Void, failure: @escaping (Error) -> Void) {
         NetworkProvider.request(.getMyDonate, to: MyDonates.self, success: success, failure: failure)
     }
+    
+    static func charge(amount: Int, userName: String, chargedAt: String, success: @escaping (ParseResponse<ChargingData>) -> Void, failure: @escaping (Error) -> Void) {
+        NetworkProvider.request(.charge(amount: amount, userName: userName, chargedAt: chargedAt), to: ChargingData.self, success: success, failure: failure)
+    }
 }

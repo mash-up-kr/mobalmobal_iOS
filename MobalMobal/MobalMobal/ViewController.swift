@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: DoneBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func secondButtonIsTapped(_ sender: UIButton) {
-        let mainVC: MainViewController = MainViewController()
+        let mainVC: MainViewController = MainViewController(viewModel: MainViewModel())
         mainVC.modalPresentationStyle = .fullScreen
         self.present(mainVC, animated: true, completion: nil)
     }
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func fourthButtonIsTapped(_ sender: UIButton) {
-        let vc = ProfileViewController()
+        let vc = PointChargingViewController()
         let navVc: UINavigationController = UINavigationController(rootViewController: vc)
         navVc.modalPresentationStyle = .overFullScreen
 //        vc.modalPresentationStyle = .fullScreen

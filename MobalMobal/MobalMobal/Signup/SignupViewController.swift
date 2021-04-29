@@ -9,7 +9,7 @@ import SnapKit
 import Then
 import UIKit
 
-class SignupViewController: UIViewController {
+class SignupViewController: DoneBaseViewController {
     // Fire Store ID: UserInfo.shared.fireStoreId 사용하면 됩니다.
     
     // MARK: - UIView

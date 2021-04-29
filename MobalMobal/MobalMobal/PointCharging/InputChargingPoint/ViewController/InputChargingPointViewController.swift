@@ -44,20 +44,9 @@ class InputChargingPointViewController: UIViewController {
         return button
     }()
     // MARK: - Properties
-    private let numberFormat: (Int) -> String = { number in
-        let str: String = "\(number)"
-        let regex: NSRegularExpression?
-        do {
-            regex = try? NSRegularExpression(pattern: "(?<=\\d)(?=(?:\\d{3})+(?!\\d))", options: [])
-        }
-        guard let regexString = regex else { return "" }
-        return regexString.stringByReplacingMatches(in: str,
-                                                    options: [],
-                                                    range: NSRange(location: 0, length: str.count),
-                                                    withTemplate: ",")
-    }
     private let maxChargingPoint: Int = 10_000_000
-    
+    private let viewModel: InputChargingPointViewModel = InputChargingPointViewModel()
+  
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +69,7 @@ class InputChargingPointViewController: UIViewController {
             return
         }
         accountVC.charge = "\(inputText)원"
+        setNetwork(inputText.components(separatedBy: ",").joined())
         self.navigationController?.pushViewController(accountVC, animated: true)
     }
     @objc
@@ -97,7 +87,7 @@ class InputChargingPointViewController: UIViewController {
                 showAlertController()
                 disactivateButtonUI()
             } else {
-                chargingInputField.text = numberFormat(chargingPointInt)
+                chargingInputField.text = chargingPointInt.changeToCommaFormat()
                 activateButtonUI()
             }
         } else {
@@ -107,6 +97,14 @@ class InputChargingPointViewController: UIViewController {
     }
     
     // MARK: - Methods
+    private func setNetwork(_ textFieldText: String) {
+        viewModel.amount = Int(textFieldText)!
+        // TODO
+        // 싱글톤객체에서 받아와야함!!!!!
+        viewModel.userName = "ㅅㅇ"
+        viewModel.chargedAt = Date().iso8601withFractionalSeconds
+        viewModel.postCharging()
+    }
     private func viewTapGesture() {
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
         tapGestureRecognizer.delegate = self
@@ -164,5 +162,21 @@ extension InputChargingPointViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         self.view.endEditing(true)
         return true
+    }
+}
+
+// MARK: - iso8601 Format
+extension ISO8601DateFormatter {
+    convenience init(_ formatOptions: Options) {
+        self.init()
+        self.formatOptions = formatOptions
+    }
+}
+extension Formatter {
+    static let iso8601withFractionalSeconds = ISO8601DateFormatter([.withInternetDateTime, .withFractionalSeconds])
+}
+extension Date {
+    var iso8601withFractionalSeconds: String {
+        return Formatter.iso8601withFractionalSeconds.string(from: self)
     }
 }
