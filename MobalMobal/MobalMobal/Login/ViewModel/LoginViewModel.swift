@@ -37,7 +37,6 @@ class LoginViewModel {
             self?.userToken = response.data?.token.token
             if response.code == 200 {
                 self?.callUserAPI()
-                self?.delegate?.successLogin()
             } else if response.code == 404 {
                 self?.delegate?.needToSignUp()
             }
@@ -47,10 +46,12 @@ class LoginViewModel {
     private func callUserAPI() {
         DoneProvider.getUserProfile { [weak self]  response in
             self?.userData = response.data?.user
-            if response.code != 200 {
-                guard let message = response.message else { return }
-                print("🐻 유저 정보를 불러오는데 실패했습니다. : \(message)")
+            if response.code == 200 {
+                self?.delegate?.successLogin()
+                return
             }
+            guard let message = response.message else { return }
+            print("🐻 유저 정보를 불러오는데 실패했습니다. : \(message)")
         } failure: { _ in return }
     }
     
