@@ -35,6 +35,12 @@ class LoginViewController: DoneBaseViewController {
         let button: UIView = CustomLoginButton(title: "Apple로 로그인하기", iconName: "appleLogo")
         return button
     }()
+    lazy var guestButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.setTitle("둘러보기", for: .normal)
+        button.addTarget(self, action: #selector(clickGuestButton), for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - Properties
     let viewModel: LoginViewModel = LoginViewModel()
@@ -65,7 +71,7 @@ class LoginViewController: DoneBaseViewController {
             make.width.equalToSuperview().multipliedBy(319.0 / 375.0)
         }
         
-        [logoImageView, googleButton, facebookButton, appleButton].forEach { stackView.addArrangedSubview($0) }
+        [logoImageView, googleButton, facebookButton, appleButton, guestButton].forEach { stackView.addArrangedSubview($0) }
         logoImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(10)
@@ -80,12 +86,16 @@ class LoginViewController: DoneBaseViewController {
         }
         appleButton.snp.makeConstraints { make in
             make.leading.trailing.height.equalTo(googleButton)
+        }
+        guestButton.snp.makeConstraints { make in
+            make.leading.trailing.height.equalTo(googleButton)
             make.bottom.equalToSuperview()
         }
         
         stackView.setCustomSpacing(view.frame.height * 58 / 812, after: logoImageView)
         stackView.setCustomSpacing(view.frame.height * 13 / 812, after: googleButton)
         stackView.setCustomSpacing(view.frame.height * 13 / 812, after: facebookButton)
+        stackView.setCustomSpacing(view.frame.height * 13 / 812, after: appleButton)
         super.updateViewConstraints()
     }
         
@@ -109,6 +119,10 @@ class LoginViewController: DoneBaseViewController {
     }
     @IBAction private func clickAppleLoginButton() {
         loginWithApple()
+    }
+    @objc
+    private func clickGuestButton() {
+        dismissNavigationController()
     }
     
     // MARK: - Methods
