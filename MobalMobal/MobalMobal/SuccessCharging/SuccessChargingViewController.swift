@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-class SuccessChargingViewController: UIViewController {
+class SuccessChargingViewController: DoneBaseViewController {
     // MARK: - UIComponents
     private let closeBtn: UIButton = {
         let button: UIButton = UIButton()

@@ -15,7 +15,7 @@ enum SettingURL: String {
     case openKakaoTalk = "https://open.kakao.com/o/sRo0Df7c"
 }
 
-class SettingViewController: UIViewController {
+class SettingViewController: DoneBaseViewController {
     // MARK: - UIView
     private let myAccountLabel: UILabel = {
         let label: UILabel = UILabel()
@@ -185,5 +185,10 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 }

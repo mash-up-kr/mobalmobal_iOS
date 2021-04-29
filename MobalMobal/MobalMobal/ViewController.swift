@@ -7,28 +7,35 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: DoneBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
     
     // - MARK : 각자 view로 넘어감
-    @IBAction func firstButtonIsTapped(_ sender: UIButton) {
-        let viewController = SettingViewController()
-        self.navigationController?.pushViewController(viewController, animated: true)
+    @IBAction private func firstButtonIsTapped(_ sender: UIButton) {
+    
     }
     
     @IBAction private func secondButtonIsTapped(_ sender: UIButton) {
-        let mainVC: MainViewController = MainViewController()
+        let mainVC: MainViewController = MainViewController(viewModel: MainViewModel())
         mainVC.modalPresentationStyle = .fullScreen
         self.present(mainVC, animated: true, completion: nil)
     }
     
     @IBAction private func thirdButtonIsTapped(_ sender: UIButton) {
         let loginVC: LoginViewController = LoginViewController()
-        loginVC.modalPresentationStyle = .fullScreen
-        self.present(loginVC, animated: true)
+        let navVc: UINavigationController = UINavigationController(rootViewController: loginVC)
+        navVc.modalPresentationStyle = .fullScreen
+        self.present(navVc, animated: true)
+//        loginVC.modalPresentationStyle = .fullScreen
+//        self.present(loginVC, animated: true)
+//        self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
     @IBAction func fourthButtonIsTapped(_ sender: UIButton) {

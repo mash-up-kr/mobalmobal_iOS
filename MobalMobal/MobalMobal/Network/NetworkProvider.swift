@@ -10,15 +10,15 @@ import Moya
 
 struct ParseResponse<Response: Decodable>: Decodable {
     var code: Int
-    var data: Response
+    var data: Response?
     var message: String?
 }
 
 enum DoneError: Error {
-  case noData
-  case client
-  case server
-  case unknown
+    case noData
+    case client
+    case server
+    case unknown
 }
 
 enum NetworkProvider {
@@ -30,10 +30,9 @@ enum NetworkProvider {
         request(target) { data in
             do {
                 let parseData: ParseResponse<Response> = try parse(data)
-                print("\(parseData)")
                 success(parseData)
             } catch {
-                print("🛑 Parse Fail: \(error)")
+                Log(.networkError).logger("Parse Fail: \(error)")
                 failure(error)
             }
         } failure: { failure($0) }
@@ -42,18 +41,19 @@ enum NetworkProvider {
     private static func request(_ target: DoneService, success: @escaping (Data) -> Void, failure: @escaping (Error) -> Void) {
         provider.session.sessionConfiguration.timeoutIntervalForRequest = 5
         provider.request(target) { result in
+            print("result: \(result)")
             switch result {
             case .success(let response):
                 if 400..<500 ~= response.statusCode {
-                    print("🛑 400..<500 Client Error \(response)")
+                    Log(.networkError).logger("400..<500 Client Error \(response)")
                     failure(DoneError.client)
                 } else if 500..<600 ~= response.statusCode {
-                    print("🛑 500..<600 Server Error \(response)")
+                    Log(.networkError).logger("500..<600 Server Error \(response)")
                     failure(DoneError.server)
                 }
                 success(response.data)
             case .failure(let error):
-                print("🛑 ServerError \(error)")
+                Log(.networkError).logger("ServerError \(error)")
                 failure(error)
             }
         }

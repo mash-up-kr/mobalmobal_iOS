@@ -9,25 +9,27 @@ import SnapKit
 import Then
 import UIKit
 
-class SignupViewController: UIViewController {
+class SignupViewController: DoneBaseViewController {
+    // Fire Store ID: UserInfo.shared.fireStoreId 사용하면 됩니다.
+    
     // MARK: - UIView
     private let nickNameView: UIView = {
         let view: UIView = SignupCustomView(imageName: "iconlyLightProfile", inputText: "닉네임을 입력해주세요.")
-        view.backgroundColor = .signUpBackgroundColor
+        view.backgroundColor = .white7
         view.layer.cornerRadius = 30
         return view
     }()
     
     private let phoneNumberView: UIView = {
         let view: UIView = SignupCustomView(imageName: "iconlyLightCall", inputText: "전화번호를 입력해주세요. (선택)")
-        view.backgroundColor = .signUpBackgroundColor
+        view.backgroundColor = .white7
         view.layer.cornerRadius = 30
         return view
     }()
     
     private let emailView: UIView = {
         let view: UIView = SignupCustomView(imageName: "iconlyLightMessage", inputText: "이메일을 입력해주세요. (선택)")
-        view.backgroundColor = .signUpBackgroundColor
+        view.backgroundColor = .white7
         view.layer.cornerRadius = 30
         return view
     }()
@@ -92,9 +94,7 @@ class SignupViewController: UIViewController {
     
     @objc
     func backButtonTapped() {
-        // 실제로는 pop이 되어야 함. dismiss는 임시코드
-        // navigationController?.popViewController(animated: true)
-        navigationController?.dismiss(animated: true)
+         navigationController?.popViewController(animated: true)
     }
     
     private func setNicknameView() {
@@ -166,6 +166,11 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 }
 
