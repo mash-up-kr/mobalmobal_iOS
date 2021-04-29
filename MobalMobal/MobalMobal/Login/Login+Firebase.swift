@@ -19,7 +19,7 @@ extension LoginViewController {
             let fireStoreId: String = authResult.user.uid
             print("🐻 fireStoreId: \(fireStoreId)")
             
-            self?.viewModel.login(with: fireStoreId, provider: provider)
+            self?.viewModel.callLoginAPI(with: fireStoreId, provider: provider)
         }
     }
 }

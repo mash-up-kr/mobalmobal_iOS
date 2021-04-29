@@ -16,13 +16,26 @@ class UserInfo {
     
     var token: String?
     var provider: Provider?
-    var fireStoreId: String?
     
+    var fireStoreId: String?
     var userId: Int?
     var nickName: String?
-    var profileImage: String?
+    var profileImage: String? // url
     var phoneNumber: String?
     var accountNumber: String?
     var bankName: String?
-    var cash: Int64?
+    var cash: Int?
+    
+    func updateUserInfo(data user: ProfileUser?) {
+        guard let user = user else { return }
+        
+        fireStoreId = user.firestoreId
+        userId = user.userId
+        nickName = user.nickname
+        profileImage = user.profileImage
+        phoneNumber = user.phoneNumber
+        accountNumber = user.accountNumber
+        bankName = user.bankName
+        cash = user.cash
+    }
 }
