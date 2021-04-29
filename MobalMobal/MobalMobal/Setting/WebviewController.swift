@@ -14,14 +14,13 @@ class WebviewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     var webURL: String?
     var navTitle: String?
     private var webView: WKWebView?
-   
+
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
         setwebView()
         setURLRequest()
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -34,17 +33,20 @@ class WebviewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         webView = WKWebView(frame: .zero)
         webView?.uiDelegate = self
         webView?.navigationDelegate = self
+        webView?.backgroundColor = .backgroundColor
+        webView?.isOpaque = false
     }
     
-    private func setNavigationBar() {
-        self.title = navTitle
-        self.navigationController?.navigationBar.tintColor = .white
-    }
-
     private func setURLRequest() {
         guard let webURL = self.webURL else { return }
         guard let url: URL = URL(string: webURL) else { return }
         let request: URLRequest = URLRequest(url: url)
         webView?.load(request)
+        
+    }
+    
+    private func setNavigationBar() {
+        self.title = navTitle
+        self.navigationController?.navigationBar.tintColor = .white
     }
 }

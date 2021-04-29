@@ -26,6 +26,7 @@ class SettingViewController: UIViewController {
     }()
     private let myAccountButton: UIButton = {
         let button: UIButton = UIButton()
+        button.addTarget(self, action: #selector(myAccountAction), for: .touchUpInside)
         return button
     }()
     private let openSourceLabel: UILabel = {
@@ -78,24 +79,32 @@ class SettingViewController: UIViewController {
         button.addTarget(self, action: #selector(inquiryAction), for: .touchUpInside)
         return button
     }()
-    // MARK: - Property
-    private let webVC: WebviewController = WebviewController()
 
     // MARK: - Actions
     @objc
+    func myAccountAction() {
+        let alertController: UIAlertController = UIAlertController(title: "내 계좌", message: "신한1010101010", preferredStyle: .alert)
+        let okBtn: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(okBtn)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    @objc
     func openSourceAction() {
+        let webVC: WebviewController = WebviewController()
         webVC.webURL = SettingURL.openSource.rawValue
         webVC.navTitle = "오픈소스 약관"
         self.navigationController?.pushViewController(webVC, animated: true)
     }
     @objc
     func termsAndConditionAction() {
+        let webVC: WebviewController = WebviewController()
         webVC.webURL = SettingURL.termsAndConditioin.rawValue
         webVC.navTitle = "이용약관"
         self.navigationController?.pushViewController(webVC, animated: true)
     }
     @objc
     func inquiryAction() {
+        let webVC: WebviewController = WebviewController()
         webVC.webURL = SettingURL.openKakaoTalk.rawValue
         webVC.navTitle = "문의하기"
         self.navigationController?.pushViewController(webVC, animated: true)
@@ -151,6 +160,7 @@ class SettingViewController: UIViewController {
             make.top.bottom.equalTo(termsAndConditionLabel)
             make.leading.trailing.equalTo(openSourceButton)
         }
+        // 1차 배포 제외 대상 (알람설정)
 //        alarmLabel.snp.makeConstraints { make in
 //            make.top.equalTo(termsAndConditionLabel.snp.bottom).offset(31)
 //            make.leading.equalTo(termsAndConditionLabel)
