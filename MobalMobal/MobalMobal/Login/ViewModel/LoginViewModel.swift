@@ -62,14 +62,14 @@ class LoginViewModel {
     private func userTokenChanged() {
         setUserToken()
         
-        if KeychainManager.shared.getUserToken() != nil {
-            if KeychainManager.shared.updateUserToken(userToken) {
+        if KeychainManager.getUserToken() != nil {
+            if KeychainManager.updateUserToken(userToken) {
                 print("🐻 키체인 업데이트 성공")
             } else {
                 print("🐻 키체인 업데이트 실패")
             }
         } else {
-            if KeychainManager.shared.setUserToken(userToken) {
+            if KeychainManager.setUserToken(userToken) {
                 print("🐻 키체인 저장 성공")
             } else {
                 print("🐻 키체인 저장 실패")

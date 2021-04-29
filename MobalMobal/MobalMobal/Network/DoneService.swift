@@ -83,7 +83,11 @@ extension DoneService: TargetType {
         case .login:
             return nil
         case .getMain, .getDetail, .donate, .getUserProfile, .getMyDonate, .getMyDonation, .charge:
-            guard let token = KeychainManager.shared.getUserToken() else { return nil }
+            guard let token = KeychainManager.getUserToken() else {
+                print("🐻 keychain token : nil")
+                return nil
+            }
+            print("🐻 keychain token : \(token)")
             return ["authorization": token]
         }
     }
