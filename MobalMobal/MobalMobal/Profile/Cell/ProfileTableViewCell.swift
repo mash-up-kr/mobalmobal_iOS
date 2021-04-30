@@ -72,7 +72,6 @@ class ProfileTableViewCell: UITableViewCell {
     
     @objc
     func chargingPointAction() {
-        print("action")
         pointChargingDelegate?.presentPointChargingView()
     }
     

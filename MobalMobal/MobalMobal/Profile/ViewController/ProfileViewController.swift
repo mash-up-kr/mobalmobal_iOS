@@ -212,7 +212,6 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section >= 2 {
-            print("didselect")
             guard let postId = profileViewModel.getPostId(section: indexPath.section, row: indexPath.row) else { return }
             let donationDetailVC: DonationDetailViewController = DonationDetailViewController(donationId: postId)
             self.navigationController?.pushViewController(donationDetailVC, animated: true)
@@ -231,11 +230,9 @@ extension ProfileViewController: ProfileViewModelDelegate {
 // MARK: - ppointChargingActionDelegate
 extension ProfileViewController: pointChargingActionDelegate {
     func presentPointChargingView() {
-        print("delegate")
         let pointChargingVC: PointChargingViewController = PointChargingViewController()
         let navVc: UINavigationController = UINavigationController(rootViewController: pointChargingVC)
         navVc.modalPresentationStyle = .overFullScreen
-//      vc.modalPresentationStyle = .fullScreen
         self.present(navVc, animated: true, completion: nil)
     }
 }
