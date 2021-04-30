@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 enum SettingURL: String {
-    case openSource = "https://www.notion.so/b384c72d60cc4475af49284625f81a0e"
+    case openSource = "https://www.notion.so/iOS-Open-Source-License-0b8df2ee46f54ea684d484faf347b6b9"
     case termsAndConditioin = "https://www.notion.so/26c36382cd8448188c7532519b9019cc"
     case openKakaoTalk = "https://open.kakao.com/o/sRo0Df7c"
 }
@@ -83,12 +83,7 @@ class SettingViewController: DoneBaseViewController {
     // MARK: - Actions
     @objc
     func myAccountAction() {
-        let bankName: String = UserInfo.shared.bankName ?? ""
-        let accountNumber: String = UserInfo.shared.accountNumber ?? "내 계좌 정보가 없습니다."
-        let alertController: UIAlertController = UIAlertController(title: "내 계좌", message: bankName + accountNumber, preferredStyle: .alert)
-        let okBtn: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-        alertController.addAction(okBtn)
-        self.present(alertController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(MyAccountViewController(), animated: true)
     }
     @objc
     func openSourceAction() {
