@@ -83,7 +83,9 @@ class SettingViewController: DoneBaseViewController {
     // MARK: - Actions
     @objc
     func myAccountAction() {
-        let alertController: UIAlertController = UIAlertController(title: "내 계좌", message: "신한1010101010", preferredStyle: .alert)
+        let bankName: String = UserInfo.shared.bankName ?? ""
+        let accountNumber: String = UserInfo.shared.accountNumber ?? "내 계좌 정보가 없습니다."
+        let alertController: UIAlertController = UIAlertController(title: "내 계좌", message: bankName + accountNumber, preferredStyle: .alert)
         let okBtn: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alertController.addAction(okBtn)
         self.present(alertController, animated: true, completion: nil)
@@ -93,14 +95,16 @@ class SettingViewController: DoneBaseViewController {
         let webVC: WebviewController = WebviewController()
         webVC.webURL = SettingURL.openSource.rawValue
         webVC.navTitle = "오픈소스 약관"
-        self.navigationController?.pushViewController(webVC, animated: true)
+        self.present(webVC, animated: true, completion: nil)
+//        self.navigationController?.pushViewController(webVC, animated: true)
     }
     @objc
     func termsAndConditionAction() {
         let webVC: WebviewController = WebviewController()
         webVC.webURL = SettingURL.termsAndConditioin.rawValue
         webVC.navTitle = "이용약관"
-        self.navigationController?.pushViewController(webVC, animated: true)
+        self.present(webVC, animated: true, completion: nil)
+//        self.navigationController?.pushViewController(webVC, animated: true)
     }
     @objc
     func inquiryAction() {
