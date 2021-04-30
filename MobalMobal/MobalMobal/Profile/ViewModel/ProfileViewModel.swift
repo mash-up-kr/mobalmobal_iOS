@@ -83,4 +83,11 @@ class ProfileViewModel {
     func getMyDonate() -> [Donate]? {
         myDonateResponseModel
     }
+    func getPostId(section: Int, row: Int) -> Int? {
+        if section == 2 || section == 4 {
+            return mydonationResponseModel?.posts[row].postId
+        }else {
+            return myDonateResponseModel[row].postId
+        }
+    }
 }
