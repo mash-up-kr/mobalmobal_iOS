@@ -9,6 +9,10 @@ import Kingfisher
 import SnapKit
 import UIKit
 
+protocol pointChargingActionDelegate: AnyObject {
+    func presentPointChargingView()
+}
+
 class ProfileTableViewCell: UITableViewCell {
     // MARK: - UIComponents
     private lazy var profileImage: UIImageView = {
@@ -52,6 +56,7 @@ class ProfileTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     let cellViewModel: ProfileCellViewModel = ProfileCellViewModel()
+    weak var pointChargingDelegate: pointChargingActionDelegate?
     
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -59,12 +64,23 @@ class ProfileTableViewCell: UITableViewCell {
         self.contentView.backgroundColor = .backgroundColor
         self.setLayout()
         self.cellViewModel.delegate = self
+        setChargingPointGesture()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc
+    func chargingPointAction() {
+        print("action")
+        pointChargingDelegate?.presentPointChargingView()
+    }
+    
     // MARK: - Methods
+    private func setChargingPointGesture() {
+        let chargingPointGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chargingPointAction))
+        self.pointStackView.addGestureRecognizer(chargingPointGesture)
+    }
     private func setLayout() {
         self.contentView.addSubviews([profileImage, userInfoVerticalStackView])
         profileImage.snp.makeConstraints { make in
