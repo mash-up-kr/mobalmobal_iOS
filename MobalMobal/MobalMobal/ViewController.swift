@@ -38,10 +38,10 @@ class ViewController: DoneBaseViewController {
     }
     
     @IBAction func fourthButtonIsTapped(_ sender: UIButton) {
-        let vc = PointChargingViewController()
+        let vc = ProfileViewController()
         let navVc: UINavigationController = UINavigationController(rootViewController: vc)
+//        self.navigationController?.pushViewController(navVc, animated: true)
         navVc.modalPresentationStyle = .overFullScreen
-//        vc.modalPresentationStyle = .fullScreen
         self.present(navVc, animated: true, completion: nil)
     }
 }
