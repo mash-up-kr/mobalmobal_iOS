@@ -200,7 +200,8 @@ class DonationDetailViewController: DoneBaseViewController {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
     }
-    override func updateViewConstraints() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setScrollViewConstraints()
         setTopImageAreaConstraints()
         setMidDescriptionAreaConstraints()
