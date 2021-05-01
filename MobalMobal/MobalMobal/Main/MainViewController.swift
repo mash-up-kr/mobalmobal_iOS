@@ -101,7 +101,7 @@ class MainViewController: DoneBaseViewController {
         if KeychainManager.isEmptyUserToken() {
             presentLoginVC()
         } else {
-            presentProfileVC()
+            pushProfileVC()
         }
     }
     @objc
@@ -113,12 +113,9 @@ class MainViewController: DoneBaseViewController {
         }
     }
     
-    private func presentProfileVC() {
+    private func pushProfileVC() {
         let profileVC: ProfileViewController = ProfileViewController()
-        let navigation: UINavigationController = UINavigationController(rootViewController: profileVC)
-        navigation.modalPresentationStyle = .fullScreen
-        navigation.setNavigationBarHidden(false, animated: true)
-        present(navigation, animated: true)
+        navigationController?.pushViewController(profileVC, animated: true)
     }
     
     private func presentLoginVC() {

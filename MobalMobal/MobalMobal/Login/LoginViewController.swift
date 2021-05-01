@@ -21,6 +21,7 @@ class LoginViewController: DoneBaseViewController {
         let imageView: UIImageView = UIImageView()
         let image: UIImage? = UIImage(named: imageName)
         imageView.image = image
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     let googleButton: UIView = {
@@ -35,11 +36,35 @@ class LoginViewController: DoneBaseViewController {
         let button: UIView = CustomLoginButton(title: "Apple로 로그인하기", iconName: "appleLogo")
         return button
     }()
-    lazy var guestButton: UIButton = {
+    lazy var guestButtonView: UIView = {
+        let view: UIView = UIView()
+        
+        let title: UILabel = UILabel()
+        title.text = "둘러보기"
+        title.font = .spoqaHanSansNeo(ofSize: 14, weight: .medium)
+        title.textColor = .whiteTwo
+
+        let line: UIView = UIView()
+        line.backgroundColor = .veryLightPinkTwo
+        
         let button: UIButton = UIButton()
-        button.setTitle("둘러보기", for: .normal)
         button.addTarget(self, action: #selector(clickGuestButton), for: .touchUpInside)
-        return button
+        
+        view.addSubviews([title, line, button])
+        title.snp.makeConstraints { make in
+            make.top.centerX.equalToSuperview()
+        }
+        line.snp.makeConstraints { make in
+            make.top.equalTo(title.snp.bottom).offset(4)
+            make.width.equalTo(62)
+            make.height.equalTo(1)
+            make.centerX.bottom.equalToSuperview()
+        }
+        button.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        return view
     }()
     
     // MARK: - Properties
@@ -65,13 +90,13 @@ class LoginViewController: DoneBaseViewController {
     }
     
     override func updateViewConstraints() {
-        view .addSubview(stackView)
+        view.addSubviews([stackView, guestButtonView])
         stackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(319.0 / 375.0)
         }
         
-        [logoImageView, googleButton, facebookButton, appleButton, guestButton].forEach { stackView.addArrangedSubview($0) }
+        [logoImageView, googleButton, facebookButton, appleButton].forEach { stackView.addArrangedSubview($0) }
         logoImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(10)
@@ -86,12 +111,13 @@ class LoginViewController: DoneBaseViewController {
         }
         appleButton.snp.makeConstraints { make in
             make.leading.trailing.height.equalTo(googleButton)
-        }
-        guestButton.snp.makeConstraints { make in
-            make.leading.trailing.height.equalTo(googleButton)
             make.bottom.equalToSuperview()
         }
         
+        guestButtonView.snp.makeConstraints { make in
+            make.top.equalTo(stackView.snp.bottom).offset(44)
+            make.centerX.equalToSuperview()
+        }
         stackView.setCustomSpacing(view.frame.height * 58 / 812, after: logoImageView)
         stackView.setCustomSpacing(view.frame.height * 13 / 812, after: googleButton)
         stackView.setCustomSpacing(view.frame.height * 13 / 812, after: facebookButton)
