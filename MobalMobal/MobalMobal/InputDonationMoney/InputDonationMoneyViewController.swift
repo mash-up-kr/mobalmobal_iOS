@@ -200,9 +200,23 @@ class InputDonationMoneyViewController: DoneBaseViewController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
+    private func showInsufficientPointAlert() {
+        let alert: UIAlertController = UIAlertController(title: "포인트 잔액 부족", message: "포인트를 먼저 충전해주세요", preferredStyle: .alert)
+        let cancelAction: UIAlertAction = UIAlertAction(title: "취소", style: .cancel)
+        let moveAction: UIAlertAction = UIAlertAction(title: "충전 페이지로", style: .default) { [weak self] _ in
+            self?.pushPointChargingVC()
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(moveAction)
+        present(alert, animated: true)
+    }
     @objc
     private func dismissNavigationController() {
         navigationController?.dismiss(animated: true, completion: nil)
+    }
+    private func pushPointChargingVC() {
+        let pointCharging: PointChargingViewController = PointChargingViewController()
+        navigationController?.pushViewController(pointCharging, animated: false)
     }
 }
 
@@ -272,6 +286,10 @@ extension InputDonationMoneyViewController: UITextFieldDelegate {
 }
 
 extension InputDonationMoneyViewController: DonateMoneyViewModelDelegate {
+    func insufficientPoint() {
+        showInsufficientPointAlert()
+    }
+    
     func failDonateMoney(message: String?) {
         print("🐻 Donation fail: \(message!)")
         showFailAlert()

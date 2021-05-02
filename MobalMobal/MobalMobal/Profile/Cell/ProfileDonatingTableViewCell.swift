@@ -124,7 +124,7 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     }
     func setLayout() {
         donateContentView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(12)
             make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(10)
         }
