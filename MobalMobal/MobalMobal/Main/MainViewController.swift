@@ -199,7 +199,6 @@ class MainViewController: DoneBaseViewController {
 extension MainViewController: UICollectionViewDelegate {
     // 스크롤 - 헤더뷰 사이즈 조정
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y)
         if scrollView.contentOffset.y <= 0 {
             if lastMinContentOffset > scrollView.contentOffset.y {
                 lastMinContentOffset = scrollView.contentOffset.y
@@ -227,8 +226,7 @@ extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 1:
-            print("🐰 진행중 도네이션 : \(indexPath.item)")
-            presentDonationDetailVC(donationId: indexPath.item)
+            presentDonationDetailVC(donationId: viewModel.posts[indexPath.item].postID)
         default:
             break
         }
@@ -374,6 +372,6 @@ extension MainViewController: MainMyDonationCollectionViewCellDelegate {
     
     func didSelectMyOngoingDonationItem(at indexPath: IndexPath) {
         print("🐰 나의 진행 도네이션 : \(indexPath.item)")
-        presentDonationDetailVC(donationId: indexPath.item)
+        presentDonationDetailVC(donationId: indexPath.item) // viewModel.posts[indexPath.item].postID
     }
 }
