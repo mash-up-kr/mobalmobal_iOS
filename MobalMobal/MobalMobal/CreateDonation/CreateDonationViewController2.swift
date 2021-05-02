@@ -24,9 +24,11 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     @IBOutlet private weak var imageView: UIView!
     @IBOutlet private weak var photoImageView: UIImageView!
     @IBOutlet private weak var imagePickerButton: UIButton!
+    @IBOutlet weak var createButtonView: UIView!
+    @IBOutlet private weak var createButtonViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet private var donationViewArray: [UIView] = []
     @IBOutlet private var textFieldArray: [UITextField] = []
-    
+
     // MARK: - IBAction
     @IBAction private func dismissButtonIsTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
@@ -50,10 +52,18 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
         self.contentView.backgroundColor = .backgroundColor
         self.imageView.backgroundColor = .darkGreyThree
         self.imageView.isHidden = true
+        setCreateButtonView()
         
         donationViewArray.forEach { $0.isHidden = true }
         
         setTextField()
+        addToolBar()
+    }
+    
+    private func setCreateButtonView() {
+        self.createButtonView.backgroundColor = .greyishBrown
+        self.createButtonView.layer.cornerRadius = self.createButtonView.frame.height/2
+        
     }
     
     private func transformAnimation(_ view: UIView, translationY: CGFloat) {
@@ -66,6 +76,10 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     
     private func setTextField() {
         self.textFieldArray.forEach { $0.delegate = self }
+    }
+    
+    private func setKeyboardNotification() {
+//        NotificationCenter.default.addObserver(self, selector: <#T##Selector#>, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     private func setDatePicker() {
@@ -94,6 +108,40 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
         }
     }
     
+    private func addToolBar() {
+        let toolBarKeyboard: UIToolbar = UIToolbar()
+        toolBarKeyboard.sizeToFit()
+        
+        let flexibleButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneButtonClicked(_:)))
+        toolBarKeyboard.items = [flexibleButton, doneButton]
+        let textField: [UITextField] = [priceTextField, startDateTextField, endDateTextField]
+        textField.forEach { $0.inputAccessoryView = toolBarKeyboard }
+    }
+    
+    @objc
+    private func doneButtonClicked(_ textField: UITextField) {
+        self.view.endEditing(true)
+    }
+    
+    private func transformTextField(textField: UITextField) {
+        if textFieldArray.count > 0 && textFieldArray.contains(textField) {
+            textFieldArray.removeAll { $0 == textField }
+            
+            filledView.insert(textField, at: 0)
+            textFieldArray.first?.superview?.isHidden = false
+            
+            for index in 0..<filledView.count {
+                let view = filledView[index].superview
+                transformAnimation(view!, translationY: CGFloat(topConstraint * (index + 1)))
+            }
+            
+            if textFieldArray.isEmpty {
+                imageView.isHidden = false
+            }
+        }
+    }
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,21 +154,7 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
 extension CreateDonationViewController2: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     
-        if textFieldArray.count > 0 && textFieldArray.contains(textField) {
-            textFieldArray.removeAll { $0 == textField }
-            
-            if textFieldArray.isEmpty {
-                imageView.isHidden = false
-            }
-            
-            filledView.insert(textField, at: 0)
-            textFieldArray.first?.superview?.isHidden = false
-            
-            for index in 0..<filledView.count {
-                let view = filledView[index].superview
-                transformAnimation(view!, translationY: CGFloat(topConstraint * (index + 1)))
-            }
-        }
+        transformTextField(textField: textField)
         return true
     }
     

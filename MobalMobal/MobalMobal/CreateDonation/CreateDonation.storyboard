@@ -221,9 +221,36 @@
                                                     <constraint firstItem="Efy-Bh-DTk" firstAttribute="top" secondItem="8CY-Ca-HHu" secondAttribute="top" id="ubJ-fv-OOP"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZI-HV-Iy6">
+                                                <rect key="frame" x="109" y="910" width="196" height="60"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwq-7J-AWD">
+                                                        <rect key="frame" x="0.0" y="0.0" width="196" height="60"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="생성하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4d-PX-lKJ">
+                                                        <rect key="frame" x="67" y="19" width="62.5" height="22"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="18"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="Qwq-7J-AWD" firstAttribute="leading" secondItem="DZI-HV-Iy6" secondAttribute="leading" id="5nK-7E-FlY"/>
+                                                    <constraint firstItem="T4d-PX-lKJ" firstAttribute="centerX" secondItem="DZI-HV-Iy6" secondAttribute="centerX" id="Ama-He-ff9"/>
+                                                    <constraint firstItem="Qwq-7J-AWD" firstAttribute="top" secondItem="DZI-HV-Iy6" secondAttribute="top" id="GVn-pH-xNN"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Qwq-7J-AWD" secondAttribute="trailing" id="Oc4-PN-hZN"/>
+                                                    <constraint firstAttribute="width" constant="196" id="br4-95-EXi"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Qwq-7J-AWD" secondAttribute="bottom" id="ole-uz-kZ2"/>
+                                                    <constraint firstAttribute="height" constant="60" id="tur-Gr-dTA"/>
+                                                    <constraint firstItem="T4d-PX-lKJ" firstAttribute="centerY" secondItem="DZI-HV-Iy6" secondAttribute="centerY" id="zNk-iR-Z7j"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.08235294118" green="0.08235294118" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstItem="DZI-HV-Iy6" firstAttribute="centerX" secondItem="b7d-1Z-KId" secondAttribute="centerX" id="0Yg-M2-53n"/>
                                             <constraint firstItem="fi9-OW-6ra" firstAttribute="trailing" secondItem="TsS-QW-o65" secondAttribute="trailing" id="5rM-EL-hP5"/>
                                             <constraint firstItem="27b-oO-gZd" firstAttribute="top" secondItem="b7d-1Z-KId" secondAttribute="top" constant="18" id="6zf-iq-WQ9"/>
                                             <constraint firstItem="iWF-bW-oIC" firstAttribute="leading" secondItem="b7d-1Z-KId" secondAttribute="leading" constant="28" id="7IU-3z-yef"/>
@@ -248,6 +275,7 @@
                                             <constraint firstItem="27b-oO-gZd" firstAttribute="centerX" secondItem="b7d-1Z-KId" secondAttribute="centerX" id="lDi-tA-4NE"/>
                                             <constraint firstAttribute="trailing" secondItem="hUP-El-VYd" secondAttribute="trailing" id="mt2-XG-zfE"/>
                                             <constraint firstItem="iWF-bW-oIC" firstAttribute="top" secondItem="hUP-El-VYd" secondAttribute="bottom" constant="177" id="n1T-1E-ZYh"/>
+                                            <constraint firstAttribute="bottom" secondItem="DZI-HV-Iy6" secondAttribute="bottom" constant="30" id="n8c-qT-mai"/>
                                             <constraint firstItem="hIy-SC-Q2O" firstAttribute="leading" secondItem="fi9-OW-6ra" secondAttribute="leading" id="tsA-An-VeM"/>
                                             <constraint firstItem="TsS-QW-o65" firstAttribute="top" secondItem="VD9-8o-5cF" secondAttribute="top" id="wRw-TM-025"/>
                                         </constraints>
@@ -276,6 +304,8 @@
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
                         <outlet property="contentView" destination="b7d-1Z-KId" id="LPG-Ql-XcY"/>
+                        <outlet property="createButtonView" destination="DZI-HV-Iy6" id="oPr-Yx-ssI"/>
+                        <outlet property="createButtonViewBottomConstraint" destination="n8c-qT-mai" id="tJZ-KP-hH2"/>
                         <outlet property="donationDescriptionView" destination="VD9-8o-5cF" id="9mP-Mv-Lam"/>
                         <outlet property="endDateTextField" destination="vC8-2U-nqp" id="8Kw-LG-mcY"/>
                         <outlet property="endDateView" destination="hIy-SC-Q2O" id="O4A-3Y-rjH"/>
