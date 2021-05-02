@@ -31,6 +31,14 @@ extension DonationDetailViewController {
         setDDayLabelConstraints()
         setProgressBarViewConstraints()
     }
+    func remakeProgressBarViewConstraints() {
+        progressBarView.snp.remakeConstraints { make in
+            make.leading.bottom.equalTo(translucentView)
+            make.width.equalToSuperview().multipliedBy(progress)
+            make.height.equalTo(2)
+        }
+    }
+    
     private func setDetailimageViewConstraints() {
         detailImageView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()

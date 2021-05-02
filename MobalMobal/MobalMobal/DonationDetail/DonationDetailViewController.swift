@@ -182,6 +182,8 @@ class DonationDetailViewController: DoneBaseViewController {
         button.addTarget(self, action: #selector(clickDonationButton), for: .touchUpInside)
         return button
     }()
+    var isUpdateConstraints: Bool = false
+    var progress: Float = 0
     
     // MARK: - Properties
     private lazy var viewModel: DonationDetailViewModel = DonationDetailViewModel(delegate: self)
@@ -199,13 +201,18 @@ class DonationDetailViewController: DoneBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
+        view.setNeedsUpdateConstraints()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setScrollViewConstraints()
-        setTopImageAreaConstraints()
-        setMidDescriptionAreaConstraints()
-        setBottomDetailInfoAreaConstraints()
+    
+    override func updateViewConstraints() {
+        if !isUpdateConstraints {
+            setScrollViewConstraints()
+            setTopImageAreaConstraints()
+            setMidDescriptionAreaConstraints()
+            setBottomDetailInfoAreaConstraints()
+        }
+        remakeProgressBarViewConstraints()
+        
         super.updateViewConstraints()
     }
     
@@ -255,16 +262,12 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
         descriptionLabel.text = description
     }
     func didProgressChanged(current: Int, goal: Int) {
-        let progress: Float = Float(current) / Float(goal)
+        progress = Float(current) / Float(goal)
         progressLabel.text = "\(Int(progress * 100))%"
         destinationNumberLabel.text = goal.changeToCommaFormat()
         fundAmountNumberLabel.text = current.changeToCommaFormat()
         
-        progressBarView.snp.remakeConstraints { make in
-            make.leading.bottom.equalTo(translucentView)
-            make.width.equalToSuperview().multipliedBy(progress)
-            make.height.equalTo(2)
-        }
+        view.setNeedsUpdateConstraints()
     }
     func didEndDateChanged(to date: Date?) {
         guard let date = date else {
