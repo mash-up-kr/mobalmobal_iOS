@@ -25,13 +25,17 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     @IBOutlet private weak var photoImageView: UIImageView!
     @IBOutlet private weak var imagePickerButton: UIButton!
     @IBOutlet weak var createButtonView: UIView!
-    @IBOutlet private weak var createButtonViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var createButtonViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet private var donationViewArray: [UIView] = []
     @IBOutlet private var textFieldArray: [UITextField] = []
 
     // MARK: - IBAction
     @IBAction private func dismissButtonIsTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func createButtonIsTapped(_ sender: UIButton) {
+        print("Button이 눌렸습니다.")
     }
     
     @IBAction private func imagePickerButtonIsTapped(_ sender: UIButton) {
@@ -45,6 +49,7 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     private var filledView: [UITextField] = []
     private let topConstraint: Int = 86
     private let datePicker: UIDatePicker = UIDatePicker()
+    private var originCreateButtonViewBottomConstraint: CGFloat = -30
  
     // MARK: - Method
     private func setup() {
@@ -58,12 +63,12 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
         
         setTextField()
         addToolBar()
+        setKeyboardNotification()
     }
     
     private func setCreateButtonView() {
         self.createButtonView.backgroundColor = .greyishBrown
         self.createButtonView.layer.cornerRadius = self.createButtonView.frame.height/2
-        
     }
     
     private func transformAnimation(_ view: UIView, translationY: CGFloat) {
@@ -79,7 +84,24 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     }
     
     private func setKeyboardNotification() {
-//        NotificationCenter.default.addObserver(self, selector: <#T##Selector#>, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(increaseButtonViewConstraint(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(decreaseButtonViewConstraint(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    private func increaseButtonViewConstraint(notification: Notification) {
+        if let userInfo = notification.userInfo, let keyboardHeight = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn) {
+                self.createButtonViewBottomConstraint.constant -= keyboardHeight.height
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc
+    private func decreaseButtonViewConstraint(notification: Notification) {
+        self.createButtonViewBottomConstraint.constant = self.originCreateButtonViewBottomConstraint
     }
     
     private func setDatePicker() {

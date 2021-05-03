@@ -31,12 +31,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWF-bW-oIC">
                                                 <rect key="frame" x="28" y="177" width="358" height="49"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="가지고 싶은 물건 이름은?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lfb-KT-a4o">
-                                                        <rect key="frame" x="0.0" y="0.0" width="263.5" height="38.5"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="가지고 싶은 물건 이름은?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lfb-KT-a4o">
+                                                        <rect key="frame" x="0.0" y="0.0" width="235.5" height="30.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fL4-jj-c5H">
                                                         <rect key="frame" x="0.0" y="48" width="358" height="1"/>
@@ -59,12 +59,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VD9-8o-5cF">
                                                 <rect key="frame" x="28" y="177" width="358" height="49"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="하고 싶은 말" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S3q-5F-8am">
-                                                        <rect key="frame" x="0.0" y="0.0" width="142.5" height="38.5"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="하고 싶은 말" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S3q-5F-8am">
+                                                        <rect key="frame" x="0.0" y="0.0" width="114.5" height="30.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BS2-aY-RKr">
                                                         <rect key="frame" x="0.0" y="48" width="358" height="1"/>
@@ -87,12 +87,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TsS-QW-o65">
                                                 <rect key="frame" x="28" y="177" width="358" height="49"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="얼마를 모아볼까요?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5K0-Jq-cNJ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="211.5" height="38.5"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="얼마를 모아볼까요?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5K0-Jq-cNJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="183.5" height="30.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EuS-nZ-3Kf">
                                                         <rect key="frame" x="0.0" y="48" width="358" height="1"/>
@@ -115,12 +115,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fi9-OW-6ra">
                                                 <rect key="frame" x="28" y="177" width="358" height="49"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="시작 날짜를 선택해주세요" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VEV-yW-dBV">
-                                                        <rect key="frame" x="0.0" y="0.0" width="267.5" height="38.5"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="시작 날짜를 선택해주세요" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VEV-yW-dBV">
+                                                        <rect key="frame" x="0.0" y="0.0" width="239.5" height="30.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSY-Z5-ahr">
                                                         <rect key="frame" x="0.0" y="48" width="358" height="1"/>
@@ -143,12 +143,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hIy-SC-Q2O">
                                                 <rect key="frame" x="28" y="177" width="358" height="49"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="종료 날짜를 선택해주세요" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vC8-2U-nqp">
-                                                        <rect key="frame" x="0.0" y="0.0" width="267.5" height="38.5"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="종료 날짜를 선택해주세요" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vC8-2U-nqp">
+                                                        <rect key="frame" x="0.0" y="0.0" width="239.5" height="30.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ja-yr-Nhj">
                                                         <rect key="frame" x="0.0" y="48" width="358" height="1"/>
