@@ -98,8 +98,7 @@ class MainViewController: DoneBaseViewController {
     // MARK: - Actions
     @objc
     private func touchProfileButton() {
-        print("🐰 프로필")
-        presentProfileVC()
+        pushProfileVC()
     }
     @objc
     private func touchNotiListButton() {
@@ -107,12 +106,9 @@ class MainViewController: DoneBaseViewController {
         presentNotiListVC()
     }
     
-    private func presentProfileVC() {
+    private func pushProfileVC() {
         let profileVC: ProfileViewController = ProfileViewController()
-        let navigation: UINavigationController = UINavigationController(rootViewController: profileVC)
-        navigation.modalPresentationStyle = .fullScreen
-        navigation.setNavigationBarHidden(false, animated: true)
-        present(navigation, animated: true)
+        navigationController?.pushViewController(profileVC, animated: true)
     }
     
     // 변경 가능
