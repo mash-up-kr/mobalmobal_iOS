@@ -207,7 +207,13 @@ class DonationDetailViewController: DoneBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
+        setNavigationItems(title: "상세 보기", backButtonImageName: "arrowChevronBigLeft", action: #selector(clickBackButton))
         view.setNeedsUpdateConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func updateViewConstraints() {
@@ -231,6 +237,10 @@ class DonationDetailViewController: DoneBaseViewController {
     private func clickDonationButton() {
         presentDonateMoneyVC()
     }
+    @objc
+    private func clickBackButton() {
+        popNavigationVC()
+    }
     
     // MARK: - Methods
     private func showParticipantsAlert() {
@@ -242,9 +252,16 @@ class DonationDetailViewController: DoneBaseViewController {
     
     private func presentDonateMoneyVC() {
         let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController(postId: viewModel.getDonationId() )
+        donateMoneyVC.donationCompletionHander = { [weak self] in
+            self?.viewModel.callDonationInfoAPI()
+        }
         let navigationController: UINavigationController = UINavigationController(rootViewController: donateMoneyVC)
         navigationController.modalPresentationStyle = .overFullScreen
         present(navigationController, animated: true)
+    }
+    
+    private func popNavigationVC() {
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -278,6 +295,7 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
     }
     func didTitleChanged(to title: String) {
         giftLabel.text = title
+        navigationItem.title = title
     }
     func didDesciptionChanged(to description: String) {
         descriptionLabel.text = description

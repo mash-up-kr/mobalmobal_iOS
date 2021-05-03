@@ -125,7 +125,7 @@ class MainViewController: DoneBaseViewController {
     
     func presentDonationDetailVC(donationId: Int) {
         let detailVC: DonationDetailViewController = DonationDetailViewController(donationId: donationId)
-        present(detailVC, animated: true)
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     // 변경 가능

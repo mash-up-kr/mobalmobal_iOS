@@ -84,6 +84,9 @@ class DonateCompleteViewController: UIViewController {
         return stackView
     }()
     
+    // MARK: - Properties
+    var donationCompletionHander: () -> Void = {}
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,6 +122,7 @@ class DonateCompleteViewController: UIViewController {
     
     @objc
     private func clickCloseButton() {
+        donationCompletionHander()
         navigationController?.dismiss(animated: true)
     }
 }
