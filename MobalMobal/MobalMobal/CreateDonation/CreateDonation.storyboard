@@ -8,6 +8,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Spoqa Han Sans Neo Medium.otf">
+            <string>SpoqaHanSansNeo-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Create Donation View Controller2-->
         <scene sceneID="W0v-bS-wWb">
@@ -18,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Pu-cw-8Hk">
-                                <rect key="frame" x="0.0" y="80" width="414" height="782"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="694"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b7d-1Z-KId">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
@@ -257,24 +262,56 @@
                                     <action selector="dismissButtonIsTapped:" destination="4Q6-B8-uHw" eventType="touchUpInside" id="Bgi-ER-TcL"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NYG-8C-HVe">
+                                <rect key="frame" x="90" y="806" width="234" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="생성하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPP-NK-vmS">
+                                        <rect key="frame" x="84" y="19" width="66.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="18"/>
+                                        <color key="textColor" red="0.14509803921568626" green="0.14509803921568626" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBQ-pk-W62">
+                                        <rect key="frame" x="0.0" y="0.0" width="234" height="60"/>
+                                        <connections>
+                                            <action selector="createButtonIsTapped:" destination="4Q6-B8-uHw" eventType="touchUpInside" id="wBX-lN-688"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="hPP-NK-vmS" firstAttribute="centerX" secondItem="NYG-8C-HVe" secondAttribute="centerX" id="4a4-iS-7JZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="cBQ-pk-W62" secondAttribute="trailing" id="79G-4A-8ze"/>
+                                    <constraint firstItem="hPP-NK-vmS" firstAttribute="centerY" secondItem="NYG-8C-HVe" secondAttribute="centerY" id="Bf3-GD-UhC"/>
+                                    <constraint firstItem="cBQ-pk-W62" firstAttribute="leading" secondItem="NYG-8C-HVe" secondAttribute="leading" id="PPb-VD-QxE"/>
+                                    <constraint firstItem="cBQ-pk-W62" firstAttribute="top" secondItem="NYG-8C-HVe" secondAttribute="top" id="eAL-u0-Ghe"/>
+                                    <constraint firstAttribute="bottom" secondItem="cBQ-pk-W62" secondAttribute="bottom" id="epX-Dn-tje"/>
+                                    <constraint firstAttribute="height" constant="60" id="xRN-C2-fEM"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eb0-HB-4IH"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                        <color key="backgroundColor" systemColor="labelColor"/>
                         <constraints>
+                            <constraint firstItem="NYG-8C-HVe" firstAttribute="bottom" secondItem="ubp-hp-Cf6" secondAttribute="bottom" constant="-30" id="0gc-w9-FuO"/>
                             <constraint firstItem="eb0-HB-4IH" firstAttribute="trailing" secondItem="L8L-NT-9oK" secondAttribute="trailing" id="0mC-UU-d5g"/>
                             <constraint firstItem="K1K-4L-BqZ" firstAttribute="top" secondItem="eb0-HB-4IH" secondAttribute="top" id="2vc-gD-My4"/>
-                            <constraint firstItem="1Pu-cw-8Hk" firstAttribute="bottom" secondItem="eb0-HB-4IH" secondAttribute="bottom" id="OEm-TV-4lq"/>
+                            <constraint firstItem="1Pu-cw-8Hk" firstAttribute="bottom" secondItem="eb0-HB-4IH" secondAttribute="bottom" constant="-80" id="OEm-TV-4lq"/>
                             <constraint firstItem="1Pu-cw-8Hk" firstAttribute="trailing" secondItem="eb0-HB-4IH" secondAttribute="trailing" id="PRa-JW-Pt3"/>
-                            <constraint firstItem="1Pu-cw-8Hk" firstAttribute="top" secondItem="ubp-hp-Cf6" secondAttribute="top" constant="80" id="UHO-Om-iBD"/>
+                            <constraint firstItem="1Pu-cw-8Hk" firstAttribute="top" secondItem="ubp-hp-Cf6" secondAttribute="top" constant="88" id="UHO-Om-iBD"/>
                             <constraint firstItem="wKc-3m-if5" firstAttribute="top" secondItem="eb0-HB-4IH" secondAttribute="top" constant="18" id="UbH-i1-0ZY"/>
                             <constraint firstAttribute="trailing" secondItem="K1K-4L-BqZ" secondAttribute="trailing" constant="6" id="UcI-7L-HWa"/>
+                            <constraint firstItem="eb0-HB-4IH" firstAttribute="trailing" secondItem="NYG-8C-HVe" secondAttribute="trailing" constant="90" id="fOT-Mf-Hzj"/>
                             <constraint firstItem="wKc-3m-if5" firstAttribute="centerX" secondItem="ubp-hp-Cf6" secondAttribute="centerX" id="irl-tc-sog"/>
+                            <constraint firstItem="NYG-8C-HVe" firstAttribute="leading" secondItem="eb0-HB-4IH" secondAttribute="leading" constant="90" id="k4Y-ip-z3h"/>
                             <constraint firstItem="1Pu-cw-8Hk" firstAttribute="leading" secondItem="eb0-HB-4IH" secondAttribute="leading" id="o5i-xb-1W2"/>
                             <constraint firstItem="L8L-NT-9oK" firstAttribute="top" secondItem="K1K-4L-BqZ" secondAttribute="top" id="vQB-ho-CnW"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="contentView" destination="b7d-1Z-KId" id="LPG-Ql-XcY"/>
+                        <outlet property="createButtonView" destination="NYG-8C-HVe" id="HO9-HU-O1B"/>
+                        <outlet property="createButtonViewBottomConstraint" destination="0gc-w9-FuO" id="ovi-xs-aUX"/>
                         <outlet property="donationDescriptionView" destination="VD9-8o-5cF" id="9mP-Mv-Lam"/>
                         <outlet property="endDateTextField" destination="vC8-2U-nqp" id="8Kw-LG-mcY"/>
                         <outlet property="endDateView" destination="hIy-SC-Q2O" id="O4A-3Y-rjH"/>
@@ -307,11 +344,11 @@
     <resources>
         <image name="iconlyLightCamera" width="46" height="44"/>
         <image name="menuCloseBig" width="44" height="44"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
