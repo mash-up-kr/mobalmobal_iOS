@@ -7,13 +7,12 @@
 
 import Foundation
 
-struct CreateDonationResponse {
+struct CreateDonationResponse: Codable {
     let code: Int
     let data: CreateDonationData
-    
 }
 
-struct CreateDonationData {
+struct CreateDonationData: Codable {
     let postId: Int
     let userId: Int
     let title: String

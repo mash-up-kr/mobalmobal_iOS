@@ -13,6 +13,7 @@ enum DoneService {
     case getMain(item: Int, limit: Int)
     case getDetail(posts: Int)
     case donate(post: Int, money: Int)
+    case createDonation(donation: CreateDonation)
     case getUserProfile
     case getMyDonation
     case getMyDonate
@@ -46,6 +47,8 @@ extension DoneService: TargetType {
             return "/donate/my"
         case .charge:
             return "/charge"
+        case .createDonation(donation: let donation):
+            return "/posts"
         }
     }
     
@@ -53,7 +56,7 @@ extension DoneService: TargetType {
         switch self {
         case .getMain, .getDetail, .getUserProfile, .getMyDonation, .getMyDonate:
             return .get
-        case .login, .donate, .charge:
+        case .login, .donate, .charge, .createDonation:
             return .post
         }
     }
@@ -76,13 +79,22 @@ extension DoneService: TargetType {
                                                                 "charged_at": chargedAt]
                                                , bodyEncoding: JSONEncoding.default
                                                , urlParameters: [:])
+        case .createDonation(donation: let donation):
+            return .requestCompositeParameters(bodyParameters:
+                                                [ "title": donation.title,
+                                                  "description": donation.description,
+                                                  "post_image": donation.postImage,
+                                                  "goal": donation.goal,
+                                                  "started_at": donation.startedAt,
+                                                  "end_at": donation.endAt
+            ], bodyEncoding: JSONEncoding.default, urlParameters: [:])
         }
     }
     var headers: [String: String]? {
         switch self {
         case .login:
             return nil
-        case .getMain, .getDetail, .donate, .getUserProfile, .getMyDonate, .getMyDonation, .charge:
+        case .getMain, .getDetail, .donate, .getUserProfile, .getMyDonate, .getMyDonation, .charge, .createDonation:
 //            guard let token = token else { return nil }
             return ["authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2MTc3ODIzNzgsImV4cCI6MTY0OTMzOTk3OCwiaXNzIjoiaHllb25pIn0.EylJ0O9zsOePeB6WmQ5-Xfm6X63L29s6iUxZL6dxzdA"]
         }
