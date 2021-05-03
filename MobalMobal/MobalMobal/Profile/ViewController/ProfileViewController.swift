@@ -23,6 +23,7 @@ class ProfileViewController: DoneBaseViewController {
     private let sectionHeaderCellIdentifier: String = "SectionHeaderCell"
     private lazy var numberOfDonations: [Int] = [0, 0, 0]     // 내연, 후원중, 종료 갯수
     private let profileViewModel: ProfileViewModel = ProfileViewModel()
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,12 +81,11 @@ class ProfileViewController: DoneBaseViewController {
         }
     }
     private func setNavigation() {
-
+        navigationController?.navigationBar.barStyle = .default
         self.navigationController?.navigationBar.barTintColor = .blackFour
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.isNavigationBarHidden = false
         
-        self.navigationItem.title = profileViewModel.getUserNickname()
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.whiteTwo]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
         
@@ -126,8 +126,6 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("🍎🍎🍎🍎", profileViewModel.myInprogressResponseModel.count)
-        print("🍎🍎🍎🍎", profileViewModel.myExpiredResponseModel.count)
         if !checkDynamicSection(section) {
             return 1
         } else {
@@ -152,7 +150,8 @@ extension ProfileViewController: UITableViewDataSource {
             guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
             myDonationCell.selectionStyle = .none
             
-            myDonationCell.myDonationViewModel.setMyDonationModel(profileViewModel.mydonationResponseModel)
+            myDonationCell.myDonationViewModel.setMyInprogressModel(profileViewModel.myInprogressResponseModel)
+            myDonationCell.myDonationViewModel.setMyExpiredModel(profileViewModel.myExpiredResponseModel)
             myDonationCell.myDonationViewModel.setMyDonateModel(profileViewModel.myDonateResponseModel)
             return myDonationCell
         }
@@ -167,7 +166,6 @@ extension ProfileViewController: UITableViewDataSource {
             } else {
                 donatingCell.viewModel.setMyDonationData(profileViewModel.myExpiredResponseModel[indexPath.row])
             }
-            
             return donatingCell
         } else {        // 내가 후원한 도네
             guard let donatingCell: ProfileDonatingTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: donatingCellIdentifier, for: indexPath) as? ProfileDonatingTableViewCell
@@ -218,9 +216,10 @@ extension ProfileViewController: UITableViewDelegate {
 
 // MARK: - ProfileViewModelDelegate
 extension ProfileViewController: ProfileViewModelDelegate {
-    func tableViewUpdate(section: IndexSet) {
-        self.mainTableView.reloadSections(section, with: .automatic)
-        self.navigationItem.title = profileViewModel.getUserNickname()
+    func tableViewReload() {
+        let sectionSet: IndexSet = IndexSet(0...4)
+        self.mainTableView.reloadSections(sectionSet, with: .automatic)
+        self.title = profileViewModel.getUserNickname()!
     }
 }
 

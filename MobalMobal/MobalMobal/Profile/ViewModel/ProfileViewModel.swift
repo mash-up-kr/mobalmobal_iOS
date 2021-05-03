@@ -9,24 +9,12 @@ import Alamofire
 import Foundation
 
 protocol ProfileViewModelDelegate: AnyObject {
-    func tableViewUpdate(section: IndexSet)
+    func tableViewReload()
 }
 class ProfileViewModel {
     // MARK: - Properties
     weak var mainDelegate: ProfileViewModelDelegate?
-    var profileResponseModel: ProfileData? {
-        didSet {
-            let sectionRange: IndexSet = IndexSet(0...0)
-            mainDelegate?.tableViewUpdate(section: sectionRange)
-        }
-    }
-    // 내가 열은 도네 (종료 & 내연도네)
-    var mydonationResponseModel: MydonationData? {
-        didSet {
-            let sectionRange: IndexSet = IndexSet(1...4)
-            mainDelegate?.tableViewUpdate(section: sectionRange)
-        }
-    }
+    var profileResponseModel: ProfileData?
     var myInprogressResponseModel: [MydonationPost] = [MydonationPost]()
     var myExpiredResponseModel: [MydonationPost] = [MydonationPost]()
     var myDonateResponseModel: [Donate] = [Donate]()
@@ -63,11 +51,10 @@ class ProfileViewModel {
                 self.myDonateResponseModel.append(donate)
             }
         }
-        let sectionRange: IndexSet = IndexSet(1...4)
-        self.mainDelegate?.tableViewUpdate(section: sectionRange)
+        self.mainDelegate?.tableViewReload()
     }
     
-    //내가 열은 도네를 Inprogress와 expired로 구분
+    // 내가 연 도네를 Inprogress와 expired로 구분
     func splitModelInprogressExpired(_ response: ParseResponse<MydonationData>) {
         for post in response.data!.posts {
             // 날짜가 지났으면 true반환 -> expired에넣음
@@ -89,20 +76,15 @@ class ProfileViewModel {
     func getUserProfileImage() -> String? {
         profileResponseModel?.user.profileImage
     }
-    func getMydonation() -> MydonationData? {
-        mydonationResponseModel
-    }
-    func checkOutDated(date: Date) -> Bool {
-        // 날자가 지났으면 true반환 -> 종료된도네에 넣는다.
-        Date().getDueDay(of: date) < 0 ? true : false
-    }
     func getMyDonate() -> [Donate]? {
         myDonateResponseModel
     }
     func getPostId(section: Int, row: Int) -> Int? {
-        if section == 2 || section == 4 {
-            return mydonationResponseModel?.posts[row].postId
-        }else {
+        if section == 2 {
+            return myInprogressResponseModel[row].postId
+        } else if section == 4 {
+            return myExpiredResponseModel[row].postId
+        } else {
             return myDonateResponseModel[row].postId
         }
     }
