@@ -72,11 +72,10 @@ extension DonationDetailViewController {
     
     // MARK: - Mid Area
     func setMidDescriptionAreaConstraints() {
-        nameGiftGroupView.addSubviews([nameLabel, zosaLabel, giftLabel, wantLabel])
+        nameGiftGroupView.addSubviews([nameLabel, wantLabel, giftLabel])
         setNameLabelConstraints()
-        setZosaLabelConstraints()
-        setGiftLabelConstraints()
         setWantLabelConstraints()
+        setGiftLabelConstraints()
         
         contentView.addSubviews([profileImageView, nameGiftGroupView, descriptionLabel])
         setProfileImageViewConstraints()
@@ -88,9 +87,9 @@ extension DonationDetailViewController {
             make.top.leading.equalToSuperview()
         }
     }
-    private func setZosaLabelConstraints() {
-        zosaLabel.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.trailing).offset(5)
+    private func setWantLabelConstraints() {
+        wantLabel.snp.makeConstraints { make in
+            make.leading.equalTo(nameLabel.snp.trailing).offset(4)
             make.trailing.lessThanOrEqualToSuperview()
             make.bottom.equalTo(nameLabel)
         }
@@ -98,14 +97,7 @@ extension DonationDetailViewController {
     private func setGiftLabelConstraints() {
         giftLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(6)
-            make.leading.bottom.equalToSuperview()
-        }
-    }
-    private func setWantLabelConstraints() {
-        wantLabel.snp.makeConstraints { make in
-            make.leading.equalTo(giftLabel.snp.trailing).offset(4)
-            make.trailing.equalToSuperview()
-            make.bottom.equalTo(giftLabel)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
     private func setProfileImageViewConstraints() {

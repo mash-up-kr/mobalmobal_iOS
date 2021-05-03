@@ -32,7 +32,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let translucentView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = .black70
+        view.backgroundColor = .black40
         return view
     }()
     let progressLabel: UILabel = {
@@ -69,15 +69,16 @@ class DonationDetailViewController: DoneBaseViewController {
     let nameLabel: UILabel = {
         let label: UILabel = UILabel()
         label.textAlignment = .left
+        label.lineBreakMode = .byTruncatingTail
         label.text = "누군가"
         label.font = .spoqaHanSansNeo(ofSize: 16, weight: .medium)
         label.textColor = .white
         return label
     }()
-    let zosaLabel: UILabel = {
+    let wantLabel: UILabel = {
         let label: UILabel = UILabel()
         label.textAlignment = .left
-        label.text = "는"
+        label.text = "가 원하는"
         label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
         label.textColor = .white
         return label
@@ -85,19 +86,12 @@ class DonationDetailViewController: DoneBaseViewController {
     let giftLabel: UILabel = {
         let label: UILabel = UILabel()
         label.textAlignment = .left
+        label.lineBreakMode = .byTruncatingTail
         label.text = "선물"
         label.font = .spoqaHanSansNeo(ofSize: 16, weight: .medium)
         label.textColor = .wheat
         label.drawShadow(color: .yellowTan80, blur: 10)
         label.layer.masksToBounds = false
-        return label
-    }()
-    let wantLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.textAlignment = .left
-        label.text = "가지고 싶어요"
-        label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
-        label.textColor = .white
         return label
     }()
     let descriptionLabel: UILabel = {
@@ -265,6 +259,7 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
     }
     func didPublisherChanged(to nickname: String) {
         nameLabel.text = nickname
+        
         donationButton.setTitle("\(nickname)에게 후원하기", for: .normal)
     }
     func didTitleChanged(to title: String) {
