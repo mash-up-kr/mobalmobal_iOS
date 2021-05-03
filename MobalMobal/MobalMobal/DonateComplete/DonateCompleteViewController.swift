@@ -21,6 +21,7 @@ class DonateCompleteViewController: UIViewController {
         label.text = nickname
         label.font = .spoqaHanSansNeo(ofSize: 19, weight: .bold)
         label.textColor = .white
+        label.textAlignment = .right
         return label
     }()
     let zosaLabel: UILabel = {
@@ -28,6 +29,7 @@ class DonateCompleteViewController: UIViewController {
         label.text = "는"
         label.font = .spoqaHanSansNeo(ofSize: 19, weight: .regular)
         label.textColor = .white
+        label.textAlignment = .left
         return label
     }()
     lazy var giftLabel: UILabel = {
@@ -35,6 +37,8 @@ class DonateCompleteViewController: UIViewController {
         label.text = "\(giftName) 가지고 싶어요"
         label.font = .spoqaHanSansNeo(ofSize: 19, weight: .regular)
         label.textColor = .white
+        label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
     lazy var completeImageView: UIImageView = {
@@ -47,6 +51,7 @@ class DonateCompleteViewController: UIViewController {
         label.text = "후원완료"
         label.font = .spoqaHanSansNeo(ofSize: 22, weight: .bold)
         label.textColor = .darkCream
+        label.textAlignment = .center
         return label
     }()
     lazy var moneyLabel: UILabel = {
@@ -54,6 +59,7 @@ class DonateCompleteViewController: UIViewController {
         label.text = "\(money)원"
         label.font = .spoqaHanSansNeo(ofSize: 38, weight: .bold)
         label.textColor = .white
+        label.textAlignment = .center
         return label
     }()
     
@@ -131,7 +137,7 @@ class DonateCompleteViewController: UIViewController {
         stackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(44)
-        }        
+        }
     }
     
     @objc
