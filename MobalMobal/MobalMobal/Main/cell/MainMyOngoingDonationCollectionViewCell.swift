@@ -8,6 +8,13 @@
 import SnapKit
 import UIKit
 
+struct MainMyDonationModel {
+    let title: String
+    let progress: Float
+    let money: Int
+    let indexPathRow: Int
+}
+
 class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
     // MARK: - UIComponents
     let cardView: UIView = {
@@ -39,8 +46,14 @@ class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    private var model: MainMyDonationModel {
+        didSet {
+            populate()
+        }
+    }
     // MARK: - Initializer
     override init(frame: CGRect) {
+        self.model = MainMyDonationModel(title: "default", progress: 0.0, money: 0, indexPathRow: 0)
         super.init(frame: frame)
         setLayout()
     }
@@ -50,6 +63,13 @@ class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
+    func setModel(title: String, money: Int, progress: Float, indexPath: Int) {
+        self.model = MainMyDonationModel(title: title, progress: progress, money: money, indexPathRow: indexPath)
+    }
+    private func populate() {
+        donationTitleLabel.text = model.title
+        donationPointLabel.text = "\(model.money)"
+    }
     private func setLayout() {
         [cardView].forEach { contentView.addSubview($0) }
         

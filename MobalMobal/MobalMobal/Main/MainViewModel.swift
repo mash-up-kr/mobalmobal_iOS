@@ -10,7 +10,7 @@ import Foundation
 class MainViewModel {
     // MARK: - property
     var posts: [MainPost] = []
-    
+    var myDonations: [MydonationPost] = []
     var limit: Int = 10
     var item: Int = Int.max
     var isEnd: Bool = false
@@ -35,5 +35,19 @@ class MainViewModel {
             print(error)
             completion(.failure(.unknown))
         }
+    }
+    
+    func callMyDonationAPI(completion: @escaping (Result<Void, DoneError>) -> Void ) {
+        DoneProvider.getMyDonation { [weak self] response in
+            guard let posts = response.data?.posts else {
+                completion(.failure(.unknown))
+                return
+            }
+            self?.myDonations = posts
+        } failure: { err in
+            print(err.localizedDescription)
+            completion(.failure(.unknown))
+        }
+
     }
 }

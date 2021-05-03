@@ -27,10 +27,11 @@ class ProfileViewModel {
             mainDelegate?.tableViewUpdate(section: sectionRange)
         }
     }
-    // 내가 후원한 도네
+    var myInprogressResponseModel: [MydonationPost] = [MydonationPost]()
+    var myExpiredResponseModel: [MydonationPost] = [MydonationPost]()
     var myDonateResponseModel: [Donate] = [Donate]()
     
-    // MARK: - Methods
+    // MARK: - API call
     func getProfileResponse() {
         DoneProvider.getUserProfile() { [weak self] response in
             self?.profileResponseModel = response.data
@@ -40,7 +41,7 @@ class ProfileViewModel {
     }
     func getMydontaionResponse() {
         DoneProvider.getMyDonation { [weak self] response in
-            self?.mydonationResponseModel = response.data
+            self?.splitModelInprogressExpired(response)
         } failure: { err in
             print(err.localizedDescription)
         }
@@ -52,6 +53,7 @@ class ProfileViewModel {
             print(err.localizedDescription)
         }
     }
+    
     // 후원중인도네 중복체크
     func myDonateResponseDuplicateCheck(_ response: ParseResponse<MyDonates>) {
         var donationPostId: Set<Int> = Set<Int>()
@@ -64,6 +66,20 @@ class ProfileViewModel {
         let sectionRange: IndexSet = IndexSet(1...4)
         self.mainDelegate?.tableViewUpdate(section: sectionRange)
     }
+    
+    //내가 열은 도네를 Inprogress와 expired로 구분
+    func splitModelInprogressExpired(_ response: ParseResponse<MydonationData>) {
+        for post in response.data!.posts {
+            // 날짜가 지났으면 true반환 -> expired에넣음
+            if Date().getDueDay(of: post.endAt) < 0 {
+                myExpiredResponseModel.append(post)
+            } else {
+                myInprogressResponseModel.append(post)
+            }
+        }
+    }
+    
+    // MARK: - Methods
     func getUserNickname() -> String? {
         profileResponseModel?.user.nickname
     }
