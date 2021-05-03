@@ -187,6 +187,7 @@ class DonationDetailViewController: DoneBaseViewController {
     
     // MARK: - Properties
     private lazy var viewModel: DonationDetailViewModel = DonationDetailViewModel(delegate: self)
+    let placeholderImage: UIImage? = UIImage(named: "profile_default")!
     
     // MARK: - Initializer
     init(donationId: Int) {
@@ -246,10 +247,10 @@ class DonationDetailViewController: DoneBaseViewController {
 extension DonationDetailViewController: DonationDetailViewModelDelegate {
     func didImageChanged(to url: String?) {
         guard let url = url else {
-            detailImageView.image = UIImage(named: "doneImage")
+            detailImageView.image = placeholderImage
             return
         }
-        detailImageView.kf.setImage(with: URL(string: url))
+        detailImageView.kf.setImage(with: URL(string: url), placeholder: placeholderImage)
     }
     func didPublisherChanged(to nickname: String) {
         nameLabel.text = nickname
