@@ -10,11 +10,15 @@ import Foundation
 class MainViewModel {
     // MARK: - property
     var posts: [MainPost] = []
-    var myDonations: [MydonationPost] = []
+    var myDonations: [MydonationPost] = []  //진행 중인 내 도네이션
     var limit: Int = 10
     var item: Int = Int.max
     var isEnd: Bool = false
+    weak var delegate: MainMyOngoingDonationDelegate?
     
+    var getMyDonationsCount: Int {
+        return myDonations.count
+    }
     // MARK: - API Method
     func callMainInfoApi(completion: @escaping (Result<Void, DoneError>) -> Void) {
         DoneProvider.getMain(item: item, limit: limit) { response in
@@ -43,11 +47,22 @@ class MainViewModel {
                 completion(.failure(.unknown))
                 return
             }
-            self?.myDonations = posts
+            self?.checkInprogressDonation(posts)
+            self?.delegate?.populate()
+            completion(.success(()))
         } failure: { err in
             print(err.localizedDescription)
             completion(.failure(.unknown))
         }
-
+    }
+    
+    func checkInprogressDonation(_ response: [MydonationPost]) {
+        for post in response{
+            // 날짜가 지났으면 true반환 -> expired에넣음
+            if Date().getDueDay(of: post.endAt) >= 0 {
+                self.myDonations.append(post)
+            }
+        }
+        print(self.myDonations.count, "🤨🤨🤨🤨🤨")
     }
 }

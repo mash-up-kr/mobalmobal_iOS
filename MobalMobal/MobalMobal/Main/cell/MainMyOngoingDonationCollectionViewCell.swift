@@ -15,7 +15,10 @@ struct MainMyDonationModel {
     let indexPathRow: Int
 }
 
-class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
+protocol MainMyOngoingDonationDelegate: AnyObject {
+    func populate()
+}
+class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell, MainMyOngoingDonationDelegate {
     // MARK: - UIComponents
     let cardView: UIView = {
         let view: UIView = UIView(frame: .zero)
@@ -46,6 +49,7 @@ class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    let viewModel: MainViewModel = MainViewModel()
     private var model: MainMyDonationModel {
         didSet {
             populate()
@@ -56,6 +60,7 @@ class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
         self.model = MainMyDonationModel(title: "default", progress: 0.0, money: 0, indexPathRow: 0)
         super.init(frame: frame)
         setLayout()
+        viewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -66,7 +71,8 @@ class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
     func setModel(title: String, money: Int, progress: Float, indexPath: Int) {
         self.model = MainMyDonationModel(title: title, progress: progress, money: money, indexPathRow: indexPath)
     }
-    private func populate() {
+    func populate() {
+        print("🥳🥳🥳🥳 main my onging cell setting 🥳🥳🥳🥳🥳")
         donationTitleLabel.text = model.title
         donationPointLabel.text = "\(model.money)"
     }

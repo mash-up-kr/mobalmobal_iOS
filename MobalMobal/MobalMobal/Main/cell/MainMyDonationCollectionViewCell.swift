@@ -36,14 +36,17 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     weak var delegate: MainMyDonationCollectionViewCellDelegate?
+    
     let buttonCellIdentifier: String = "MainAddMyDonationCollectionViewCell"
     let cardCellIdentifier: String = "MainMyOngoingDonationCollectionViewCell"
+    let viewModel: MainViewModel = MainViewModel()
     
     // MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
         setCollectionView()
         setLayout()
+        callAPI()
     }
     
     required init?(coder: NSCoder) {
@@ -51,6 +54,16 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
+    private func callAPI(){
+        viewModel.callMyDonationAPI { result in
+            switch result {
+            case .success:
+                self.collectionView.reloadData()
+            case .failure(.client), .failure(.noData), .failure(.server), .failure(.unknown):
+                print("fail")
+            }
+        }
+    }
     private func setCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -98,7 +111,7 @@ extension MainMyDonationCollectionViewCell: UICollectionViewDataSource {
         case 0:
             return 1
         case 1:
-            return 10
+            return viewModel.getMyDonationsCount
         default:
             return 0
         }
