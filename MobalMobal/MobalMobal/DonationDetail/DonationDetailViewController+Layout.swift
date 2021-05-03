@@ -91,6 +91,7 @@ extension DonationDetailViewController {
     private func setZosaLabelConstraints() {
         zosaLabel.snp.makeConstraints { make in
             make.leading.equalTo(nameLabel.snp.trailing).offset(5)
+            make.trailing.lessThanOrEqualToSuperview()
             make.bottom.equalTo(nameLabel)
         }
     }

@@ -59,8 +59,8 @@ class DonationDetailViewController: DoneBaseViewController {
     
     // Mid Description Area
     let nameGiftGroupView: UIView = UIView()
-    let profileImageView: UIImageView = {
-        let imageView: UIImageView = UIImageView(image: UIImage(named: "profile_default"))
+    lazy var profileImageView: UIImageView = {
+        let imageView: UIImageView = UIImageView(image: placeholderImage)
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 29
         imageView.layer.masksToBounds = true
@@ -68,6 +68,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let nameLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "누군가"
         label.font = .spoqaHanSansNeo(ofSize: 16, weight: .medium)
         label.textColor = .white
@@ -75,6 +76,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let zosaLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "는"
         label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
         label.textColor = .white
@@ -82,6 +84,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let giftLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "선물"
         label.font = .spoqaHanSansNeo(ofSize: 16, weight: .medium)
         label.textColor = .wheat
@@ -91,6 +94,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let wantLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "가지고 싶어요"
         label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
         label.textColor = .white
@@ -98,6 +102,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let descriptionLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "한마디"
         label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
         label.textColor = .white
@@ -113,6 +118,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let destinationTitleLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "목표 금액"
         label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
         label.textColor = .veryLightPink
@@ -120,6 +126,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let destinationNumberLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "0"
         label.font = .spoqaHanSansNeo(ofSize: 16, weight: .bold)
         label.textColor = UIColor.white.withAlphaComponent(0.5)
@@ -127,6 +134,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let fundAmountTitleLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "모금 금액"
         label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
         label.textColor = .veryLightPink
@@ -134,6 +142,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let fundAmountNumberLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "0"
         label.font = .spoqaHanSansNeo(ofSize: 16, weight: .bold)
         label.textColor = .lightBluishGreen
@@ -141,6 +150,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
 //    let participantsTitleLabel: UILabel = {
 //        let label: UILabel = UILabel()
+//        label.textAlignment = .left
 //        label.text = "참여자"
 //        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
 //        label.textColor = .veryLightPink
@@ -148,6 +158,7 @@ class DonationDetailViewController: DoneBaseViewController {
 //    }()
 //    let participantsCountLabel: UILabel = {
 //        let label: UILabel = UILabel()
+    //        label.textAlignment = .left
 //        label.text = ""
 //        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
 //        label.textColor = .veryLightPink
