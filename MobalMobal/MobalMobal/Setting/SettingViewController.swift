@@ -17,6 +17,7 @@ enum SettingURL: String {
 
 class SettingViewController: DoneBaseViewController {
     // MARK: - UIView
+    /* 1차배포 제외대상
     private let myAccountLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = .spoqaHanSansNeo(ofSize: 15, weight: .regular)
@@ -29,6 +30,7 @@ class SettingViewController: DoneBaseViewController {
         button.addTarget(self, action: #selector(myAccountAction), for: .touchUpInside)
         return button
     }()
+ */
     private let openSourceLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = .spoqaHanSansNeo(ofSize: 15, weight: .regular)
@@ -91,7 +93,6 @@ class SettingViewController: DoneBaseViewController {
         webVC.webURL = SettingURL.openSource.rawValue
         webVC.navTitle = "오픈소스 약관"
         self.present(webVC, animated: true, completion: nil)
-//        self.navigationController?.pushViewController(webVC, animated: true)
     }
     @objc
     func termsAndConditionAction() {
@@ -99,7 +100,6 @@ class SettingViewController: DoneBaseViewController {
         webVC.webURL = SettingURL.termsAndConditioin.rawValue
         webVC.navTitle = "이용약관"
         self.present(webVC, animated: true, completion: nil)
-//        self.navigationController?.pushViewController(webVC, animated: true)
     }
     @objc
     func inquiryAction() {
@@ -113,8 +113,8 @@ class SettingViewController: DoneBaseViewController {
     private func setup() {
         self.view.backgroundColor = .backgroundColor
         self.setNavigationController()
-        self.view.addSubviews([myAccountLabel, openSourceLabel, termsAndConditionLabel, inquiryLabel])
-        self.view.addSubviews([myAccountButton, openSourceButton, termsAndConditionButton, inquiryButton])
+        self.view.addSubviews([openSourceLabel, termsAndConditionLabel, inquiryLabel])
+        self.view.addSubviews([openSourceButton, termsAndConditionButton, inquiryButton])
         self.setConstraint()
     }
     
@@ -135,6 +135,7 @@ class SettingViewController: DoneBaseViewController {
     }
     
     private func setConstraint() {
+        /* 1차배포 제외대상
         myAccountLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(28)
             make.leading.equalToSuperview().offset(21)
@@ -143,13 +144,14 @@ class SettingViewController: DoneBaseViewController {
             make.top.bottom.equalTo(myAccountLabel)
             make.leading.trailing.equalToSuperview().inset(21)
         }
+ */
         openSourceLabel.snp.makeConstraints { make in
-            make.top.equalTo(myAccountLabel.snp.bottom).offset(31)
-            make.leading.equalTo(myAccountLabel)
+            make.top.equalToSuperview().offset(28)
+            make.leading.equalToSuperview().offset(21)
         }
         openSourceButton.snp.makeConstraints { make in
             make.top.bottom.equalTo(openSourceLabel)
-            make.leading.trailing.equalTo(myAccountButton)
+            make.leading.trailing.equalToSuperview().inset(21)
         }
         termsAndConditionLabel.snp.makeConstraints { make in
             make.top.equalTo(openSourceLabel.snp.bottom).offset(31)
