@@ -58,17 +58,17 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
         self.contentView.backgroundColor = .backgroundColor
         self.imageView.backgroundColor = .darkGreyThree
         self.imageView.isHidden = true
-        setCreateButtonView()
+        self.createButtonView.isHidden = true
         
         donationViewArray.forEach { $0.isHidden = true }
-        
+        setCreateButtonView()
         setTextField()
         addToolBar()
         setKeyboardNotification()
     }
     
     private func setCreateButtonView() {
-        self.createButtonView.backgroundColor = .greyishBrown
+        self.createButtonView.backgroundColor = .lightBluishGreen
         self.createButtonView.layer.cornerRadius = self.createButtonView.frame.height/2
     }
     
@@ -124,6 +124,14 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
         datePicker.addTarget(self, action: #selector(updateTextField), for: .valueChanged)
     }
     
+    private func checkCreateButtonViewValidation() {
+        if !(productTextField.text!.isEmpty) && !(priceTextField.text!.isEmpty) && !(startDateTextField.text!.isEmpty) && !(endDateTextField.text!.isEmpty) {
+            self.createButtonView.isHidden = false
+        } else {
+            self.createButtonView.isHidden = true
+        }
+    }
+    
     @objc
     func updateTextField() {
         let dateFormatter: DateFormatter = DateFormatter()
@@ -133,6 +141,7 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
         if startDateTextField.isEditing {
             startDateTextField.text = datePickerDate
         } else if endDateTextField.isEditing {
+            datePicker.minimumDate = dateFormatter.date(from: startDateTextField.text ?? "")
             endDateTextField.text = datePickerDate
         }
     }
@@ -142,14 +151,22 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
         toolBarKeyboard.sizeToFit()
         
         let flexibleButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneButtonClicked(_:)))
+        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneButtonClicked))
         toolBarKeyboard.items = [flexibleButton, doneButton]
         let textField: [UITextField] = [priceTextField, startDateTextField, endDateTextField]
         textField.forEach { $0.inputAccessoryView = toolBarKeyboard }
     }
     
     @objc
-    private func doneButtonClicked(_ textField: UITextField) {
+    private func doneButtonClicked() {
+        if startDateTextField.isEditing {
+            transformTextField(textField: startDateTextField)
+        } else if endDateTextField.isEditing {
+            transformTextField(textField: endDateTextField)
+        } else {
+            transformTextField(textField: priceTextField)
+        }
+        checkCreateButtonViewValidation()
         self.view.endEditing(true)
     }
     
@@ -184,6 +201,8 @@ extension CreateDonationViewController2: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     
         transformTextField(textField: textField)
+        checkCreateButtonViewValidation()
+        self.view.endEditing(true)
         return true
     }
     
