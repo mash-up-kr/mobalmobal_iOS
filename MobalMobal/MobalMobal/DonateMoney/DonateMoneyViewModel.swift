@@ -67,10 +67,10 @@ class DonateMoneyViewModel {
         self.amount = amount
         
         // 잔액 부족
-//        if checkChargedPoint() < amount {
-//            delegate?.insufficientPoint()
-//            return
-//        }
+        if checkChargedPoint() < amount {
+            delegate?.insufficientPoint()
+            return
+        }
         // 정상 작동
         DoneProvider.donate(amount, to: postId) { [weak self] response in
             self?.donateData = response.data
