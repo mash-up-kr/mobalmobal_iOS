@@ -228,7 +228,7 @@ extension MainViewController: UICollectionViewDelegate {
         switch indexPath.section {
         case 1:
             print("🐰 진행중 도네이션 : \(indexPath.item)")
-            presentDonationDetailVC(donationId: indexPath.item)
+            presentDonationDetailVC(donationId: viewModel.posts[indexPath.item].postID)
         default:
             break
         }

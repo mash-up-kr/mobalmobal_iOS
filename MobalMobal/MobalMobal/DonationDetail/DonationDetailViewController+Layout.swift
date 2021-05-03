@@ -103,6 +103,7 @@ extension DonationDetailViewController {
     private func setWantLabelConstraints() {
         wantLabel.snp.makeConstraints { make in
             make.leading.equalTo(giftLabel.snp.trailing).offset(4)
+            make.trailing.equalToSuperview()
             make.bottom.equalTo(giftLabel)
         }
     }
@@ -116,6 +117,7 @@ extension DonationDetailViewController {
     private func setNameGiftGroupViewConstraints() {
         nameGiftGroupView.snp.makeConstraints { make in
             make.leading.equalTo(profileImageView.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().inset(22)
             make.centerY.equalTo(profileImageView)
         }
     }
