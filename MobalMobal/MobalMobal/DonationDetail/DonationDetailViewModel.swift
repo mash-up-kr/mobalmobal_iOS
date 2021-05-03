@@ -74,6 +74,12 @@ class DonationDetailViewModel {
     func getDonationId() -> Int {
         self.donationId
     }
+    func getNickname() -> String {
+        self.donationPublisherName
+    }
+    func getGiftName() -> String {
+        self.donationTitle
+    }
     
     // MARK: - API Method
     func callDonationInfoAPI() {
