@@ -250,6 +250,7 @@ class DonationDetailViewController: DoneBaseViewController {
 
 // MARK: - DonationDetailViewModelDelegate
 extension DonationDetailViewController: DonationDetailViewModelDelegate {
+    
     func didImageChanged(to url: String?) {
         guard let url = url else {
             detailImageView.image = placeholderImage
@@ -257,10 +258,23 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
         }
         detailImageView.kf.setImage(with: URL(string: url), placeholder: placeholderImage)
     }
+    func didProfileImageChanged(to url: String?) {
+        guard let url = url else {
+            profileImageView.image = placeholderImage
+            return
+        }
+        profileImageView.kf.setImage(with: URL(string: url), placeholder: placeholderImage)
+    }
     func didPublisherChanged(to nickname: String) {
         nameLabel.text = nickname
-        
+        wantLabel.text = "\(getZosa(after: nickname))원하는"
         donationButton.setTitle("\(nickname)에게 후원하기", for: .normal)
+    }
+    func getZosa(after string: String) -> String {
+        guard let lastChar = string.last, let unicode = UnicodeScalar(String(lastChar))?.value else { return "" }
+        if unicode < 0xAC00 || unicode > 0xD7A3 { return "" } // 한글이 아니면 "" 반환
+        let fianlWord = (unicode - 0xAC00) % 28 // 종성 확인
+        return fianlWord > 0 ? "이 " : "가 " // 받침있으면 "이" 없으면 "가" 반환
     }
     func didTitleChanged(to title: String) {
         giftLabel.text = title
