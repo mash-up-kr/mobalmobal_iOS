@@ -50,6 +50,7 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     private let topConstraint: Int = 86
     private let datePicker: UIDatePicker = UIDatePicker()
     private var originCreateButtonViewBottomConstraint: CGFloat = -30
+    private var checkKeyboardAppearance: Bool = false
  
     // MARK: - Method
     private func setup() {
@@ -91,6 +92,11 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     
     @objc
     private func increaseButtonViewConstraint(notification: Notification) {
+        guard !checkKeyboardAppearance else {
+            return
+        }
+        
+        self.checkKeyboardAppearance = true
         if let userInfo = notification.userInfo, let keyboardHeight = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn) {
                 self.createButtonViewBottomConstraint.constant -= keyboardHeight.height
@@ -102,6 +108,7 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     @objc
     private func decreaseButtonViewConstraint(notification: Notification) {
         self.createButtonViewBottomConstraint.constant = self.originCreateButtonViewBottomConstraint
+        self.checkKeyboardAppearance = false
     }
     
     private func setDatePicker() {
