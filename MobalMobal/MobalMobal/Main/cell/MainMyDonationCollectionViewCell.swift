@@ -10,7 +10,7 @@ import UIKit
 
 protocol MainMyDonationCollectionViewCellDelegate: AnyObject {
     func didSelectAddMyDonationButton()
-    func didSelectMyOngoingDonationItem(at indexPath: IndexPath)
+    func didSelectMyOngoingDonationItem(at postId: Int)
 }
 
 class MainMyDonationCollectionViewCell: UICollectionViewCell {
@@ -54,7 +54,7 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
-    private func callAPI(){
+    private func callAPI() {
         viewModel.callMyDonationAPI { result in
             switch result {
             case .success:
@@ -93,7 +93,8 @@ extension MainMyDonationCollectionViewCell: UICollectionViewDelegate {
         case 0:
             delegate?.didSelectAddMyDonationButton()
         case 1:
-            delegate?.didSelectMyOngoingDonationItem(at: indexPath)
+            let postId = viewModel.myDonations[indexPath.row].postId
+            delegate?.didSelectMyOngoingDonationItem(at: postId)
         default:
             break
         }
@@ -124,6 +125,10 @@ extension MainMyDonationCollectionViewCell: UICollectionViewDataSource {
             return cell
         default:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as? MainMyOngoingDonationCollectionViewCell else { return .init() }
+            cell.setModel(title: viewModel.getMyDonationTitle(indexPath.item),
+                          money: viewModel.getMyDonationMoney(indexPath.item),
+                          progress: viewModel.getMyDonationProgress(indexPath.item),
+                          indexPath: indexPath.row)
             return cell
         }
     }

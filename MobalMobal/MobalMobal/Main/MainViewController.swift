@@ -390,8 +390,7 @@ extension MainViewController: MainMyDonationCollectionViewCellDelegate {
         presentAddMyDonationVC()
     }
     
-    func didSelectMyOngoingDonationItem(at indexPath: IndexPath) {
-        print("🐰 나의 진행 도네이션 : \(indexPath.item)")
-        presentDonationDetailVC(donationId: indexPath.item) // viewModel.posts[indexPath.item].postID
+    func didSelectMyOngoingDonationItem(at postId: Int) {
+        presentDonationDetailVC(donationId: postId) // viewModel.posts[indexPath.item].postID
     }
 }
