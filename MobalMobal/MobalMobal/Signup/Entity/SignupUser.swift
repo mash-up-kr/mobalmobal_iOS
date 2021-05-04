@@ -16,4 +16,10 @@ struct SignupUser: Codable {
     var bankName: String?
     var profileImage: String?
     var cash: Int?
+    
+    init(nickname: String, provider: String, fireStoreId: String) {
+        self.nickname = nickname
+        self.provider = provider
+        self.fireStoreId = fireStoreId
+    }
 }

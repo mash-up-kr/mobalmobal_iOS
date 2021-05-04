@@ -14,8 +14,7 @@ class SignupViewController: DoneBaseViewController {
     
     // MARK: - UIView
     private let signupViewModel = SignupViewModel()
-    private var signupUser: SignupUser?
-    
+    private var signupUser: SignupUser = SignupUser(nickname: "", provider: UserInfo.shared.provider?.rawValue ?? "", fireStoreId: UserInfo.shared.fireStoreId ?? "")
     private let nickNameView: SignupCustomView = {
         let view: SignupCustomView = SignupCustomView(imageName: "iconlyLightProfile", inputText: "닉네임을 입력해주세요.")
         view.backgroundColor = .white7
@@ -86,8 +85,8 @@ class SignupViewController: DoneBaseViewController {
     
     @objc
     private func completButtonIsTapped() {
-        self.signupUser?.fireStoreId = UserInfo.shared.fireStoreId ?? ""
-        signupViewModel.signup(signupUser: self.signupUser!)
+//        self.signupUser.fireStoreId = UserInfo.shared.fireStoreId ?? ""
+//        signupViewModel.signup(signupUser: self.signupUser!)
     }
     
     private let completeButtonLabel: UILabel = {
@@ -105,8 +104,8 @@ class SignupViewController: DoneBaseViewController {
     private func setup() {
         self.view.backgroundColor = .backgroundColor
         self.signupViewModel.delegate = self
-        
         setUIViewLayout()
+        addTapGestureRecognizer()
         setNavigationItems(title: "회원 가입", backButtonImageName: "arrowChevronBigLeft", action: #selector(backButtonTapped))
     }
     
@@ -120,6 +119,21 @@ class SignupViewController: DoneBaseViewController {
             agreementButton.setImage(UIImage(named: "iconlyLightCheckOn"), for: .normal)
         }
         completButtonCheck()
+    }
+    
+    private func addTapGestureRecognizer() {
+        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func dismissKeyboard() {
+        if !signupViewModel.emailTextFieldIsFilled(emailView.textFieldView) && emailView.textFieldView.isEditing {
+            emailView.textFieldView.text = ""
+        } else if !signupViewModel.phoneNumberTextFieldIsFilled(phoneNumberView.textFieldView) && phoneNumberView.textFieldView.isEditing {
+            phoneNumberView.textFieldView.text = ""
+        }
+        
+        self.view.endEditing(true)
     }
     
     @objc
@@ -254,23 +268,24 @@ extension SignupViewController: UITextFieldDelegate {
             }
             
             if let nicknameInput = nickNameView.textFieldView.text {
-                self.signupUser?.nickname = nicknameInput
+                self.signupUser.nickname = nicknameInput
             }
             
         } else if textField == phoneNumberView.textFieldView {
             guard signupViewModel.phoneNumberTextFieldIsFilled(textField) == true else {
                 textField.text = ""
                 alertController("올바르지 않은 형식입니다 !")
-                return false
+                return true
             }
             
             if let phoneNumberInput = phoneNumberView.textFieldView.text {
-                self.signupUser?.phoneNumber = phoneNumberInput
+                self.signupUser.phoneNumber = phoneNumberInput
             }
         } else if textField == emailView.textFieldView {
             guard signupViewModel.emailTextFieldIsFilled(textField) == true else {
+                textField.text = ""
                 alertController("올바르지 않은 이메일 형식입니다 !")
-                return false
+                return true
             }
         }
         
