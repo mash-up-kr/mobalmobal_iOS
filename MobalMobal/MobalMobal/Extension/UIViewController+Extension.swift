@@ -8,6 +8,7 @@
 import UIKit
 extension UIViewController {
     func setNavigationItems(title: String, backButtonImageName: String, action: Selector?) {
+        navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = title
         
         guard let backButtonImage: UIImage = UIImage(named: backButtonImageName) else { return }
