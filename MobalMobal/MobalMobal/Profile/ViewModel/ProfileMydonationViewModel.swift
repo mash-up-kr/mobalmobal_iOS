@@ -17,7 +17,12 @@ protocol ProfileMydonationViewModelDelegate: AnyObject {
 class ProfileMydonationViewModel {
     // MARK: - Properties
     weak var delegate: ProfileMydonationViewModelDelegate?
-    var myDonationModel: MydonationData? {
+    var myInprogressModel: [MydonationPost]? {
+        didSet {
+            delegate?.setMyDonationUI()
+        }
+    }
+    var myExpiredModel: [MydonationPost]? {
         didSet {
             delegate?.setMyDonationUI()
         }
@@ -30,27 +35,21 @@ class ProfileMydonationViewModel {
     func setMyDonateModel(_ model: [Donate]) {
         self.myDonateModel = model
     }
-    func setMyDonationModel(_ model: MydonationData?) {
-        self.myDonationModel = model
+    func setMyInprogressModel(_ model: [MydonationPost]) {
+        self.myInprogressModel = model
+    }
+    func setMyExpiredModel(_ model: [MydonationPost]) {
+        self.myExpiredModel = model
     }
     // postId 중복 체
-    func getMyDonatePostsNumber() -> Int {
-        var postIdSet: Set<Int> = Set<Int>()
-        guard let donates = myDonateModel else { return 0}
-        for post in donates {
-            postIdSet.insert(post.postId)
-        }
-        return postIdSet.count
+    func getMyDonateModelCount() -> Int? {
+        myDonateModel?.count
     }
-    func getMyDonationPosts() -> [MydonationPost]? {
-        myDonationModel?.posts
+    func getMyInprogressModelCount() -> Int? {
+        myInprogressModel?.count
     }
-    // 종료된도네 파악
-    // true -> 종료
-    func checkOutDated(postNumber: Int) -> Bool {
-        guard let endDate = myDonationModel?.posts[postNumber].endAt else {
-            return false
-        }
-        return Date().getDueDay(of: endDate) < 0 ? true : false
+    func getMyExpiredModelCount() -> Int? {
+        myExpiredModel?.count
     }
+    
 }

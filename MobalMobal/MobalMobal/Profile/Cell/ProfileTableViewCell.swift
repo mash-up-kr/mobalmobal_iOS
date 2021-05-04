@@ -57,7 +57,7 @@ class ProfileTableViewCell: UITableViewCell {
     // MARK: - Properties
     let cellViewModel: ProfileCellViewModel = ProfileCellViewModel()
     weak var pointChargingDelegate: pointChargingActionDelegate?
-    
+    let profileViewModel: ProfileViewModel = ProfileViewModel()
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -134,3 +134,4 @@ extension ProfileTableViewCell: ProfileCellViewModelDelegate {
         }
     }
 }
+
