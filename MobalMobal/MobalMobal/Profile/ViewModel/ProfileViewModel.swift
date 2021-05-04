@@ -20,25 +20,48 @@ class ProfileViewModel {
     var myDonateResponseModel: [Donate] = [Donate]()
     
     // MARK: - API call
-    func getProfileResponse() {
+    func getProfileResponse(completion: @escaping (Result<Void, DoneError>) -> Void) {
         DoneProvider.getUserProfile() { [weak self] response in
-            self?.profileResponseModel = response.data
+            switch response.code {
+            case 200:
+                self?.profileResponseModel = response.data
+                completion(.success(()))
+            default:
+                //토큰만료, 유효하지않은 토큰값, 토큰 없음
+                completion(.failure(.client))
+            }
         } failure: { err in
             print(err.localizedDescription)
+            completion(.failure(.unknown))
         }
     }
-    func getMydontaionResponse() {
+    func getMydontaionResponse(completion: @escaping (Result<Void, DoneError>) -> Void) {
         DoneProvider.getMyDonation { [weak self] response in
-            self?.splitModelInprogressExpired(response)
+            switch response.code {
+            case 200:
+                self?.splitModelInprogressExpired(response)
+                completion(.success(()))
+            default:
+                //토큰만료, 유효하지않은 토큰 값, 토큰 없음
+                completion(.failure(.client))
+            }
         } failure: { err in
             print(err.localizedDescription)
+            completion(.failure(.unknown))
         }
     }
-    func getMyDonateResponse() {
+    func getMyDonateResponse(completion: @escaping (Result<Void, DoneError>) -> Void) {
         DoneProvider.getMyDonate { [weak self] response in
-            self?.myDonateResponseDuplicateCheck(response)
+            switch response.code {
+            case 200:
+                self?.myDonateResponseDuplicateCheck(response)
+                completion(.success(()))
+            default:
+                completion(.failure(.client))
+            }
         } failure: { (err) in
             print(err.localizedDescription)
+            completion(.failure((.unknown)))
         }
     }
     

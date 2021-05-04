@@ -5,6 +5,7 @@
 //  Created by 송서영 on 2021/02/27.
 //
 
+import Toast
 import SnapKit
 import UIKit
 
@@ -46,10 +47,10 @@ class ProfileViewController: DoneBaseViewController {
         navigationController?.popViewController(animated: true)
     }
     /* 1차배포 제외
-    @objc
-    private func modifyInfo() {
-        print("✨ modify user info")
-    }
+     @objc
+     private func modifyInfo() {
+     print("✨ modify user info")
+     }
      */
     @objc
     private func pushSettingVC() {
@@ -57,10 +58,52 @@ class ProfileViewController: DoneBaseViewController {
     }
     
     // MARK: - Methods
+    func tokenExpired() {
+        self.view.makeToast("로그인이 필요한 서비스입니다.",
+                             duration: 0.5,
+                             position: .bottom,
+                             completion: { _ in
+                                let loginVC: LoginViewController = LoginViewController()
+                                let navigation: UINavigationController = UINavigationController(rootViewController: loginVC)
+                                navigation.modalPresentationStyle = .fullScreen
+                                self.present(navigation, animated: true, completion: nil)
+                             })
+    }
+    func networkError() {
+        self.view.makeToast("네트워크 연결을 다시해주세요.")
+    }
     func callAPI() {
-        profileViewModel.getMydontaionResponse()
-        profileViewModel.getProfileResponse()
-        profileViewModel.getMyDonateResponse()
+        profileViewModel.getProfileResponse { [weak self] result in
+            switch result {
+            case .success:
+                print("success")
+            case .failure(.client):
+                self?.networkError()
+            case .failure(.noData), .failure(.server), .failure(.unknown):
+                self?.tokenExpired()
+            }
+        }
+        profileViewModel.getMydontaionResponse { [weak self] result in
+            switch result {
+            case .success:
+                print("success")
+            case .failure(.client):
+                self?.networkError()
+            case .failure(.noData), .failure(.server), .failure(.unknown):
+                self?.tokenExpired()
+            }
+        }
+        
+        profileViewModel.getMyDonateResponse { [weak self] result in
+            switch result {
+            case .success:
+                print("success")
+            case .failure(.client):
+                self?.networkError()
+            case .failure(.noData), .failure(.server), .failure(.unknown):
+                self?.tokenExpired()
+            }
+        }
     }
     func setTableView() {
         self.mainTableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: self.profileCellIdentifier)
@@ -90,11 +133,11 @@ class ProfileViewController: DoneBaseViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
         
         // 1차배포 제외(프로필 수정)
-//        let editBtn: UIButton = UIButton()
-//        editBtn.setImage(UIImage(named: "iconlyLightEditSquare"), for: .normal)
-//        editBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-//        editBtn.addTarget(self, action: #selector(pushSettingVC), for: .touchUpInside)
-//        let editBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: editBtn)
+        //        let editBtn: UIButton = UIButton()
+        //        editBtn.setImage(UIImage(named: "iconlyLightEditSquare"), for: .normal)
+        //        editBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        //        editBtn.addTarget(self, action: #selector(pushSettingVC), for: .touchUpInside)
+        //        let editBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: editBtn)
         
         let settingBtn: UIButton = UIButton()
         settingBtn.setImage(UIImage(named: "iconlyLightSetting"), for: .normal)
@@ -136,7 +179,7 @@ extension ProfileViewController: UITableViewDataSource {
             return numberOfDonations[section - 2]
         }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return UITableViewCell() }
@@ -203,7 +246,7 @@ extension ProfileViewController: UITableViewDataSource {
     }
 }
 
- // MARK: - UITableViewDelegate
+// MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section >= 2 {
