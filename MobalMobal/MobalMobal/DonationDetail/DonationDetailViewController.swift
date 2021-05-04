@@ -313,7 +313,7 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
         descriptionLabel.text = description
     }
     func didProgressChanged(current: Int, goal: Int) {
-        progress = Float(current) / Float(goal)
+        progress = goal == 0 ? 100.0 : Float(current) / Float(goal)
         progressLabel.text = "\(Int(progress * 100))%"
         destinationNumberLabel.text = goal.changeToCommaFormat()
         fundAmountNumberLabel.text = current.changeToCommaFormat()

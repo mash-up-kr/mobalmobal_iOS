@@ -316,7 +316,7 @@ extension MainViewController: UICollectionViewDataSource {
         
         if viewModel.posts.isEmpty { return cell }
         let post = viewModel.posts[indexPath.item]
-        let progress = Float(post.currentAmount) / Float(post.goal)
+        let progress = post.goal == 0 ? 100.0 : Float(post.currentAmount) / Float(post.goal)
         cell.setModel(dday: post.endAt, money: post.currentAmount, title: post.title, progress: progress, indexPath: indexPath)
         
         // 이미지 다운로드 후 인덱스 비교하여 셋팅
