@@ -23,6 +23,7 @@ class ProfileViewController: DoneBaseViewController {
     private let sectionHeaderCellIdentifier: String = "SectionHeaderCell"
     private lazy var numberOfDonations: [Int] = [0, 0, 0]     // 내연, 후원중, 종료 갯수
     private let profileViewModel: ProfileViewModel = ProfileViewModel()
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,12 +81,11 @@ class ProfileViewController: DoneBaseViewController {
         }
     }
     private func setNavigation() {
-
+        navigationController?.navigationBar.barStyle = .default
         self.navigationController?.navigationBar.barTintColor = .blackFour
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.isNavigationBarHidden = false
         
-        self.navigationItem.title = profileViewModel.getUserNickname()
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.whiteTwo]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
         
@@ -130,21 +130,13 @@ extension ProfileViewController: UITableViewDataSource {
             return 1
         } else {
             numberOfDonations = [0, 0, 0]
-            // 내가 연 도네이션으로 -> 내연도네, 종료도네 구문
-            if let mydonationData: MydonationData = profileViewModel.mydonationResponseModel {
-                for post in 0..<mydonationData.posts.count {
-                    if profileViewModel.checkOutDated(date: mydonationData.posts[post].endAt) {
-                        numberOfDonations[2] += 1
-                    } else {
-                        numberOfDonations[0] += 1
-                    }
-                }
-            }
+            numberOfDonations[0] = profileViewModel.myInprogressResponseModel.count
             numberOfDonations[1] = profileViewModel.myDonateResponseModel.count
+            numberOfDonations[2] = profileViewModel.myExpiredResponseModel.count
             return numberOfDonations[section - 2]
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return UITableViewCell() }
@@ -158,7 +150,8 @@ extension ProfileViewController: UITableViewDataSource {
             guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
             myDonationCell.selectionStyle = .none
             
-            myDonationCell.myDonationViewModel.setMyDonationModel(profileViewModel.mydonationResponseModel)
+            myDonationCell.myDonationViewModel.setMyInprogressModel(profileViewModel.myInprogressResponseModel)
+            myDonationCell.myDonationViewModel.setMyExpiredModel(profileViewModel.myExpiredResponseModel)
             myDonationCell.myDonationViewModel.setMyDonateModel(profileViewModel.myDonateResponseModel)
             return myDonationCell
         }
@@ -168,8 +161,10 @@ extension ProfileViewController: UITableViewDataSource {
             else { return UITableViewCell() }
             donatingCell.selectionStyle = .none
             donatingCell.headerLabelText = sectionHeader[indexPath.section - 2]
-            if let mydonationData: MydonationData = profileViewModel.mydonationResponseModel {
-                donatingCell.viewModel.setMyDonationData(mydonationData.posts[indexPath.row])
+            if indexPath.section == 2 {
+                donatingCell.viewModel.setMyDonationData(profileViewModel.myInprogressResponseModel[indexPath.row])
+            } else {
+                donatingCell.viewModel.setMyDonationData(profileViewModel.myExpiredResponseModel[indexPath.row])
             }
             return donatingCell
         } else {        // 내가 후원한 도네
@@ -221,9 +216,10 @@ extension ProfileViewController: UITableViewDelegate {
 
 // MARK: - ProfileViewModelDelegate
 extension ProfileViewController: ProfileViewModelDelegate {
-    func tableViewUpdate(section: IndexSet) {
-        self.mainTableView.reloadSections(section, with: .automatic)
-        self.navigationItem.title = profileViewModel.getUserNickname()
+    func tableViewReload() {
+        let sectionSet: IndexSet = IndexSet(0...4)
+        self.mainTableView.reloadSections(sectionSet, with: .automatic)
+        self.title = profileViewModel.getUserNickname()!
     }
 }
 

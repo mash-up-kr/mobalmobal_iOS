@@ -7,6 +7,17 @@
 
 import Foundation
 
+struct PostPublisher: Codable {
+    let userId: Int
+    let nickname: String
+    let profileImageURL: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case userId = "user_id"
+        case nickname
+        case profileImageURL = "profile_image"
+    }
+}
 struct DetailData: Codable {
     let postId: Int
     let userId: Int
@@ -15,6 +26,7 @@ struct DetailData: Codable {
     let description: String?
     let goal: Int
     let current: Int
+    let user: PostPublisher
     
     let startedDate: Date?
     let endDate: Date?
@@ -26,7 +38,7 @@ struct DetailData: Codable {
         case postId = "post_id"
         case userId = "user_id"
         case postImage = "post_image"
-        case title, description, goal
+        case title, description, goal, user
         case current = "current_amount"
         case startedDate = "started_at"
         case endDate = "end_at"

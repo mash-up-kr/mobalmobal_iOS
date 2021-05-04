@@ -27,6 +27,7 @@ class DonateMoneyViewController: DoneBaseViewController {
     
     // MARK: - Properties
     private lazy var viewModel: DonateMoneyViewModel = DonateMoneyViewModel(delegate: self)
+    var donationCompletionHander: () -> Void = {}
     
     private let headerString: String = "후원"
     private let cellIdentifier: String = "DonateMoneyTableViewCell"
@@ -180,6 +181,7 @@ extension DonateMoneyViewController: DonateMoneyViewModelDelegate {
     func completeDonateMoney(amount: Int) {
         // 후원완료 페이지로 이동
         let completeVC: DonateCompleteViewController = DonateCompleteViewController(nickname: viewModel.getNickname(), giftName: viewModel.getGiftName(), moneyAmount: amount)
+        completeVC.donationCompletionHander = donationCompletionHander
         completeVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(completeVC, animated: true)
     }

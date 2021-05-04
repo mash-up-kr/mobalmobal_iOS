@@ -30,7 +30,7 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     
     private let translucentView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = .black70
+        view.backgroundColor = .black40
         return view
     }()
     

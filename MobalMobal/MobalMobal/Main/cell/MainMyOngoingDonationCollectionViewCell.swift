@@ -8,7 +8,17 @@
 import SnapKit
 import UIKit
 
-class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
+struct MainMyDonationModel {
+    let title: String
+    let progress: Float
+    let money: Int
+    let indexPathRow: Int
+}
+
+protocol MainMyOngoingDonationDelegate: AnyObject {
+    func populate()
+}
+class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell, MainMyOngoingDonationDelegate {
     // MARK: - UIComponents
     let cardView: UIView = {
         let view: UIView = UIView(frame: .zero)
@@ -33,16 +43,33 @@ class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let donationImageView: UIImageView = {
-        let imageView: UIImageView = UIImageView(image: UIImage(named: "process-01_poor-guji"))
+    lazy var donationImageView: UIImageView = {
+        let imageView: UIImageView = UIImageView(image: donateImage[0])
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
+    // MARK: - Properties
+    private let donateImage: [UIImage?] = [
+        UIImage(named: "process-00_yanudo"),
+        UIImage(named: "process-01_poor-guji"),
+        UIImage(named: "process-02_chicken"),
+        UIImage(named: "process-03_shopping"),
+        UIImage(named: "process-04_chanel-girl"),
+        UIImage(named: "process-05_rich")
+    ]
+    let viewModel: MainViewModel = MainViewModel()
+    private var model: MainMyDonationModel {
+        didSet {
+            populate()
+        }
+    }
     // MARK: - Initializer
     override init(frame: CGRect) {
+        self.model = MainMyDonationModel(title: "default", progress: 0.0, money: 0, indexPathRow: 0)
         super.init(frame: frame)
         setLayout()
+        viewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -50,6 +77,29 @@ class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
+    func setModel(title: String, money: Int, progress: Float, indexPath: Int) {
+        self.model = MainMyDonationModel(title: title, progress: progress, money: money, indexPathRow: indexPath)
+    }
+    func populate() {
+        donationTitleLabel.text = model.title
+        donationPointLabel.text = model.money.changeToCommaFormat()
+        setImage()
+    }
+    private func setImage() {
+        if model.progress == 0.0 {
+            donationImageView.image = donateImage[0]
+        } else if 0.0..<25.0 ~= model.progress {
+            donationImageView.image = donateImage[1]
+        } else if 25.0..<50.0 ~= model.progress {
+            donationImageView.image = donateImage[2]
+        } else if 50.0..<75.0 ~= model.progress {
+            donationImageView.image = donateImage[3]
+        } else if 75.0..<100.0 ~= model.progress {
+            donationImageView.image = donateImage[4]
+        } else {
+            donationImageView.image = donateImage[5]
+        }
+    }
     private func setLayout() {
         [cardView].forEach { contentView.addSubview($0) }
         

@@ -95,6 +95,7 @@ class DonateCompleteViewController: UIViewController {
     private let giftName: String
     private let money: String
     private let placeholderImage: UIImage = UIImage(named: "doneImage")!
+    var donationCompletionHander: () -> Void = {}
     
     // MARK: - Initializer
     init(nickname: String, giftName: String, moneyAmount: Int) {
@@ -142,6 +143,7 @@ class DonateCompleteViewController: UIViewController {
     
     @objc
     private func clickCloseButton() {
+        donationCompletionHander()
         navigationController?.dismiss(animated: true)
     }
 }

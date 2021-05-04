@@ -27,7 +27,7 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     }()
     private let translucentView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = .black70
+        view.backgroundColor = .black40
         return view
     }()
     private lazy var donateDday: UILabel = {
