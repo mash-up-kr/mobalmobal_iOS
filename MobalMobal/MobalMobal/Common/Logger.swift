@@ -14,6 +14,8 @@ struct Log {
         case `deinit`
         case error
         case networkError
+        case networkRequest
+        case networkResponse
         case custom(String)
     }
     
@@ -44,6 +46,10 @@ struct Log {
             emoji = "💥"
         case .networkError:
             emoji = "🛑"
+        case .networkRequest:
+            emoji = "🚀"
+        case .networkResponse:
+            emoji = "📦️"
         case .custom(let emoji):
             self.emoji = emoji
         }

@@ -18,9 +18,10 @@ class DonateCompleteViewController: UIViewController {
     }()
     lazy var nameLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "Jercy"
+        label.text = nickname
         label.font = .spoqaHanSansNeo(ofSize: 19, weight: .bold)
         label.textColor = .white
+        label.textAlignment = .right
         return label
     }()
     let zosaLabel: UILabel = {
@@ -28,17 +29,20 @@ class DonateCompleteViewController: UIViewController {
         label.text = "는"
         label.font = .spoqaHanSansNeo(ofSize: 19, weight: .regular)
         label.textColor = .white
+        label.textAlignment = .left
         return label
     }()
     lazy var giftLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "PS5 가지고싶어요"
+        label.text = "\(giftName) 가지고 싶어요"
         label.font = .spoqaHanSansNeo(ofSize: 19, weight: .regular)
         label.textColor = .white
+        label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
-    let completeImageView: UIImageView = {
-        let image: UIImage = UIImage(named: "doneImage")!
+    lazy var completeImageView: UIImageView = {
+        let image: UIImage = placeholderImage
         let imageView: UIImageView = UIImageView(image: image)
         return imageView
     }()
@@ -47,13 +51,15 @@ class DonateCompleteViewController: UIViewController {
         label.text = "후원완료"
         label.font = .spoqaHanSansNeo(ofSize: 22, weight: .bold)
         label.textColor = .darkCream
+        label.textAlignment = .center
         return label
     }()
     lazy var moneyLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "30,000원"
+        label.text = "\(money)원"
         label.font = .spoqaHanSansNeo(ofSize: 38, weight: .bold)
         label.textColor = .white
+        label.textAlignment = .center
         return label
     }()
     
@@ -83,6 +89,24 @@ class DonateCompleteViewController: UIViewController {
         stackView.setCustomSpacing(22, after: completeLabel)
         return stackView
     }()
+    
+    // MARK: - Properties
+    private let nickname: String
+    private let giftName: String
+    private let money: String
+    private let placeholderImage: UIImage = UIImage(named: "doneImage")!
+    var donationCompletionHander: () -> Void = {}
+    
+    // MARK: - Initializer
+    init(nickname: String, giftName: String, moneyAmount: Int) {
+        self.nickname = nickname
+        self.giftName = giftName
+        self.money = moneyAmount.changeToCommaFormat() ?? "0"
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -114,11 +138,12 @@ class DonateCompleteViewController: UIViewController {
         stackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(44)
-        }        
+        }
     }
     
     @objc
     private func clickCloseButton() {
+        donationCompletionHander()
         navigationController?.dismiss(animated: true)
     }
 }

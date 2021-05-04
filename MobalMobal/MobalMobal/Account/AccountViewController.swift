@@ -83,9 +83,9 @@ class AccountViewController: DoneBaseViewController {
     
     // MARK: - Properties
     // dummy data
-    private var account: String = "110-436-3412421"
-    private var bankName: String = "신한은행"
-    private var accountName: String = "재르시"
+    private var account: String = "7979-33-72352"
+    private var bankName: String = "카카오뱅크"
+    private var accountName: String = "정민호"
     
     var charge: String?
     private let defaultAttributes: [NSAttributedString.Key: Any] = [

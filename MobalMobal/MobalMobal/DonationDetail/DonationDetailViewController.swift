@@ -32,7 +32,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let translucentView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = .black70
+        view.backgroundColor = .black40
         return view
     }()
     let progressLabel: UILabel = {
@@ -59,8 +59,8 @@ class DonationDetailViewController: DoneBaseViewController {
     
     // Mid Description Area
     let nameGiftGroupView: UIView = UIView()
-    let profileImageView: UIImageView = {
-        let imageView: UIImageView = UIImageView(image: UIImage(named: "profile_default"))
+    lazy var profileImageView: UIImageView = {
+        let imageView: UIImageView = UIImageView(image: placeholderImage)
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 29
         imageView.layer.masksToBounds = true
@@ -68,20 +68,25 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let nameLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
+        label.lineBreakMode = .byTruncatingTail
         label.text = "누군가"
         label.font = .spoqaHanSansNeo(ofSize: 16, weight: .medium)
         label.textColor = .white
         return label
     }()
-    let zosaLabel: UILabel = {
+    let wantLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "는"
+        label.textAlignment = .left
+        label.text = "가 원하는"
         label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
         label.textColor = .white
         return label
     }()
     let giftLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
+        label.lineBreakMode = .byTruncatingTail
         label.text = "선물"
         label.font = .spoqaHanSansNeo(ofSize: 16, weight: .medium)
         label.textColor = .wheat
@@ -89,15 +94,9 @@ class DonationDetailViewController: DoneBaseViewController {
         label.layer.masksToBounds = false
         return label
     }()
-    let wantLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.text = "가지고 싶어요"
-        label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
-        label.textColor = .white
-        return label
-    }()
     let descriptionLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "한마디"
         label.font = .spoqaHanSansNeo(ofSize: 14, weight: .regular)
         label.textColor = .white
@@ -113,6 +112,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let destinationTitleLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "목표 금액"
         label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
         label.textColor = .veryLightPink
@@ -120,6 +120,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let destinationNumberLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "0"
         label.font = .spoqaHanSansNeo(ofSize: 16, weight: .bold)
         label.textColor = UIColor.white.withAlphaComponent(0.5)
@@ -127,6 +128,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let fundAmountTitleLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "모금 금액"
         label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
         label.textColor = .veryLightPink
@@ -134,6 +136,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
     let fundAmountNumberLabel: UILabel = {
         let label: UILabel = UILabel()
+        label.textAlignment = .left
         label.text = "0"
         label.font = .spoqaHanSansNeo(ofSize: 16, weight: .bold)
         label.textColor = .lightBluishGreen
@@ -141,6 +144,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }()
 //    let participantsTitleLabel: UILabel = {
 //        let label: UILabel = UILabel()
+//        label.textAlignment = .left
 //        label.text = "참여자"
 //        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
 //        label.textColor = .veryLightPink
@@ -148,6 +152,7 @@ class DonationDetailViewController: DoneBaseViewController {
 //    }()
 //    let participantsCountLabel: UILabel = {
 //        let label: UILabel = UILabel()
+    //        label.textAlignment = .left
 //        label.text = ""
 //        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .medium)
 //        label.textColor = .veryLightPink
@@ -182,9 +187,12 @@ class DonationDetailViewController: DoneBaseViewController {
         button.addTarget(self, action: #selector(clickDonationButton), for: .touchUpInside)
         return button
     }()
+    var isUpdateConstraints: Bool = false
+    var progress: Float = 0
     
     // MARK: - Properties
     private lazy var viewModel: DonationDetailViewModel = DonationDetailViewModel(delegate: self)
+    let placeholderImage: UIImage? = UIImage(named: "profile_default")!
     
     // MARK: - Initializer
     init(donationId: Int) {
@@ -199,13 +207,24 @@ class DonationDetailViewController: DoneBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
+        setNavigationItems(title: "상세 보기", backButtonImageName: "arrowChevronBigLeft", action: #selector(clickBackButton))
+        view.setNeedsUpdateConstraints()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setScrollViewConstraints()
-        setTopImageAreaConstraints()
-        setMidDescriptionAreaConstraints()
-        setBottomDetailInfoAreaConstraints()
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    override func updateViewConstraints() {
+        if !isUpdateConstraints {
+            setScrollViewConstraints()
+            setTopImageAreaConstraints()
+            setMidDescriptionAreaConstraints()
+            setBottomDetailInfoAreaConstraints()
+        }
+        remakeProgressBarViewConstraints()
+        
         super.updateViewConstraints()
     }
     
@@ -223,6 +242,10 @@ class DonationDetailViewController: DoneBaseViewController {
             presentDonateMoneyVC()
         }
     }
+    @objc
+    private func clickBackButton() {
+        popNavigationVC()
+    }
     
     // MARK: - Methods
     private func showParticipantsAlert() {
@@ -233,7 +256,10 @@ class DonationDetailViewController: DoneBaseViewController {
     }
     
     private func presentDonateMoneyVC() {
-        let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController(postId: viewModel.getDonationId() )
+        let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController(postId: viewModel.getDonationId(), nickname: viewModel.getNickname(), giftName: viewModel.getGiftName())
+        donateMoneyVC.donationCompletionHander = { [weak self] in
+            self?.viewModel.callDonationInfoAPI()
+        }
         let navigationController: UINavigationController = UINavigationController(rootViewController: donateMoneyVC)
         navigationController.modalPresentationStyle = .overFullScreen
         present(navigationController, animated: true)
@@ -245,38 +271,54 @@ class DonationDetailViewController: DoneBaseViewController {
         navVc.modalPresentationStyle = .fullScreen
         self.present(navVc, animated: true)
     }
+    
+    private func popNavigationVC() {
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 // MARK: - DonationDetailViewModelDelegate
 extension DonationDetailViewController: DonationDetailViewModelDelegate {
+    
     func didImageChanged(to url: String?) {
         guard let url = url else {
-            detailImageView.image = UIImage(named: "doneImage")
+            detailImageView.image = placeholderImage
             return
         }
-        detailImageView.kf.setImage(with: URL(string: url))
+        detailImageView.kf.setImage(with: URL(string: url), placeholder: placeholderImage)
+    }
+    func didProfileImageChanged(to url: String?) {
+        guard let url = url else {
+            profileImageView.image = placeholderImage
+            return
+        }
+        profileImageView.kf.setImage(with: URL(string: url), placeholder: placeholderImage)
     }
     func didPublisherChanged(to nickname: String) {
         nameLabel.text = nickname
+        wantLabel.text = "\(getZosa(after: nickname))원하는"
         donationButton.setTitle("\(nickname)에게 후원하기", for: .normal)
+    }
+    func getZosa(after string: String) -> String {
+        guard let lastChar = string.last, let unicode = UnicodeScalar(String(lastChar))?.value else { return "" }
+        if unicode < 0xAC00 || unicode > 0xD7A3 { return "" } // 한글이 아니면 "" 반환
+        let fianlWord = (unicode - 0xAC00) % 28 // 종성 확인
+        return fianlWord > 0 ? "이 " : "가 " // 받침있으면 "이" 없으면 "가" 반환
     }
     func didTitleChanged(to title: String) {
         giftLabel.text = title
+        navigationItem.title = title
     }
     func didDesciptionChanged(to description: String) {
         descriptionLabel.text = description
     }
     func didProgressChanged(current: Int, goal: Int) {
-        let progress: Float = Float(current) / Float(goal)
+        progress = Float(current) / Float(goal)
         progressLabel.text = "\(Int(progress * 100))%"
         destinationNumberLabel.text = goal.changeToCommaFormat()
         fundAmountNumberLabel.text = current.changeToCommaFormat()
         
-        progressBarView.snp.remakeConstraints { make in
-            make.leading.bottom.equalTo(translucentView)
-            make.width.equalToSuperview().multipliedBy(progress)
-            make.height.equalTo(2)
-        }
+        view.setNeedsUpdateConstraints()
     }
     func didEndDateChanged(to date: Date?) {
         guard let date = date else {

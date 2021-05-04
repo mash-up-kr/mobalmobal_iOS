@@ -39,7 +39,7 @@ class MakeCompleteViewController: UIViewController {
     }()
     lazy var transparentView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = .black70
+        view.backgroundColor = .black40
         return view
     }()
     lazy var ddayLabel: UILabel = {

@@ -5,6 +5,7 @@
 //  Created by 김재희 on 2021/02/27.
 //
 
+import Kingfisher
 import SnapKit
 import Then
 import UIKit
@@ -135,7 +136,7 @@ class MainViewController: DoneBaseViewController {
     
     func presentDonationDetailVC(donationId: Int) {
         let detailVC: DonationDetailViewController = DonationDetailViewController(donationId: donationId)
-        present(detailVC, animated: true)
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     // 변경 가능
@@ -237,8 +238,7 @@ extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 1:
-            print("🐰 진행중 도네이션 : \(indexPath.item)")
-            presentDonationDetailVC(donationId: indexPath.item)
+            presentDonationDetailVC(donationId: viewModel.posts[indexPath.item].postID)
         default:
             break
         }
@@ -272,38 +272,15 @@ extension MainViewController: UICollectionViewDataSource {
         }
     }
     
-    private func isIndicatorCell(_ indexPath: IndexPath) -> Bool {
-        if viewModel.posts.isEmpty { return false }
-        return indexPath.item == viewModel.posts.count
-    }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            guard let cell: MainMyDonationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: myCellIdentifier, for: indexPath) as? MainMyDonationCollectionViewCell else { return .init() }
-            cell.delegate = self
-            return cell
-            
+            return getMyDonationCell(indexPath)
         default:
             if isIndicatorCell(indexPath) {
-                guard let cell: MainIndicatorCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: indicatorCellIdentifier, for: indexPath) as? MainIndicatorCollectionViewCell else { return .init() }
-                cell.animationIndicatorView()
-                return cell
+                return getIndicatorCell(indexPath)
             }
-            
-            guard let cell: MainOngoingDonationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationCollectionViewCell else { return .init() }
-            
-            if !viewModel.posts.isEmpty {
-                let post = viewModel.posts[indexPath.item]
-                guard let money = post.currentAmount.changeToCommaFormat() else { return .init() }
-                cell.setModel(OngoingDonationModel(imageUrl: post.postImage,
-                                                   dday: Date().getDDayString(to: post.endAt),
-                                                   money: money,
-                                                   title: post.title,
-                                                   progress: Float(post.currentAmount) / Float(post.goal)
-                ))
-            }
-            return cell
+            return getDonationCell(indexPath)
         }
     }
     
@@ -315,6 +292,47 @@ extension MainViewController: UICollectionViewDataSource {
         default:
             return .init()
         }
+    }
+    
+    private func isIndicatorCell(_ indexPath: IndexPath) -> Bool {
+        if viewModel.posts.isEmpty { return false }
+        return indexPath.item == viewModel.posts.count
+    }
+    
+    private func getMyDonationCell(_ indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell: MainMyDonationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: myCellIdentifier, for: indexPath) as? MainMyDonationCollectionViewCell else { return .init() }
+        cell.delegate = self
+        return cell
+    }
+    
+    private func getIndicatorCell(_ indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell: MainIndicatorCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: indicatorCellIdentifier, for: indexPath) as? MainIndicatorCollectionViewCell else { return .init() }
+        cell.animationIndicatorView()
+        return cell
+    }
+    
+    private func getDonationCell(_ indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell: MainOngoingDonationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ongoingCellIdentifier, for: indexPath) as? MainOngoingDonationCollectionViewCell else { return .init() }
+        
+        if viewModel.posts.isEmpty { return cell }
+        let post = viewModel.posts[indexPath.item]
+        let progress = Float(post.currentAmount) / Float(post.goal)
+        cell.setModel(dday: post.endAt, money: post.currentAmount, title: post.title, progress: progress, indexPath: indexPath)
+        
+        // 이미지 다운로드 후 인덱스 비교하여 셋팅
+        cell.setImage(nil)
+        guard let urlString: String = post.postImage, let imageURL: URL = URL(string: urlString) else { return cell }
+        KingfisherManager.shared.retrieveImage(with: imageURL) { result in
+            switch result {
+            case .success(let value):
+                if cell.isIndexPathEqual(with: indexPath) {
+                    cell.setImage(value.image)
+                }
+            default:
+                break
+            }
+        }
+        return cell
     }
 }
 
@@ -376,6 +394,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - MainMyDonationCollectionViewCellDelegate
 extension MainViewController: MainMyDonationCollectionViewCellDelegate {
     func didSelectAddMyDonationButton() {
         if KeychainManager.isEmptyUserToken() {
@@ -386,8 +405,7 @@ extension MainViewController: MainMyDonationCollectionViewCellDelegate {
         }
     }
     
-    func didSelectMyOngoingDonationItem(at indexPath: IndexPath) {
-        print("🐰 나의 진행 도네이션 : \(indexPath.item)")
-        presentDonationDetailVC(donationId: indexPath.item)
+    func didSelectMyOngoingDonationItem(at postId: Int) {
+        presentDonationDetailVC(donationId: postId) // viewModel.posts[indexPath.item].postID
     }
 }

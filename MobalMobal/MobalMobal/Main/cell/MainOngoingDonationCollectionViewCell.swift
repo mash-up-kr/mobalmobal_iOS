@@ -10,18 +10,18 @@ import SnapKit
 import UIKit
 
 struct OngoingDonationModel {
-    let imageUrl: String?
-    let dday: String
-    let money: String
+    let dday: Date
+    let money: Int
     let title: String
     let progress: Float
+    let indexPath: IndexPath
 }
 
 class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     // MARK: - UIComponents
-    private let thumbnailImageView: UIImageView = {
+    private lazy var thumbnailImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.image = UIImage(named: "profile_default")
+        imageView.image = placeholderImage
         imageView.backgroundColor = .white
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -30,7 +30,7 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     
     private let translucentView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = .black70
+        view.backgroundColor = .black40
         return view
     }()
     
@@ -75,6 +75,7 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     }()
     
     // MARK: - Properties
+    let placeholderImage: UIImage = UIImage(named: "profile_default")!
     private var model: OngoingDonationModel {
         didSet {
             populate()
@@ -83,7 +84,7 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Initializer
     override init(frame: CGRect) {
-        self.model = OngoingDonationModel(imageUrl: nil, dday: "D", money: "0", title: "title", progress: 0.0)
+        self.model = OngoingDonationModel(dday: Date(), money: 0, title: "갖고 싶은 물건", progress: 0.0, indexPath: IndexPath(item: -1, section: -1))
         super.init(frame: .zero)
         contentView.backgroundColor = .darkGrey
         contentView.layer.cornerRadius = 12
@@ -104,7 +105,6 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
             make.edges.equalTo(thumbnailImageView)
         }
         progressBackgroundView.snp.makeConstraints { make in
-//            make.centerY.equalTo(translucentView.snp.bottom)
             make.top.equalTo(thumbnailImageView.snp.bottom)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(2)
@@ -126,17 +126,22 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
-    func setModel(_ model: OngoingDonationModel) {
-        self.model = model
+    func isIndexPathEqual(with indexPath: IndexPath) -> Bool {
+        self.model.indexPath == indexPath
     }
-    
-    private func populate() {
-        if let url = model.imageUrl {
-            let imageURL: URL? = URL(string: url)
-            thumbnailImageView.kf.setImage(with: imageURL)
+    func setModel(dday: Date, money: Int, title: String, progress: Float, indexPath: IndexPath) {
+        self.model = OngoingDonationModel(dday: dday, money: money, title: title, progress: progress, indexPath: indexPath)
+    }
+    func setImage(_ image: UIImage?) {
+        guard let image = image else {
+            self.thumbnailImageView.image = placeholderImage
+            return
         }
-        dDayLabel.text = model.dday
-        moneyLabel.text = model.money
+        self.thumbnailImageView.image = image
+    }
+    private func populate() {
+        dDayLabel.text = Date().getDDayString(to: model.dday)
+        moneyLabel.text = model.money.changeToCommaFormat()
         titleLabel.text = model.title
         progressBarView.snp.removeConstraints()
         progressBackgroundView.addSubview(progressBarView)

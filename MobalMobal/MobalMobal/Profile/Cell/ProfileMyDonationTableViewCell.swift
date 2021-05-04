@@ -93,6 +93,7 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
     private let myDonationText: [String] = ["받는", "주는", "종료"]
     private lazy var myDonationNumber: [Int] = [0, 0, 0]
     let myDonationViewModel: ProfileMydonationViewModel = ProfileMydonationViewModel()
+    let viewModel: ProfileViewModel = ProfileViewModel()
     
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -142,22 +143,14 @@ class ProfileMyDonationTableViewCell: UITableViewCell {
 extension ProfileMyDonationTableViewCell: ProfileMydonationViewModelDelegate {
     func setMyDonationUI() {
         initMyDonationInfoNumber(0, 2)
-        // 내가 연 도네이션 관련 정보 처리
-        if let mydonationPosts: [MydonationPost] = myDonationViewModel.getMyDonationPosts() {
-            for post in 0..<mydonationPosts.count {
-                if myDonationViewModel.checkOutDated(postNumber: post) {
-                    myDonationNumber[2] += 1
-                } else {
-                    myDonationNumber[0] += 1
-                }
-            }
-            takeNumberOfDonation.text = "\(myDonationNumber[0])"
-            endNumberOfDonation.text = "\(myDonationNumber[2])"
-        }
+        myDonationNumber[0] = myDonationViewModel.getMyInprogressModelCount() ?? 0
+        myDonationNumber[2] = myDonationViewModel.getMyExpiredModelCount() ?? 0
+        takeNumberOfDonation.text = "\(myDonationNumber[0])"
+        endNumberOfDonation.text = "\(myDonationNumber[2])"
     }
     func setMyDonateUI() {
         initMyDonationInfoNumber(1)
-        myDonationNumber[1] = myDonationViewModel.getMyDonatePostsNumber()
+        myDonationNumber[1] = self.myDonationViewModel.getMyDonateModelCount() ?? 0
         giveNumberOfDonation.text = "\(myDonationNumber[1])"
     }
 }

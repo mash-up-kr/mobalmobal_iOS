@@ -31,6 +31,14 @@ extension DonationDetailViewController {
         setDDayLabelConstraints()
         setProgressBarViewConstraints()
     }
+    func remakeProgressBarViewConstraints() {
+        progressBarView.snp.remakeConstraints { make in
+            make.leading.bottom.equalTo(translucentView)
+            make.width.equalToSuperview().multipliedBy(progress)
+            make.height.equalTo(2)
+        }
+    }
+    
     private func setDetailimageViewConstraints() {
         detailImageView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
@@ -64,11 +72,10 @@ extension DonationDetailViewController {
     
     // MARK: - Mid Area
     func setMidDescriptionAreaConstraints() {
-        nameGiftGroupView.addSubviews([nameLabel, zosaLabel, giftLabel, wantLabel])
+        nameGiftGroupView.addSubviews([nameLabel, wantLabel, giftLabel])
         setNameLabelConstraints()
-        setZosaLabelConstraints()
-        setGiftLabelConstraints()
         setWantLabelConstraints()
+        setGiftLabelConstraints()
         
         contentView.addSubviews([profileImageView, nameGiftGroupView, descriptionLabel])
         setProfileImageViewConstraints()
@@ -80,22 +87,17 @@ extension DonationDetailViewController {
             make.top.leading.equalToSuperview()
         }
     }
-    private func setZosaLabelConstraints() {
-        zosaLabel.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.trailing).offset(5)
+    private func setWantLabelConstraints() {
+        wantLabel.snp.makeConstraints { make in
+            make.leading.equalTo(nameLabel.snp.trailing).offset(4)
+            make.trailing.lessThanOrEqualToSuperview()
             make.bottom.equalTo(nameLabel)
         }
     }
     private func setGiftLabelConstraints() {
         giftLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(6)
-            make.leading.bottom.equalToSuperview()
-        }
-    }
-    private func setWantLabelConstraints() {
-        wantLabel.snp.makeConstraints { make in
-            make.leading.equalTo(giftLabel.snp.trailing).offset(4)
-            make.bottom.equalTo(giftLabel)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
     private func setProfileImageViewConstraints() {
@@ -108,6 +110,7 @@ extension DonationDetailViewController {
     private func setNameGiftGroupViewConstraints() {
         nameGiftGroupView.snp.makeConstraints { make in
             make.leading.equalTo(profileImageView.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().inset(22)
             make.centerY.equalTo(profileImageView)
         }
     }

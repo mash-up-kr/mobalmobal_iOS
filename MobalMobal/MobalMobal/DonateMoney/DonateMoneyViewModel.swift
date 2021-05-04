@@ -20,6 +20,8 @@ class DonateMoneyViewModel {
     let amounts: [Int] = [1_000, 2_000, 5_000, 10_000, 50_000, 100_000]
     
     private var postId: Int = -1
+    private var nickname: String = ""
+    private var giftName: String = ""
     private var amount: Int?
     private var donateData: DonateMoneyData? {
         didSet { donateDataChanged() }
@@ -31,11 +33,23 @@ class DonateMoneyViewModel {
     }
     
     // MARK: - getter, setter
+    func getPostId() -> Int {
+        self.postId
+    }
     func setPostId(_ postId: Int) {
         self.postId = postId
     }
-    func getPostId() -> Int {
-        self.postId
+    func getNickname() -> String {
+        self.nickname
+    }
+    func setNickname(_ nickname: String) {
+        self.nickname = nickname
+    }
+    func getGiftName() -> String {
+        self.giftName
+    }
+    func setGiftName(_ giftName: String) {
+        self.giftName = giftName
     }
     
     // MARK: - API
