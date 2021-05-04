@@ -22,7 +22,7 @@ struct CreateDonationInfo: Codable {
     let userId: Int
     let title: String
     let description: String
-    let goal: Int
+    let goal: String
     let startedAt: Date
     let endAt: Date
     let postImage: String

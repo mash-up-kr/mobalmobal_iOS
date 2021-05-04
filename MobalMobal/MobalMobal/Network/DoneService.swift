@@ -80,16 +80,18 @@ extension DoneService: TargetType {
                                                , bodyEncoding: JSONEncoding.default
                                                , urlParameters: [:])
         case .createDonation(let donation):
-            return .requestCompositeParameters(bodyParameters:
-                                                [ "title": donation.title,
-                                                  "description": donation.description,
-                                                  "post_image": donation.postImage,
-                                                  "goal": donation.goal,
-                                                  "started_at": donation.startedAt,
-                                                  "end_at": donation.endAt
-            ], bodyEncoding: JSONEncoding.default, urlParameters: [:])
+            let titleData = MultipartFormData(provider: .data(donation.title.data(using: .utf8)!), name: "title")
+            let descriptionData = MultipartFormData(provider: .data(donation.description!.data(using: .utf8)!), name: "description")
+            let imageData = MultipartFormData(provider: .data(donation.postImageData!), name: "post_image", fileName: "image.png", mimeType: "image/png")
+            let goalData = MultipartFormData(provider: .data(String(donation.goal).data(using: .utf8)!), name: "goal")
+            let startedData = MultipartFormData(provider: .data(donation.startedAt.data(using: .utf8)!), name: "started_at")
+            let endData = MultipartFormData(provider: .data(donation.endAt.data(using: .utf8)!), name: "end_at")
+            let multipartData = [titleData, descriptionData, imageData, goalData, startedData, endData]
+
+            return .uploadMultipart(multipartData)
         }
     }
+        
     var headers: [String: String]? {
         switch self {
         case .login:

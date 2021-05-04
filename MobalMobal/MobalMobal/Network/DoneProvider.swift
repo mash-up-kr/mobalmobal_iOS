@@ -22,7 +22,6 @@ enum DoneProvider {
     
     static func createDonation(donation: CreateDonation, success: @escaping (ParseResponse<CreateDonationData>) -> Void, failure: @escaping (Error) -> Void) {
         NetworkProvider.request(.createDonation(donation: donation), to: CreateDonationData.self, success: success, failure: failure)
-
     }
     
     static func donate(_ amount: Int, to postId: Int, success: @escaping (ParseResponse<DonateMoneyData>) -> Void, failure: @escaping (Error) -> Void) {

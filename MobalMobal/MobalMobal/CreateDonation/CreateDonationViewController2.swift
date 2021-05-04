@@ -183,7 +183,7 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
             viewModel.donation.endAt = stringToDate(input: endDateTextField.text!).iso8601withFractionalSeconds
             print(viewModel.donation)
         } else {
-            viewModel.donation.goal = Int(priceTextField.text!)!
+            viewModel.donation.goal = priceTextField.text!
             print(viewModel.donation)
             transformTextField(textField: priceTextField)
         }
@@ -255,6 +255,7 @@ extension CreateDonationViewController2: UIImagePickerControllerDelegate {
             photoImageView.contentMode = .scaleAspectFill
             photoImageView.image = selectedImage
             imagePickerButton.backgroundColor = .clear
+            viewModel.donation.postImageData = selectedImage.pngData()
         }
         picker.dismiss(animated: true, completion: nil)
     }

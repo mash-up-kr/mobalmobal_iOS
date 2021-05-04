@@ -15,7 +15,7 @@ protocol CreateDonationViewModelDeleagate: class {
 class CreateDonationViewModel {
     
     // MARK: - Property
-    var donation: CreateDonation = CreateDonation(title: "", description: nil, postImage: "", goal: 0, startedAt: "", endAt: "")
+    var donation: CreateDonation = CreateDonation(title: "", description: nil, postImage: "", goal: "0", startedAt: "", endAt: "")
     weak var delegate: CreateDonationViewModelDeleagate?
     
     // MARK: - Method
