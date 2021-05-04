@@ -19,12 +19,16 @@ class LoginViewModel {
     private var fireStoreId: String? {
         didSet { setFireStoreId() }
     }
+    private var provider: Provider? {
+        didSet { setProvider() }
+    }
     private var loginData: LoginData? {
         didSet { loginDataChanged() }
     }
     
-    func login(with fireStoreId: String) {
+    func login(with fireStoreId: String, provider: Provider) {
         self.fireStoreId = fireStoreId
+        self.provider = provider
         
         DoneProvider.login(fireStoreId: fireStoreId) { [weak self] response in
             self?.loginData = response.data
@@ -39,15 +43,19 @@ class LoginViewModel {
     }
     
     private func loginDataChanged() {
-        setUserToken(loginData?.token.token)
+        if KeychainManager.shared.getUserToken() != nil {
+            if KeychainManager.shared.updateUserToken(loginData?.token.token) { print("🐻 키체인 업데이트 성공") }
+        } else {
+            if KeychainManager.shared.setUserToken(loginData?.token.token) { print("🐻 키체인 저장 성공") }
+        }
     }
     
     private func setFireStoreId() {
         UserInfo.shared.fireStoreId = fireStoreId
     }
     
-    private func setUserToken(_ token: String?) {
-        UserDefaults.standard.setValue(token, forKey: UserDefaultsKeys.userToken)
-        UserInfo.shared.token = token
+    private func setProvider() {
+        UserInfo.shared.provider = provider
     }
+    
 }

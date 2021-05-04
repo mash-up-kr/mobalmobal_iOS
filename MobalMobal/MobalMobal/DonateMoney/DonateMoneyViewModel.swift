@@ -8,6 +8,7 @@ import Alamofire
 import Foundation
 
 protocol DonateMoneyViewModelDelegate: AnyObject {
+    func insufficientPoint()
     func failDonateMoney(message: String?)
     func completeDonateMoney(amount: Int)
 }
@@ -38,8 +39,25 @@ class DonateMoneyViewModel {
     }
     
     // MARK: - API
+    func checkChargedPoint() -> Int {
+        var chargedCash = 0
+        DoneProvider.getUserProfile { response in
+            if let cash = response.data?.user.cash {
+                chargedCash = cash
+            }
+        } failure: { _ in }
+        return chargedCash
+    }
+    
     func donate(amount: Int) {
         self.amount = amount
+        
+        // 잔액 부족
+        if checkChargedPoint() < amount {
+            delegate?.insufficientPoint()
+            return
+        }
+        // 정상 작동
         DoneProvider.donate(amount, to: postId) { [weak self] response in
             self?.donateData = response.data
             if let message = response.message {

@@ -23,7 +23,6 @@ class ProfileViewController: DoneBaseViewController {
     private let sectionHeaderCellIdentifier: String = "SectionHeaderCell"
     private lazy var numberOfDonations: [Int] = [0, 0, 0]     // 내연, 후원중, 종료 갯수
     private let profileViewModel: ProfileViewModel = ProfileViewModel()
-    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +30,7 @@ class ProfileViewController: DoneBaseViewController {
         setLayout()
         setNavigation()
         callAPI()
+        
         profileViewModel.mainDelegate = self
         mainTableView.tableFooterView = UIView(frame: .zero)
     }
@@ -42,16 +42,17 @@ class ProfileViewController: DoneBaseViewController {
     // MARK: - Actions
     @objc
     private func popVC() {
-        print("✨ pop viewcontroller")
         navigationController?.popViewController(animated: true)
     }
+    /* 1차배포 제외
     @objc
     private func modifyInfo() {
         print("✨ modify user info")
     }
+     */
     @objc
     private func pushSettingVC() {
-        print("✨ push setting vc")
+        navigationController?.pushViewController(SettingViewController(), animated: true)
     }
     
     // MARK: - Methods
@@ -88,7 +89,7 @@ class ProfileViewController: DoneBaseViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.whiteTwo]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
         
-        // 추가 네비게이션 아이템
+        // 1차배포 제외(프로필 수정)
 //        let editBtn: UIButton = UIButton()
 //        editBtn.setImage(UIImage(named: "iconlyLightEditSquare"), for: .normal)
 //        editBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
@@ -97,7 +98,7 @@ class ProfileViewController: DoneBaseViewController {
         
         let settingBtn: UIButton = UIButton()
         settingBtn.setImage(UIImage(named: "iconlyLightSetting"), for: .normal)
-        settingBtn.addTarget(self, action: #selector(modifyInfo), for: .touchUpInside)
+        settingBtn.addTarget(self, action: #selector(pushSettingVC), for: .touchUpInside)
         settingBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         let settingBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: settingBtn)
         
@@ -148,6 +149,7 @@ extension ProfileViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return UITableViewCell() }
             profileCell.selectionStyle = .none
+            profileCell.pointChargingDelegate = self
             if let userProfileData: ProfileData = profileViewModel.profileResponseModel {
                 profileCell.cellViewModel.setModel(userProfileData)
             }
@@ -208,11 +210,29 @@ extension ProfileViewController: UITableViewDataSource {
 
  // MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section >= 2 {
+            guard let postId = profileViewModel.getPostId(section: indexPath.section, row: indexPath.row) else { return }
+            let donationDetailVC: DonationDetailViewController = DonationDetailViewController(donationId: postId)
+            self.navigationController?.pushViewController(donationDetailVC, animated: true)
+        }
+    }
 }
 
+// MARK: - ProfileViewModelDelegate
 extension ProfileViewController: ProfileViewModelDelegate {
     func tableViewUpdate(section: IndexSet) {
         self.mainTableView.reloadSections(section, with: .automatic)
         self.navigationItem.title = profileViewModel.getUserNickname()
+    }
+}
+
+// MARK: - ppointChargingActionDelegate
+extension ProfileViewController: pointChargingActionDelegate {
+    func presentPointChargingView() {
+        let pointChargingVC: PointChargingViewController = PointChargingViewController()
+        let navVc: UINavigationController = UINavigationController(rootViewController: pointChargingVC)
+        navVc.modalPresentationStyle = .overFullScreen
+        self.present(navVc, animated: true, completion: nil)
     }
 }
