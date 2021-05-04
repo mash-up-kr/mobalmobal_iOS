@@ -14,4 +14,11 @@ extension UIViewController {
         let backButton: UIBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: action)
         navigationItem.leftBarButtonItem = backButton
     }
+    
+    func alertController(_ message: String) {
+        let alertController: UIAlertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let alertAction: UIAlertAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
+    }
 }
