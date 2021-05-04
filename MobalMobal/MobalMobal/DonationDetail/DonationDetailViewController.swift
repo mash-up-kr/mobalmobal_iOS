@@ -233,9 +233,14 @@ class DonationDetailViewController: DoneBaseViewController {
     private func clickParticipantsMoreButton() {
         showParticipantsAlert()
     }
+    
     @objc
     private func clickDonationButton() {
-        presentDonateMoneyVC()
+        if KeychainManager.isEmptyUserToken() {
+            presentLoginVC()
+        } else {
+            presentDonateMoneyVC()
+        }
     }
     @objc
     private func clickBackButton() {
@@ -258,6 +263,13 @@ class DonationDetailViewController: DoneBaseViewController {
         let navigationController: UINavigationController = UINavigationController(rootViewController: donateMoneyVC)
         navigationController.modalPresentationStyle = .overFullScreen
         present(navigationController, animated: true)
+    }
+    
+    private func presentLoginVC() {
+        let loginVC: LoginViewController = LoginViewController()
+        let navVc: UINavigationController = UINavigationController(rootViewController: loginVC)
+        navVc.modalPresentationStyle = .fullScreen
+        self.present(navVc, animated: true)
     }
     
     private func popNavigationVC() {
