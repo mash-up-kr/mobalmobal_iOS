@@ -251,7 +251,7 @@ class DonationDetailViewController: DoneBaseViewController {
     }
     
     private func presentDonateMoneyVC() {
-        let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController(postId: viewModel.getDonationId() )
+        let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController(postId: viewModel.getDonationId(), nickname: viewModel.getNickname(), giftName: viewModel.getGiftName())
         donateMoneyVC.donationCompletionHander = { [weak self] in
             self?.viewModel.callDonationInfoAPI()
         }
