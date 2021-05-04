@@ -15,11 +15,11 @@ protocol CreateDonationViewModelDeleagate: class {
 class CreateDonationViewModel {
     
     // MARK: - Property
-    var donation: CreateDonation?
+    var donation: CreateDonation = CreateDonation(title: "", description: nil, postImage: "", goal: 0, startedAt: "", endAt: "")
     weak var delegate: CreateDonationViewModelDeleagate?
     
     // MARK: - Method
-    private func createDonation(donation: CreateDonation) {
+    func createDonation(donation: CreateDonation) {
         DoneProvider.createDonation(donation: donation) { [weak self] response in
             guard let self = self else {
                 return
@@ -34,6 +34,9 @@ class CreateDonationViewModel {
             print("CreateDonation : \(error.localizedDescription)")
             return
         }
-
+    }
+    
+    func textFieldisFilled(textField: UITextField) -> Bool {
+        return !(textField.text!.isEmpty)
     }
 }

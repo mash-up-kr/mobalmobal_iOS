@@ -9,10 +9,15 @@ import Foundation
 
 struct CreateDonationResponse: Codable {
     let code: Int
+    let message: String
     let data: CreateDonationData
 }
 
 struct CreateDonationData: Codable {
+    let post: CreateDonationInfo
+}
+
+struct CreateDonationInfo: Codable {
     let postId: Int
     let userId: Int
     let title: String

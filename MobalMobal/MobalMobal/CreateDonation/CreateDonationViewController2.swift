@@ -35,7 +35,8 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     }
     
     @IBAction func createButtonIsTapped(_ sender: UIButton) {
-        print("Button이 눌렸습니다.")
+        print(viewModel.donation)
+        viewModel.createDonation(donation: self.viewModel.donation)
     }
     
     @IBAction private func imagePickerButtonIsTapped(_ sender: UIButton) {
@@ -46,6 +47,7 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     }
     
     // MARK: - Property
+    private var viewModel: CreateDonationViewModel = CreateDonationViewModel()
     private var filledView: [UITextField] = []
     private let topConstraint: Int = 86
     private let datePicker: UIDatePicker = UIDatePicker()
@@ -112,7 +114,7 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     }
     
     private func setDatePicker() {
-        datePicker.datePickerMode = .dateAndTime
+        datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "ko_KR")
         startDateTextField.inputView = datePicker
         endDateTextField.inputView = datePicker
@@ -135,7 +137,7 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     @objc
     func updateTextField() {
         let dateFormatter: DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd hh:mm"
+        dateFormatter.dateFormat = "YYYY-MM-dd"
         let datePickerDate: String = dateFormatter.string(from: datePicker.date)
         
         if startDateTextField.isEditing {
@@ -144,6 +146,19 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
             datePicker.minimumDate = dateFormatter.date(from: startDateTextField.text ?? "")
             endDateTextField.text = datePickerDate
         }
+    }
+    
+    func stringToDate(input: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(identifier: "KST")
+        
+        if let date = formatter.date(from: input) {
+            return date
+        }
+        
+        return Date()
     }
     
     private func addToolBar() {
@@ -161,9 +176,15 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     private func doneButtonClicked() {
         if startDateTextField.isEditing {
             transformTextField(textField: startDateTextField)
+            viewModel.donation.startedAt = stringToDate(input: startDateTextField.text!).iso8601withFractionalSeconds
+            print(viewModel.donation)
         } else if endDateTextField.isEditing {
             transformTextField(textField: endDateTextField)
+            viewModel.donation.endAt = stringToDate(input: endDateTextField.text!).iso8601withFractionalSeconds
+            print(viewModel.donation)
         } else {
+            viewModel.donation.goal = Int(priceTextField.text!)!
+            print(viewModel.donation)
             transformTextField(textField: priceTextField)
         }
         checkCreateButtonViewValidation()
@@ -202,6 +223,15 @@ extension CreateDonationViewController2: UITextFieldDelegate {
     
         transformTextField(textField: textField)
         checkCreateButtonViewValidation()
+        
+        if let textFieldText = textField.text, !(textFieldText.isEmpty) {
+            if textField == productTextField {
+                viewModel.donation.title = textFieldText
+            } else if textField == inputTextField {
+                viewModel.donation.description = textFieldText
+            }
+        }
+        
         self.view.endEditing(true)
         return true
     }
@@ -233,3 +263,4 @@ extension CreateDonationViewController2: UIImagePickerControllerDelegate {
         self.dismiss(animated: true, completion: nil)
     }
 }
+

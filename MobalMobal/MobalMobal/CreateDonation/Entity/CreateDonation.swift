@@ -12,8 +12,8 @@ struct CreateDonation: Codable {
     var description: String?
     var postImage: String
     var goal: Int
-    var startedAt: Date
-    var endAt: Date
+    var startedAt: String
+    var endAt: String
     
     enum CodingKeys: String, CodingKey {
         case title, description

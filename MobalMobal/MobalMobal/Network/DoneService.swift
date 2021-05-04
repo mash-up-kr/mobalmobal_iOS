@@ -47,7 +47,7 @@ extension DoneService: TargetType {
             return "/donate/my"
         case .charge:
             return "/charge"
-        case .createDonation(donation: let donation):
+        case .createDonation:
             return "/posts"
         }
     }
@@ -79,7 +79,7 @@ extension DoneService: TargetType {
                                                                 "charged_at": chargedAt]
                                                , bodyEncoding: JSONEncoding.default
                                                , urlParameters: [:])
-        case .createDonation(donation: let donation):
+        case .createDonation(let donation):
             return .requestCompositeParameters(bodyParameters:
                                                 [ "title": donation.title,
                                                   "description": donation.description,
