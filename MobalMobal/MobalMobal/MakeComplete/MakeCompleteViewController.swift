@@ -7,8 +7,12 @@
 
 import SnapKit
 import UIKit
+import Kingfisher
 
 class MakeCompleteViewController: UIViewController {
+    // MARK: - Property
+    var donationInfo: CreateDonationInfo?
+    
     // MARK: - UIComponenets
     let closeButton: UIButton = {
         let button: UIButton = UIButton()
@@ -18,7 +22,9 @@ class MakeCompleteViewController: UIViewController {
     }()
     lazy var giftLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "\(gift) 가지고싶다"
+        if let title = donationInfo?.title, let description = donationInfo?.description {
+            label.text = "\(title) \(description)"
+        }
         label.font = .spoqaHanSansNeo(ofSize: 36, weight: .medium)
         label.textColor = .white
         return label
@@ -31,8 +37,9 @@ class MakeCompleteViewController: UIViewController {
         return label
     }()
     lazy var donationImageView: UIImageView = {
-        let image: UIImage? = UIImage(named: "profile_default")
-        let imageView: UIImageView = UIImageView(image: image)
+        let url = URL(string: donationInfo?.postImage ?? "")
+        let imageView: UIImageView = UIImageView()
+        imageView.kf.setImage(with: url)
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         return imageView
@@ -44,7 +51,7 @@ class MakeCompleteViewController: UIViewController {
     }()
     lazy var ddayLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "D-\(dday)"
+        label.text = "D-\(calculateDday())"
         label.font = .spoqaHanSansNeo(ofSize: 11, weight: .regular)
         label.textColor = .brownGrey
         return label
@@ -57,7 +64,9 @@ class MakeCompleteViewController: UIViewController {
     lazy var smallTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.numberOfLines = 2
-        label.text = "티끌모아\n\(gift)"
+        if let title = donationInfo?.title {
+            label.text = "티끌모아\n\(title)"
+        }
         label.font = .spoqaHanSansNeo(ofSize: 14, weight: .medium)
         label.textColor = .white
         return label
@@ -153,6 +162,10 @@ class MakeCompleteViewController: UIViewController {
             make.center.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(20)
         }
+    }
+    
+    private func calculateDday() -> Int {
+        return Calendar.current.dateComponents([.year, .month, .day], from: donationInfo!.startedAt, to: donationInfo!.endAt).day! + 1
     }
     
     @objc

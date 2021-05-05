@@ -14,6 +14,7 @@ enum DoneService {
     case getMain(item: Int, limit: Int)
     case getDetail(posts: Int)
     case donate(post: Int, money: Int)
+    case createDonation(donation: CreateDonation)
     case getUserProfile
     case getMyDonation(status: String)
     case getMyDonate
@@ -49,6 +50,8 @@ extension DoneService: TargetType {
             return "/donate/my"
         case .charge:
             return "/charge"
+        case .createDonation:
+            return "/posts"
         }
     }
     
@@ -56,7 +59,8 @@ extension DoneService: TargetType {
         switch self {
         case .getMain, .getDetail, .getUserProfile, .getMyDonation, .getMyDonate:
             return .get
-        case .login, .donate, .charge, .signup:
+
+        case .login, .donate, .charge, .createDonation, .signup:
             return .post
         }
     }
@@ -90,15 +94,26 @@ extension DoneService: TargetType {
                                                                 "charged_at": chargedAt]
                                                , bodyEncoding: JSONEncoding.default
                                                , urlParameters: [:])
+        case .createDonation(let donation):
+            let titleData = MultipartFormData(provider: .data(donation.title.data(using: .utf8)!), name: "title")
+            let descriptionData = MultipartFormData(provider: .data(donation.description!.data(using: .utf8)!), name: "description")
+            let imageData = MultipartFormData(provider: .data(donation.postImageData!), name: "post_image", fileName: "image.png", mimeType: "image/png")
+            let goalData = MultipartFormData(provider: .data(String(donation.goal).data(using: .utf8)!), name: "goal")
+            let startedData = MultipartFormData(provider: .data(donation.startedAt.data(using: .utf8)!), name: "started_at")
+            let endData = MultipartFormData(provider: .data(donation.endAt.data(using: .utf8)!), name: "end_at")
+            let multipartData = [titleData, descriptionData, imageData, goalData, startedData, endData]
+
+            return .uploadMultipart(multipartData)
         case .getMyDonation(let status):
             return .requestParameters(parameters: ["status": status], encoding: URLEncoding.queryString)
         }
     }
+        
     var headers: [String: String]? {
         switch self {
         case .login, .signup:
             return nil
-        case .getMain, .getDetail, .donate, .getUserProfile, .getMyDonate, .getMyDonation, .charge:
+        case .getMain, .getDetail, .donate, .getUserProfile, .getMyDonate, .getMyDonation, .charge, .createDonation:
             guard let token = KeychainManager.getUserToken() else {
                 print("🐻 [Login Required] keychain token nil")
                 return nil
