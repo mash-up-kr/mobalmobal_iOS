@@ -5,6 +5,7 @@
 //  Created by 송서영 on 2021/02/27.
 //
 
+import Toast
 import SnapKit
 import UIKit
 
@@ -93,13 +94,33 @@ class PointChargingViewController: DoneBaseViewController {
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissVC))
         self.transparencyView.addGestureRecognizer(tapGestureRecognizer)
     }
+    private func tokenError() {
+        let loginVC: LoginViewController = LoginViewController()
+        let navigation: UINavigationController = UINavigationController(rootViewController: loginVC)
+        navigation.modalPresentationStyle = .fullScreen
+        self.present(navigation, animated: true, completion: nil)
+    }
+    private func networkError() {
+        let toastPoint: CGPoint = CGPoint(x: view.frame.midX, y: view.frame.maxY - 60)
+        self.view.makeToast("네트워크 연결을 다시 해주세요.", duration: 2.0, point: toastPoint, title: nil, image: nil, completion: nil)
+    }
     private func setNetwork(_ textFieldText: String) {
         viewModel.amount = Int(textFieldText)!
-        // TODO
-        // 싱글톤객체에서 받아와야함!!!!!
-        viewModel.userName = "ㅅㅇ"
+        viewModel.userName = UserInfo.shared.nickName
         viewModel.chargedAt = Date().iso8601withFractionalSeconds
-        viewModel.postCharging()
+        let toastPoint: CGPoint = CGPoint(x: view.frame.midX, y: view.frame.maxY - 60)
+        viewModel.postCharging { [weak self] result in
+            switch result {
+            case .success:
+                print("🎉🎉chaging success🎉🎉")
+            case .failure(.client):
+                self?.networkError()
+            case.failure(.noData):
+                self?.view.makeToast("충전할 값을 다시 입력해주세요", duration: 2.0, point: toastPoint, title: nil, image: nil, completion: nil)
+            case .failure(.server), .failure(.unknown):
+                self?.tokenError()
+            }
+        }
 
     }
 }

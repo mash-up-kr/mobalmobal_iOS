@@ -67,19 +67,16 @@ class SignupViewModel: SignupViewModelProtocol {
                 self.delegate?.requestNickNameAgain()
             } else if response.code == 200 {
                 self.delegate?.success()
-                if let token = self.loginData {
-                    self.setUserToken(loginData: token)
+                if let data = self.loginData {
+                    if KeychainManager.shared.setUserToken(data.token.token) {
+                        print("Signup Token 저장 성공")
+                    }
                 }
             }
         } failure: { (error) in
             print(error.localizedDescription)
             return
         }
-    }
-    
-    private func setUserToken(loginData: LoginData) {
-        UserDefaults.standard.setValue(loginData.token.token, forKey: UserDefaultsKeys.userToken)
-        UserInfo.shared.token = loginData.token.token
     }
     
     func apiValidation(_ nicknameTextField: UITextField, agreementButtonIsPressed: Bool) -> Bool {

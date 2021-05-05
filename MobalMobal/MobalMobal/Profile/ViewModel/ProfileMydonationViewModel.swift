@@ -12,8 +12,8 @@ protocol ProfileMydonationViewModelDelegate: AnyObject {
     func setMyDonateUI()
 }
 
-// 내가 만든 도네이션 (내가 연 도네, 종료된 도네) MyDonation
-// 내가 후운한 돈데 MyDonate
+
+// 내가 후원한 돈데 MyDonate
 class ProfileMydonationViewModel {
     // MARK: - Properties
     weak var delegate: ProfileMydonationViewModelDelegate?

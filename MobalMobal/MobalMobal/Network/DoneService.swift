@@ -16,7 +16,7 @@ enum DoneService {
     case donate(post: Int, money: Int)
     case createDonation(donation: CreateDonation)
     case getUserProfile
-    case getMyDonation
+    case getMyDonation(status: String)
     case getMyDonate
     case charge(amount: Int, userName: String, chargedAt: String)
 }
@@ -71,7 +71,7 @@ extension DoneService: TargetType {
             return .requestParameters(parameters: ["item": item,
                                                    "limit": limit,
                                                    "order": "DESC"], encoding: URLEncoding.queryString)
-        case .getDetail, .getUserProfile, .getMyDonation, .getMyDonate:
+        case .getDetail, .getUserProfile, .getMyDonate:
             return .requestPlain
         case .login(let fireStoreId):
             return .requestParameters(parameters: ["fireStoreId": fireStoreId], encoding: JSONEncoding.default)
@@ -104,6 +104,8 @@ extension DoneService: TargetType {
             let multipartData = [titleData, descriptionData, imageData, goalData, startedData, endData]
 
             return .uploadMultipart(multipartData)
+        case .getMyDonation(let status):
+            return .requestParameters(parameters: ["status": status], encoding: URLEncoding.queryString)
         }
     }
         
@@ -118,6 +120,7 @@ extension DoneService: TargetType {
             }
             print("🐻 keychain token : \(token)")
             return ["authorization": token]
+//            return ["authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2MTc3ODIzNzgsImV4cCI6MTY0OTMzOTk3OCwiaXNzIjoiaHllb25pIn0.EylJ0O9zsOePeB6WmQ5-Xfm6X63L29s6iUxZL6dxzdA"]
         }
     }
 }
