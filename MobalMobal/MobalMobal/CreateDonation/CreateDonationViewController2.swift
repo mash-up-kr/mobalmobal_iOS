@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 class CreateDonationViewController2: UIViewController, UINavigationControllerDelegate {
     
@@ -35,7 +36,6 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     }
     
     @IBAction func createButtonIsTapped(_ sender: UIButton) {
-        print(viewModel.donation)
         viewModel.createDonation(donation: self.viewModel.donation)
     }
     
@@ -129,7 +129,7 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     }
     
     private func checkCreateButtonViewValidation() {
-        if !(productTextField.text!.isEmpty) && !(priceTextField.text!.isEmpty) && !(startDateTextField.text!.isEmpty) && !(endDateTextField.text!.isEmpty) {
+        if !(productTextField.text!.isEmpty) && !(priceTextField.text!.isEmpty) && !(startDateTextField.text!.isEmpty) && !(endDateTextField.text!.isEmpty) && (photoImageView.image != nil) {
             self.createButtonView.isHidden = false
         } else {
             self.createButtonView.isHidden = true
@@ -263,10 +263,12 @@ extension CreateDonationViewController2: UIImagePickerControllerDelegate {
             imagePickerButton.backgroundColor = .clear
             viewModel.donation.postImageData = selectedImage.pngData()
         }
+        checkCreateButtonViewValidation()
         picker.dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        checkCreateButtonViewValidation()
         self.dismiss(animated: true, completion: nil)
     }
 }
@@ -283,6 +285,7 @@ extension CreateDonationViewController2: CreateDonationViewModelDeleagate {
     }
     
     func unavaliableToken() {
-         
+        let toastPoint: CGPoint = CGPoint(x: view.frame.midX, y: view.frame.maxY - 60)
+        view.makeToast("다시 로그인 해주시기 바랍니다.", duration: 2.0, point: toastPoint, title: nil, image: nil, completion: nil)
     }
 }
