@@ -158,7 +158,7 @@ extension ProfileDonatingTableViewCell: ProfileDonatingViewModelDelegate {
             donatePrice.text = "\(donationGoalFormat)"
         }
         if let imageURL: URL = URL(string: viewModel.getDonationImg(myDonate: mydonate) ?? "") {
-            donateImg.kf.setImage(with: imageURL)
+            donateImg.kf.setImage(with: imageURL, placeholder: UIImage(named: "profile_default"), options: nil, completionHandler: nil)
         } else {
             donateImg.image = UIImage(named: "profile_default")
         }

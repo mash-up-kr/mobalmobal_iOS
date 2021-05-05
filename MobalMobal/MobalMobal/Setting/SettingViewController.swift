@@ -93,14 +93,14 @@ class SettingViewController: DoneBaseViewController {
         let webVC: WebviewController = WebviewController()
         webVC.webURL = SettingURL.openSource.rawValue
         webVC.navTitle = "오픈소스 약관"
-        self.present(webVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(webVC, animated: true)
     }
     @objc
     func termsAndConditionAction() {
         let webVC: WebviewController = WebviewController()
         webVC.webURL = SettingURL.termsAndConditioin.rawValue
         webVC.navTitle = "이용약관"
-        self.present(webVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(webVC, animated: true)
     }
     @objc
     func inquiryAction() {

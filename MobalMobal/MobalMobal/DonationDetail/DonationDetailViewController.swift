@@ -238,6 +238,8 @@ class DonationDetailViewController: DoneBaseViewController {
     private func clickDonationButton() {
         if KeychainManager.isEmptyUserToken() {
             presentLoginVC()
+        } else if UserInfo.shared.nickName == viewModel.getNickname() {
+            donateMySelfAlert()
         } else {
             presentDonateMoneyVC()
         }
@@ -248,6 +250,12 @@ class DonationDetailViewController: DoneBaseViewController {
     }
     
     // MARK: - Methods
+    private func donateMySelfAlert() {
+        let alert: UIAlertController = UIAlertController(title: "안내", message: "본인의 게시물에 후원할 수 없습니다.", preferredStyle: .alert)
+        let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
     private func showParticipantsAlert() {
         let alert: UIAlertController = UIAlertController(title: "준비중입니다.", message: "빠른 시일 내로 참여자 확인이 가능하도록 하겠습니다.", preferredStyle: .alert)
         let action: UIAlertAction = UIAlertAction(title: "확인", style: .default)

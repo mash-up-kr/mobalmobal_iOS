@@ -51,7 +51,8 @@ class MakeCompleteViewController: UIViewController {
     }()
     lazy var ddayLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "D-\(calculateDday())"
+        let dDay = Date().getDDayString(to: donationInfo?.endAt)
+        label.text = "\(dDay)"
         label.font = .spoqaHanSansNeo(ofSize: 11, weight: .regular)
         label.textColor = .brownGrey
         return label
