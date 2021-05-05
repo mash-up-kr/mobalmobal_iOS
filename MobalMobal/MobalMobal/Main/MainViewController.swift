@@ -141,8 +141,11 @@ class MainViewController: DoneBaseViewController {
     
     // 변경 가능
     func presentAddMyDonationVC() {
-        // let addMyDonationVC: AddMyDonationViewController = AddMyDonationViewController()
-        // present(addMyDonationVC, animated: true)
+        let viewController = UIStoryboard(name: "CreateDonation", bundle: nil).instantiateViewController(withIdentifier: "CreateDonationViewController2")
+        let navigationController: UINavigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        navigationController.isNavigationBarHidden = true
+        present(navigationController, animated: true, completion: nil)
     }
     
     // MARK: - Methods
