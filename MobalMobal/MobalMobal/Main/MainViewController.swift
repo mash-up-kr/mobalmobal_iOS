@@ -92,6 +92,7 @@ class MainViewController: DoneBaseViewController {
         
         viewModel.callUserInfoApi()
         viewModel.callMainPostsApi()
+        viewModel.callMyDonationAPI()
     }
     
     // MARK: - Actions
@@ -312,6 +313,8 @@ extension MainViewController: UICollectionViewDataSource {
     private func getMyDonationCell(_ indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: MainMyDonationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: myCellIdentifier, for: indexPath) as? MainMyDonationCollectionViewCell else { return .init() }
         cell.delegate = self
+        cell.viewModel = self.viewModel
+        cell.viewModel?.mainMyOngoingDelegate = cell
         return cell
     }
     

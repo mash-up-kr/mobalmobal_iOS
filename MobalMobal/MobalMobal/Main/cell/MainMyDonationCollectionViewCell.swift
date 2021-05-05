@@ -36,17 +36,16 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     weak var delegate: MainMyDonationCollectionViewCellDelegate?
+    var viewModel: MainViewModel?
     
     let buttonCellIdentifier: String = "MainAddMyDonationCollectionViewCell"
     let cardCellIdentifier: String = "MainMyOngoingDonationCollectionViewCell"
-    let viewModel: MainViewModel = MainViewModel()
     
     // MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
         setCollectionView()
         setLayout()
-        callAPI()
     }
     
     required init?(coder: NSCoder) {
@@ -54,10 +53,6 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
-    private func callAPI() {
-        viewModel.callMyDonationAPI()
-    }
-    
     private func setCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -80,6 +75,13 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
     }
 }
 
+// MARK: - MainMyOngoingDonationDelegate
+extension MainMyDonationCollectionViewCell: MainMyOngoingDonationDelegate {
+    func didMyDonationsChanged() {
+        collectionView.reloadData()
+    }
+}
+
 // MARK: - UICollectionViewDelegate
 extension MainMyDonationCollectionViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -87,7 +89,7 @@ extension MainMyDonationCollectionViewCell: UICollectionViewDelegate {
         case 0:
             delegate?.didSelectAddMyDonationButton()
         case 1:
-            let postId = viewModel.myDonations[indexPath.row].postId
+            guard let postId = viewModel?.getMyDontion(at: indexPath.row).postId else { return }
             delegate?.didSelectMyOngoingDonationItem(at: postId)
         default:
             break
@@ -106,7 +108,7 @@ extension MainMyDonationCollectionViewCell: UICollectionViewDataSource {
         case 0:
             return 1
         case 1:
-            return viewModel.getMyDonationsCount
+            return viewModel?.getMyDonationsCount ?? 0
         default:
             return 0
         }
@@ -119,10 +121,8 @@ extension MainMyDonationCollectionViewCell: UICollectionViewDataSource {
             return cell
         default:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as? MainMyOngoingDonationCollectionViewCell else { return .init() }
-            cell.setModel(title: viewModel.getMyDonationTitle(indexPath.item),
-                          money: viewModel.getMyDonationMoney(indexPath.item),
-                          progress: viewModel.getMyDonationProgress(indexPath.item),
-                          indexPath: indexPath.row)
+            guard let myDonation = viewModel?.myDonations[indexPath.item] else { return cell }
+            cell.setModel(myDonation)
             return cell
         }
     }

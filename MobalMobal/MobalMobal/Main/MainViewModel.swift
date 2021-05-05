@@ -10,10 +10,13 @@ import Foundation
 protocol MainViewModelDelegate: AnyObject {
     func didNicknameChanged(to nickname: String?)
     func didPostsChanged(to posts: [MainPost])
-    func didMyDonationsChanged(to myDonations: [MydonationPost])
     
     func failedGetPosts(message: String)
     func failedGetMyDonations(message: String)
+}
+
+protocol MainMyOngoingDonationDelegate: AnyObject {
+    func didMyDonationsChanged()
 }
 
 class MainViewModel {
@@ -30,7 +33,7 @@ class MainViewModel {
     }
     var myDonations: [MydonationPost] = [] { // 진행 중인 내 도네이션
         didSet {
-            mainViewModelDelegate?.didMyDonationsChanged(to: myDonations)
+            mainMyOngoingDelegate?.didMyDonationsChanged()
         }
     }
     
@@ -63,7 +66,7 @@ class MainViewModel {
             guard let self = self else { return }
             
             if response.code != 200 {
-                self.mainViewModelDelegate?.failedGetPosts(message: "데이터를 불러올 수 없습니다. \(response.message!)")
+                self.mainViewModelDelegate?.failedGetPosts(message: "진행중 데이터를 불러올 수 없습니다. \(response.message!)")
                 return
             }
             
@@ -72,10 +75,10 @@ class MainViewModel {
                 self.posts = posts
             } else {
                 if posts.isEmpty {  self.isEnd = true }
-                self.posts.append(contentsOf: posts)
+                self.posts += posts
             }
         } failure: { error in
-            self.mainViewModelDelegate?.failedGetPosts(message: "데이터를 불러올 수 없습니다. \(error.localizedDescription)")
+            self.mainViewModelDelegate?.failedGetPosts(message: "진행중 데이터를 불러올 수 없습니다. \(error.localizedDescription)")
         }
     }
     
@@ -84,15 +87,14 @@ class MainViewModel {
             guard let self = self else { return }
             
             if response.code != 200 {
-                self.mainViewModelDelegate?.failedGetPosts(message: "데이터를 불러올 수 없습니다. \(response.message!)")
+                self.mainViewModelDelegate?.failedGetPosts(message: "나의 진행 데이터를 불러올 수 없습니다. \(response.message!)")
                 return
             }
             
             guard let posts = response.data?.posts else { return }
             self.checkInprogressDonation(posts)
-            self.mainMyOngoingDelegate?.populate()
         } failure: { error in
-            self.mainViewModelDelegate?.failedGetPosts(message: "데이터를 불러올 수 없습니다. \(error.localizedDescription)")
+            self.mainViewModelDelegate?.failedGetPosts(message: "나의 진행 데이터를 불러올 수 없습니다. \(error.localizedDescription)")
 
         }
     }
@@ -102,9 +104,12 @@ class MainViewModel {
         for post in response {
             // 날짜가 지났으면 true반환 -> expired에넣음
             if Date().getDueDay(of: post.endAt) >= 0 {
-                self.myDonations.append(post)
+                self.myDonations += [post]
             }
         }
+    }
+    func getMyDontion(at item: Int) -> MydonationPost {
+        return myDonations[item]
     }
     func getMyDonationTitle(_ item: Int) -> String {
         return myDonations[item].title
