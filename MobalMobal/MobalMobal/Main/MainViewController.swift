@@ -85,14 +85,24 @@ class MainViewController: DoneBaseViewController {
         view.backgroundColor = .backgroundColor
         setCollectionView()
         setLayout()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
         
         viewModel.callUserInfoApi()
         viewModel.callMainPostsApi()
         viewModel.callMyDonationAPI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        if UserInfo.shared.needToUpdate {
+            viewModel.reset()
+            viewModel.callUserInfoApi()
+            viewModel.callMainPostsApi()
+            viewModel.callMyDonationAPI()
+            
+            UserInfo.shared.needToUpdate = false
+        }
     }
     
     // MARK: - Actions

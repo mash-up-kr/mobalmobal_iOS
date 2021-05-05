@@ -48,6 +48,7 @@ class LoginViewModel {
             self?.userData = response.data?.user
             if response.code == 200 {
                 self?.delegate?.successLogin()
+                UserInfo.shared.needToUpdate = true
                 return
             }
             guard let message = response.message else { return }

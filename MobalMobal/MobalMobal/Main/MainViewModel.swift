@@ -111,14 +111,12 @@ class MainViewModel {
     func getMyDontion(at item: Int) -> MydonationPost {
         return myDonations[item]
     }
-    func getMyDonationTitle(_ item: Int) -> String {
-        return myDonations[item].title
-    }
-    func getMyDonationMoney(_ item: Int) -> Int {
-        return myDonations[item].currentAmount
-    }
-    func getMyDonationProgress(_ item: Int) -> Float {
-        if myDonations[item].goal == 0 { return 100.0 }
-        return Float(Float(( myDonations[item].currentAmount * 100 )) / Float(myDonations[item].goal))
+    
+    func reset() {
+        limit = 10
+        item = Int.max
+        isEnd = false
+        posts = []
+        myDonations = []
     }
 }
