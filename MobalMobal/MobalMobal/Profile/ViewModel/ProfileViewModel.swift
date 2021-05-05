@@ -15,8 +15,8 @@ class ProfileViewModel {
     // MARK: - Properties
     weak var mainDelegate: ProfileViewModelDelegate?
     var profileResponseModel: ProfileData?
-    var myInprogressResponseModel: [MydonationPost] = [MydonationPost]()
-    var myExpiredResponseModel: [MydonationPost] = [MydonationPost]()
+    var myInprogressResponseModel: [MydonationPost]?
+    var myExpiredResponseModel: [MydonationPost]?
     var myDonateResponseModel: [Donate] = [Donate]()
     
     // MARK: - API call
@@ -27,7 +27,6 @@ class ProfileViewModel {
                 self?.profileResponseModel = response.data
                 completion(.success(()))
             default:
-                //토큰만료, 유효하지않은 토큰값, 토큰 없음
                 completion(.failure(.client))
             }
         } failure: { err in
@@ -35,14 +34,31 @@ class ProfileViewModel {
             completion(.failure(.unknown))
         }
     }
-    func getMydontaionResponse(completion: @escaping (Result<Void, DoneError>) -> Void) {
-        DoneProvider.getMyDonation { [weak self] response in
+    func getMyInprogressResponse(completion: @escaping (Result<Void, DoneError>) -> Void) {
+        DoneProvider.getMyDonation(status: "IN_PROGRESS") { [weak self] response in
             switch response.code {
             case 200:
-                self?.splitModelInprogressExpired(response)
+//                self?.splitModelInprogressExpired(response)
+                
+                self?.myInprogressResponseModel = response.data?.posts
+                print("INPROGRESS complete ", self?.myInprogressResponseModel?.count)
                 completion(.success(()))
             default:
-                //토큰만료, 유효하지않은 토큰 값, 토큰 없음
+                completion(.failure(.client))
+            }
+        } failure: { err in
+            print(err.localizedDescription)
+            completion(.failure(.unknown))
+        }
+    }
+    func getMyExpiredResponse(completion: @escaping (Result<Void, DoneError>) -> Void) {
+        DoneProvider.getMyDonation(status: "EXPIRED") { [weak self] response in
+            switch response.code {
+            case 200:
+//                self?.splitModelInprogressExpired(response)
+                self?.myExpiredResponseModel = response.data?.posts
+                completion(.success(()))
+            default:
                 completion(.failure(.client))
             }
         } failure: { err in
@@ -74,9 +90,9 @@ class ProfileViewModel {
                 self.myDonateResponseModel.append(donate)
             }
         }
-        self.mainDelegate?.tableViewReload()
     }
     
+    /*
     // 내가 연 도네를 Inprogress와 expired로 구분
     func splitModelInprogressExpired(_ response: ParseResponse<MydonationData>) {
         for post in response.data!.posts {
@@ -88,6 +104,7 @@ class ProfileViewModel {
             }
         }
     }
+ */
     
     // MARK: - Methods
     func getUserNickname() -> String? {
@@ -104,9 +121,9 @@ class ProfileViewModel {
     }
     func getPostId(section: Int, row: Int) -> Int? {
         if section == 2 {
-            return myInprogressResponseModel[row].postId
+            return myInprogressResponseModel?[row].postId
         } else if section == 4 {
-            return myExpiredResponseModel[row].postId
+            return myExpiredResponseModel?[row].postId
         } else {
             return myDonateResponseModel[row].postId
         }

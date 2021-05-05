@@ -59,15 +59,14 @@ class ProfileViewController: DoneBaseViewController {
     
     // MARK: - Methods
     func tokenExpired() {
-        self.view.makeToast("로그인이 필요한 서비스입니다.",
-                             duration: 0.5,
-                             position: .bottom,
-                             completion: { _ in
-                                let loginVC: LoginViewController = LoginViewController()
-                                let navigation: UINavigationController = UINavigationController(rootViewController: loginVC)
-                                navigation.modalPresentationStyle = .fullScreen
-                                self.present(navigation, animated: true, completion: nil)
-                             })
+        let toastPoint: CGPoint = CGPoint(x: view.frame.midX, y: view.frame.maxY - 60)
+      
+        self.view.makeToast("로그인이 필요한 서비스입니다.", point: toastPoint, title: nil, image: nil ) { _ in
+            let loginVC: LoginViewController = LoginViewController()
+            let navigation: UINavigationController = UINavigationController(rootViewController: loginVC)
+            navigation.modalPresentationStyle = .fullScreen
+            self.present(navigation, animated: true, completion: nil)
+        }
     }
     func networkError() {
         self.view.makeToast("네트워크 연결을 다시해주세요.")
@@ -76,28 +75,38 @@ class ProfileViewController: DoneBaseViewController {
         profileViewModel.getProfileResponse { [weak self] result in
             switch result {
             case .success:
-                print("success")
+                self?.mainTableView.reloadSections(IndexSet(0...0), with: .automatic)
+            print("success")
             case .failure(.client):
                 self?.networkError()
             case .failure(.noData), .failure(.server), .failure(.unknown):
                 self?.tokenExpired()
             }
         }
-        profileViewModel.getMydontaionResponse { [weak self] result in
+        profileViewModel.getMyInprogressResponse { [weak self] result in
             switch result {
             case .success:
-                print("success")
+                self?.mainTableView.reloadSections(IndexSet(2...2), with: .automatic)
             case .failure(.client):
                 self?.networkError()
             case .failure(.noData), .failure(.server), .failure(.unknown):
                 self?.tokenExpired()
             }
         }
-        
+        profileViewModel.getMyExpiredResponse { [weak self] result in
+            switch result {
+            case .success:
+                self?.mainTableView.reloadSections(IndexSet(4...4), with: .automatic)
+            case .failure(.client):
+                self?.networkError()
+            case .failure(.noData), .failure(.server), .failure(.unknown):
+                self?.tokenExpired()
+            }
+        }
         profileViewModel.getMyDonateResponse { [weak self] result in
             switch result {
             case .success:
-                print("success")
+                self?.mainTableView.reloadSections(IndexSet(3...3), with: .automatic)
             case .failure(.client):
                 self?.networkError()
             case .failure(.noData), .failure(.server), .failure(.unknown):
@@ -173,9 +182,9 @@ extension ProfileViewController: UITableViewDataSource {
             return 1
         } else {
             numberOfDonations = [0, 0, 0]
-            numberOfDonations[0] = profileViewModel.myInprogressResponseModel.count
+            numberOfDonations[0] = profileViewModel.myInprogressResponseModel?.count ?? 0
             numberOfDonations[1] = profileViewModel.myDonateResponseModel.count
-            numberOfDonations[2] = profileViewModel.myExpiredResponseModel.count
+            numberOfDonations[2] = profileViewModel.myExpiredResponseModel?.count ?? 0
             return numberOfDonations[section - 2]
         }
     }
@@ -193,8 +202,11 @@ extension ProfileViewController: UITableViewDataSource {
             guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
             myDonationCell.selectionStyle = .none
             
-            myDonationCell.myDonationViewModel.setMyInprogressModel(profileViewModel.myInprogressResponseModel)
-            myDonationCell.myDonationViewModel.setMyExpiredModel(profileViewModel.myExpiredResponseModel)
+            if let inprogressModel = profileViewModel.myInprogressResponseModel,
+               let expiredModel = profileViewModel.myExpiredResponseModel {
+                myDonationCell.myDonationViewModel.setMyInprogressModel(inprogressModel)
+                myDonationCell.myDonationViewModel.setMyExpiredModel(expiredModel)
+            }
             myDonationCell.myDonationViewModel.setMyDonateModel(profileViewModel.myDonateResponseModel)
             return myDonationCell
         }
@@ -205,9 +217,13 @@ extension ProfileViewController: UITableViewDataSource {
             donatingCell.selectionStyle = .none
             donatingCell.headerLabelText = sectionHeader[indexPath.section - 2]
             if indexPath.section == 2 {
-                donatingCell.viewModel.setMyDonationData(profileViewModel.myInprogressResponseModel[indexPath.row])
+                if let inprogressModel = profileViewModel.myInprogressResponseModel {
+                    donatingCell.viewModel.setMyDonationData(inprogressModel[indexPath.row])
+                }
             } else {
-                donatingCell.viewModel.setMyDonationData(profileViewModel.myExpiredResponseModel[indexPath.row])
+                if let expiredModel = profileViewModel.myExpiredResponseModel {
+                    donatingCell.viewModel.setMyDonationData(expiredModel[indexPath.row])
+                }
             }
             return donatingCell
         } else {        // 내가 후원한 도네
