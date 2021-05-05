@@ -6,4 +6,5 @@ target 'MobalMobal' do
 
   pod 'SwiftLint'
   pod 'GoogleSignIn', '< 5.1'
+  pod 'Toast-Swift', '~> 5.0.1'
 end

@@ -42,7 +42,7 @@ class MainViewModel {
     }
     
     func callMyDonationAPI(completion: @escaping (Result<Void, DoneError>) -> Void ) {
-        DoneProvider.getMyDonation { [weak self] response in
+        DoneProvider.getMyDonation(status: "IN_PROGRESS") { [weak self] response in
             guard let posts = response.data?.posts else {
                 completion(.failure(.unknown))
                 return

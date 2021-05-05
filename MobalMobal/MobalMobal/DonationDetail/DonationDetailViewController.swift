@@ -207,7 +207,7 @@ class DonationDetailViewController: DoneBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
-        setNavigationItems(title: "상세 보기", backButtonImageName: "arrowChevronBigLeft", action: #selector(clickBackButton))
+        setNavigationItems(title: "", backButtonImageName: "arrowChevronBigLeft", action: #selector(clickBackButton))
         view.setNeedsUpdateConstraints()
     }
     

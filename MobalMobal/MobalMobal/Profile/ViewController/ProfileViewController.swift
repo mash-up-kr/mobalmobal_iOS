@@ -5,6 +5,7 @@
 //  Created by 송서영 on 2021/02/27.
 //
 
+import Toast
 import SnapKit
 import UIKit
 
@@ -31,8 +32,6 @@ class ProfileViewController: DoneBaseViewController {
         setLayout()
         setNavigation()
         callAPI()
-        
-        profileViewModel.mainDelegate = self
         mainTableView.tableFooterView = UIView(frame: .zero)
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -46,10 +45,10 @@ class ProfileViewController: DoneBaseViewController {
         navigationController?.popViewController(animated: true)
     }
     /* 1차배포 제외
-    @objc
-    private func modifyInfo() {
-        print("✨ modify user info")
-    }
+     @objc
+     private func modifyInfo() {
+     print("✨ modify user info")
+     }
      */
     @objc
     private func pushSettingVC() {
@@ -57,10 +56,57 @@ class ProfileViewController: DoneBaseViewController {
     }
     
     // MARK: - Methods
+    func tokenError() {
+        let loginVC: LoginViewController = LoginViewController()
+        let navigation: UINavigationController = UINavigationController(rootViewController: loginVC)
+        navigation.modalPresentationStyle = .fullScreen
+        self.present(navigation, animated: true, completion: nil)
+    }
+    func networkError() {
+        self.view.makeToast("네트워크 연결을 다시해주세요.")
+    }
     func callAPI() {
-        profileViewModel.getMydontaionResponse()
-        profileViewModel.getProfileResponse()
-        profileViewModel.getMyDonateResponse()
+        profileViewModel.getProfileResponse { [weak self] result in
+            switch result {
+            case .success:
+                self?.mainTableView.reloadSections(IndexSet(0...0), with: .automatic)
+                self?.title = self?.profileViewModel.getUserNickname()
+            case .failure(.client):
+                self?.networkError()
+            case .failure(.noData), .failure(.server), .failure(.unknown):
+                self?.tokenError()
+            }
+        }
+        profileViewModel.getMyInprogressResponse { [weak self] result in
+            switch result {
+            case .success:
+                self?.mainTableView.reloadSections(IndexSet(1...4), with: .automatic)
+            case .failure(.client):
+                self?.networkError()
+            case .failure(.noData), .failure(.server), .failure(.unknown):
+                self?.tokenError()
+            }
+        }
+        profileViewModel.getMyExpiredResponse { [weak self] result in
+            switch result {
+            case .success:
+                self?.mainTableView.reloadSections(IndexSet(1...4), with: .automatic)
+            case .failure(.client):
+                self?.networkError()
+            case .failure(.noData), .failure(.server), .failure(.unknown):
+                self?.tokenError()
+            }
+        }
+        profileViewModel.getMyDonateResponse { [weak self] result in
+            switch result {
+            case .success:
+                self?.mainTableView.reloadSections(IndexSet(1...4), with: .automatic)
+            case .failure(.client):
+                self?.networkError()
+            case .failure(.noData), .failure(.server), .failure(.unknown):
+                self?.tokenError()
+            }
+        }
     }
     func setTableView() {
         self.mainTableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: self.profileCellIdentifier)
@@ -90,11 +136,11 @@ class ProfileViewController: DoneBaseViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowChevronBigLeft"), style: .plain, target: self, action: #selector(popVC))
         
         // 1차배포 제외(프로필 수정)
-//        let editBtn: UIButton = UIButton()
-//        editBtn.setImage(UIImage(named: "iconlyLightEditSquare"), for: .normal)
-//        editBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-//        editBtn.addTarget(self, action: #selector(pushSettingVC), for: .touchUpInside)
-//        let editBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: editBtn)
+        //        let editBtn: UIButton = UIButton()
+        //        editBtn.setImage(UIImage(named: "iconlyLightEditSquare"), for: .normal)
+        //        editBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        //        editBtn.addTarget(self, action: #selector(pushSettingVC), for: .touchUpInside)
+        //        let editBtnBarItem: UIBarButtonItem = UIBarButtonItem(customView: editBtn)
         
         let settingBtn: UIButton = UIButton()
         settingBtn.setImage(UIImage(named: "iconlyLightSetting"), for: .normal)
@@ -130,13 +176,13 @@ extension ProfileViewController: UITableViewDataSource {
             return 1
         } else {
             numberOfDonations = [0, 0, 0]
-            numberOfDonations[0] = profileViewModel.myInprogressResponseModel.count
+            numberOfDonations[0] = profileViewModel.myInprogressResponseModel?.count ?? 0
             numberOfDonations[1] = profileViewModel.myDonateResponseModel.count
-            numberOfDonations[2] = profileViewModel.myExpiredResponseModel.count
+            numberOfDonations[2] = profileViewModel.myExpiredResponseModel?.count ?? 0
             return numberOfDonations[section - 2]
         }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let profileCell: ProfileTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as? ProfileTableViewCell else { return UITableViewCell() }
@@ -150,8 +196,14 @@ extension ProfileViewController: UITableViewDataSource {
             guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
             myDonationCell.selectionStyle = .none
             
-            myDonationCell.myDonationViewModel.setMyInprogressModel(profileViewModel.myInprogressResponseModel)
-            myDonationCell.myDonationViewModel.setMyExpiredModel(profileViewModel.myExpiredResponseModel)
+            if let inprogressModel = profileViewModel.myInprogressResponseModel,
+               let expiredModel = profileViewModel.myExpiredResponseModel {
+                myDonationCell.myDonationViewModel.setMyInprogressModel(inprogressModel)
+                myDonationCell.myDonationViewModel.setMyExpiredModel(expiredModel)
+            } else {
+                myDonationCell.myDonationViewModel.setMyInprogressModel([MydonationPost]())
+                myDonationCell.myDonationViewModel.setMyExpiredModel([MydonationPost]())
+            }
             myDonationCell.myDonationViewModel.setMyDonateModel(profileViewModel.myDonateResponseModel)
             return myDonationCell
         }
@@ -162,9 +214,13 @@ extension ProfileViewController: UITableViewDataSource {
             donatingCell.selectionStyle = .none
             donatingCell.headerLabelText = sectionHeader[indexPath.section - 2]
             if indexPath.section == 2 {
-                donatingCell.viewModel.setMyDonationData(profileViewModel.myInprogressResponseModel[indexPath.row])
+                if let inprogressModel = profileViewModel.myInprogressResponseModel {
+                    donatingCell.viewModel.setMyDonationData(inprogressModel[indexPath.row])
+                }
             } else {
-                donatingCell.viewModel.setMyDonationData(profileViewModel.myExpiredResponseModel[indexPath.row])
+                if let expiredModel = profileViewModel.myExpiredResponseModel {
+                    donatingCell.viewModel.setMyDonationData(expiredModel[indexPath.row])
+                }
             }
             return donatingCell
         } else {        // 내가 후원한 도네
@@ -203,7 +259,7 @@ extension ProfileViewController: UITableViewDataSource {
     }
 }
 
- // MARK: - UITableViewDelegate
+// MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section >= 2 {
@@ -211,15 +267,6 @@ extension ProfileViewController: UITableViewDelegate {
             let donationDetailVC: DonationDetailViewController = DonationDetailViewController(donationId: postId)
             self.navigationController?.pushViewController(donationDetailVC, animated: true)
         }
-    }
-}
-
-// MARK: - ProfileViewModelDelegate
-extension ProfileViewController: ProfileViewModelDelegate {
-    func tableViewReload() {
-        let sectionSet: IndexSet = IndexSet(0...4)
-        self.mainTableView.reloadSections(sectionSet, with: .automatic)
-        self.title = profileViewModel.getUserNickname()!
     }
 }
 
