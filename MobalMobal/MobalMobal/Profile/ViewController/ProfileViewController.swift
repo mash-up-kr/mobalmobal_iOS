@@ -32,8 +32,6 @@ class ProfileViewController: DoneBaseViewController {
         setLayout()
         setNavigation()
         callAPI()
-        
-        profileViewModel.mainDelegate = self
         mainTableView.tableFooterView = UIView(frame: .zero)
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -58,15 +56,11 @@ class ProfileViewController: DoneBaseViewController {
     }
     
     // MARK: - Methods
-    func tokenExpired() {
-        let toastPoint: CGPoint = CGPoint(x: view.frame.midX, y: view.frame.maxY - 60)
-      
-        self.view.makeToast("로그인이 필요한 서비스입니다.", point: toastPoint, title: nil, image: nil ) { _ in
-            let loginVC: LoginViewController = LoginViewController()
-            let navigation: UINavigationController = UINavigationController(rootViewController: loginVC)
-            navigation.modalPresentationStyle = .fullScreen
-            self.present(navigation, animated: true, completion: nil)
-        }
+    func tokenError() {
+        let loginVC: LoginViewController = LoginViewController()
+        let navigation: UINavigationController = UINavigationController(rootViewController: loginVC)
+        navigation.modalPresentationStyle = .fullScreen
+        self.present(navigation, animated: true, completion: nil)
     }
     func networkError() {
         self.view.makeToast("네트워크 연결을 다시해주세요.")
@@ -76,41 +70,41 @@ class ProfileViewController: DoneBaseViewController {
             switch result {
             case .success:
                 self?.mainTableView.reloadSections(IndexSet(0...0), with: .automatic)
-            print("success")
+                self?.title = self?.profileViewModel.getUserNickname()
             case .failure(.client):
                 self?.networkError()
             case .failure(.noData), .failure(.server), .failure(.unknown):
-                self?.tokenExpired()
+                self?.tokenError()
             }
         }
         profileViewModel.getMyInprogressResponse { [weak self] result in
             switch result {
             case .success:
-                self?.mainTableView.reloadSections(IndexSet(2...2), with: .automatic)
+                self?.mainTableView.reloadSections(IndexSet(1...4), with: .automatic)
             case .failure(.client):
                 self?.networkError()
             case .failure(.noData), .failure(.server), .failure(.unknown):
-                self?.tokenExpired()
+                self?.tokenError()
             }
         }
         profileViewModel.getMyExpiredResponse { [weak self] result in
             switch result {
             case .success:
-                self?.mainTableView.reloadSections(IndexSet(4...4), with: .automatic)
+                self?.mainTableView.reloadSections(IndexSet(1...4), with: .automatic)
             case .failure(.client):
                 self?.networkError()
             case .failure(.noData), .failure(.server), .failure(.unknown):
-                self?.tokenExpired()
+                self?.tokenError()
             }
         }
         profileViewModel.getMyDonateResponse { [weak self] result in
             switch result {
             case .success:
-                self?.mainTableView.reloadSections(IndexSet(3...3), with: .automatic)
+                self?.mainTableView.reloadSections(IndexSet(1...4), with: .automatic)
             case .failure(.client):
                 self?.networkError()
             case .failure(.noData), .failure(.server), .failure(.unknown):
-                self?.tokenExpired()
+                self?.tokenError()
             }
         }
     }
@@ -206,6 +200,9 @@ extension ProfileViewController: UITableViewDataSource {
                let expiredModel = profileViewModel.myExpiredResponseModel {
                 myDonationCell.myDonationViewModel.setMyInprogressModel(inprogressModel)
                 myDonationCell.myDonationViewModel.setMyExpiredModel(expiredModel)
+            } else {
+                myDonationCell.myDonationViewModel.setMyInprogressModel([MydonationPost]())
+                myDonationCell.myDonationViewModel.setMyExpiredModel([MydonationPost]())
             }
             myDonationCell.myDonationViewModel.setMyDonateModel(profileViewModel.myDonateResponseModel)
             return myDonationCell
@@ -270,15 +267,6 @@ extension ProfileViewController: UITableViewDelegate {
             let donationDetailVC: DonationDetailViewController = DonationDetailViewController(donationId: postId)
             self.navigationController?.pushViewController(donationDetailVC, animated: true)
         }
-    }
-}
-
-// MARK: - ProfileViewModelDelegate
-extension ProfileViewController: ProfileViewModelDelegate {
-    func tableViewReload() {
-        let sectionSet: IndexSet = IndexSet(0...4)
-        self.mainTableView.reloadSections(sectionSet, with: .automatic)
-        self.title = profileViewModel.getUserNickname()!
     }
 }
 

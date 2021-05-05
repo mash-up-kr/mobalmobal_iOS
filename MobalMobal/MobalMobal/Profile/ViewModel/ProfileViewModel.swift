@@ -8,12 +8,8 @@
 import Alamofire
 import Foundation
 
-protocol ProfileViewModelDelegate: AnyObject {
-    func tableViewReload()
-}
 class ProfileViewModel {
     // MARK: - Properties
-    weak var mainDelegate: ProfileViewModelDelegate?
     var profileResponseModel: ProfileData?
     var myInprogressResponseModel: [MydonationPost]?
     var myExpiredResponseModel: [MydonationPost]?
@@ -38,10 +34,7 @@ class ProfileViewModel {
         DoneProvider.getMyDonation(status: "IN_PROGRESS") { [weak self] response in
             switch response.code {
             case 200:
-//                self?.splitModelInprogressExpired(response)
-                
                 self?.myInprogressResponseModel = response.data?.posts
-                print("INPROGRESS complete ", self?.myInprogressResponseModel?.count)
                 completion(.success(()))
             default:
                 completion(.failure(.client))
@@ -55,7 +48,6 @@ class ProfileViewModel {
         DoneProvider.getMyDonation(status: "EXPIRED") { [weak self] response in
             switch response.code {
             case 200:
-//                self?.splitModelInprogressExpired(response)
                 self?.myExpiredResponseModel = response.data?.posts
                 completion(.success(()))
             default:
@@ -81,6 +73,8 @@ class ProfileViewModel {
         }
     }
     
+    // MARK: - Methods
+    
     // 후원중인도네 중복체크
     func myDonateResponseDuplicateCheck(_ response: ParseResponse<MyDonates>) {
         var donationPostId: Set<Int> = Set<Int>()
@@ -92,21 +86,6 @@ class ProfileViewModel {
         }
     }
     
-    /*
-    // 내가 연 도네를 Inprogress와 expired로 구분
-    func splitModelInprogressExpired(_ response: ParseResponse<MydonationData>) {
-        for post in response.data!.posts {
-            // 날짜가 지났으면 true반환 -> expired에넣음
-            if Date().getDueDay(of: post.endAt) < 0 {
-                myExpiredResponseModel.append(post)
-            } else {
-                myInprogressResponseModel.append(post)
-            }
-        }
-    }
- */
-    
-    // MARK: - Methods
     func getUserNickname() -> String? {
         profileResponseModel?.user.nickname
     }
