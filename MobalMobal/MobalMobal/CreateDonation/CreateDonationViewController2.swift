@@ -280,11 +280,9 @@ extension CreateDonationViewController2: CreateDonationViewModelDeleagate {
     
     func success(donationInfo: CreateDonationInfo) {
         self.donationInfo = donationInfo
-        
         let viewController: MakeCompleteViewController = MakeCompleteViewController()
-        viewController.modalPresentationStyle = .fullScreen
         viewController.donationInfo = self.donationInfo
-        present(viewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     func unavaliableToken() {
