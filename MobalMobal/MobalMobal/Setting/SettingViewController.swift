@@ -12,6 +12,7 @@ import WebKit
 enum SettingURL: String {
     case openSource = "https://www.notion.so/iOS-Open-Source-License-0b8df2ee46f54ea684d484faf347b6b9"
     case termsAndConditioin = "https://www.notion.so/26c36382cd8448188c7532519b9019cc"
+    case privacy = "https://www.notion.so/b384c72d60cc4475af49284625f81a0e"
     case openKakaoTalk = "https://open.kakao.com/o/sRo0Df7c"
 }
 

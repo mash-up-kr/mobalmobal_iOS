@@ -91,7 +91,9 @@ class SignupViewController: DoneBaseViewController {
     
     @objc
     private func termsOfServiceButtonIsTapped() {
-        print("이용약관 버튼 눌림")
+        let webViewController: WebviewController = WebviewController()
+        webViewController.webURL = SettingURL.termsAndConditioin.rawValue
+        present(webViewController, animated: true, completion: nil)
     }
     
     private let privacyButton: UIButton = {
@@ -103,7 +105,9 @@ class SignupViewController: DoneBaseViewController {
     
     @objc
     private func privacyButtonIsTapped() {
-        print("개인정보 버튼 눌림")
+        let webViewController: WebviewController = WebviewController()
+        webViewController.webURL = SettingURL.privacy.rawValue
+        present(webViewController, animated: true, completion: nil)
     }
     
     private let completeButton: UIButton = {
