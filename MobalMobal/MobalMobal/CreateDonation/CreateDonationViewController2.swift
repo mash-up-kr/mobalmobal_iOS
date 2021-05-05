@@ -141,6 +141,7 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
         let datePickerDate: String = dateFormatter.string(from: datePicker.date)
         
         if startDateTextField.isEditing {
+            datePicker.maximumDate = dateFormatter.date(from: endDateTextField.text ?? "")
             startDateTextField.text = datePickerDate
         } else if endDateTextField.isEditing {
             datePicker.minimumDate = dateFormatter.date(from: startDateTextField.text ?? "")
@@ -176,23 +177,26 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     private func doneButtonClicked() {
         if startDateTextField.isEditing {
             transformTextField(textField: startDateTextField)
-            viewModel.donation.startedAt = stringToDate(input: startDateTextField.text!).iso8601withFractionalSeconds
-            print(viewModel.donation)
+            if let inputDate = startDateTextField.text {
+                viewModel.donation.startedAt = inputDate
+            }
         } else if endDateTextField.isEditing {
             transformTextField(textField: endDateTextField)
-            viewModel.donation.endAt = stringToDate(input: endDateTextField.text!).iso8601withFractionalSeconds
-            print(viewModel.donation)
+            if let inputDate = endDateTextField.text {
+                viewModel.donation.startedAt = inputDate
+            }
         } else {
-            viewModel.donation.goal = priceTextField.text!
-            print(viewModel.donation)
             transformTextField(textField: priceTextField)
+            if let inputPrice = priceTextField.text, let input = Int(inputPrice) {
+                viewModel.donation.goal = String(input)
+            }
         }
         checkCreateButtonViewValidation()
         self.view.endEditing(true)
     }
     
     private func transformTextField(textField: UITextField) {
-        guard !((textField.text?.isEmpty) != nil) else {
+        guard !(textField.text?.isEmpty ?? true) else {
             return
         }
         
