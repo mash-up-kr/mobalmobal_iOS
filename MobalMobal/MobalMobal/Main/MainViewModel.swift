@@ -7,19 +7,54 @@
 
 import Foundation
 
+protocol MainViewModelDelegate: AnyObject {
+    func didNicknameChanged(to nickname: String?)
+    func didPostsChanged(to posts: [MainPost])
+    func didMyDonationsChanged(to myDonations: [MydonationPost])
+}
+
 class MainViewModel {
     // MARK: - property
-    var posts: [MainPost] = []
-    var myDonations: [MydonationPost] = []  //진행 중인 내 도네이션
+    var nickname: String? {
+        didSet {
+            mainViewModelDelegate?.didNicknameChanged(to: nickname)
+        }
+    }
+    var posts: [MainPost] = [] {
+        didSet {
+            mainViewModelDelegate?.didPostsChanged(to: posts)
+        }
+    }
+    var myDonations: [MydonationPost] = []  {//진행 중인 내 도네이션
+        didSet {
+            mainViewModelDelegate?.didMyDonationsChanged(to: myDonations)
+        }
+    }
+    
     var limit: Int = 10
     var item: Int = Int.max
     var isEnd: Bool = false
-    weak var delegate: MainMyOngoingDonationDelegate?
+
+    weak var mainMyOngoingDelegate: MainMyOngoingDonationDelegate?
+    weak var mainViewModelDelegate: MainViewModelDelegate?
     
     var getMyDonationsCount: Int {
         return myDonations.count
     }
     // MARK: - API Method
+    
+    func callUserInfoApi() {
+        // check keychain user token
+        if let token = KeychainManager.getUserToken() {
+            UserInfo.shared.token = token
+            DoneProvider.getUserProfile { [weak self] response in
+                guard let user = response.data?.user else { return }
+                UserInfo.shared.updateUserInfo(data: user)
+                self?.nickname = user.nickname
+            } failure: { _ in return }
+        }
+    }
+    
     func callMainInfoApi(completion: @escaping (Result<Void, DoneError>) -> Void) {
         DoneProvider.getMain(item: item, limit: limit) { response in
             guard let posts = response.data?.posts else {
@@ -48,7 +83,7 @@ class MainViewModel {
                 return
             }
             self?.checkInprogressDonation(posts)
-            self?.delegate?.populate()
+            self?.mainMyOngoingDelegate?.populate()
             completion(.success(()))
         } failure: { err in
             print(err.localizedDescription)

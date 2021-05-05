@@ -69,7 +69,7 @@ class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell, MainMyOngoi
         self.model = MainMyDonationModel(title: "default", progress: 0.0, money: 0, indexPathRow: 0)
         super.init(frame: frame)
         setLayout()
-        viewModel.delegate = self
+        viewModel.mainMyOngoingDelegate = self
     }
     
     required init?(coder: NSCoder) {

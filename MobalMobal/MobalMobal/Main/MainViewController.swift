@@ -53,11 +53,7 @@ class MainViewController: DoneBaseViewController {
     }()
     
     // MARK: - Properties
-    var viewModel: MainViewModel {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    var viewModel: MainViewModel
     
     var lastContentOffset: CGFloat = 0.0
     var lastMinContentOffset: CGFloat = 0.0
@@ -85,6 +81,7 @@ class MainViewController: DoneBaseViewController {
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.mainViewModelDelegate = self
         view.backgroundColor = .backgroundColor
         setCollectionView()
         setLayout()
@@ -92,7 +89,8 @@ class MainViewController: DoneBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        titleLabel.text = "Hi, \(UserInfo.shared.nickName ?? "Guest")"
+        
+        viewModel.callUserInfoApi()
         getMain()
     }
     
@@ -196,17 +194,29 @@ class MainViewController: DoneBaseViewController {
     }
     
     private func getMain() {
-        viewModel.callMainInfoApi { result in
+        viewModel.callMainInfoApi { [weak self] result in
             switch result {
             case .success:
-                self.collectionView.reloadData()
-            case .failure(.client), .failure(.noData), .failure(.server), .failure(.unknown):
-                let alertVC = UIAlertController(title: "나중에 다시 시도해 주세요.", message: "서버 또는 네트워크에 이상이 있을 수 있습니다.", preferredStyle: UIAlertController.Style.alert)
-                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-                alertVC.addAction(okAction)
-                self.present(alertVC, animated: true, completion: nil)
+                self?.collectionView.reloadData()
+            case .failure:
+                self?.showToastMessage("네트워크 오류가 발생했습니다.")
             }
         }
+    }
+}
+
+// MARK: - MainViewModelDelegate
+extension MainViewController: MainViewModelDelegate {
+    func didNicknameChanged(to nickname: String?) {
+        titleLabel.text =  "Hi, \(nickname ?? "Guest")"
+    }
+    
+    func didPostsChanged(to posts: [MainPost]) {
+        collectionView.reloadData()
+    }
+    
+    func didMyDonationsChanged(to myDonations: [MydonationPost]) {
+        collectionView.reloadData()
     }
 }
 
