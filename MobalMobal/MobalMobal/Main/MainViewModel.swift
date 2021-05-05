@@ -11,6 +11,9 @@ protocol MainViewModelDelegate: AnyObject {
     func didNicknameChanged(to nickname: String?)
     func didPostsChanged(to posts: [MainPost])
     func didMyDonationsChanged(to myDonations: [MydonationPost])
+    
+    func failedGetPosts(message: String)
+    func failedGetMyDonations(message: String)
 }
 
 class MainViewModel {
@@ -25,7 +28,7 @@ class MainViewModel {
             mainViewModelDelegate?.didPostsChanged(to: posts)
         }
     }
-    var myDonations: [MydonationPost] = []  {//진행 중인 내 도네이션
+    var myDonations: [MydonationPost] = [] { //진행 중인 내 도네이션
         didSet {
             mainViewModelDelegate?.didMyDonationsChanged(to: myDonations)
         }
@@ -55,24 +58,24 @@ class MainViewModel {
         }
     }
     
-    func callMainInfoApi(completion: @escaping (Result<Void, DoneError>) -> Void) {
-        DoneProvider.getMain(item: item, limit: limit) { response in
-            guard let posts = response.data?.posts else {
-                completion(.failure(.unknown))
+    func callMainPostsApi() {
+        DoneProvider.getMain(item: item, limit: limit) { [weak self] response in
+            guard let self = self else { return }
+            
+            if response.code != 200 {
+                self.mainViewModelDelegate?.failedGetPosts(message: "데이터를 불러올 수 없습니다. \(response.message!)")
                 return
             }
+            
+            guard let posts = response.data?.posts else { return }
             if self.posts.isEmpty {
                 self.posts = posts
             } else {
-                if posts.isEmpty {
-                    self.isEnd = true
-                }
+                if posts.isEmpty {  self.isEnd = true }
                 self.posts.append(contentsOf: posts)
             }
-            completion(.success(()))
         } failure: { (error) in
-            print(error)
-            completion(.failure(.unknown))
+            self.mainViewModelDelegate?.failedGetPosts(message: "데이터를 불러올 수 없습니다. \(error.localizedDescription)")
         }
     }
     

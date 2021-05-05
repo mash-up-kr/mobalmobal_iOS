@@ -91,7 +91,7 @@ class MainViewController: DoneBaseViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
         viewModel.callUserInfoApi()
-        getMain()
+        viewModel.callMainPostsApi()
     }
     
     // MARK: - Actions
@@ -192,17 +192,6 @@ class MainViewController: DoneBaseViewController {
 //            make.size.equalTo(44)
 //        }
     }
-    
-    private func getMain() {
-        viewModel.callMainInfoApi { [weak self] result in
-            switch result {
-            case .success:
-                self?.collectionView.reloadData()
-            case .failure:
-                self?.showToastMessage("네트워크 오류가 발생했습니다.")
-            }
-        }
-    }
 }
 
 // MARK: - MainViewModelDelegate
@@ -217,6 +206,14 @@ extension MainViewController: MainViewModelDelegate {
     
     func didMyDonationsChanged(to myDonations: [MydonationPost]) {
         collectionView.reloadData()
+    }
+    
+    func failedGetPosts(message: String) {
+        showToastMessage(message)
+    }
+    
+    func failedGetMyDonations(message: String) {
+        showToastMessage(message)
     }
 }
 
@@ -281,7 +278,7 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if isIndicatorCell(indexPath) {
             viewModel.item = viewModel.posts[indexPath.item - 1].postID - 1
-            getMain()
+            viewModel.callMainPostsApi()
         }
     }
     
