@@ -58,7 +58,7 @@ class MainViewModel {
     
     // MARK: - Methods
     func checkInprogressDonation(_ response: [MydonationPost]) {
-        for post in response{
+        for post in response {
             // 날짜가 지났으면 true반환 -> expired에넣음
             if Date().getDueDay(of: post.endAt) >= 0 {
                 self.myDonations.append(post)
@@ -72,8 +72,7 @@ class MainViewModel {
         return myDonations[item].currentAmount
     }
     func getMyDonationProgress(_ item: Int) -> Float {
-        var progress: Float = 0.0
-        progress = Float(Float(( myDonations[item].currentAmount * 100 )) / Float(myDonations[item].goal))
-        return progress
+        if myDonations[item].goal == 0 { return 100.0 }
+        return Float(Float(( myDonations[item].currentAmount * 100 )) / Float(myDonations[item].goal))
     }
 }

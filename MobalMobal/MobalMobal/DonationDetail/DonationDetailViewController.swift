@@ -233,9 +233,14 @@ class DonationDetailViewController: DoneBaseViewController {
     private func clickParticipantsMoreButton() {
         showParticipantsAlert()
     }
+    
     @objc
     private func clickDonationButton() {
-        presentDonateMoneyVC()
+        if KeychainManager.isEmptyUserToken() {
+            presentLoginVC()
+        } else {
+            presentDonateMoneyVC()
+        }
     }
     @objc
     private func clickBackButton() {
@@ -251,13 +256,20 @@ class DonationDetailViewController: DoneBaseViewController {
     }
     
     private func presentDonateMoneyVC() {
-        let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController(postId: viewModel.getDonationId() )
+        let donateMoneyVC: DonateMoneyViewController = DonateMoneyViewController(postId: viewModel.getDonationId(), nickname: viewModel.getNickname(), giftName: viewModel.getGiftName())
         donateMoneyVC.donationCompletionHander = { [weak self] in
             self?.viewModel.callDonationInfoAPI()
         }
         let navigationController: UINavigationController = UINavigationController(rootViewController: donateMoneyVC)
         navigationController.modalPresentationStyle = .overFullScreen
         present(navigationController, animated: true)
+    }
+    
+    private func presentLoginVC() {
+        let loginVC: LoginViewController = LoginViewController()
+        let navVc: UINavigationController = UINavigationController(rootViewController: loginVC)
+        navVc.modalPresentationStyle = .fullScreen
+        self.present(navVc, animated: true)
     }
     
     private func popNavigationVC() {
@@ -301,7 +313,7 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
         descriptionLabel.text = description
     }
     func didProgressChanged(current: Int, goal: Int) {
-        progress = Float(current) / Float(goal)
+        progress = goal == 0 ? 100.0 : Float(current) / Float(goal)
         progressLabel.text = "\(Int(progress * 100))%"
         destinationNumberLabel.text = goal.changeToCommaFormat()
         fundAmountNumberLabel.text = current.changeToCommaFormat()

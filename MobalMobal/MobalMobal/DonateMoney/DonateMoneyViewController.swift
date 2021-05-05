@@ -33,9 +33,11 @@ class DonateMoneyViewController: DoneBaseViewController {
     private let cellIdentifier: String = "DonateMoneyTableViewCell"
     
     // MARK: - Initializer
-    init(postId: Int) {
+    init(postId: Int, nickname: String, giftName: String) {
         super.init(nibName: nil, bundle: nil)
         viewModel.setPostId(postId)
+        viewModel.setNickname(nickname)
+        viewModel.setGiftName(giftName)
     }
     
     required init?(coder: NSCoder) {
@@ -117,8 +119,7 @@ extension DonateMoneyViewController: UITableViewDelegate {
         if indexPath.row < viewModel.amounts.count {
             viewModel.donate(amount: viewModel.amounts[indexPath.row])
         } else {
-            print("🐻 직접 입력 🐻")
-            let inputDonateMoneyVC: InputDonationMoneyViewController = InputDonationMoneyViewController(postId: viewModel.getPostId())
+            let inputDonateMoneyVC: InputDonationMoneyViewController = InputDonationMoneyViewController(postId: viewModel.getPostId(), nickname: viewModel.getNickname(), giftName: viewModel.getGiftName())
             inputDonateMoneyVC.modalPresentationStyle = .fullScreen
             navigationController?.pushViewController(inputDonateMoneyVC, animated: true)
         }
@@ -178,9 +179,8 @@ extension DonateMoneyViewController: DonateMoneyViewModelDelegate {
     }
     
     func completeDonateMoney(amount: Int) {
-        print("🐻 Donation Success")
         // 후원완료 페이지로 이동
-        let completeVC: DonateCompleteViewController = DonateCompleteViewController()
+        let completeVC: DonateCompleteViewController = DonateCompleteViewController(nickname: viewModel.getNickname(), giftName: viewModel.getGiftName(), moneyAmount: amount)
         completeVC.donationCompletionHander = donationCompletionHander
         completeVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(completeVC, animated: true)

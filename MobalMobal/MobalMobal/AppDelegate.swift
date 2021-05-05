@@ -26,6 +26,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().delegate = self
         setFCMToken()
         
+        // check keychain user token
+        if let token = KeychainManager.getUserToken() {
+            UserInfo.shared.token = token
+            DoneProvider.getUserProfile { response in
+                guard let user = response.data?.user else { return }
+                UserInfo.shared.updateUserInfo(data: user)
+            } failure: { _ in return }
+        }
+        
         // setting Facebook Login
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         

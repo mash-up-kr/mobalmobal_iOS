@@ -195,8 +195,8 @@
         "repositoryURL": "https://github.com/shibapm/Rocket",
         "state": {
           "branch": null,
-          "revision": "51a77ce5fa66c42715c14dcc542c01cd7a60fb27",
-          "version": "1.2.0"
+          "revision": "25613f7ffd16105c74417c1b4eb4c93fd04e2cdf",
+          "version": "1.1.0"
         }
       },
       {
@@ -258,8 +258,8 @@
         "repositoryURL": "https://github.com/jpsim/Yams",
         "state": {
           "branch": null,
-          "revision": "9ff1cc9327586db4e0c8f46f064b6a82ec1566fa",
-          "version": "4.0.6"
+          "revision": "c947a306d2e80ecb2c0859047b35c73b8e1ca27f",
+          "version": "2.0.0"
         }
       }
     ]

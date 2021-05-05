@@ -25,9 +25,7 @@ class ViewController: DoneBaseViewController {
     
     @IBAction private func secondButtonIsTapped(_ sender: UIButton) {
         let mainVC: MainViewController = MainViewController(viewModel: MainViewModel())
-        let navigation: UINavigationController = UINavigationController(rootViewController: mainVC)
-        navigation.modalPresentationStyle = .fullScreen
-        present(navigation, animated: true)
+        navigationController?.pushViewController(mainVC, animated: true)
     }
     
     @IBAction private func thirdButtonIsTapped(_ sender: UIButton) {

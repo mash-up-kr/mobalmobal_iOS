@@ -20,7 +20,7 @@ class MainViewController: DoneBaseViewController {
     
     let titleLabel: UILabel = {
         let label: UILabel = UILabel(frame: .zero)
-        label.text = "Hi, \(UserInfo.shared.nickName ?? "nickName")"
+        label.text = "Hi, \(UserInfo.shared.nickName ?? "Guest")"
         label.font = UIFont(name: "Futura-Bold", size: 25)
         label.textColor = .white
         return label
@@ -92,23 +92,38 @@ class MainViewController: DoneBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        titleLabel.text = "Hi, \(UserInfo.shared.nickName ?? "Guest")"
         getMain()
     }
     
     // MARK: - Actions
     @objc
     private func touchProfileButton() {
-        pushProfileVC()
+        if KeychainManager.isEmptyUserToken() {
+            presentLoginVC()
+        } else {
+            pushProfileVC()
+        }
     }
     @objc
     private func touchNotiListButton() {
-        print("🐰 알림")
-        presentNotiListVC()
+        if KeychainManager.isEmptyUserToken() {
+            presentLoginVC()
+        } else {
+            presentNotiListVC()
+        }
     }
     
     private func pushProfileVC() {
         let profileVC: ProfileViewController = ProfileViewController()
         navigationController?.pushViewController(profileVC, animated: true)
+    }
+    
+    private func presentLoginVC() {
+        let loginVC: LoginViewController = LoginViewController()
+        let navVc: UINavigationController = UINavigationController(rootViewController: loginVC)
+        navVc.modalPresentationStyle = .fullScreen
+        self.present(navVc, animated: true)
     }
     
     // 변경 가능
@@ -301,7 +316,7 @@ extension MainViewController: UICollectionViewDataSource {
         
         if viewModel.posts.isEmpty { return cell }
         let post = viewModel.posts[indexPath.item]
-        let progress = Float(post.currentAmount) / Float(post.goal)
+        let progress = post.goal == 0 ? 100.0 : Float(post.currentAmount) / Float(post.goal)
         cell.setModel(dday: post.endAt, money: post.currentAmount, title: post.title, progress: progress, indexPath: indexPath)
         
         // 이미지 다운로드 후 인덱스 비교하여 셋팅
@@ -382,8 +397,12 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - MainMyDonationCollectionViewCellDelegate
 extension MainViewController: MainMyDonationCollectionViewCellDelegate {
     func didSelectAddMyDonationButton() {
-        print("🐰 나의 도네이션 추가하기")
-        presentAddMyDonationVC()
+        if KeychainManager.isEmptyUserToken() {
+            presentLoginVC()
+        } else {
+            print("🐰 나의 도네이션 추가하기")
+            presentAddMyDonationVC()
+        }
     }
     
     func didSelectMyOngoingDonationItem(at postId: Int) {

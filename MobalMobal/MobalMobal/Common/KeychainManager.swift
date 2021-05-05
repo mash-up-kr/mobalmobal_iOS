@@ -7,33 +7,39 @@
 
 import Foundation
 
-class KeychainManager {
-    static let shared: KeychainManager = KeychainManager()
-    let serviceName: String = "돈에이션"
-    var fireStoreId: String? {
-        UserInfo.shared.fireStoreId
-    }
+struct KeychainManager {
+    static let serviceName: String = "돈에이션"
     
-    func setUserToken(_ token: String?) -> Bool {
+    static func setUserToken(_ token: String?) -> Bool {
         // TODO: 삭제할 부분
         UserDefaults.standard.setValue(token, forKey: UserDefaultsKeys.userToken)
         UserInfo.shared.token = token
         
         // 남길 부분
-        guard let fireStoreId = fireStoreId, let token = token else { return false }
+        guard let token = token else { return false }
         let query: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
                                         kSecAttrService: serviceName,
-                                        kSecAttrAccount: fireStoreId,
                                         kSecAttrGeneric: token]
 
         return SecItemAdd(query as CFDictionary, nil) == errSecSuccess
     }
     
-    func getUserToken() -> String? {
-        guard let fireStoreId = fireStoreId else { return nil }
+    static func isEmptyUserToken() -> Bool {
         let query: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
                                         kSecAttrService: serviceName,
-                                        kSecAttrAccount: fireStoreId,
+                                        kSecMatchLimit: kSecMatchLimitOne,
+                                        kSecReturnAttributes: true,
+                                        kSecReturnData: true]
+
+        var item: CFTypeRef?
+        if SecItemCopyMatching(query as CFDictionary, &item) != errSecSuccess { return true }
+        guard let existingItem = item as? [CFString: Any], let _ = existingItem[kSecAttrGeneric] as? String else { return true }
+        return false
+    }
+    
+    static func getUserToken() -> String? {
+        let query: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
+                                        kSecAttrService: serviceName,
                                         kSecMatchLimit: kSecMatchLimitOne,
                                         kSecReturnAttributes: true,
                                         kSecReturnData: true]
@@ -45,21 +51,18 @@ class KeychainManager {
         return token
     }
     
-    func updateUserToken(_ token: String?) -> Bool {
-        guard let fireStoreId = fireStoreId, let token = token else { return false }
+    static func updateUserToken(_ token: String?) -> Bool {
+        guard let token = token else { return false }
         
         let query: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
-                                        kSecAttrService: serviceName,
-                                        kSecAttrAccount: fireStoreId]
-        let attributes: [CFString: Any] = [kSecAttrAccount: fireStoreId, kSecAttrGeneric: token]
+                                        kSecAttrService: serviceName]
+        let attributes: [CFString: Any] = [kSecAttrGeneric: token]
         return SecItemUpdate(query as CFDictionary, attributes as CFDictionary) == errSecSuccess
     }
     
-    func deleteUserToken() -> Bool {
-        guard let fireStoreId = fireStoreId else { return false }
+    static func deleteUserToken() -> Bool {
         let query: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
-                                        kSecAttrService: serviceName,
-                                        kSecAttrAccount: fireStoreId]
+                                        kSecAttrService: serviceName]
      
       return SecItemDelete(query as CFDictionary) == errSecSuccess
     }
