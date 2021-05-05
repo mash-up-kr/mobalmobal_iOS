@@ -76,7 +76,6 @@ class DonateMoneyViewModel {
             self?.donateData = response.data
             if let message = response.message {
                 self?.delegate?.failDonateMoney(message: message)
-                UserInfo.shared.needToUpdate = true
             }
         } failure: { error in
             self.delegate?.failDonateMoney(message: error.localizedDescription)
@@ -86,6 +85,7 @@ class DonateMoneyViewModel {
     private func donateDataChanged() {
         if let amount = self.donateData?.donate?.amount {
             delegate?.completeDonateMoney(amount: amount)
+            UserInfo.shared.needToUpdate = true
         }
     }
 }
