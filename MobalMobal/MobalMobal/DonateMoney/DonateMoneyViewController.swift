@@ -119,6 +119,7 @@ extension DonateMoneyViewController: UITableViewDelegate {
         if indexPath.row < viewModel.amounts.count {
             viewModel.donate(amount: viewModel.amounts[indexPath.row])
         } else {
+            print("직접 입력")
             let inputDonateMoneyVC: InputDonationMoneyViewController = InputDonationMoneyViewController(postId: viewModel.getPostId(), nickname: viewModel.getNickname(), giftName: viewModel.getGiftName())
             inputDonateMoneyVC.modalPresentationStyle = .fullScreen
             navigationController?.pushViewController(inputDonateMoneyVC, animated: true)

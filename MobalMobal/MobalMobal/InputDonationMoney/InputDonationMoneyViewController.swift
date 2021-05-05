@@ -59,8 +59,8 @@ class InputDonationMoneyViewController: DoneBaseViewController {
     private let iconImageName: String = "iconlyBrokenBuy"
     private let placeholderString: String = "후원할 금액을 입력하세요."
     private let buttonString: String = "후원하기"
-    
     private let maxMoneyRange: Int = 10_000_000
+    private var isUpdateConstraints: Bool = false
     
     // MARK: - Initializer
     init(postId: Int, nickname: String, giftName: String) {
@@ -80,6 +80,7 @@ class InputDonationMoneyViewController: DoneBaseViewController {
         view.backgroundColor = .backgroundColor
         setNavigationItems()
         setButtonDisable()
+        view.setNeedsUpdateConstraints()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,13 +89,15 @@ class InputDonationMoneyViewController: DoneBaseViewController {
     }
     
     override func updateViewConstraints() {
-        view.addSubviews([roundView, donationButton])
-        setRoundViewConstraints()
-        setButtonConstraints()
-        
-        roundView.addSubviews([iconImageView, textField])
-        setIconImageViewConstraints()
-        setTextFieldConstraints()
+        if !isUpdateConstraints {
+            view.addSubviews([roundView, donationButton])
+            setRoundViewConstraints()
+            setButtonConstraints()
+            
+            roundView.addSubviews([iconImageView, textField])
+            setIconImageViewConstraints()
+            setTextFieldConstraints()
+        }
         super.updateViewConstraints()
     }
     
