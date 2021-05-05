@@ -22,8 +22,8 @@ class MakeCompleteViewController: UIViewController {
     }()
     lazy var giftLabel: UILabel = {
         let label: UILabel = UILabel()
-        if let title = donationInfo?.title {
-            label.text = "\(title) 가지고싶다"
+        if let title = donationInfo?.title, let description = donationInfo?.description {
+            label.text = "\(title) \(description)"
         }
         label.font = .spoqaHanSansNeo(ofSize: 36, weight: .medium)
         label.textColor = .white
