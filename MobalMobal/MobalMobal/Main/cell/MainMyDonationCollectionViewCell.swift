@@ -55,15 +55,9 @@ class MainMyDonationCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Methods
     private func callAPI() {
-        viewModel.callMyDonationAPI { result in
-            switch result {
-            case .success:
-                self.collectionView.reloadData()
-            case .failure(.client), .failure(.noData), .failure(.server), .failure(.unknown):
-                print("fail")
-            }
-        }
+        viewModel.callMyDonationAPI()
     }
+    
     private func setCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self

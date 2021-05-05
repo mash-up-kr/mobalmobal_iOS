@@ -28,7 +28,7 @@ class MainViewModel {
             mainViewModelDelegate?.didPostsChanged(to: posts)
         }
     }
-    var myDonations: [MydonationPost] = [] { //진행 중인 내 도네이션
+    var myDonations: [MydonationPost] = [] { // 진행 중인 내 도네이션
         didSet {
             mainViewModelDelegate?.didMyDonationsChanged(to: myDonations)
         }
@@ -74,23 +74,26 @@ class MainViewModel {
                 if posts.isEmpty {  self.isEnd = true }
                 self.posts.append(contentsOf: posts)
             }
-        } failure: { (error) in
+        } failure: { error in
             self.mainViewModelDelegate?.failedGetPosts(message: "데이터를 불러올 수 없습니다. \(error.localizedDescription)")
         }
     }
     
-    func callMyDonationAPI(completion: @escaping (Result<Void, DoneError>) -> Void ) {
+    func callMyDonationAPI() {
         DoneProvider.getMyDonation(status: "IN_PROGRESS") { [weak self] response in
-            guard let posts = response.data?.posts else {
-                completion(.failure(.unknown))
+            guard let self = self else { return }
+            
+            if response.code != 200 {
+                self.mainViewModelDelegate?.failedGetPosts(message: "데이터를 불러올 수 없습니다. \(response.message!)")
                 return
             }
-            self?.checkInprogressDonation(posts)
-            self?.mainMyOngoingDelegate?.populate()
-            completion(.success(()))
-        } failure: { err in
-            print(err.localizedDescription)
-            completion(.failure(.unknown))
+            
+            guard let posts = response.data?.posts else { return }
+            self.checkInprogressDonation(posts)
+            self.mainMyOngoingDelegate?.populate()
+        } failure: { error in
+            self.mainViewModelDelegate?.failedGetPosts(message: "데이터를 불러올 수 없습니다. \(error.localizedDescription)")
+
         }
     }
     
