@@ -85,7 +85,10 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     }
     
     private func setTextField() {
-        self.textFieldArray.forEach { $0.delegate = self }
+        self.textFieldArray.forEach {
+            $0.delegate = self
+            $0.minimumFontSize = 24
+        }
     }
     
     private func setKeyboardNotification() {
