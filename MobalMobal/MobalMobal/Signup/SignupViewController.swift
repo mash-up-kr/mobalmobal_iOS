@@ -8,6 +8,7 @@
 import SnapKit
 import Then
 import UIKit
+import Toast
 
 class SignupViewController: DoneBaseViewController {
     
@@ -46,16 +47,37 @@ class SignupViewController: DoneBaseViewController {
         return button
     }()
     
-    private let agreementLabel: UILabel = {
+    private let termsOfServiceLabel: UILabel = {
         let label: UILabel = UILabel()
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
-        let underlineAttributedString = NSAttributedString(string: "이용약관, 개인정보 수집 및 이용", attributes: underlineAttribute)
+        let underlineAttributedString = NSAttributedString(string: "이용약관, ", attributes: underlineAttribute)
         label.attributedText = underlineAttributedString
-        let remainText: String = "에 모두 동의 합니다."
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 15)
         
-        label.text = label.attributedText!.string + remainText
+        label.text = label.attributedText!.string
+        label.textColor = .white
+        return label
+    }()
+    
+    private let privacyLabel: UILabel = {
+        let label: UILabel = UILabel()
+        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
+        let underlineAttributedString = NSAttributedString(string: "개인정보 수집 및 이용", attributes: underlineAttribute)
+        label.attributedText = underlineAttributedString
+        label.numberOfLines = 1
+        label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 15)
+        
+        label.text = label.attributedText!.string
+        label.textColor = .white
+        return label
+    }()
+    
+    private let descriptionLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.text = "에 모두 동의합니다."
+        label.numberOfLines = 0
+        label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 15)
         label.textColor = .white
         return label
     }()
@@ -69,7 +91,23 @@ class SignupViewController: DoneBaseViewController {
     
     @objc
     private func termsOfServiceButtonIsTapped() {
-        print("이용약관 버튼 눌림")
+        let webViewController: WebviewController = WebviewController()
+        webViewController.webURL = SettingURL.termsAndConditioin.rawValue
+        present(webViewController, animated: true, completion: nil)
+    }
+    
+    private let privacyButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(privacyButtonIsTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc
+    private func privacyButtonIsTapped() {
+        let webViewController: WebviewController = WebviewController()
+        webViewController.webURL = SettingURL.privacy.rawValue
+        present(webViewController, animated: true, completion: nil)
     }
     
     private let completeButton: UIButton = {
@@ -106,7 +144,6 @@ class SignupViewController: DoneBaseViewController {
         setUIViewLayout()
         addTapGestureRecognizer()
         setNavigationItems(title: "회원 가입", backButtonImageName: "arrowChevronBigLeft", action: #selector(backButtonTapped))
-                
     }
     
     @objc
@@ -191,18 +228,35 @@ class SignupViewController: DoneBaseViewController {
             make.width.equalTo(43)
         }
         
-        self.agreementView.addSubview(agreementLabel)
-        self.agreementLabel.snp.makeConstraints { make in
+        self.agreementView.addSubview(termsOfServiceLabel)
+        self.termsOfServiceLabel.snp.makeConstraints { make in
             make.centerY.equalTo(self.agreementView)
             make.leading.equalTo(self.agreementButton.snp.trailing).offset(7)
+        }
+        
+        self.agreementView.addSubview(privacyLabel)
+        self.privacyLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(self.termsOfServiceLabel)
+            make.leading.equalTo(self.termsOfServiceLabel.snp.trailing).offset(0)
+        }
+        
+        self.agreementView.addSubview(descriptionLabel)
+        self.descriptionLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(self.privacyLabel)
+            make.leading.equalTo(self.privacyLabel.snp.trailing).offset(0)
             make.trailing.equalTo(self.agreementView.snp.trailing).offset(0)
         }
         
         self.agreementView.addSubview(termsOfServiceButton)
         self.termsOfServiceButton.snp.makeConstraints { make in
-            make.centerY.equalTo(self.agreementLabel)
-            make.leading.top.equalTo(self.agreementLabel)
-            make.width.equalTo(self.agreementLabel)
+            make.center.equalTo(self.termsOfServiceLabel)
+            make.width.height.equalTo(self.termsOfServiceLabel)
+        }
+        
+        self.agreementView.addSubview(privacyButton)
+        self.privacyButton.snp.makeConstraints { make in
+            make.center.equalTo(self.privacyLabel)
+            make.width.height.equalTo(self.privacyLabel)
         }
     }
     
@@ -232,10 +286,14 @@ class SignupViewController: DoneBaseViewController {
         }
     }
     
+    private func makeToast(_ message: String) {
+        self.view.makeToast(message, duration: 2.0, point: CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height - 60), title: "", image: nil, completion: nil)
+    }
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         setup()
     }
     
@@ -257,11 +315,11 @@ extension SignupViewController {
 
 extension SignupViewController: SignUpViewModelDelegate {
     func requestNickNameAgain() {
-        print("닉네임 다시 입력하게")
+        self.makeToast("중복된 닉네임이 있습니다.")
     }
     
     func success() {
-        print("성공")
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
