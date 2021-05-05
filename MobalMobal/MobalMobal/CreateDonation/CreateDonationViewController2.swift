@@ -192,6 +192,10 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     }
     
     private func transformTextField(textField: UITextField) {
+        guard !((textField.text?.isEmpty) != nil) else {
+            return
+        }
+        
         if textFieldArray.count > 0 && textFieldArray.contains(textField) {
             textFieldArray.removeAll { $0 == textField }
             
