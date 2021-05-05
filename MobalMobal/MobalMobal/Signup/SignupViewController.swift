@@ -53,7 +53,11 @@ class SignupViewController: DoneBaseViewController {
         let underlineAttributedString = NSAttributedString(string: "이용약관, ", attributes: underlineAttribute)
         label.attributedText = underlineAttributedString
         label.numberOfLines = 1
-        label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 15)
+        if UIScreen.isSe {
+            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 11)
+        } else {
+            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 13)
+        }
         
         label.text = label.attributedText!.string
         label.textColor = .white
@@ -66,7 +70,11 @@ class SignupViewController: DoneBaseViewController {
         let underlineAttributedString = NSAttributedString(string: "개인정보 수집 및 이용", attributes: underlineAttribute)
         label.attributedText = underlineAttributedString
         label.numberOfLines = 1
-        label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 15)
+        if UIScreen.isSe {
+            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 11)
+        } else {
+            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 13)
+        }
         
         label.text = label.attributedText!.string
         label.textColor = .white
@@ -76,8 +84,12 @@ class SignupViewController: DoneBaseViewController {
     private let descriptionLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "에 모두 동의합니다."
-        label.numberOfLines = 0
-        label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 15)
+        label.numberOfLines = 1
+        if UIScreen.isSe {
+            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 11)
+        } else {
+            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 13)
+        }
         label.textColor = .white
         return label
     }()
@@ -93,7 +105,8 @@ class SignupViewController: DoneBaseViewController {
     private func termsOfServiceButtonIsTapped() {
         let webViewController: WebviewController = WebviewController()
         webViewController.webURL = SettingURL.termsAndConditioin.rawValue
-        present(webViewController, animated: true, completion: nil)
+        webViewController.navigationItem.title = "이용약관"
+        self.navigationController?.pushViewController(webViewController, animated: true)
     }
     
     private let privacyButton: UIButton = {
@@ -107,7 +120,8 @@ class SignupViewController: DoneBaseViewController {
     private func privacyButtonIsTapped() {
         let webViewController: WebviewController = WebviewController()
         webViewController.webURL = SettingURL.privacy.rawValue
-        present(webViewController, animated: true, completion: nil)
+        webViewController.navigationItem.title = "개인정보 처리 방침"
+        self.navigationController?.pushViewController(webViewController, animated: true)
     }
     
     private let completeButton: UIButton = {
