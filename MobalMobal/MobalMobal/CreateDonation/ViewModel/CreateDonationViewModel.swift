@@ -9,13 +9,14 @@ import UIKit
 
 protocol CreateDonationViewModelDeleagate: class {
     func unavaliableToken()
-    func success()
+    func success(donationInfo: CreateDonationInfo)
 }
 
 class CreateDonationViewModel {
     
     // MARK: - Property
     var donation: CreateDonation = CreateDonation(title: "", description: nil, postImage: "", goal: "0", startedAt: "", endAt: "")
+    var donationInfo: CreateDonationInfo?
     weak var delegate: CreateDonationViewModelDeleagate?
     
     // MARK: - Method
@@ -26,7 +27,7 @@ class CreateDonationViewModel {
             }
             
             if response.code == 200 {
-                self.delegate?.success()
+                self.delegate?.success(donationInfo: response.data!.post)
             } else if response.code == 400 || response.code == 401 {
                 self.delegate?.unavaliableToken()
             }

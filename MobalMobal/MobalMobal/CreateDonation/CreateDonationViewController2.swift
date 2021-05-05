@@ -53,6 +53,7 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     private let datePicker: UIDatePicker = UIDatePicker()
     private var originCreateButtonViewBottomConstraint: CGFloat = -30
     private var checkKeyboardAppearance: Bool = false
+    private var donationInfo: CreateDonationInfo?
  
     // MARK: - Method
     private func setup() {
@@ -61,6 +62,7 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
         self.imageView.backgroundColor = .darkGreyThree
         self.imageView.isHidden = true
         self.createButtonView.isHidden = true
+        self.viewModel.delegate = self
         
         donationViewArray.forEach { $0.isHidden = true }
         setCreateButtonView()
@@ -177,14 +179,10 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     private func doneButtonClicked() {
         if startDateTextField.isEditing {
             transformTextField(textField: startDateTextField)
-            if let inputDate = startDateTextField.text {
-                viewModel.donation.startedAt = inputDate
-            }
+            viewModel.donation.startedAt = stringToDate(input: startDateTextField.text ?? "").iso8601withFractionalSeconds
         } else if endDateTextField.isEditing {
             transformTextField(textField: endDateTextField)
-            if let inputDate = endDateTextField.text {
-                viewModel.donation.startedAt = inputDate
-            }
+            viewModel.donation.endAt = stringToDate(input: endDateTextField.text ?? "").iso8601withFractionalSeconds
         } else {
             transformTextField(textField: priceTextField)
             if let inputPrice = priceTextField.text, let input = Int(inputPrice) {
@@ -273,3 +271,18 @@ extension CreateDonationViewController2: UIImagePickerControllerDelegate {
     }
 }
 
+extension CreateDonationViewController2: CreateDonationViewModelDeleagate {
+    
+    func success(donationInfo: CreateDonationInfo) {
+        self.donationInfo = donationInfo
+        
+        let viewController: MakeCompleteViewController = MakeCompleteViewController()
+        viewController.modalPresentationStyle = .fullScreen
+        viewController.donationInfo = self.donationInfo
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    func unavaliableToken() {
+         
+    }
+}
