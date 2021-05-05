@@ -9,6 +9,7 @@ import Foundation
 
 protocol DonationDetailViewModelDelegate: class {
     func didImageChanged(to url: String?)
+    func didProfileImageChanged(to url: String?)
     func didPublisherChanged(to nickname: String)
     func didTitleChanged(to title: String)
     func didDesciptionChanged(to description: String)
@@ -28,6 +29,9 @@ class DonationDetailViewModel {
     }
     private lazy var donationImageURL: String? = nil { // 이미지
         didSet { delegate?.didImageChanged(to: donationImageURL) }
+    }
+    private lazy var profileImageURL: String? = nil {
+        didSet { delegate?.didProfileImageChanged(to: profileImageURL) }
     }
     private lazy var donationPublisherName: String = "누군가" {
         didSet { delegate?.didPublisherChanged(to: donationPublisherName) }
@@ -62,7 +66,8 @@ class DonationDetailViewModel {
         guard let info = detailResponse?.post else { return }
         
         self.donationImageURL = info.postImage
-        self.donationPublisherName = "\(info.userId)번 사용자" // 유저 id가 아닌 닉네임 가져와야 함!
+        self.profileImageURL = info.user.profileImageURL
+        self.donationPublisherName = info.user.nickname
         self.donationTitle = info.title
         self.donationDescription = info.description ?? ""
         self.donationGoal = info.goal
@@ -73,6 +78,12 @@ class DonationDetailViewModel {
     // MARK: - Get Method
     func getDonationId() -> Int {
         self.donationId
+    }
+    func getNickname() -> String {
+        self.donationPublisherName
+    }
+    func getGiftName() -> String {
+        self.donationTitle
     }
     
     // MARK: - API Method

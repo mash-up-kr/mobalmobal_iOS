@@ -10,6 +10,7 @@ import Moya
 
 enum DoneService {
     case login(fireStoreId: String)
+    case signup(signupUser: SignupUser)
     case getMain(item: Int, limit: Int)
     case getDetail(posts: Int)
     case donate(post: Int, money: Int)
@@ -35,6 +36,8 @@ extension DoneService: TargetType {
             return "/posts"
         case .login:
             return "/users/login"
+        case .signup:
+            return "/users"
         case .getDetail(let posts):
             return "/posts/\(posts)"
         case .donate:
@@ -56,7 +59,8 @@ extension DoneService: TargetType {
         switch self {
         case .getMain, .getDetail, .getUserProfile, .getMyDonation, .getMyDonate:
             return .get
-        case .login, .donate, .charge, .createDonation:
+
+        case .login, .donate, .charge, .createDonation, .signup:
             return .post
         }
     }
@@ -71,6 +75,17 @@ extension DoneService: TargetType {
             return .requestPlain
         case .login(let fireStoreId):
             return .requestParameters(parameters: ["fireStoreId": fireStoreId], encoding: JSONEncoding.default)
+        case .signup(let signupUser):
+            return .requestParameters(parameters: ["nickname": signupUser.nickname,
+                                                   "provider": signupUser.provider,
+                                                   "fireStoreId": signupUser.fireStoreId,
+                                                   "phoneNumber": signupUser.phoneNumber,
+                                                   "accountNumber": signupUser.accountNumber,
+                                                   "bankName": signupUser.bankName,
+                                                   "profileImage": signupUser.profileImage,
+                                                   "cash": signupUser.cash
+                                                   
+            ], encoding: JSONEncoding.default)
         case .donate(let post, let money):
             return .requestParameters(parameters: ["post_id": post, "amount": money], encoding: JSONEncoding.default)
         case .charge(let amount, let userName, let chargedAt):
@@ -94,11 +109,15 @@ extension DoneService: TargetType {
         
     var headers: [String: String]? {
         switch self {
-        case .login:
+        case .login, .signup:
             return nil
         case .getMain, .getDetail, .donate, .getUserProfile, .getMyDonate, .getMyDonation, .charge, .createDonation:
-//            guard let token = token else { return nil }
-            return ["authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2MTc3ODIzNzgsImV4cCI6MTY0OTMzOTk3OCwiaXNzIjoiaHllb25pIn0.EylJ0O9zsOePeB6WmQ5-Xfm6X63L29s6iUxZL6dxzdA"]
+            guard let token = KeychainManager.getUserToken() else {
+                print("🐻 [Login Required] keychain token nil")
+                return nil
+            }
+            print("🐻 keychain token : \(token)")
+            return ["authorization": token]
         }
     }
 }

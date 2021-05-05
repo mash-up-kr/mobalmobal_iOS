@@ -63,9 +63,11 @@ class InputDonationMoneyViewController: DoneBaseViewController {
     private let maxMoneyRange: Int = 10_000_000
     
     // MARK: - Initializer
-    init(postId: Int) {
+    init(postId: Int, nickname: String, giftName: String) {
         super.init(nibName: nil, bundle: nil)
         viewModel.setPostId(postId)
+        viewModel.setNickname(nickname)
+        viewModel.setGiftName(giftName)
     }
     
     required init?(coder: NSCoder) {
@@ -296,7 +298,7 @@ extension InputDonationMoneyViewController: DonateMoneyViewModelDelegate {
     }
     
     func completeDonateMoney(amount: Int) {
-        print("🐻 Donation success: \(amount)원")
-        // 후원 완료 페이지로 이동
+        let completeVC: DonateCompleteViewController = DonateCompleteViewController(nickname: viewModel.getNickname(), giftName: viewModel.getGiftName(), moneyAmount: amount)
+        navigationController?.pushViewController(completeVC, animated: true)
     }
 }

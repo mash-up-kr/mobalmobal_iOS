@@ -27,7 +27,7 @@ class ProfileDonatingTableViewCell: UITableViewCell {
     }()
     private let translucentView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = .black70
+        view.backgroundColor = .black40
         return view
     }()
     private lazy var donateDday: UILabel = {
@@ -172,7 +172,7 @@ extension ProfileDonatingTableViewCell: ProfileDonatingViewModelDelegate {
             let ratingBackgroundBarWidth: Float = Float(UIScreen.main.bounds.width) - 40.0
             
             // goal : 전체길이 = currentAmount : 보여질길이
-            ratingBarWidth = Float((ratingBackgroundBarWidth * Float(currentAmount))) / Float(donationGoal)
+            ratingBarWidth = donationGoal == 0 ? 100.0 : Float((ratingBackgroundBarWidth * Float(currentAmount))) / Float(donationGoal)
             if ratingBarWidth >= ratingBackgroundBarWidth {
                 ratingBarWidth = ratingBackgroundBarWidth
             }
