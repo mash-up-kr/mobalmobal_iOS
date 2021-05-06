@@ -49,7 +49,14 @@ class MainViewController: DoneBaseViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.layer.masksToBounds = true
         collectionView.clipsToBounds = true
+        collectionView.refreshControl = refreshControl
         return collectionView
+    }()
+    
+    let refreshControl: UIRefreshControl = {
+        let refreshControl: UIRefreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(scrollDown(_:)), for: .valueChanged)
+        return refreshControl
     }()
     
     // MARK: - Properties
@@ -86,9 +93,7 @@ class MainViewController: DoneBaseViewController {
         setCollectionView()
         setLayout()
         
-        viewModel.callUserInfoApi()
-        viewModel.callMainPostsApi()
-        viewModel.callMyDonationAPI()
+        viewModel.refresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,12 +101,7 @@ class MainViewController: DoneBaseViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
         if UserInfo.shared.needToUpdate {
-            viewModel.reset()
-            viewModel.callUserInfoApi()
-            viewModel.callMainPostsApi()
-            viewModel.callMyDonationAPI()
-            
-            UserInfo.shared.needToUpdate = false
+            viewModel.refresh()
         }
     }
     
@@ -120,6 +120,12 @@ class MainViewController: DoneBaseViewController {
             presentLoginVC()
         } else {
             presentNotiListVC()
+        }
+    }
+    @objc
+    private func scrollDown(_ sender: Any) {
+        viewModel.refresh {
+            self.refreshControl.endRefreshing()
         }
     }
     
