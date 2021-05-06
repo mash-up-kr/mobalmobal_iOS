@@ -121,6 +121,7 @@ extension DonateMoneyViewController: UITableViewDelegate {
         } else {
             print("직접 입력")
             let inputDonateMoneyVC: InputDonationMoneyViewController = InputDonationMoneyViewController(postId: viewModel.getPostId(), nickname: viewModel.getNickname(), giftName: viewModel.getGiftName())
+            inputDonateMoneyVC.donationCompletionHander = donationCompletionHander
             inputDonateMoneyVC.modalPresentationStyle = .fullScreen
             navigationController?.pushViewController(inputDonateMoneyVC, animated: true)
         }
