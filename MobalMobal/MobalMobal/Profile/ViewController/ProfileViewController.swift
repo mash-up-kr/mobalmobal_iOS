@@ -11,9 +11,15 @@ import UIKit
 
 class ProfileViewController: DoneBaseViewController {
     // MARK: - UIComponents
-    private let mainTableView: UITableView = {
+    private lazy var mainTableView: UITableView = {
         let tableview: UITableView = UITableView(frame: .zero, style: .grouped)
+        tableview.refreshControl = self.refreshControl
         return tableview
+    }()
+    private let refreshControl: UIRefreshControl = {
+        let refreshControl: UIRefreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshControl
     }()
     
     // MARK: - Properties
@@ -31,7 +37,6 @@ class ProfileViewController: DoneBaseViewController {
         setTableView()
         setLayout()
         setNavigation()
-        mainTableView.tableFooterView = UIView(frame: .zero)
         profileViewModel.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +61,11 @@ class ProfileViewController: DoneBaseViewController {
         navigationController?.pushViewController(SettingViewController(), animated: true)
     }
     
+    @objc
+    private func refresh() {
+        profileViewModel.callAPI { self.refreshControl.endRefreshing() }
+    }
+    
     // MARK: - Methods
 
     func setTableView() {
@@ -68,9 +78,10 @@ class ProfileViewController: DoneBaseViewController {
         mainTableView.separatorStyle = .none
         mainTableView.estimatedRowHeight = 160
         mainTableView.rowHeight = UITableView.automaticDimension
+        mainTableView.tableFooterView = UIView(frame: .zero)
     }
     func setLayout() {
-        [mainTableView].forEach { self.view.addSubview($0) }
+        self.view.addSubview(mainTableView)
         mainTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.height.equalTo(UIScreen.main.bounds.height)        
@@ -102,12 +113,12 @@ class ProfileViewController: DoneBaseViewController {
     }
     
     // 유동적으로 갯수가 변화하는 section인지 체크하는 메서드
-    func checkDynamicSection(_ section: Int) -> Bool {
+    private func checkDynamicSection(_ section: Int) -> Bool {
         section >= 2 ? true : false
     }
     
     // 서버로부터 받아온 도네이션 갯수가 0개인지 체크하는 메서드
-    func checkNumberOfDonationIsZero(_ section: Int) -> Bool {
+    private func checkNumberOfDonationIsZero(_ section: Int) -> Bool {
         if numberOfDonations[section - 2] == 0 {
             return true
         }

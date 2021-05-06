@@ -24,7 +24,7 @@ class ProfileViewModel {
     weak var delegate: ProfileViewModelDelegate?
     
     // MARK: - API call
-    private func callMyProfileAPI(_ completion: @escaping () -> Void = { } ) {
+    private func callMyProfileAPI(_ completion: @escaping () -> Void = {} ) {
         DoneProvider.getUserProfile() { [weak self] response in
             switch response.code {
             case 200:
@@ -102,31 +102,47 @@ class ProfileViewModel {
         }
     }
     
-    func callAPI() {
+    func callAPI(_ endRefreshing: @escaping () -> Void = {} ) {
         var complete: Int = 0
+        myInprogressResponseModel = []
         callMyProfileAPI { [weak self] in
             complete += 1
-            if complete == 5 { self?.delegate?.completeAPICall() }
+            if complete == 5 {
+                self?.delegate?.completeAPICall()
+                endRefreshing()
+            }
         }
         callMyBeforeAPI { [weak self] in
             complete += 1
-            if complete == 5 { self?.delegate?.completeAPICall() }
+            if complete == 5 {
+                self?.delegate?.completeAPICall()
+                endRefreshing()
+            }
         }
         callMyInProgressAPI { [weak self] in
             complete += 1
-            if complete == 5 { self?.delegate?.completeAPICall() }
+            if complete == 5 {
+                self?.delegate?.completeAPICall()
+                endRefreshing()
+            }
         }
         callMyDonateAPI { [weak self] in
             complete += 1
-            if complete == 5 { self?.delegate?.completeAPICall() }
+            if complete == 5 {
+                self?.delegate?.completeAPICall()
+                endRefreshing()
+            }
         }
         callMyExpiredAPI { [weak self] in
             complete += 1
-            if complete == 5 { self?.delegate?.completeAPICall() }
+            if complete == 5 {
+                self?.delegate?.completeAPICall()
+                endRefreshing()
+            }
         }
     }
     // MARK: - Methods
-    
+
     // 후원중인도네 중복체크
     func myDonateResponseDuplicateCheck(_ response: ParseResponse<MyDonates>) {
         var donationPostId: Set<Int> = Set<Int>()
