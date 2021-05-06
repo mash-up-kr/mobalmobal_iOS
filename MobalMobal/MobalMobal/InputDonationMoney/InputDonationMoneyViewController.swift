@@ -54,6 +54,8 @@ class InputDonationMoneyViewController: DoneBaseViewController {
     
     // MARK: - Properties
     private lazy var viewModel: DonateMoneyViewModel = DonateMoneyViewModel(delegate: self)
+    var donationCompletionHander: () -> Void = {}
+    
     private let navigationTitle: String = "후원"
     private let backButtonImageName: String = "arrowChevronBigLeft"
     private let iconImageName: String = "iconlyBrokenBuy"
@@ -302,6 +304,7 @@ extension InputDonationMoneyViewController: DonateMoneyViewModelDelegate {
     
     func completeDonateMoney(amount: Int) {
         let completeVC: DonateCompleteViewController = DonateCompleteViewController(nickname: viewModel.getNickname(), giftName: viewModel.getGiftName(), moneyAmount: amount)
+        completeVC.donationCompletionHander = donationCompletionHander
         navigationController?.pushViewController(completeVC, animated: true)
     }
 }
