@@ -176,7 +176,7 @@ extension ProfileViewController: UITableViewDataSource {
             return 1
         } else {
             numberOfDonations = [0, 0, 0]
-            numberOfDonations[0] = profileViewModel.myInprogressResponseModel?.count ?? 0
+            numberOfDonations[0] = profileViewModel.myInprogressResponseModel.count
             numberOfDonations[1] = profileViewModel.myDonateResponseModel.count
             numberOfDonations[2] = profileViewModel.myExpiredResponseModel?.count ?? 0
             return numberOfDonations[section - 2]
@@ -195,9 +195,8 @@ extension ProfileViewController: UITableViewDataSource {
         } else if indexPath.section == 1 {
             guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
             myDonationCell.selectionStyle = .none
-            
-            if let inprogressModel = profileViewModel.myInprogressResponseModel,
-               let expiredModel = profileViewModel.myExpiredResponseModel {
+            let inprogressModel = profileViewModel.myInprogressResponseModel
+            if let expiredModel = profileViewModel.myExpiredResponseModel {
                 myDonationCell.myDonationViewModel.setMyInprogressModel(inprogressModel)
                 myDonationCell.myDonationViewModel.setMyExpiredModel(expiredModel)
             } else {
@@ -214,9 +213,9 @@ extension ProfileViewController: UITableViewDataSource {
             donatingCell.selectionStyle = .none
             donatingCell.headerLabelText = sectionHeader[indexPath.section - 2]
             if indexPath.section == 2 {
-                if let inprogressModel = profileViewModel.myInprogressResponseModel {
-                    donatingCell.viewModel.setMyDonationData(inprogressModel[indexPath.row])
-                }
+                let inprogressModel = profileViewModel.myInprogressResponseModel
+                donatingCell.viewModel.setMyDonationData(inprogressModel[indexPath.row])
+                
             } else {
                 if let expiredModel = profileViewModel.myExpiredResponseModel {
                     donatingCell.viewModel.setMyDonationData(expiredModel[indexPath.row])

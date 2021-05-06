@@ -11,7 +11,7 @@ import Foundation
 class ProfileViewModel {
     // MARK: - Properties
     var profileResponseModel: ProfileData?
-    var myInprogressResponseModel: [MydonationPost]?
+    var myInprogressResponseModel: [MydonationPost] = []
     var myExpiredResponseModel: [MydonationPost]?
     var myDonateResponseModel: [Donate] = [Donate]()
     
@@ -34,7 +34,21 @@ class ProfileViewModel {
         DoneProvider.getMyDonation(status: "IN_PROGRESS") { [weak self] response in
             switch response.code {
             case 200:
-                self?.myInprogressResponseModel = response.data?.posts
+                guard let posts = response.data?.posts else { return }
+                self?.myInprogressResponseModel += posts
+                completion(.success(()))
+            default:
+                completion(.failure(.client))
+            }
+        } failure: { err in
+            print(err.localizedDescription)
+            completion(.failure(.unknown))
+        }
+        DoneProvider.getMyDonation(status: "BEFORE") { [weak self] response in
+            switch response.code {
+            case 200:
+                guard let posts = response.data?.posts else { return }
+                self?.myInprogressResponseModel += posts
                 completion(.success(()))
             default:
                 completion(.failure(.client))
@@ -100,7 +114,7 @@ class ProfileViewModel {
     }
     func getPostId(section: Int, row: Int) -> Int? {
         if section == 2 {
-            return myInprogressResponseModel?[row].postId
+            return myInprogressResponseModel[row].postId
         } else if section == 4 {
             return myExpiredResponseModel?[row].postId
         } else {
