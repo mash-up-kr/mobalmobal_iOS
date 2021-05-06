@@ -85,6 +85,7 @@ class DonateMoneyViewModel {
     private func donateDataChanged() {
         if let amount = self.donateData?.donate?.amount {
             delegate?.completeDonateMoney(amount: amount)
+            UserInfo.shared.needToUpdate = true
         }
     }
 }
