@@ -49,7 +49,7 @@ class MainViewModel {
     }
     // MARK: - API Method
     
-    func callUserInfoApi(_ completion: @escaping () -> Void) {
+    func callUserInfoApi(_ completion: @escaping () -> Void = {}) {
         // check keychain user token
         if let token = KeychainManager.getUserToken() {
             UserInfo.shared.token = token
@@ -62,7 +62,7 @@ class MainViewModel {
         }
     }
     
-    func callMainPostsApi(_ completion: @escaping () -> Void) {
+    func callMainPostsApi(_ completion: @escaping () -> Void = {}) {
         DoneProvider.getMain(item: item, limit: limit) { [weak self] response in
             guard let self = self else { return completion() }
             
@@ -85,7 +85,7 @@ class MainViewModel {
         }
     }
     
-    func callMyDonationAPI(_ completion: @escaping () -> Void) {
+    func callMyDonationAPI(_ completion: @escaping () -> Void = {}) {
         DoneProvider.getMyDonation(status: "IN_PROGRESS") { [weak self] response in
             guard let self = self else { return completion() }
             
@@ -103,7 +103,7 @@ class MainViewModel {
         }
     }
     
-    func refresh(_ endRefreshing: @escaping () -> Void) {
+    func refresh(_ endRefreshing: @escaping () -> Void = {}) {
         var complete: Int = 0
         reset()
         callUserInfoApi {

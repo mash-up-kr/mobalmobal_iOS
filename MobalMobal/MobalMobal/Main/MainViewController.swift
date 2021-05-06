@@ -56,7 +56,6 @@ class MainViewController: DoneBaseViewController {
     let refreshControl: UIRefreshControl = {
         let refreshControl: UIRefreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(scrollDown(_:)), for: .valueChanged)
-//        refreshControl.attributedTitle = NSAttributedString(string: "새로고침")
         return refreshControl
     }()
     
@@ -94,9 +93,7 @@ class MainViewController: DoneBaseViewController {
         setCollectionView()
         setLayout()
         
-        viewModel.callUserInfoApi { return }
-        viewModel.callMainPostsApi { return }
-        viewModel.callMyDonationAPI { return }
+        viewModel.refresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,7 +101,7 @@ class MainViewController: DoneBaseViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
         if UserInfo.shared.needToUpdate {
-            viewModel.refresh { return }
+            viewModel.refresh()
         }
     }
     
@@ -298,7 +295,7 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if isIndicatorCell(indexPath) {
             viewModel.item = viewModel.posts[indexPath.item - 1].postID - 1
-            viewModel.callMainPostsApi { return }
+            viewModel.callMainPostsApi()
         }
     }
     
