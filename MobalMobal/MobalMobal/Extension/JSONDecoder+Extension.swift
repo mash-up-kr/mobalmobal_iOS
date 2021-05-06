@@ -11,7 +11,7 @@ extension JSONDecoder.DateDecodingStrategy {
     static func iso8610WithZ() throws -> JSONDecoder.DateDecodingStrategy {
         return .custom { (decoder) -> Date in
             let formatter = DateFormatter()
-            formatter.calendar = Calendar(identifier: .iso8601)
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
             
             let container = try decoder.singleValueContainer()
             let dateStr = try container.decode(String.self)
