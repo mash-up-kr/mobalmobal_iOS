@@ -53,11 +53,7 @@ class MainViewController: DoneBaseViewController {
     }()
     
     // MARK: - Properties
-    var viewModel: MainViewModel {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    var viewModel: MainViewModel
     
     var lastContentOffset: CGFloat = 0.0
     var lastMinContentOffset: CGFloat = 0.0
@@ -85,15 +81,28 @@ class MainViewController: DoneBaseViewController {
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.mainViewModelDelegate = self
         view.backgroundColor = .backgroundColor
         setCollectionView()
         setLayout()
+        
+        viewModel.callUserInfoApi()
+        viewModel.callMainPostsApi()
+        viewModel.callMyDonationAPI()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        titleLabel.text = "Hi, \(UserInfo.shared.nickName ?? "Guest")"
-        getMain()
+        
+        if UserInfo.shared.needToUpdate {
+            viewModel.reset()
+            viewModel.callUserInfoApi()
+            viewModel.callMainPostsApi()
+            viewModel.callMyDonationAPI()
+            
+            UserInfo.shared.needToUpdate = false
+        }
     }
     
     // MARK: - Actions
@@ -194,19 +203,28 @@ class MainViewController: DoneBaseViewController {
 //            make.size.equalTo(44)
 //        }
     }
+}
+
+// MARK: - MainViewModelDelegate
+extension MainViewController: MainViewModelDelegate {
+    func didNicknameChanged(to nickname: String?) {
+        titleLabel.text =  "Hi, \(nickname ?? "Guest")"
+    }
     
-    private func getMain() {
-        viewModel.callMainInfoApi { result in
-            switch result {
-            case .success:
-                self.collectionView.reloadData()
-            case .failure(.client), .failure(.noData), .failure(.server), .failure(.unknown):
-                let alertVC = UIAlertController(title: "나중에 다시 시도해 주세요.", message: "서버 또는 네트워크에 이상이 있을 수 있습니다.", preferredStyle: UIAlertController.Style.alert)
-                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-                alertVC.addAction(okAction)
-                self.present(alertVC, animated: true, completion: nil)
-            }
-        }
+    func didPostsChanged(to posts: [MainPost]) {
+        collectionView.reloadData()
+    }
+    
+    func didMyDonationsChanged(to myDonations: [MydonationPost]) {
+        collectionView.reloadData()
+    }
+    
+    func failedGetPosts(message: String) {
+        showToastMessage(message)
+    }
+    
+    func failedGetMyDonations(message: String) {
+        showToastMessage(message)
     }
 }
 
@@ -271,7 +289,7 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if isIndicatorCell(indexPath) {
             viewModel.item = viewModel.posts[indexPath.item - 1].postID - 1
-            getMain()
+            viewModel.callMainPostsApi()
         }
     }
     
@@ -305,6 +323,8 @@ extension MainViewController: UICollectionViewDataSource {
     private func getMyDonationCell(_ indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: MainMyDonationCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: myCellIdentifier, for: indexPath) as? MainMyDonationCollectionViewCell else { return .init() }
         cell.delegate = self
+        cell.viewModel = self.viewModel
+        cell.viewModel?.mainMyOngoingDelegate = cell
         return cell
     }
     

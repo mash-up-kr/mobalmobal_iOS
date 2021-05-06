@@ -13,6 +13,7 @@ enum Provider: String {
 
 class UserInfo {
     static let shared: UserInfo = UserInfo()
+    var needToUpdate: Bool = false
     
     var token: String?
     var provider: Provider?

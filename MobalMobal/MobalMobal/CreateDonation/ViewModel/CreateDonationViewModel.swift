@@ -28,6 +28,7 @@ class CreateDonationViewModel {
             
             if response.code == 200 {
                 self.delegate?.success(donationInfo: response.data!.post)
+                UserInfo.shared.needToUpdate = true
             } else if response.code == 400 || response.code == 401 {
                 self.delegate?.unavaliableToken()
             }

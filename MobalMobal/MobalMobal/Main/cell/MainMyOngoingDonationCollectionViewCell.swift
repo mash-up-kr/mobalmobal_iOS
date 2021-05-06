@@ -12,13 +12,9 @@ struct MainMyDonationModel {
     let title: String
     let progress: Float
     let money: Int
-    let indexPathRow: Int
 }
 
-protocol MainMyOngoingDonationDelegate: AnyObject {
-    func populate()
-}
-class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell, MainMyOngoingDonationDelegate {
+class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell {
     // MARK: - UIComponents
     let cardView: UIView = {
         let view: UIView = UIView(frame: .zero)
@@ -58,7 +54,7 @@ class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell, MainMyOngoi
         UIImage(named: "process-04_chanel-girl"),
         UIImage(named: "process-05_rich")
     ]
-    let viewModel: MainViewModel = MainViewModel()
+    
     private var model: MainMyDonationModel {
         didSet {
             populate()
@@ -66,10 +62,9 @@ class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell, MainMyOngoi
     }
     // MARK: - Initializer
     override init(frame: CGRect) {
-        self.model = MainMyDonationModel(title: "default", progress: 0.0, money: 0, indexPathRow: 0)
+        self.model = MainMyDonationModel(title: "default", progress: 0.0, money: 0)
         super.init(frame: frame)
         setLayout()
-        viewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -77,8 +72,11 @@ class MainMyOngoingDonationCollectionViewCell: UICollectionViewCell, MainMyOngoi
     }
     
     // MARK: - Methods
-    func setModel(title: String, money: Int, progress: Float, indexPath: Int) {
-        self.model = MainMyDonationModel(title: title, progress: progress, money: money, indexPathRow: indexPath)
+    func setModel(_ myDonation: MydonationPost) {
+        let progress = myDonation.goal == 0 ? 100 : Float(myDonation.currentAmount) / Float(myDonation.goal)
+        self.model = MainMyDonationModel(title: myDonation.title,
+                                         progress: progress,
+                                         money: myDonation.currentAmount)
     }
     func populate() {
         donationTitleLabel.text = model.title
