@@ -28,6 +28,7 @@ class MakeCompleteViewController: UIViewController {
         label.numberOfLines = 3
         label.font = .spoqaHanSansNeo(ofSize: 36, weight: .medium)
         label.textColor = .white
+        label.textAlignment = .center
         return label
     }()
     let completeLabel: UILabel = {
@@ -35,6 +36,7 @@ class MakeCompleteViewController: UIViewController {
         label.text = "생성완료"
         label.font = .spoqaHanSansNeo(ofSize: 36, weight: .regular)
         label.textColor = .veryLightPink
+        label.textAlignment = .center
         return label
     }()
     lazy var donationImageView: UIImageView = {
