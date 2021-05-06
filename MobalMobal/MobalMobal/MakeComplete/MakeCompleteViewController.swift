@@ -25,6 +25,7 @@ class MakeCompleteViewController: UIViewController {
         if let title = donationInfo?.title, let description = donationInfo?.description {
             label.text = "\(title) \(description)"
         }
+        label.numberOfLines = 3
         label.font = .spoqaHanSansNeo(ofSize: 36, weight: .medium)
         label.textColor = .white
         return label

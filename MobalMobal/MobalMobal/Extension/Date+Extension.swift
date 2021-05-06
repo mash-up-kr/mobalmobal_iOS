@@ -9,8 +9,14 @@ import Foundation
 
 extension Date {
     func getDueDay(of dueDate: Date) -> Int {
-        let gregorian: Calendar = Calendar(identifier: .gregorian)
-        let period = gregorian.dateComponents([.day], from: self, to: dueDate).day!
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY.MM.dd"
+        dateFormatter.timeZone = TimeZone(identifier: "KST")
+        
+        let gregorian: Calendar = Calendar.current
+        let formattedText = dateFormatter.string(from: dueDate)
+        let formattedDate = dateFormatter.string(from: self)
+        let period = gregorian.dateComponents([.day], from: dateFormatter.date(from: formattedDate)!, to: dateFormatter.date(from: formattedText)!).day! 
         return period
     }
     
