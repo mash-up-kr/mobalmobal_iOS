@@ -31,12 +31,13 @@ class ProfileViewController: DoneBaseViewController {
         setTableView()
         setLayout()
         setNavigation()
-        callAPI()
         mainTableView.tableFooterView = UIView(frame: .zero)
+        profileViewModel.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        profileViewModel.callAPI()
     }
     
     // MARK: - Actions
@@ -56,58 +57,7 @@ class ProfileViewController: DoneBaseViewController {
     }
     
     // MARK: - Methods
-    func tokenError() {
-        let loginVC: LoginViewController = LoginViewController()
-        let navigation: UINavigationController = UINavigationController(rootViewController: loginVC)
-        navigation.modalPresentationStyle = .fullScreen
-        self.present(navigation, animated: true, completion: nil)
-    }
-    func networkError() {
-        self.view.makeToast("네트워크 연결을 다시해주세요.")
-    }
-    func callAPI() {
-        profileViewModel.getProfileResponse { [weak self] result in
-            switch result {
-            case .success:
-                self?.mainTableView.reloadSections(IndexSet(0...0), with: .automatic)
-                self?.title = self?.profileViewModel.getUserNickname()
-            case .failure(.client):
-                self?.networkError()
-            case .failure(.noData), .failure(.server), .failure(.unknown):
-                self?.tokenError()
-            }
-        }
-        profileViewModel.getMyInprogressResponse { [weak self] result in
-            switch result {
-            case .success:
-                self?.mainTableView.reloadSections(IndexSet(1...4), with: .automatic)
-            case .failure(.client):
-                self?.networkError()
-            case .failure(.noData), .failure(.server), .failure(.unknown):
-                self?.tokenError()
-            }
-        }
-        profileViewModel.getMyExpiredResponse { [weak self] result in
-            switch result {
-            case .success:
-                self?.mainTableView.reloadSections(IndexSet(1...4), with: .automatic)
-            case .failure(.client):
-                self?.networkError()
-            case .failure(.noData), .failure(.server), .failure(.unknown):
-                self?.tokenError()
-            }
-        }
-        profileViewModel.getMyDonateResponse { [weak self] result in
-            switch result {
-            case .success:
-                self?.mainTableView.reloadSections(IndexSet(1...4), with: .automatic)
-            case .failure(.client):
-                self?.networkError()
-            case .failure(.noData), .failure(.server), .failure(.unknown):
-                self?.tokenError()
-            }
-        }
-    }
+
     func setTableView() {
         self.mainTableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: self.profileCellIdentifier)
         self.mainTableView.register(ProfileMyDonationTableViewCell.self, forCellReuseIdentifier: self.myDonationCellIdentifier)
@@ -269,12 +219,32 @@ extension ProfileViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - ppointChargingActionDelegate
+// MARK: - pointChargingActionDelegate
 extension ProfileViewController: pointChargingActionDelegate {
     func presentPointChargingView() {
         let pointChargingVC: PointChargingViewController = PointChargingViewController()
         let navVc: UINavigationController = UINavigationController(rootViewController: pointChargingVC)
         navVc.modalPresentationStyle = .overFullScreen
         self.present(navVc, animated: true, completion: nil)
+    }
+}
+
+// MARK: - ProfileViewModelDelegate
+extension ProfileViewController: ProfileViewModelDelegate {
+    func completeAPICall() {
+        self.mainTableView.reloadSections(IndexSet(0...4), with: .automatic)
+    }
+    
+    func setNavigationTitle(_ nickName: String?) {
+        self.title = nickName
+    }
+    func networkError() {
+        self.view.makeToast("네트워크 연결을 다시해주세요.")
+    }
+    func tokenError() {
+        let loginVC: LoginViewController = LoginViewController()
+        let navigation: UINavigationController = UINavigationController(rootViewController: loginVC)
+        navigation.modalPresentationStyle = .fullScreen
+        self.present(navigation, animated: true, completion: nil)
     }
 }
