@@ -251,7 +251,7 @@ class DonationDetailViewController: DoneBaseViewController {
     
     // MARK: - Methods
     private func donateMySelfAlert() {
-        let alert: UIAlertController = UIAlertController(title: "안내", message: "본인의 게시물에 후원할 수 없습니다.", preferredStyle: .alert)
+        let alert: UIAlertController = UIAlertController(title: "후원 불가", message: "본인의 게시물에 후원할 수 없습니다.", preferredStyle: .alert)
         let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
