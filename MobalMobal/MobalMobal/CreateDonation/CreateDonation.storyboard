@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4Q6-B8-uHw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4Q6-B8-uHw">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -240,7 +240,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="oaA-V3-xwV"/>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="도네이션 생성" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKc-3m-if5">
-                                <rect key="frame" x="160.5" y="62" width="93" height="20"/>
+                                <rect key="frame" x="160.5" y="62" width="93" height="18"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -305,6 +305,7 @@
                             <constraint firstItem="wKc-3m-if5" firstAttribute="centerX" secondItem="ubp-hp-Cf6" secondAttribute="centerX" id="irl-tc-sog"/>
                             <constraint firstItem="NYG-8C-HVe" firstAttribute="leading" secondItem="eb0-HB-4IH" secondAttribute="leading" constant="90" id="k4Y-ip-z3h"/>
                             <constraint firstItem="1Pu-cw-8Hk" firstAttribute="leading" secondItem="eb0-HB-4IH" secondAttribute="leading" id="o5i-xb-1W2"/>
+                            <constraint firstItem="1Pu-cw-8Hk" firstAttribute="top" secondItem="wKc-3m-if5" secondAttribute="bottom" constant="8" id="sJX-ol-6qX"/>
                             <constraint firstItem="L8L-NT-9oK" firstAttribute="top" secondItem="K1K-4L-BqZ" secondAttribute="top" id="vQB-ho-CnW"/>
                         </constraints>
                     </view>

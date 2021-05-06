@@ -10,6 +10,7 @@ import UIKit
 protocol CreateDonationViewModelDeleagate: class {
     func unavaliableToken()
     func success(donationInfo: CreateDonationInfo)
+    func inValidTypeImage()
 }
 
 class CreateDonationViewModel {
@@ -34,6 +35,7 @@ class CreateDonationViewModel {
             }
         } failure: { (error) in
             print("CreateDonation : \(error.localizedDescription)")
+            self.delegate?.inValidTypeImage()
             return
         }
     }

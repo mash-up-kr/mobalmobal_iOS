@@ -251,7 +251,7 @@ class DonationDetailViewController: DoneBaseViewController {
     
     // MARK: - Methods
     private func donateMySelfAlert() {
-        let alert: UIAlertController = UIAlertController(title: "안내", message: "본인의 게시물에 후원할 수 없습니다.", preferredStyle: .alert)
+        let alert: UIAlertController = UIAlertController(title: "후원 불가", message: "본인의 게시물에 후원할 수 없습니다.", preferredStyle: .alert)
         let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
@@ -322,6 +322,9 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
     }
     func didProgressChanged(current: Int, goal: Int) {
         progress = goal == 0 ? 100.0 : Float(current) / Float(goal)
+        if progress >= 1.0 && goal == 0 {
+            progress = 1
+        }
         progressLabel.text = "\(Int(progress * 100))%"
         destinationNumberLabel.text = goal.changeToCommaFormat()
         fundAmountNumberLabel.text = current.changeToCommaFormat()
