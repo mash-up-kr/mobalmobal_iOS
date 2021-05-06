@@ -253,6 +253,22 @@ extension CreateDonationViewController2: UITextFieldDelegate {
             }
         }
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let str = textField.text else {
+            return true
+        }
+        
+        let strLength = str.count + string.count - range.length
+        
+        if textField == productTextField {
+            return strLength <= 10
+        } else if textField == inputTextField {
+            return strLength <= 100
+        }
+        
+        return true
+    }
 }
 
 // MAKR: - UIImaePickerControlllerDelegate
