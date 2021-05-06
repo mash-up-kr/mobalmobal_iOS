@@ -341,6 +341,7 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
         // 종료 날짜
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY.MM.dd"
+        dateFormatter.timeZone = TimeZone(identifier: "KST")
         endDateLabel.text = dateFormatter.string(from: date)
         
         // D-Day
