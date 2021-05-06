@@ -289,4 +289,12 @@ extension CreateDonationViewController2: CreateDonationViewModelDeleagate {
         let toastPoint: CGPoint = CGPoint(x: view.frame.midX, y: view.frame.maxY - 60)
         view.makeToast("다시 로그인 해주시기 바랍니다.", duration: 2.0, point: toastPoint, title: nil, image: nil, completion: nil)
     }
+    func inValidTypeImage() {
+        let alertController: UIAlertController = UIAlertController(title: "안내", message: "지원하지 않는 사진 타입입니다.", preferredStyle: .alert)
+        let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true) { [weak self] in
+            self?.photoImageView.image = nil
+        }
+    }
 }
