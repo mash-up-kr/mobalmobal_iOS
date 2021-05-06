@@ -157,8 +157,8 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
     func stringToDate(input: String) -> Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.timeZone = TimeZone(identifier: "KST")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         
         if let date = formatter.date(from: input) {
             return date
