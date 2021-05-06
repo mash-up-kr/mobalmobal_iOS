@@ -49,7 +49,15 @@ class MainViewController: DoneBaseViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.layer.masksToBounds = true
         collectionView.clipsToBounds = true
+        collectionView.refreshControl = refreshControl
         return collectionView
+    }()
+    
+    let refreshControl: UIRefreshControl = {
+        let refreshControl: UIRefreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(scrollDown(_:)), for: .valueChanged)
+//        refreshControl.attributedTitle = NSAttributedString(string: "새로고침")
+        return refreshControl
     }()
     
     // MARK: - Properties
@@ -86,9 +94,9 @@ class MainViewController: DoneBaseViewController {
         setCollectionView()
         setLayout()
         
-        viewModel.callUserInfoApi()
-        viewModel.callMainPostsApi()
-        viewModel.callMyDonationAPI()
+        viewModel.callUserInfoApi { return }
+        viewModel.callMainPostsApi { return }
+        viewModel.callMyDonationAPI { return }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,12 +104,7 @@ class MainViewController: DoneBaseViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
         if UserInfo.shared.needToUpdate {
-            viewModel.reset()
-            viewModel.callUserInfoApi()
-            viewModel.callMainPostsApi()
-            viewModel.callMyDonationAPI()
-            
-            UserInfo.shared.needToUpdate = false
+            viewModel.refresh { return }
         }
     }
     
@@ -120,6 +123,12 @@ class MainViewController: DoneBaseViewController {
             presentLoginVC()
         } else {
             presentNotiListVC()
+        }
+    }
+    @objc
+    private func scrollDown(_ sender: Any) {
+        viewModel.refresh {
+            self.refreshControl.endRefreshing()
         }
     }
     
@@ -289,7 +298,7 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if isIndicatorCell(indexPath) {
             viewModel.item = viewModel.posts[indexPath.item - 1].postID - 1
-            viewModel.callMainPostsApi()
+            viewModel.callMainPostsApi { return }
         }
     }
     
