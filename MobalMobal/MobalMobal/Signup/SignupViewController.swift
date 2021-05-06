@@ -333,7 +333,7 @@ extension SignupViewController: SignUpViewModelDelegate {
     }
     
     func success() {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.dismiss(animated: true)
     }
 }
 

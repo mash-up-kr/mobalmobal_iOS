@@ -69,6 +69,7 @@ class SignupViewModel: SignupViewModelProtocol {
                 self.delegate?.success()
                 if let data = self.loginData {
                     if KeychainManager.setUserToken(data.token.token) {
+                        UserInfo.shared.needToUpdate = true
                         print("Signup Token 저장 성공")
                     }
                 }
