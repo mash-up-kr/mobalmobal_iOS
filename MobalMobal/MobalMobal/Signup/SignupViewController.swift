@@ -54,11 +54,8 @@ class SignupViewController: DoneBaseViewController {
         let underlineAttributedString = NSAttributedString(string: "이용약관, ", attributes: underlineAttribute)
         label.attributedText = underlineAttributedString
         label.numberOfLines = 1
-        if UIScreen.isSe {
-            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 11)
-        } else {
-            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 13)
-        }
+        let size: CGFloat = UIScreen.isSe ? 11 : 13
+        label.font = .spoqaHanSansNeo(ofSize: size, weight: .bold)
         
         label.text = label.attributedText!.string
         label.textColor = .white
@@ -71,11 +68,8 @@ class SignupViewController: DoneBaseViewController {
         let underlineAttributedString = NSAttributedString(string: "개인정보 수집 및 이용", attributes: underlineAttribute)
         label.attributedText = underlineAttributedString
         label.numberOfLines = 1
-        if UIScreen.isSe {
-            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 11)
-        } else {
-            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 13)
-        }
+        let size: CGFloat = UIScreen.isSe ? 11 : 13
+        label.font = .spoqaHanSansNeo(ofSize: size, weight: .bold)
         
         label.text = label.attributedText!.string
         label.textColor = .white
@@ -86,11 +80,8 @@ class SignupViewController: DoneBaseViewController {
         let label: UILabel = UILabel()
         label.text = "에 모두 동의합니다."
         label.numberOfLines = 1
-        if UIScreen.isSe {
-            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 11)
-        } else {
-            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 13)
-        }
+        let size: CGFloat = UIScreen.isSe ? 11 : 13
+        label.font = .spoqaHanSansNeo(ofSize: size, weight: .bold)
         label.textColor = .white
         return label
     }()
