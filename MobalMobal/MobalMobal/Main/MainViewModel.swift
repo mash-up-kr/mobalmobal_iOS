@@ -54,24 +54,36 @@ class MainViewModel {
         if let token = KeychainManager.getUserToken() {
             UserInfo.shared.token = token
             DoneProvider.getUserProfile { [weak self] response in
-                guard let user = response.data?.user else { return completion() }
+                guard let user = response.data?.user else {
+                    completion()
+                    return
+                }
                 UserInfo.shared.updateUserInfo(data: user)
                 self?.nickname = user.nickname
                 completion()
-            } failure: { _ in return completion() }
+            } failure: { _ in
+                completion()
+                return
+            }
         }
+        completion()
     }
     
     func callMainPostsApi(_ completion: @escaping () -> Void = {}) {
         DoneProvider.getMain(item: item, limit: limit) { [weak self] response in
-            guard let self = self else { return completion() }
-            
+            guard let self = self else {
+                completion()
+                return
+            }
             if response.code != 200 {
                 self.mainViewModelDelegate?.failedGetPosts(message: "진행중 데이터를 불러올 수 없습니다. \(response.message!)")
-                return completion()
+                completion()
+                return
             }
-            
-            guard let posts = response.data?.posts else { return completion() }
+            guard let posts = response.data?.posts else {
+                completion()
+                return
+            }
             if self.posts.isEmpty {
                 self.posts = posts
             } else {
@@ -86,15 +98,24 @@ class MainViewModel {
     }
     
     func callMyDonationAPI(_ completion: @escaping () -> Void = {}) {
+        if KeychainManager.isEmptyUserToken() {
+            completion()
+            return
+        }
         DoneProvider.getMyDonation(status: "IN_PROGRESS") { [weak self] response in
-            guard let self = self else { return completion() }
-            
+            guard let self = self else {
+                completion()
+                return
+            }
             if response.code != 200 {
                 self.mainViewModelDelegate?.failedGetPosts(message: "나의 진행 데이터를 불러올 수 없습니다. \(response.message!)")
-                return completion()
+                completion()
+                return
             }
-            
-            guard let posts = response.data?.posts else { return }
+            guard let posts = response.data?.posts else {
+                completion()
+                return
+            }
             self.myDonations += posts
             completion()
         } failure: { error in
@@ -121,15 +142,15 @@ class MainViewModel {
         reset()
         callUserInfoApi {
             complete += 1
-            if complete == 3 { endRefreshing() }
+            if complete >= 3 { endRefreshing() }
         }
         callMainPostsApi {
             complete += 1
-            if complete == 3 { endRefreshing() }
+            if complete >= 3 { endRefreshing() }
         }
         callMyDonationAPI {
             complete += 1
-            if complete == 3 { endRefreshing() }
+            if complete >= 3 { endRefreshing() }
         }
         
         UserInfo.shared.needToUpdate = false

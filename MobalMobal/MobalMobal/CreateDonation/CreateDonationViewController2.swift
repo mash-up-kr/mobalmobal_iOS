@@ -176,6 +176,12 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
         textField.forEach { $0.inputAccessoryView = toolBarKeyboard }
     }
     
+    private func toastMessage(message: String) {
+        view.makeToast(message, duration: 0.8, position: .top, title: "", image: nil) { (_) in
+            self.priceTextField.text = ""
+        }
+    }
+    
     @objc
     private func doneButtonClicked() {
         if startDateTextField.isEditing {
@@ -185,9 +191,20 @@ class CreateDonationViewController2: UIViewController, UINavigationControllerDel
             transformTextField(textField: endDateTextField)
             viewModel.donation.endAt = stringToDate(input: endDateTextField.text ?? "").iso8601withFractionalSeconds
         } else {
-            transformTextField(textField: priceTextField)
             if let inputPrice = priceTextField.text, let input = Int(inputPrice) {
+                
+                guard input >= 500 else {
+                    toastMessage(message: "500원 이상 충전해주세요!")
+                    return
+                }
+                
+                guard input <= 10000000 else {
+                    toastMessage(message: "최대 충전 금액은 천만원 입니다!")
+                    return
+                }
+                
                 viewModel.donation.goal = String(input)
+                transformTextField(textField: priceTextField)
             }
         }
         checkCreateButtonViewValidation()
@@ -252,6 +269,22 @@ extension CreateDonationViewController2: UITextFieldDelegate {
                 textField.text = formattedNumber
             }
         }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let str = textField.text else {
+            return true
+        }
+        
+        let strLength = str.count + string.count - range.length
+        
+        if textField == productTextField {
+            return strLength <= 10
+        } else if textField == inputTextField {
+            return strLength <= 100
+        }
+        
+        return true
     }
 }
 
