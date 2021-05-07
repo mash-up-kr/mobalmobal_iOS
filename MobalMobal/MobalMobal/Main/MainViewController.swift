@@ -286,6 +286,7 @@ extension MainViewController: UICollectionViewDataSource {
             if viewModel.isEnd {
                 return viewModel.posts.count
             }
+            if viewModel.posts.count == 0 { return 0 }
             return viewModel.posts.count + 1
         default:
             return 0
