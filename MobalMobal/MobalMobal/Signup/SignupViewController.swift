@@ -25,6 +25,7 @@ class SignupViewController: DoneBaseViewController {
         let view: SignupCustomView = SignupCustomView(imageName: "iconlyLightCall", inputText: "전화번호를 입력해주세요. (선택)")
         view.backgroundColor = .white7
         view.layer.cornerRadius = 30
+        view.textFieldView.keyboardType = .numberPad
         return view
     }()
     
@@ -53,11 +54,8 @@ class SignupViewController: DoneBaseViewController {
         let underlineAttributedString = NSAttributedString(string: "이용약관, ", attributes: underlineAttribute)
         label.attributedText = underlineAttributedString
         label.numberOfLines = 1
-        if UIScreen.isSe {
-            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 11)
-        } else {
-            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 13)
-        }
+        let size: CGFloat = UIScreen.isSe ? 11 : 13
+        label.font = .spoqaHanSansNeo(ofSize: size, weight: .bold)
         
         label.text = label.attributedText!.string
         label.textColor = .white
@@ -70,11 +68,8 @@ class SignupViewController: DoneBaseViewController {
         let underlineAttributedString = NSAttributedString(string: "개인정보 수집 및 이용", attributes: underlineAttribute)
         label.attributedText = underlineAttributedString
         label.numberOfLines = 1
-        if UIScreen.isSe {
-            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 11)
-        } else {
-            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 13)
-        }
+        let size: CGFloat = UIScreen.isSe ? 11 : 13
+        label.font = .spoqaHanSansNeo(ofSize: size, weight: .bold)
         
         label.text = label.attributedText!.string
         label.textColor = .white
@@ -85,11 +80,8 @@ class SignupViewController: DoneBaseViewController {
         let label: UILabel = UILabel()
         label.text = "에 모두 동의합니다."
         label.numberOfLines = 1
-        if UIScreen.isSe {
-            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 11)
-        } else {
-            label.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 13)
-        }
+        let size: CGFloat = UIScreen.isSe ? 11 : 13
+        label.font = .spoqaHanSansNeo(ofSize: size, weight: .bold)
         label.textColor = .white
         return label
     }()
@@ -300,6 +292,42 @@ class SignupViewController: DoneBaseViewController {
         }
     }
     
+    private func textFieldIsFilled(_ textField: UITextField) {
+        if textField == nickNameView.textFieldView {
+            guard signupViewModel.nicknameTextFieldIsFilled(textField) == true else {
+                alertController("빈칸입니다 !")
+                completButtonCheck()
+                return
+            }
+            
+            if let nicknameInput = nickNameView.textFieldView.text {
+                self.signupUser.nickname = nicknameInput
+            }
+        } else if textField == phoneNumberView.textFieldView {
+            guard signupViewModel.phoneNumberTextFieldIsFilled(textField) == true else {
+                textField.text = ""
+                alertController("올바르지 않은 형식입니다 !")
+                return
+            }
+            
+            if let phoneNumberInput = phoneNumberView.textFieldView.text {
+                self.signupUser.phoneNumber = phoneNumberInput
+            }
+        } else if textField == emailView.textFieldView {
+            guard signupViewModel.emailTextFieldIsFilled(textField) == true else {
+                textField.text = ""
+                alertController("올바르지 않은 이메일 형식입니다 !")
+                return
+            }
+            
+            if let emailInput = emailView.textFieldView.text {
+                self.signupUser.accountNumber = emailInput
+            }
+        }
+        completButtonCheck()
+        self.view.endEditing(true)
+    }
+    
     private func makeToast(_ message: String) {
         self.view.makeToast(message, duration: 2.0, point: CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height - 60), title: "", image: nil, completion: nil)
     }
@@ -339,41 +367,11 @@ extension SignupViewController: SignUpViewModelDelegate {
 
 extension SignupViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == nickNameView.textFieldView {
-            guard signupViewModel.nicknameTextFieldIsFilled(textField) == true else {
-                alertController("빈칸입니다 !")
-                completButtonCheck()
-                return false
-            }
-            
-            if let nicknameInput = nickNameView.textFieldView.text {
-                self.signupUser.nickname = nicknameInput
-            }
-            
-        } else if textField == phoneNumberView.textFieldView {
-            guard signupViewModel.phoneNumberTextFieldIsFilled(textField) == true else {
-                textField.text = ""
-                alertController("올바르지 않은 형식입니다 !")
-                return true
-            }
-            
-            if let phoneNumberInput = phoneNumberView.textFieldView.text {
-                self.signupUser.phoneNumber = phoneNumberInput
-            }
-        } else if textField == emailView.textFieldView {
-            guard signupViewModel.emailTextFieldIsFilled(textField) == true else {
-                textField.text = ""
-                alertController("올바르지 않은 이메일 형식입니다 !")
-                return true
-            }
-            
-            if let emailInput = emailView.textFieldView.text {
-                self.signupUser.accountNumber = emailInput
-            }
-        }
-        
-        completButtonCheck()
-        self.view.endEditing(true)
+        textFieldIsFilled(textField)
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textFieldIsFilled(textField)
     }
 }
