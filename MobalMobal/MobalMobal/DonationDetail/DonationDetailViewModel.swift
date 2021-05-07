@@ -85,6 +85,9 @@ class DonationDetailViewModel {
     func getGiftName() -> String {
         self.donationTitle
     }
+    func getEndDate() -> Date? {
+        self.donationEndDate
+    }
     
     // MARK: - API Method
     func callDonationInfoAPI() {

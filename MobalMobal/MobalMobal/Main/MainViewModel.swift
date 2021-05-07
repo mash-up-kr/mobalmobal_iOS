@@ -31,7 +31,7 @@ class MainViewModel {
             mainViewModelDelegate?.didPostsChanged(to: posts)
         }
     }
-    var myDonations: [MydonationPost] = [] { // 진행 중인 내 도네이션
+    var myDonations: [MydonationPost] = [] {
         didSet {
             mainMyOngoingDelegate?.didMyDonationsChanged()
         }
@@ -116,12 +116,25 @@ class MainViewModel {
                 completion()
                 return
             }
-            self.checkInprogressDonation(posts)
+            self.myDonations += posts
             completion()
         } failure: { error in
             self.mainViewModelDelegate?.failedGetPosts(message: "나의 진행 데이터를 불러올 수 없습니다. \(error.localizedDescription)")
             completion()
         }
+        DoneProvider.getMyDonation(status: "BEFORE") { [weak self] response in
+            guard let self = self else { return }
+            
+            if response.code != 200 {
+                self.mainViewModelDelegate?.failedGetPosts(message: "나의 진행 데이터를 불러올 수 없습니다. \(response.message!)")
+                return
+            }
+            guard let posts = response.data?.posts else { return }
+            self.myDonations += posts
+        } failure: { error in
+            self.mainViewModelDelegate?.failedGetPosts(message: "나의 진행 데이터를 불러올 수 없습니다. \(error.localizedDescription)")
+        }
+
     }
     
     func refresh(_ endRefreshing: @escaping () -> Void = {}) {
@@ -144,14 +157,6 @@ class MainViewModel {
     }
     
     // MARK: - Methods
-    func checkInprogressDonation(_ response: [MydonationPost]) {
-        for post in response {
-            // 날짜가 지났으면 true반환 -> expired에넣음
-            if Date().getDueDay(of: post.endAt) >= 0 {
-                self.myDonations += [post]
-            }
-        }
-    }
     func getMyDontion(at item: Int) -> MydonationPost {
         return myDonations[item]
     }

@@ -11,9 +11,15 @@ import UIKit
 
 class ProfileViewController: DoneBaseViewController {
     // MARK: - UIComponents
-    private let mainTableView: UITableView = {
+    private lazy var mainTableView: UITableView = {
         let tableview: UITableView = UITableView(frame: .zero, style: .grouped)
+        tableview.refreshControl = self.refreshControl
         return tableview
+    }()
+    private let refreshControl: UIRefreshControl = {
+        let refreshControl: UIRefreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshControl
     }()
     
     // MARK: - Properties
@@ -31,12 +37,12 @@ class ProfileViewController: DoneBaseViewController {
         setTableView()
         setLayout()
         setNavigation()
-        callAPI()
-        mainTableView.tableFooterView = UIView(frame: .zero)
+        profileViewModel.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        profileViewModel.callAPI()
     }
     
     // MARK: - Actions
@@ -55,59 +61,13 @@ class ProfileViewController: DoneBaseViewController {
         navigationController?.pushViewController(SettingViewController(), animated: true)
     }
     
+    @objc
+    private func refresh() {
+        profileViewModel.callAPI { self.refreshControl.endRefreshing() }
+    }
+    
     // MARK: - Methods
-    func tokenError() {
-        let loginVC: LoginViewController = LoginViewController()
-        let navigation: UINavigationController = UINavigationController(rootViewController: loginVC)
-        navigation.modalPresentationStyle = .fullScreen
-        self.present(navigation, animated: true, completion: nil)
-    }
-    func networkError() {
-        self.view.makeToast("네트워크 연결을 다시해주세요.")
-    }
-    func callAPI() {
-        profileViewModel.getProfileResponse { [weak self] result in
-            switch result {
-            case .success:
-                self?.mainTableView.reloadSections(IndexSet(0...0), with: .automatic)
-                self?.title = self?.profileViewModel.getUserNickname()
-            case .failure(.client):
-                self?.networkError()
-            case .failure(.noData), .failure(.server), .failure(.unknown):
-                self?.tokenError()
-            }
-        }
-        profileViewModel.getMyInprogressResponse { [weak self] result in
-            switch result {
-            case .success:
-                self?.mainTableView.reloadSections(IndexSet(1...4), with: .automatic)
-            case .failure(.client):
-                self?.networkError()
-            case .failure(.noData), .failure(.server), .failure(.unknown):
-                self?.tokenError()
-            }
-        }
-        profileViewModel.getMyExpiredResponse { [weak self] result in
-            switch result {
-            case .success:
-                self?.mainTableView.reloadSections(IndexSet(1...4), with: .automatic)
-            case .failure(.client):
-                self?.networkError()
-            case .failure(.noData), .failure(.server), .failure(.unknown):
-                self?.tokenError()
-            }
-        }
-        profileViewModel.getMyDonateResponse { [weak self] result in
-            switch result {
-            case .success:
-                self?.mainTableView.reloadSections(IndexSet(1...4), with: .automatic)
-            case .failure(.client):
-                self?.networkError()
-            case .failure(.noData), .failure(.server), .failure(.unknown):
-                self?.tokenError()
-            }
-        }
-    }
+
     func setTableView() {
         self.mainTableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: self.profileCellIdentifier)
         self.mainTableView.register(ProfileMyDonationTableViewCell.self, forCellReuseIdentifier: self.myDonationCellIdentifier)
@@ -118,9 +78,10 @@ class ProfileViewController: DoneBaseViewController {
         mainTableView.separatorStyle = .none
         mainTableView.estimatedRowHeight = 160
         mainTableView.rowHeight = UITableView.automaticDimension
+        mainTableView.tableFooterView = UIView(frame: .zero)
     }
     func setLayout() {
-        [mainTableView].forEach { self.view.addSubview($0) }
+        self.view.addSubview(mainTableView)
         mainTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.height.equalTo(UIScreen.main.bounds.height)        
@@ -152,12 +113,12 @@ class ProfileViewController: DoneBaseViewController {
     }
     
     // 유동적으로 갯수가 변화하는 section인지 체크하는 메서드
-    func checkDynamicSection(_ section: Int) -> Bool {
+    private func checkDynamicSection(_ section: Int) -> Bool {
         section >= 2 ? true : false
     }
     
     // 서버로부터 받아온 도네이션 갯수가 0개인지 체크하는 메서드
-    func checkNumberOfDonationIsZero(_ section: Int) -> Bool {
+    private func checkNumberOfDonationIsZero(_ section: Int) -> Bool {
         if numberOfDonations[section - 2] == 0 {
             return true
         }
@@ -176,7 +137,7 @@ extension ProfileViewController: UITableViewDataSource {
             return 1
         } else {
             numberOfDonations = [0, 0, 0]
-            numberOfDonations[0] = profileViewModel.myInprogressResponseModel?.count ?? 0
+            numberOfDonations[0] = profileViewModel.myInprogressResponseModel.count
             numberOfDonations[1] = profileViewModel.myDonateResponseModel.count
             numberOfDonations[2] = profileViewModel.myExpiredResponseModel?.count ?? 0
             return numberOfDonations[section - 2]
@@ -195,9 +156,8 @@ extension ProfileViewController: UITableViewDataSource {
         } else if indexPath.section == 1 {
             guard let myDonationCell: ProfileMyDonationTableViewCell = mainTableView.dequeueReusableCell(withIdentifier: myDonationCellIdentifier, for: indexPath) as? ProfileMyDonationTableViewCell else { return UITableViewCell() }
             myDonationCell.selectionStyle = .none
-            
-            if let inprogressModel = profileViewModel.myInprogressResponseModel,
-               let expiredModel = profileViewModel.myExpiredResponseModel {
+            let inprogressModel = profileViewModel.myInprogressResponseModel
+            if let expiredModel = profileViewModel.myExpiredResponseModel {
                 myDonationCell.myDonationViewModel.setMyInprogressModel(inprogressModel)
                 myDonationCell.myDonationViewModel.setMyExpiredModel(expiredModel)
             } else {
@@ -214,9 +174,9 @@ extension ProfileViewController: UITableViewDataSource {
             donatingCell.selectionStyle = .none
             donatingCell.headerLabelText = sectionHeader[indexPath.section - 2]
             if indexPath.section == 2 {
-                if let inprogressModel = profileViewModel.myInprogressResponseModel {
-                    donatingCell.viewModel.setMyDonationData(inprogressModel[indexPath.row])
-                }
+                let inprogressModel = profileViewModel.myInprogressResponseModel
+                donatingCell.viewModel.setMyDonationData(inprogressModel[indexPath.row])
+                
             } else {
                 if let expiredModel = profileViewModel.myExpiredResponseModel {
                     donatingCell.viewModel.setMyDonationData(expiredModel[indexPath.row])
@@ -270,12 +230,32 @@ extension ProfileViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - ppointChargingActionDelegate
+// MARK: - pointChargingActionDelegate
 extension ProfileViewController: pointChargingActionDelegate {
     func presentPointChargingView() {
         let pointChargingVC: PointChargingViewController = PointChargingViewController()
         let navVc: UINavigationController = UINavigationController(rootViewController: pointChargingVC)
         navVc.modalPresentationStyle = .overFullScreen
         self.present(navVc, animated: true, completion: nil)
+    }
+}
+
+// MARK: - ProfileViewModelDelegate
+extension ProfileViewController: ProfileViewModelDelegate {
+    func completeAPICall() {
+        self.mainTableView.reloadSections(IndexSet(0...4), with: .automatic)
+    }
+    
+    func setNavigationTitle(_ nickName: String?) {
+        self.title = nickName
+    }
+    func networkError() {
+        self.view.makeToast("네트워크 연결을 다시해주세요.")
+    }
+    func tokenError() {
+        let loginVC: LoginViewController = LoginViewController()
+        let navigation: UINavigationController = UINavigationController(rootViewController: loginVC)
+        navigation.modalPresentationStyle = .fullScreen
+        self.present(navigation, animated: true, completion: nil)
     }
 }

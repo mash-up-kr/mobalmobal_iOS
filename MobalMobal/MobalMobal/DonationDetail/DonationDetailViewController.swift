@@ -236,10 +236,13 @@ class DonationDetailViewController: DoneBaseViewController {
     
     @objc
     private func clickDonationButton() {
+        
         if KeychainManager.isEmptyUserToken() {
             presentLoginVC()
         } else if UserInfo.shared.nickName == viewModel.getNickname() {
             donateMySelfAlert()
+        } else if checkExpiredDonate(dDayLabel.text) {
+            expiredDonateAlert()
         } else {
             presentDonateMoneyVC()
         }
@@ -282,6 +285,18 @@ class DonationDetailViewController: DoneBaseViewController {
     
     private func popNavigationVC() {
         navigationController?.popViewController(animated: true)
+    }
+    private func checkExpiredDonate(_ dDay: String?) -> Bool {
+        if let day = dDay {
+            if Array(day)[1] == "+" { return true }
+        }
+        return false
+    }
+    private func expiredDonateAlert() {
+        let alertController: UIAlertController = UIAlertController(title: "종료된 도네이션", message: "종료된 도네이션에는 후원할 수 없습니다.", preferredStyle: .alert)
+        let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 
