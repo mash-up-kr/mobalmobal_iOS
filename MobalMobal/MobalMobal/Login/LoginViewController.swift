@@ -25,15 +25,15 @@ class LoginViewController: DoneBaseViewController {
         return imageView
     }()
     let googleButton: UIView = {
-        let button: UIView = CustomLoginButton(title: "Google로 로그인하기", iconName: "googleLogo")
+        let button: UIView = CustomLoginButton(title: "Google로 로그인", iconName: "googleLogo")
         return button
     }()
     let facebookButton: UIView = {
-        let button: UIView = CustomLoginButton(title: "Facebook으로 로그인하기", iconName: "facebookLogo")
+        let button: UIView = CustomLoginButton(title: "Facebook으로 로그인", iconName: "facebookLogo")
         return button
     }()
     let appleButton: UIView = {
-        let button: UIView = CustomLoginButton(title: "Apple로 로그인하기", iconName: "appleLogo")
+        let button: UIView = CustomLoginButton(title: "Apple로 로그인", iconName: "appleLogo")
         return button
     }()
     lazy var guestButtonView: UIView = {
