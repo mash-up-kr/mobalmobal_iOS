@@ -1133,6 +1133,7 @@
 				CODE_SIGN_ENTITLEMENTS = MobalMobal/MobalMobalDebug.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TA757FA6NR;
 				INFOPLIST_FILE = MobalMobal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1157,6 +1158,7 @@
 				CODE_SIGN_ENTITLEMENTS = MobalMobal/MobalMobal.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TA757FA6NR;
 				INFOPLIST_FILE = MobalMobal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

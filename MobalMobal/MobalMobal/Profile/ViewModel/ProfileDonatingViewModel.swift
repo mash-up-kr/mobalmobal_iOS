@@ -36,12 +36,22 @@ class ProfileDonatingViewModel {
         myDonate ? myDonateData?.post.goal : myDonationData?.goal
     }
     func getTitle(myDonate: Bool) -> String? {
-        myDonate ? myDonateData?.post.title : myDonationData?.title
+        myDonate ? makeTitle(myDonate: true) : makeTitle(myDonate: false)
     }
     func getDate(myDonate: Bool) -> Date? {
         myDonate ? myDonateData?.post.endAt : myDonationData?.endAt
     }
     func getCurrentAmount(myDonate: Bool) -> Int? {
         myDonate ? myDonateData?.post.currentAmount : myDonationData?.currentAmount
+    }
+    func makeTitle(myDonate: Bool) -> String? {
+        if myDonate {
+            if let description = myDonateData?.post.description,
+               let title = myDonateData?.post.title { return "\(title)\n\(description)" }
+        } else {
+            if let description = myDonationData?.description ,
+               let title = myDonationData?.title { return "\(title)\n\(description)" }
+        }
+        return nil
     }
 }
