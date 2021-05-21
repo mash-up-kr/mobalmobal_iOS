@@ -191,7 +191,7 @@
 		7CC7C08A261F1CAD0038900A /* InputChargingPointViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputChargingPointViewModel.swift; sourceTree = "<group>"; };
 		7CC7C08E261F20680038900A /* InputChargingPointModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputChargingPointModel.swift; sourceTree = "<group>"; };
 		7CE63717263C5D32008AE55E /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
-		D70C37C525E103DD00898271 /* 돈에이션.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "돈에이션.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D70C37C525E103DD00898271 /* MobalMobal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobalMobal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70C37C825E103DD00898271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D70C37CA25E103DD00898271 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D70C37CC25E103DD00898271 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -572,7 +572,7 @@
 		D70C37C625E103DD00898271 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D70C37C525E103DD00898271 /* 돈에이션.app */,
+				D70C37C525E103DD00898271 /* MobalMobal.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -714,9 +714,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D70C37C425E103DD00898271 /* 돈에이션 */ = {
+		D70C37C425E103DD00898271 /* MobalMobal */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D70C37D925E103DE00898271 /* Build configuration list for PBXNativeTarget "돈에이션" */;
+			buildConfigurationList = D70C37D925E103DE00898271 /* Build configuration list for PBXNativeTarget "MobalMobal" */;
 			buildPhases = (
 				84F3F05E72455AC321E09A11 /* [CP] Check Pods Manifest.lock */,
 				D70C37C125E103DD00898271 /* Sources */,
@@ -730,7 +730,7 @@
 			);
 			dependencies = (
 			);
-			name = "돈에이션";
+			name = MobalMobal;
 			packageProductDependencies = (
 				D7147D4025E763DC00AA0878 /* FirebaseDynamicLinks */,
 				D7147D4225E763DC00AA0878 /* FirebaseDatabase */,
@@ -750,7 +750,7 @@
 				4DBDB4E3261F53C900B5E08D /* Moya */,
 			);
 			productName = MobalMobal;
-			productReference = D70C37C525E103DD00898271 /* 돈에이션.app */;
+			productReference = D70C37C525E103DD00898271 /* MobalMobal.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -790,7 +790,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D70C37C425E103DD00898271 /* 돈에이션 */,
+				D70C37C425E103DD00898271 /* MobalMobal */,
 			);
 		};
 /* End PBXProject section */
@@ -1186,7 +1186,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D70C37D925E103DE00898271 /* Build configuration list for PBXNativeTarget "돈에이션" */ = {
+		D70C37D925E103DE00898271 /* Build configuration list for PBXNativeTarget "MobalMobal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D70C37DA25E103DE00898271 /* Debug */,
