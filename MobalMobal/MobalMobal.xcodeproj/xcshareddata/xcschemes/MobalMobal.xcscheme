@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D70C37C425E103DD00898271"
-               BuildableName = "MobalMobal.app"
-               BlueprintName = "MobalMobal"
+               BuildableName = "&#x1103;&#x1169;&#x11ab;&#x110b;&#x1166;&#x110b;&#x1175;&#x1109;&#x1167;&#x11ab;.app"
+               BlueprintName = "&#xb3c8;&#xc5d0;&#xc774;&#xc158;"
                ReferencedContainer = "container:MobalMobal.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D70C37C425E103DD00898271"
-            BuildableName = "MobalMobal.app"
-            BlueprintName = "MobalMobal"
+            BuildableName = "&#x1103;&#x1169;&#x11ab;&#x110b;&#x1166;&#x110b;&#x1175;&#x1109;&#x1167;&#x11ab;.app"
+            BlueprintName = "&#xb3c8;&#xc5d0;&#xc774;&#xc158;"
             ReferencedContainer = "container:MobalMobal.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D70C37C425E103DD00898271"
-            BuildableName = "MobalMobal.app"
-            BlueprintName = "MobalMobal"
+            BuildableName = "&#x1103;&#x1169;&#x11ab;&#x110b;&#x1166;&#x110b;&#x1175;&#x1109;&#x1167;&#x11ab;.app"
+            BlueprintName = "&#xb3c8;&#xc5d0;&#xc774;&#xc158;"
             ReferencedContainer = "container:MobalMobal.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
