@@ -69,6 +69,7 @@ class ProfileDonatingTableViewCell: UITableViewCell {
         let label: UILabel = UILabel()
         label.textColor = .white
         label.font = .spoqaHanSansNeo(ofSize: 14, weight: .medium)
+        label.numberOfLines = 0
         return label
     }()
    
@@ -134,6 +135,7 @@ class ProfileDonatingTableViewCell: UITableViewCell {
             make.top.equalTo(ratingBackgroundBar.snp.bottom).offset(20)
             make.bottom.equalToSuperview().inset(20)
             make.leading.trailing.equalToSuperview().inset(25)
+            make.height.equalTo(34)
         }
     }
     func didEndDateChanged(to date: Date) {

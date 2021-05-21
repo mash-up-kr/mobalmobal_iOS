@@ -20,7 +20,7 @@
         <!--Create Donation View Controller2-->
         <scene sceneID="W0v-bS-wWb">
             <objects>
-                <viewController storyboardIdentifier="CreateDonationViewController2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Q6-B8-uHw" customClass="CreateDonationViewController2" customModule="MobalMobal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateDonationViewController2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Q6-B8-uHw" customClass="CreateDonationViewController2" customModule="돈에이션" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ubp-hp-Cf6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

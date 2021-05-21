@@ -25,15 +25,15 @@ class LoginViewController: DoneBaseViewController {
         return imageView
     }()
     let googleButton: UIView = {
-        let button: UIView = CustomLoginButton(title: "Google로 로그인하기", iconName: "googleLogo")
+        let button: UIView = CustomLoginButton(title: "Google로 로그인", iconName: "googleLogo")
         return button
     }()
-    let facebookButton: UIView = {
-        let button: UIView = CustomLoginButton(title: "Facebook으로 로그인하기", iconName: "facebookLogo")
-        return button
-    }()
+//    let facebookButton: UIView = {
+//        let button: UIView = CustomLoginButton(title: "Facebook으로 로그인", iconName: "facebookLogo")
+//        return button
+//    }()
     let appleButton: UIView = {
-        let button: UIView = CustomLoginButton(title: "Apple로 로그인하기", iconName: "appleLogo")
+        let button: UIView = CustomLoginButton(title: "Apple로 로그인", iconName: "appleLogo")
         return button
     }()
     lazy var guestButtonView: UIView = {
@@ -96,7 +96,7 @@ class LoginViewController: DoneBaseViewController {
             make.width.equalToSuperview().multipliedBy(319.0 / 375.0)
         }
         
-        [logoImageView, googleButton, facebookButton, appleButton].forEach { stackView.addArrangedSubview($0) }
+        [logoImageView, googleButton, /*facebookButton, */appleButton].forEach { stackView.addArrangedSubview($0) }
         logoImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(10)
@@ -106,9 +106,9 @@ class LoginViewController: DoneBaseViewController {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(60)
         }
-        facebookButton.snp.makeConstraints { make in
-            make.leading.trailing.height.equalTo(googleButton)
-        }
+//        facebookButton.snp.makeConstraints { make in
+//            make.leading.trailing.height.equalTo(googleButton)
+//        }
         appleButton.snp.makeConstraints { make in
             make.leading.trailing.height.equalTo(googleButton)
             make.bottom.equalToSuperview()
@@ -120,7 +120,7 @@ class LoginViewController: DoneBaseViewController {
         }
         stackView.setCustomSpacing(view.frame.height * 58 / 812, after: logoImageView)
         stackView.setCustomSpacing(view.frame.height * 13 / 812, after: googleButton)
-        stackView.setCustomSpacing(view.frame.height * 13 / 812, after: facebookButton)
+//        stackView.setCustomSpacing(view.frame.height * 13 / 812, after: facebookButton)
         stackView.setCustomSpacing(view.frame.height * 13 / 812, after: appleButton)
         super.updateViewConstraints()
     }
@@ -130,8 +130,8 @@ class LoginViewController: DoneBaseViewController {
         let googleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickGoogleLoginButton))
         googleButton.addGestureRecognizer(googleLoginTap)
         
-        let facebookLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickFacebookLoginButton))
-        facebookButton.addGestureRecognizer(facebookLoginTap)
+//        let facebookLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickFacebookLoginButton))
+//        facebookButton.addGestureRecognizer(facebookLoginTap)
         
         let appleLoginTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickAppleLoginButton))
         appleButton.addGestureRecognizer(appleLoginTap)

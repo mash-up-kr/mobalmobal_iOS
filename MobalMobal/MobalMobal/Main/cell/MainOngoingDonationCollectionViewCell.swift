@@ -15,6 +15,7 @@ struct OngoingDonationModel {
     let title: String
     let progress: Float
     let indexPath: IndexPath
+    let description: String
 }
 
 class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
@@ -84,7 +85,7 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Initializer
     override init(frame: CGRect) {
-        self.model = OngoingDonationModel(dday: Date(), money: 0, title: "갖고 싶은 물건", progress: 0.0, indexPath: IndexPath(item: -1, section: -1))
+        self.model = OngoingDonationModel(dday: Date(), money: 0, title: "갖고 싶은 물건", progress: 0.0, indexPath: IndexPath(item: -1, section: -1), description: "물건설명")
         super.init(frame: .zero)
         contentView.backgroundColor = .darkGrey
         contentView.layer.cornerRadius = 12
@@ -129,8 +130,8 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     func isIndexPathEqual(with indexPath: IndexPath) -> Bool {
         self.model.indexPath == indexPath
     }
-    func setModel(dday: Date, money: Int, title: String, progress: Float, indexPath: IndexPath) {
-        self.model = OngoingDonationModel(dday: dday, money: money, title: title, progress: progress, indexPath: indexPath)
+    func setModel(dday: Date, money: Int, title: String, progress: Float, indexPath: IndexPath, description: String) {
+        self.model = OngoingDonationModel(dday: dday, money: money, title: title, progress: progress, indexPath: indexPath, description: description)
     }
     func setImage(_ image: UIImage?) {
         guard let image = image else {
@@ -142,7 +143,7 @@ class MainOngoingDonationCollectionViewCell: UICollectionViewCell {
     private func populate() {
         dDayLabel.text = Date().getDDayString(to: model.dday)
         moneyLabel.text = model.money.changeToCommaFormat()
-        titleLabel.text = model.title
+        titleLabel.text = "\(model.title)\n\(model.description)"
         progressBarView.snp.removeConstraints()
         progressBackgroundView.addSubview(progressBarView)
         progressBarView.snp.makeConstraints { make in
