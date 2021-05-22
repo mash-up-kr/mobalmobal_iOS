@@ -82,6 +82,18 @@ class SettingViewController: DoneBaseViewController {
         button.addTarget(self, action: #selector(inquiryAction), for: .touchUpInside)
         return button
     }()
+    private let logoutLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.font = .spoqaHanSansNeo(ofSize: 15, weight: .regular)
+        label.textColor = .white
+        label.text = "로그아웃"
+        return label
+    }()
+    private let logoutButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.addTarget(self, action: #selector(logoutAction), for: .touchUpInside)
+        return button
+    }()
 
     // MARK: - Actions
     @objc
@@ -109,13 +121,17 @@ class SettingViewController: DoneBaseViewController {
         webVC.navTitle = "문의하기"
         self.navigationController?.pushViewController(webVC, animated: true)
     }
+    @objc
+    func logoutAction() {
+        print("로그아웃")
+    }
     // MARK: - Method
 
     private func setup() {
         self.view.backgroundColor = .backgroundColor
         self.setNavigationController()
-        self.view.addSubviews([openSourceLabel, termsAndConditionLabel, inquiryLabel])
-        self.view.addSubviews([openSourceButton, termsAndConditionButton, inquiryButton])
+        self.view.addSubviews([openSourceLabel, termsAndConditionLabel, inquiryLabel, logoutLabel])
+        self.view.addSubviews([openSourceButton, termsAndConditionButton, inquiryButton, logoutButton])
         self.setConstraint()
     }
     
@@ -181,6 +197,16 @@ class SettingViewController: DoneBaseViewController {
             make.top.bottom.equalTo(inquiryLabel)
             make.leading.trailing.equalTo(termsAndConditionButton)
         }
+        
+        logoutLabel.snp.makeConstraints { make in
+            make.top.equalTo(inquiryButton.snp.bottom).offset(31)
+            make.leading.equalTo(inquiryLabel)
+        }
+        logoutButton.snp.makeConstraints { make in
+            make.top.bottom.equalTo(logoutLabel)
+            make.leading.trailing.equalTo(inquiryButton)
+        }
+        
     }
 
     // MARK: - View Life Cycle
