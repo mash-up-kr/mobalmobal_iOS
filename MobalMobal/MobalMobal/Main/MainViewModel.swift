@@ -65,6 +65,9 @@ class MainViewModel {
                 completion()
                 return
             }
+        } else {
+            nickname = nil
+            myDonations = []
         }
         completion()
     }
