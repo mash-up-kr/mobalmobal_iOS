@@ -69,17 +69,9 @@ class LoginViewModel {
         
         guard let token = userToken else { return }
         if KeychainManager.isEmptyUserToken() {
-            if KeychainManager.setUserToken(token) {
-                print("🐻 키체인 저장 성공")
-            } else {
-                print("🐻 키체인 저장 실패")
-            }
+            _ = KeychainManager.setUserToken(token)
         } else {
-            if KeychainManager.updateUserToken(token) {
-                print("🐻 키체인 업데이트 성공")
-            } else {
-                print("🐻 키체인 업데이트 실패")
-            }
+            _ = KeychainManager.updateUserToken(token)
         }
     }
     

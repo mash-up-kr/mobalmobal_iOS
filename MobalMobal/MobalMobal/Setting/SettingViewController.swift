@@ -123,8 +123,7 @@ class SettingViewController: DoneBaseViewController {
     }
     @objc
     func logoutAction() {
-        UserInfo.shared.resetUserInfo()
-        KeychainManager.deleteUserToken()
+        _ = KeychainManager.deleteUserToken()
         let alert: UIAlertController = UIAlertController(title: "로그아웃", message: "로그아웃 되었습니다.", preferredStyle: .alert)
         let okButton: UIAlertAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             self?.navigationController?.popToRootViewController(animated: true)
