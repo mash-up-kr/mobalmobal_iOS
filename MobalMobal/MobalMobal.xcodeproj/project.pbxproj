@@ -37,7 +37,6 @@
 		3AB1D0252610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1D0242610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift */; };
 		3AB1D0372615DB1900EA94E8 /* LoginData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1D0362615DB1900EA94E8 /* LoginData.swift */; };
 		3AB1D03F2615DCB600EA94E8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1D03E2615DCB600EA94E8 /* LoginViewModel.swift */; };
-		3AC393CE261C7439008BB207 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC393CD261C7439008BB207 /* UserDefaultsKeys.swift */; };
 		3AC393D9261CBC3D008BB207 /* DonationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC393D8261CBC3D008BB207 /* DonationDetailViewModel.swift */; };
 		3AC39404261DBDF5008BB207 /* DonationDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC39403261DBDF5008BB207 /* DonationDetailResponse.swift */; };
 		3AC39407261DBF59008BB207 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC39406261DBF59008BB207 /* Int+Extension.swift */; };
@@ -154,7 +153,6 @@
 		3AB1D0242610DB4700EA94E8 /* MainOngoingDonationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOngoingDonationHeaderView.swift; sourceTree = "<group>"; };
 		3AB1D0362615DB1900EA94E8 /* LoginData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginData.swift; sourceTree = "<group>"; };
 		3AB1D03E2615DCB600EA94E8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		3AC393CD261C7439008BB207 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		3AC393D8261CBC3D008BB207 /* DonationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailViewModel.swift; sourceTree = "<group>"; };
 		3AC39403261DBDF5008BB207 /* DonationDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailResponse.swift; sourceTree = "<group>"; };
 		3AC39406261DBF59008BB207 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
@@ -335,7 +333,6 @@
 			children = (
 				3A61D7652638173E00DC27CF /* KeychainManager.swift */,
 				3A1E6DC02620445A00FAF0CC /* UserInfo.swift */,
-				3AC393CD261C7439008BB207 /* UserDefaultsKeys.swift */,
 				4D46FEB426215F7B00471475 /* Logger.swift */,
 				4D46FEB72621607200471475 /* BaseViewController.swift */,
 			);
@@ -964,7 +961,6 @@
 				7C04535625EA949B00870761 /* ProfileViewController.swift in Sources */,
 				7C04535A25EA98B900870761 /* ProfileTableViewCell.swift in Sources */,
 				D70C37CB25E103DD00898271 /* SceneDelegate.swift in Sources */,
-				3AC393CE261C7439008BB207 /* UserDefaultsKeys.swift in Sources */,
 				E3F1EA8425EA552800F34BDE /* SettingViewController.swift in Sources */,
 				3AC39411261DFBF2008BB207 /* Date+Extension.swift in Sources */,
 				E3FCDF9B26406F3B009C45AB /* CreateDonation.swift in Sources */,

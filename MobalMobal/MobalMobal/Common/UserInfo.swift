@@ -15,7 +15,9 @@ class UserInfo {
     static let shared: UserInfo = UserInfo()
     var needToUpdate: Bool = false
     
-    var token: String?
+    var token: String? {
+        didSet { needToUpdate = true }
+    }
     var provider: Provider?
     
     var fireStoreId: String?
@@ -28,7 +30,7 @@ class UserInfo {
     var cash: Int?
     
     func updateUserInfo(data user: ProfileUser?) {
-        guard let user = user else { return }
+        guard let user = user else { return resetUserInfo() }
         
         fireStoreId = user.firestoreId
         userId = user.userId
