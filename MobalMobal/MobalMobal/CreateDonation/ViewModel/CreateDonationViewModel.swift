@@ -35,6 +35,7 @@ class CreateDonationViewModel {
             }
         } failure: { (error) in
             print("CreateDonation : \(error.localizedDescription)")
+            // 현재 이미지 타입 에러에 대한 API 처리가 안되어 있음
             self.delegate?.inValidTypeImage()
             return
         }

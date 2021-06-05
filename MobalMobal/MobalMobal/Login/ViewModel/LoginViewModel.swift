@@ -11,6 +11,7 @@ import Foundation
 protocol LoginViewModelDelegate: AnyObject {
     func needToSignUp()
     func successLogin()
+    func networkError()
 }
 
 class LoginViewModel {
@@ -43,7 +44,7 @@ class LoginViewModel {
         } failure: { _ in return }
     }
     
-    private func callUserAPI() {
+    func callUserAPI() {
         DoneProvider.getUserProfile { [weak self]  response in
             self?.userData = response.data?.user
             if response.code == 200 {
@@ -53,7 +54,9 @@ class LoginViewModel {
             }
             guard let message = response.message else { return }
             print("🐻 유저 정보를 불러오는데 실패했습니다. : \(message)")
-        } failure: { _ in return }
+        } failure: { [weak self] _ in
+            self?.delegate?.networkError()
+        }
     }
     
     private func fireStoreIdChanged() {

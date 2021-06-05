@@ -52,6 +52,9 @@ class NetworkErrorViewController: UIViewController {
             
         return button
     }()
+    
+    // MARK: - Property
+    var reload: (() -> Void)?
 
     // MARK: - Method
     private func setup() {
@@ -66,7 +69,9 @@ class NetworkErrorViewController: UIViewController {
     
     @objc
     private func retryButtonIsTapped() {
-        print("다시시도 버튼 눌림")
+        self.dismiss(animated: true) { [weak self] in
+            self?.reload?()
+        }
     }
     
     private func setLayout() {

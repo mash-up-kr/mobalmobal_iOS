@@ -29,4 +29,11 @@ extension UIViewController {
         let toastPoint: CGPoint = CGPoint(x: view.frame.midX, y: view.frame.maxY - 60)
         view.makeToast(message, duration: 2.0, point: toastPoint, title: nil, image: nil, completion: nil)
     }
+    
+    func presentNetworkViewController(reload: @escaping () -> Void) {
+        let viewController: NetworkErrorViewController = NetworkErrorViewController()
+        viewController.reload = reload
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true, completion: nil)
+    }
 }
