@@ -160,6 +160,12 @@ class LoginViewController: DoneBaseViewController {
         let signUpVC: SignupViewController = SignupViewController()
         navigationController?.pushViewController(signUpVC, animated: true)
     }
+    
+    private func presentNetworkErrorController() {
+        self.presentNetworkViewController { [weak self] in
+            self?.viewModel.callUserAPI()
+        }
+    }
 }
 
 // MARK: - LoginViewModelDelegate
@@ -171,4 +177,9 @@ extension LoginViewController: LoginViewModelDelegate {
     func needToSignUp() {
         pushSignUpViewController()
     }
+    
+    func networkError() {
+        presentNetworkErrorController()
+    }
+    
 }

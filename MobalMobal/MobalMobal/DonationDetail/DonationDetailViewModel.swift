@@ -15,6 +15,7 @@ protocol DonationDetailViewModelDelegate: class {
     func didDesciptionChanged(to description: String)
     func didProgressChanged(current: Int, goal: Int)
     func didEndDateChanged(to date: Date?)
+    func networkError()
 }
 
 class DonationDetailViewModel {
@@ -93,7 +94,8 @@ class DonationDetailViewModel {
     func callDonationInfoAPI() {
         DoneProvider.getDonationDetail(postId: donationId) { [weak self] response in
             self?.detailResponse = response.data
-        } failure: { _ in
+        } failure: { [weak self] _ in
+            self?.delegate?.networkError()
             return
         }
     }

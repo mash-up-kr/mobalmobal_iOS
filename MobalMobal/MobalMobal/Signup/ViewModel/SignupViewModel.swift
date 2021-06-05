@@ -19,6 +19,7 @@ protocol SignupViewModelProtocol {
 protocol SignUpViewModelDelegate: class {
     func requestNickNameAgain()
     func success()
+    func networkError()
 }
 
 class SignupViewModel: SignupViewModelProtocol {

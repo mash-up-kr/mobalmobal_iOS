@@ -63,6 +63,7 @@ class InputDonationMoneyViewController: DoneBaseViewController {
     private let buttonString: String = "후원하기"
     private let maxMoneyRange: Int = 10_000_000
     private var isUpdateConstraints: Bool = false
+    private var intAmount: Int = 0
     
     // MARK: - Initializer
     init(postId: Int, nickname: String, giftName: String) {
@@ -115,11 +116,12 @@ class InputDonationMoneyViewController: DoneBaseViewController {
     // MARK: - Actions
     @objc
     private func clickDonationButton() {
-        guard let intAmount = Int(makeRawString(from: textField.text)) else {
+        guard let inputAmount = Int(makeRawString(from: textField.text)) else {
             print("🐻 잘못된 입력값 \(textField.text!)")
             return
         }
-        viewModel.donate(amount: intAmount)
+        self.intAmount = inputAmount
+        viewModel.donate(amount: self.intAmount)
     }
     @objc
     private func clickNavigationBackButton() {
@@ -203,6 +205,14 @@ class InputDonationMoneyViewController: DoneBaseViewController {
         let alert: UIAlertController = UIAlertController(title: "후원 실패", message: "에러가 발생했습니다. 잠시 후 다시 시도해주세요.", preferredStyle: .alert)
         let okAction: UIAlertAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             self?.navigationController?.dismiss(animated: true)
+        }
+        
+        let tryAgainAction: UIAlertAction = UIAlertAction(title: "다시 시도", style: .default) { [weak self] _ in
+            self?.presentNetworkViewController(reload: { [weak self] in
+                if let inputAmount = self?.intAmount {
+                    self?.viewModel.donate(amount: inputAmount)
+                }
+            })
         }
         alert.addAction(okAction)
         present(alert, animated: true)

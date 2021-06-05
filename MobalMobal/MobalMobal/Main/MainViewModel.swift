@@ -95,7 +95,7 @@ class MainViewModel {
             }
             completion()
         } failure: { error in
-            self.mainViewModelDelegate?.failedGetPosts(message: "진행중 데이터를 불러올 수 없습니다. \(error.localizedDescription)")
+            self.mainViewModelDelegate?.failedGetPosts(message: "진행중 데이터를 불러올 수 없습니다.")
             completion()
         }
     }
@@ -122,7 +122,7 @@ class MainViewModel {
             self.myDonations += posts
             completion()
         } failure: { error in
-            self.mainViewModelDelegate?.failedGetPosts(message: "나의 진행 데이터를 불러올 수 없습니다. \(error.localizedDescription)")
+            self.mainViewModelDelegate?.failedGetPosts(message: "나의 진행 데이터를 불러올 수 없습니다.")
             completion()
         }
         DoneProvider.getMyDonation(status: "BEFORE") { [weak self] response in
@@ -135,7 +135,7 @@ class MainViewModel {
             guard let posts = response.data?.posts else { return }
             self.myDonations += posts
         } failure: { error in
-            self.mainViewModelDelegate?.failedGetPosts(message: "나의 진행 데이터를 불러올 수 없습니다. \(error.localizedDescription)")
+            self.mainViewModelDelegate?.failedGetPosts(message: "나의 진행 데이터를 불러올 수 없습니다.")
         }
 
     }

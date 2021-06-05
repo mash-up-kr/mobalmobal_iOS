@@ -369,4 +369,10 @@ extension DonationDetailViewController: DonationDetailViewModelDelegate {
             dDayLabel.text = "D+\(-dueDay)"
         }
     }
+    
+    func networkError() {
+        self.presentNetworkViewController { [weak self] in
+            self?.viewModel.callDonationInfoAPI()
+        }
+    }
 }

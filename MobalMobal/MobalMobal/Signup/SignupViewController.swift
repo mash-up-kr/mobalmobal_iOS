@@ -363,6 +363,14 @@ extension SignupViewController: SignUpViewModelDelegate {
     func success() {
         self.navigationController?.dismiss(animated: true)
     }
+    
+    func networkError() {
+        self.presentNetworkViewController { [weak self] in
+            if let user = self?.signupUser {
+                self?.signupViewModel.signup(signupUser: user)
+            }
+        }
+    }
 }
 
 extension SignupViewController: UITextFieldDelegate {
