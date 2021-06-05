@@ -68,9 +68,9 @@ class NetworkErrorViewController: UIViewController {
     }
     
     @objc
-    private func retryButtonIsTapped() {
-        self.dismiss(animated: true) { [weak self] in
-            self?.reload?()
+    private func retryButtonIsTapped() {        
+        self.dismiss(animated: true) {
+            self.reload?()
         }
     }
     
