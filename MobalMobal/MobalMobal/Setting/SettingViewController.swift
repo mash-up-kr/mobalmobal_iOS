@@ -18,7 +18,7 @@ enum SettingURL: String {
 
 class SettingViewController: DoneBaseViewController {
     // MARK: - UIView
-    /* 1차배포 제외대상
+
     private let myAccountLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = .spoqaHanSansNeo(ofSize: 15, weight: .regular)
@@ -31,7 +31,7 @@ class SettingViewController: DoneBaseViewController {
         button.addTarget(self, action: #selector(myAccountAction), for: .touchUpInside)
         return button
     }()
- */
+
     private let openSourceLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = .spoqaHanSansNeo(ofSize: 15, weight: .regular)
@@ -136,8 +136,8 @@ class SettingViewController: DoneBaseViewController {
     private func setup() {
         self.view.backgroundColor = .backgroundColor
         self.setNavigationController()
-        self.view.addSubviews([openSourceLabel, termsAndConditionLabel, inquiryLabel, logoutLabel])
-        self.view.addSubviews([openSourceButton, termsAndConditionButton, inquiryButton, logoutButton])
+        self.view.addSubviews([myAccountLabel, openSourceLabel, termsAndConditionLabel, inquiryLabel, logoutLabel])
+        self.view.addSubviews([myAccountButton, openSourceButton, termsAndConditionButton, inquiryButton, logoutButton])
         self.setConstraint()
     }
     
@@ -158,19 +158,19 @@ class SettingViewController: DoneBaseViewController {
     }
     
     private func setConstraint() {
-        /* 1차배포 제외대상
+
         myAccountLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(28)
-            make.leading.equalToSuperview().offset(21)
+            make.leading.trailing.equalToSuperview().inset(21)
         }
         myAccountButton.snp.makeConstraints { make in
             make.top.bottom.equalTo(myAccountLabel)
             make.leading.trailing.equalToSuperview().inset(21)
         }
- */
+
         openSourceLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(28)
-            make.leading.equalToSuperview().offset(21)
+            make.top.equalTo(myAccountLabel.snp.bottom).offset(31)
+            make.leading.trailing.equalTo(myAccountLabel)
         }
         openSourceButton.snp.makeConstraints { make in
             make.top.bottom.equalTo(openSourceLabel)
@@ -197,7 +197,7 @@ class SettingViewController: DoneBaseViewController {
 //
         inquiryLabel.snp.makeConstraints { make in
             make.top.equalTo(termsAndConditionLabel.snp.bottom).offset(31)
-            make.leading.equalTo(termsAndConditionLabel)
+            make.leading.trailing.equalTo(termsAndConditionLabel)
         }
         inquiryButton.snp.makeConstraints { make in
             make.top.bottom.equalTo(inquiryLabel)
@@ -206,7 +206,7 @@ class SettingViewController: DoneBaseViewController {
         
         logoutLabel.snp.makeConstraints { make in
             make.top.equalTo(inquiryButton.snp.bottom).offset(31)
-            make.leading.equalTo(inquiryLabel)
+            make.leading.trailing.equalTo(inquiryLabel)
         }
         logoutButton.snp.makeConstraints { make in
             make.top.bottom.equalTo(logoutLabel)

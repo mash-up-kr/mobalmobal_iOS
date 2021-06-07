@@ -67,6 +67,9 @@ class MyAccountViewController: UIViewController {
         return button
     }()
     
+    // MARK: - Properties
+    private let myAccountViewModel: MyAccountViewModel = MyAccountViewModel()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +78,8 @@ class MyAccountViewController: UIViewController {
         viewTapGesture()
         setNavigationItems()
         setLayout()
+        initAPICall()
+        myAccountViewModel.delegate = self
     }
     
     // MARK: - Actions
@@ -90,10 +95,10 @@ class MyAccountViewController: UIViewController {
     }
     @objc
     private func saveBtnAction() {
-        // TODO
-        // 네트워크 통신 필요
+        myAccountViewModel.bankName = bankNameInputTextField.text
+        myAccountViewModel.accountName = accountNumberInputTextField.text
+        myAccountViewModel.patchMyAccount()
         self.navigationController?.popViewController(animated: true)
-        print("🥳 my account save btn action")
     }
     @objc
     private func popVC() {
@@ -101,6 +106,18 @@ class MyAccountViewController: UIViewController {
     }
     
     // MARK: - Methods
+    private func initAPICall() {
+        myAccountViewModel.getMyProfile { [weak self] success in
+            if success {
+                if let bankName = self?.myAccountViewModel.getBankName,
+                   let accountNumber = self?.myAccountViewModel.getAccountName {
+                    self?.bankNameInputTextField.text = bankName
+                    self?.accountNumberInputTextField.text = accountNumber
+                    self?.activateButtonUI()
+                }
+            }
+        }
+    }
     private func viewTapGesture() {
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
         tapGestureRecognizer.delegate = self
@@ -165,5 +182,15 @@ extension MyAccountViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         self.view.endEditing(true)
         return true
+    }
+}
+
+// MARK: - MyAccountViewModelDelegate
+extension MyAccountViewController: MyAccountViewModelDeleagte {
+    func networkErr() {
+        let netWorkVC: NetworkErrorViewController = NetworkErrorViewController()
+        self.present(netWorkVC, animated: true) { [weak self] in
+            self?.myAccountViewModel.patchMyAccount()
+        }
     }
 }

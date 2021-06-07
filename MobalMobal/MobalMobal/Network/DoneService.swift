@@ -19,6 +19,7 @@ enum DoneService {
     case getMyDonation(status: String)
     case getMyDonate
     case charge(amount: Int, userName: String, chargedAt: String)
+    case myAccount(accountNumber: String?, bankName: String?)
 }
 
 extension DoneService: TargetType {
@@ -52,6 +53,8 @@ extension DoneService: TargetType {
             return "/charge"
         case .createDonation:
             return "/posts"
+        case .myAccount:
+            return "/users"
         }
     }
     
@@ -62,6 +65,8 @@ extension DoneService: TargetType {
 
         case .login, .donate, .charge, .createDonation, .signup:
             return .post
+        case .myAccount:
+            return .patch
         }
     }
     
@@ -106,6 +111,10 @@ extension DoneService: TargetType {
             return .uploadMultipart(multipartData)
         case .getMyDonation(let status):
             return .requestParameters(parameters: ["status": status], encoding: URLEncoding.queryString)
+        case .myAccount(let bankName, let accountNumber):
+            return .requestCompositeParameters(bodyParameters: ["next_user": [ "account_number": accountNumber,
+                                                                               "bank_name": bankName
+            ]], bodyEncoding: JSONEncoding.default, urlParameters: [:])
         }
     }
         
@@ -113,7 +122,7 @@ extension DoneService: TargetType {
         switch self {
         case .login, .signup:
             return nil
-        case .getMain, .getDetail, .donate, .getUserProfile, .getMyDonate, .getMyDonation, .charge, .createDonation:
+        case .getMain, .getDetail, .donate, .getUserProfile, .getMyDonate, .getMyDonation, .charge, .createDonation, .myAccount:
             guard let token = KeychainManager.getUserToken() else {
                 print("🐻 [Login Required] keychain token nil")
                 return nil
