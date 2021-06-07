@@ -68,7 +68,6 @@
 		7C39979125F75B5900EA82C2 /* SuccessChargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C39979025F75B5900EA82C2 /* SuccessChargingViewController.swift */; };
 		7C39985D25FA51AA00EA82C2 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C39985C25FA51AA00EA82C2 /* AccountViewController.swift */; };
 		7C4B1A53266DF558001DA144 /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B1A52266DF558001DA144 /* MyAccountViewModel.swift */; };
-		7C4B1A55266DF74D001DA144 /* MyAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B1A54266DF74D001DA144 /* MyAccountModel.swift */; };
 		7C61AEC925EA4CC200D9149F /* PointChargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */; };
 		7C61AED225EA4FA300D9149F /* PointChargingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */; };
 		7C842FA02606267400A66756 /* ModifyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C842F9F2606267400A66756 /* ModifyProfileViewController.swift */; };
@@ -186,7 +185,6 @@
 		7C39979025F75B5900EA82C2 /* SuccessChargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessChargingViewController.swift; sourceTree = "<group>"; };
 		7C39985C25FA51AA00EA82C2 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		7C4B1A52266DF558001DA144 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
-		7C4B1A54266DF74D001DA144 /* MyAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountModel.swift; sourceTree = "<group>"; };
 		7C61AEC825EA4CC200D9149F /* PointChargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingViewController.swift; sourceTree = "<group>"; };
 		7C61AED125EA4FA300D9149F /* PointChargingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointChargingTableViewCell.swift; sourceTree = "<group>"; };
 		7C842F9F2606267400A66756 /* ModifyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyProfileViewController.swift; sourceTree = "<group>"; };
@@ -687,7 +685,6 @@
 				7C062D9E2621111000F5D58D /* WebviewController.swift */,
 				7CE63717263C5D32008AE55E /* MyAccountViewController.swift */,
 				7C4B1A52266DF558001DA144 /* MyAccountViewModel.swift */,
-				7C4B1A54266DF74D001DA144 /* MyAccountModel.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -904,7 +901,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C4B1A55266DF74D001DA144 /* MyAccountModel.swift in Sources */,
 				D7AC0C9525EAB9E2000A342A /* MainMyDonationCollectionViewCell.swift in Sources */,
 				D7AC0C9925EACAC8000A342A /* MainAddMyDonationCollectionViewCell.swift in Sources */,
 				3A6CFF3325EAEC7A00214E43 /* CustomLoginButton.swift in Sources */,
