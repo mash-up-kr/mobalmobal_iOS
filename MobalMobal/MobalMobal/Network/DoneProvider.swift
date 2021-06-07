@@ -44,4 +44,8 @@ enum DoneProvider {
     static func charge(amount: Int, userName: String, chargedAt: String, success: @escaping (ParseResponse<ChargingData>) -> Void, failure: @escaping (Error) -> Void) {
         NetworkProvider.request(.charge(amount: amount, userName: userName, chargedAt: chargedAt), to: ChargingData.self, success: success, failure: failure)
     }
+    
+    static func myAccount(bankName: String?, accountNumber: String?, success: @escaping (ParseResponse<ProfileData>) -> Void, failure: @escaping (Error) -> Void) {
+        NetworkProvider.request(.myAccount(accountNumber: accountNumber, bankName: bankName), to: ProfileData.self, success: success, failure: failure)
+    }
 }
